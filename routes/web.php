@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//admin routes
 
-Route::get('/', function () {
-    return view('admin.layout.MasterAdmin');
-});
-
-
-
+Route::prefix('Admin-panel/managment')->name('admin.')->group(function(){
+    
+    Route::resource('brands', BrandController::class);
+    
+  
 //admin route
 Route::get('/dashboard', function () {
     return view('admin.page.dashboard');
-    });
+    })->name('home');
+
+});
+
+
+
+Route::get('/', function () {
+    return view('admin.layout.MasterAdmin')->name('home');
+});

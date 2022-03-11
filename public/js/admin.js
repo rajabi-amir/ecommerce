@@ -12180,6 +12180,34 @@ function showDOMContent() {
 
 /***/ }),
 
+/***/ "./resources/assets/admin/js/validation.js":
+/*!*************************************************!*\
+  !*** ./resources/assets/admin/js/validation.js ***!
+  \*************************************************/
+/***/ (() => {
+
+(function () {
+  "use strict";
+
+  window.addEventListener("load", function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName("needs-validation"); //         // Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener("submit", function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      }, false);
+    });
+  }, false);
+})();
+
+/***/ }),
+
 /***/ "./resources/assets/admin/plugins/dropify/js/dropify.min.js":
 /*!******************************************************************!*\
   !*** ./resources/assets/admin/plugins/dropify/js/dropify.min.js ***!
@@ -18470,7 +18498,9 @@ __webpack_require__(/*! ../assets/admin/js/pages/forms/dropify */ "./resources/a
 
 __webpack_require__(/*! ../assets/admin/js/pages/forms/form-wizard */ "./resources/assets/admin/js/pages/forms/form-wizard.js");
 
-__webpack_require__(/*! ../assets/admin/js/pages/medias/image-gallery.js */ "./resources/assets/admin/js/pages/medias/image-gallery.js"); //date farsi
+__webpack_require__(/*! ../assets/admin/js/pages/medias/image-gallery.js */ "./resources/assets/admin/js/pages/medias/image-gallery.js");
+
+__webpack_require__(/*! ../assets/admin/js/validation.js */ "./resources/assets/admin/js/validation.js"); //date farsi
 // index
 
 /***/ }),

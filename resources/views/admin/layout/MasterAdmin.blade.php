@@ -1,8 +1,10 @@
 <!doctype html>
+
 <html class="no-js " lang="fa">
 
 <head>
-    @include('admin.partial.Head');
+    @include('admin.partial.Head')
+    @stack('styles')
 </head>
 
 <body class="theme-blush">
@@ -10,7 +12,8 @@
     <!-- Page Loader -->
     @include('admin.partial.PageLoader')
     <!-- Overlay For Sidebars -->
-    <div class="overlay"></div>
+    <div class=" overlay">
+    </div>
 
     <!-- Main Search -->
     @include('admin.partial.MainSearch')
@@ -29,6 +32,8 @@
     <!-- Jquery Core Js -->
 
     <script src="{{asset('js/admin.js')}}"></script>
+
+    @stack('scripts')
 
 </body>
 

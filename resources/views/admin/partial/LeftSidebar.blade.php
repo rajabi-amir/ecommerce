@@ -1,189 +1,54 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.html"><img src=" {{asset('assets/images/logo.svg')}}" width="25" alt="Aero"><span
-                class="m-l-10">آئرو</span></a>
+        <a href="#"><img src="#" width="45" style="margin-right:20px" alt="Aero"><span class="m-l-10"></span></a>
+
     </div>
     <div class="menu">
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="profile.html"><img src="{{asset('assets/images/profile_av.jpg')}}"
-                            alt="User"></a>
+                    <a class="image" href="#"><img default="" src="#"></a>
+
                     <div class="detail">
-                        <h4>آرش</h4>
-                        <small>سوپر مدیر</small>
+                        <h6><strong>نام</strong></h6>
+                        <small>مدیر سایت</small>
                     </div>
                 </div>
             </li>
-            <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>داشبورد</span></a></li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>برنامه</span></a>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>مشاور
-                        املاک</span></a>
+            <li class="active open"><a href="#"><i class="zmdi zmdi-view-dashboard zmdi-hc-2x"></i><span> داشبورد
+                    </span></a></li>
 
-                <ul class="ml-menu">
-                    <li><a href="ec-dashboard.html">اضافه کردن ملک</a></li>
-                    <li><a href="ec-product-List.html">مشاهده املاک</a></li>
-                    <!-- <li><a href="ec-product.html">امکانات</a></li>
-                    <li><a href="ec-product-detail.html">جزئیات محصول</a></li> -->
-                </ul>
             </li>
-            <ul class="ml-menu">
-                <li><a href="mail-inbox.html">ایمیل</a></li>
-                <li><a href="chat.html">برنامه چت</a></li>
-                <li><a href="events.html">تقویم</a></li>
-                <li><a href="contact.html">مخاطب</a></li>
-            </ul>
-            </li>
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>پروژه
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
                         ها</span></a>
                 <ul class="ml-menu">
-                    <li><a href="project-list.html">لیست پروژه</a></li>
-                    <li><a href="taskboard.html">نوار وظیفه</a></li>
-                    <li><a href="ticket-list.html">لیست تیکت</a></li>
-                    <li><a href="ticket-detail.html">جزئیات تیکت</a></li>
+                    <li><a href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
+                    <li><a href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
                 </ul>
             </li>
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-folder"></i><span>مدیریت
-                        فایل</span></a>
-                <ul class="ml-menu">
-                    <li><a href="file-dashboard.html">همه فایل ها</a></li>
-                    <li><a href="file-documents.html">اسناد</a></li>
-                    <li><a href="file-images.html">تصاویر</a></li>
-                    <li><a href="file-media.html">رسانه</a></li>
-                </ul>
+
+
+            <li><a target="_blank" href="https://app.raychat.io/login"><i class="zmdi zmdi-hc-fw"></i><span>چت
+                        آنلاین</span></a>
+            <li> <a href="#">
+                    <i class="zmdi zmdi-hc-fw"></i><span>نظرات</span></a>
             </li>
+            <li><a href="#"><i class="zmdi zmdi-hc-fw"></i><span>
+                        درباره ما </span></a></li>
+            <!-- تنظیمات -->
             <li> <a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-blogger"></i><span>وبلاگ</span></a>
+                        class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
-                    <li><a href="blog-dashboard.html">داشبورد</a></li>
-                    <li><a href="blog-post.html">پست وبلاگ</a></li>
-                    <li><a href="blog-list.html">نمایش لیست</a></li>
-                    <li><a href="blog-grid.html">نمایش گرید</a></li>
-                    <li><a href="blog-details.html">جزئیات وبلاگ</a></li>
+                    <li><a href="#">ویرایش پروفایل کاربری </a></li>
+                    <li><a href="#">تغییر کلمه عبور </a></li>
                 </ul>
             </li>
-
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-swap-alt"></i><span>ابزارک
-                        ها</span></a>
-                <ul class="ml-menu">
-                    <li><a href="ui_kit.html">کیت عناصر کاربردی</a></li>
-                    <li><a href="alerts.html">هشدارها</a></li>
-                    <li><a href="collapse.html">سقوط</a></li>
-                    <li><a href="colors.html">رنگ ها</a></li>
-                    <li><a href="dialogs.html">گفتگوها</a></li>
-                    <li><a href="list-group.html">گروه لیست</a></li>
-                    <li><a href="media-object.html">شیء رسانه</a></li>
-                    <li><a href="modals.html">مودال ها</a></li>
-                    <li><a href="notifications.html">اطلاعیه ها</a></li>
-                    <li><a href="progressbars.html">نوار پیشرفت</a></li>
-                    <li><a href="range-sliders.html">اسلایدر محدوده</a></li>
-                    <li><a href="sortable-nestable.html">قابل مرتب شدن و ناپایداری</a></li>
-                    <li><a href="tabs.html">زبانه ها</a></li>
-                    <li><a href="waves.html">امواج</a></li>
-                </ul>
+            <!-- خروج -->
+            <li><a href="#" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i> خروج
+                </a>
             </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-flower"></i><span>آیکون های
-                        فونت</span></a>
-                <ul class="ml-menu">
-                    <li><a href="icons.html">آیکون های متریال</a></li>
-                    <li><a href="icons-themify.html">آیکون های Themify</a></li>
-                    <li><a href="icons-weather.html">آیکون های آب و هوا</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>فرم
-                        ها</span></a>
-                <ul class="ml-menu">
-                    <li><a href="basic-form-elements.html">فرم پایه</a></li>
-                    <li><a href="advanced-form-elements.html">فرم پیشرفته</a></li>
-                    <li><a href="form-examples.html">نمونه های فرم</a></li>
-                    <li><a href="form-validation.html">فرم اعتبار سنجی</a></li>
-                    <li><a href="form-wizard.html">فرم پیشرفته</a></li>
-                    <li><a href="form-editors.html">ویرایشگرها</a></li>
-                    <li><a href="form-upload.html">آپلود فایل</a></li>
-                    <li><a href="form-summernote.html">سامرنوت</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-grid"></i><span>جداول</span></a>
-                <ul class="ml-menu">
-                    <li><a href="normal-tables.html">جداول معمولی</a></li>
-                    <li><a href="jquery-datatable.html">پایگاه داده جی کوئری</a></li>
-                    <li><a href="editable-table.html">جداول قابل ویرایش</a></li>
-                    <li><a href="footable.html">جداول فو</a></li>
-                    <li><a href="table-color.html">رنگ جداول</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-chart"></i><span>نمودارها</span></a>
-                <ul class="ml-menu">
-                    <li><a href="c3.html">نمودار C3</a></li>
-                    <li><a href="morris.html">موریس</a></li>
-                    <li><a href="flot.html">فلوت</a></li>
-                    <li><a href="chartjs.html">نمودار JS</a></li>
-                    <li><a href="sparkline.html">اسپارک لاین</a></li>
-                    <li><a href="jquery-knob.html">تهیه کننده جی کوئری</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-delicious"></i><span>ابزارک
-                        ها</span></a>
-                <ul class="ml-menu">
-                    <li><a href="widgets-app.html">ابزارک برنامه ها</a></li>
-                    <li><a href="widgets-data.html">ابزارک داده</a></li>
-                </ul>
-            </li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-lock"></i><span>احراز
-                        هویت</span></a>
-                <ul class="ml-menu">
-                    <li><a href="sign-in.html">ورود</a></li>
-                    <li><a href="sign-up.html">ثبت نام</a></li>
-                    <li><a href="forgot-password.html">فراموشی رمزعبور</a></li>
-                    <li><a href="404.html">صفحه 404</a></li>
-                    <li><a href="500.html">صفحه 500</a></li>
-                    <li><a href="page-offline.html">صفحه آفلاین</a></li>
-                    <li><a href="locked.html">صفحه قفل شده</a></li>
-                </ul>
-            </li>
-            <li class="open_top"><a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-copy"></i><span>صفحات نمونه</span></a>
-                <ul class="ml-menu">
-                    <li><a href="blank.html">صفحه خالی</a></li>
-                    <li><a href="image-gallery.html">گالری تصویر</a></li>
-                    <li><a href="profile.html">پروفایل</a></li>
-                    <li><a href="timeline.html">زمان بندی</a></li>
-                    <li><a href="pricing.html">قیمت گذاری</a></li>
-                    <li><a href="invoices.html">صورتحساب ها</a></li>
-                    <li><a href="invoices-list.html">لیست صورتحساب ها</a></li>
-                    <li><a href="search-results.html">نتایج جستجو</a></li>
-                </ul>
-            </li>
-            <li class="open_top"><a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-map"></i><span>نقشه ها</span></a>
-                <ul class="ml-menu">
-                    <li><a href="google.html">نقشه گوگل</a></li>
-                    <li><a href="yandex.html">نقشه یاندکس</a></li>
-                    <li><a href="jvectormap.html">نقشه jVector</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="progress-container progress-primary m-t-10">
-                    <span class="progress-badge">ترافیک این ماه</span>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="67"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
-                            <span class="progress-value">67%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-container progress-info">
-                    <span class="progress-badge">بارگذاری سرور</span>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86"
-                            aria-valuemin="0" aria-valuemax="100" style="width: 86%;">
-                            <span class="progress-value">86%</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            <!-- خروج -->
         </ul>
     </div>
 </aside>

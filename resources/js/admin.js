@@ -21,6 +21,7 @@ require("../assets/admin/js/pages/index.js");
 require("../assets/admin/js/pages/forms/dropify");
 require("../assets/admin/js/pages/forms/form-wizard");
 require("../assets/admin/js/pages/medias/image-gallery.js");
+require("../assets/admin/js/validation.js");
 
 //date farsi
 // index
