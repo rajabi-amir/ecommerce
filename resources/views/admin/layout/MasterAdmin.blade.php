@@ -5,7 +5,7 @@
 <head>
     @include('admin.partial.Head')
     @stack('styles')
-    @livewireStyles
+    @livewireStyles()
 </head>
 
 <body class="theme-blush">
@@ -36,8 +36,9 @@
     @flasher_render
 
     @stack('scripts')
-    
-    @livewireScripts
+
+    @livewireScripts()
+
 </body>
 
 </html>

@@ -5,13 +5,14 @@ use Carbon\Carbon;
 if (!function_exists('generateImageName')) {
     function generateImageName($extension)
     {
-        $year = Carbon::now()->year;
-        $month = Carbon::now()->month;
-        $day = Carbon::now()->day;
-        $hour = Carbon::now()->hour;
-        $minute = Carbon::now()->minute;
-        $second = Carbon::now()->second;
-        $microsecond = Carbon::now()->microsecond;
+        $date_now=Carbon::now();
+        $year = $date_now->year;
+        $month =$date_now->month;
+        $day = $date_now->day;
+        $hour = $date_now->hour;
+        $minute = $date_now->minute;
+        $second = $date_now->second;
+        $microsecond = $date_now->microsecond;
         return $year . $month . $day . $hour . $minute . $second . $microsecond . '.'. $extension;
     }
 }

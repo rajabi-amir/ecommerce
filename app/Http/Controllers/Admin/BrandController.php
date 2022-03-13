@@ -62,7 +62,7 @@ class BrandController extends Controller
             if (isset($request->img)){
                 
                 $ImageController=new ImageController();
-                $image_name=$ImageController->UploadeBrandImage($request);
+                $image_name=$ImageController->UploadeBrandImage($request ,100,100,"brands");
             }
             else
             {
