@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\BrandController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 //admin routes
 
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function(){
-    
+
+
+    Route::post('brands', [BrandController::class , 'active'])->name('active');
     Route::resource('brands', BrandController::class);
     
   
@@ -33,3 +37,9 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     return view('admin.layout.MasterAdmin')->name('home');
 });
+
+Route::get('/upl',function(){
+return view('uploade');
+});
+
+Route::post('/upl',[BrandController::class,'uploade'])->name('uploade');

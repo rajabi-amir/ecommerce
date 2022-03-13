@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label class="form-label">تصویر</label>
                                     <div class="col-lg-12 px-0">
-                                        <input name="image" type="file" class="dropify"
+                                        <input name="img" type="file" class="dropify"
                                             data-allowed-file-extensions="jpg png jpeg" data-max-file-size="1024K">
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="checkbox">
                                             <input id="chec" {{ old('isactive') ==='on' ? 'checked' : '' }}
-                                                type="checkbox" name="is_active">
+                                                type="checkbox" checked name="is_active">
                                             <label for="chec">انتشار </label>
                                         </div>
                                     </div>

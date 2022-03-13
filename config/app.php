@@ -176,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
+
 
     ],
 
@@ -191,7 +194,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];

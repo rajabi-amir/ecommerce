@@ -75,8 +75,13 @@
                                 <div class="form-group">
                                     <label class="form-label">تصویر</label>
                                     <div class="col-lg-12 px-0">
-                                        <input name="image" type="file" class="dropify"
-                                            data-allowed-file-extensions="jpg png jpeg" data-max-file-size="1024K">
+                                        <input name="img" type="file" class="dropify"
+                                            data-allowed-file-extensions="jpg png jpeg" data-max-file-size="1024K" @php
+                                            if(isset($brand->image)){
+                                        $url=Storage::url('brands/'.$brand->image);
+                                        echo ("data-default-file=". $url) ;
+                                        }
+                                        @endphp />
                                     </div>
                                 </div>
 
@@ -86,8 +91,11 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="checkbox">
-                                            <input id="chec" {{ old('isactive') ==='on' ? 'checked' : '' }}
-                                                type="checkbox" name="is_active">
+
+                                            <input id="chec" type="checkbox"
+                                                {{ $brand->is_active===1 ? 'checked' : '' }} name="is_active" />
+
+
                                             <label for="chec">انتشار </label>
                                         </div>
                                     </div>

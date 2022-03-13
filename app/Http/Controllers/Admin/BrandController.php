@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Http\Controllers\Admin\ImageController;
+use Flasher\Toastr\Prime\ToastrFactory;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class BrandController extends Controller
 {
@@ -35,8 +39,11 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , ToastrFactory $flasher)
     {
+        
+      
+   
         $request->validate(
             [
                 'name' => 'unique:brands',
@@ -46,14 +53,31 @@ class BrandController extends Controller
 
             if (isset($request->is_active)) {
                 $request->isactive=true;
-            }else {
-                $request->isactive=false;};
+            }
+            else
+            {
+                $request->isactive=false;
+            };
+
+            if (isset($request->img)){
+                
+                $ImageController=new ImageController();
+                $image_name=$ImageController->UploadeBrandImage($request);
+            }
+            else
+            {
+                $image_name=null;   
+            }
+             
 
         Brand::create([
             'name' => $request->name,
             'index' => $request->index,
+            'image' => $image_name,
             'is_active' => $request->isactive
         ]);
+        $flasher->addSuccess('برند جدید ایجاد شد');
+        return redirect()->route('admin.brands.index');
     }
 
     /**
@@ -74,9 +98,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-        
+        return view('admin.page.brands.edit', compact('brand'));
     }
 
     /**
@@ -86,9 +110,47 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Brand $brand , ToastrFactory $flasher)
+    
     {
-        //
+        
+        
+        if (isset($request->is_active)) {
+            $request->isactive=true;
+        }
+        else
+        {
+            $request->isactive=false;
+        };
+
+        if (isset($request->img)){
+            
+            
+            
+            if (Storage::exists('brands/' . $brand->image)) {
+                Storage::delete('brands/' . $brand->image);
+            }
+            $ImageController=new ImageController();
+            $image_name=$ImageController->UploadeBrandImage($request);
+        }
+        else
+        {
+            $image_name=$brand->image;   
+        }
+
+       $brand->update([
+
+        'name' => $request->name,
+        'index' => $request->index,
+        'image' => $image_name,
+        'is_active' => $request->isactive
+
+
+       ]);
+
+       $flasher->addSuccess( 'برند با موفقیت تغییر کرد');
+       return redirect()->route('admin.brands.index');
+
     }
 
     /**
@@ -101,4 +163,8 @@ class BrandController extends Controller
     {
         //
     }
+
+   public function active(Request $request){
+       
+   }
 }
