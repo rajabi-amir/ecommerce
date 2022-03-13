@@ -15,16 +15,16 @@ if (!function_exists('generateImageName')) {
         return $year . $month . $day . $hour . $minute . $second . $microsecond . '.'. $extension;
     }
 }
-if (!function_exists('PertiongenerateImageName')) {
+if (!function_exists('Persian_GenerateImageName')) {
     function Persian_GenerateImageName($extension)
     {
         $v = verta();
         $v->timezone = 'Asia/Tehran';
         $year=$v->year;
-        $month=$v->month; 
-        $day=$v->day; 
-        $hour=$v->hour; 
-        $minute=$v->minute; 
+        $month=$v->month;
+        $day=$v->day;
+        $hour=$v->hour;
+        $minute=$v->minute;
         $second=$v->second;
         $micro=$v->micro;
         return $year . $month . $day . $hour .$minute . $second . $micro .'.'. $extension;
