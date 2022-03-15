@@ -47,8 +47,9 @@ Route::post('/upl', function (Request $request) {
     if (count($images) > 0) {
         $paths = [];
         foreach ($images['file'] as $image) {
-            $path = $image->store('test');
-            $paths[] = ['url' => $path];
+            $ImageController = new ImageController();
+            $image_name = $ImageController->UploadeImage($image, "test");
+            $paths[] = ['url' => $image_name];
         }
     }
     return response()->json('success', 200);

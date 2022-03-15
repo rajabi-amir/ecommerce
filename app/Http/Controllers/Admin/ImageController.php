@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Storage;
 class ImageController extends Controller
 {
 
-    public function UploadeBrandImage($request, $heigh, $width, $directory)
+    public function UploadeImage($image, $directory, $heigh = null, $width = null)
     {
-        if (isset($request->img)) {
+        if ($image) {
 
             //درایور پیش فرض ذخیره
             $filesystem = config('filesystems.default');
@@ -20,19 +20,23 @@ class ImageController extends Controller
             $pach = config('filesystems.disks.' . $filesystem)['root'];
 
             //پسوند تصویر
-            $extension = $request->file('img')->extension();
+            $extension = $image->extension();
 
             //ساخت نام تصویر از هلپر فانکشن
             $image_name = Persian_generateImageName($extension);
-
-            $img = Image::make($request->img)->resize($heigh, $width);
 
             if (!Storage::exists($directory)) {
                 // این پوشه را بساز
                 Storage::makeDirectory($directory);
             }
 
-            $img->save($pach . '/' . $directory . '/' . $image_name);
+            if ($heigh && $width) {
+                $img = Image::make($image)->resize($heigh, $width);
+
+                $img->save($pach . '/' . $directory . '/' . $image_name);
+            } else {
+                $image->storeAs($directory, $image_name);
+            }
 
             return $image_name;
         } else {
