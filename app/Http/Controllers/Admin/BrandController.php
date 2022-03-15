@@ -8,7 +8,6 @@ use App\Models\Brand;
 use App\Http\Controllers\Admin\ImageController;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class BrandController extends Controller
 {
@@ -19,8 +18,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands=Brand::latest()->paginate(5);
-        return view('admin.page.brands.index',compact('brands'));
+        $brands = Brand::latest()->paginate(5);
+        return view('admin.page.brands.index', compact('brands'));
     }
 
     /**
@@ -39,36 +38,28 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , ToastrFactory $flasher)
+    public function store(Request $request, ToastrFactory $flasher)
     {
-        
-      
-   
         $request->validate(
             [
                 'name' => 'unique:brands',
                 'index' => 'unique:brands',
             ]
-            );
+        );
 
-            if (isset($request->is_active)) {
-                $request->isactive=true;
-            }
-            else
-            {
-                $request->isactive=false;
-            };
+        if (isset($request->is_active)) {
+            $request->isactive = true;
+        } else {
+            $request->isactive = false;
+        };
 
-            if (isset($request->img)){
-                
-                $ImageController=new ImageController();
-                $image_name=$ImageController->UploadeBrandImage($request ,100,100,"brands");
-            }
-            else
-            {
-                $image_name=null;   
-            }
-             
+        if (isset($request->img)) {
+
+            $ImageController = new ImageController();
+            $image_name = $ImageController->UploadeBrandImage($request, 100, 100, "brands");
+        } else {
+            $image_name = null;
+        }
 
         Brand::create([
             'name' => $request->name,
@@ -88,8 +79,6 @@ class BrandController extends Controller
      */
     public function show($id)
     {
- 
-        
     }
 
     /**
@@ -110,47 +99,33 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand , ToastrFactory $flasher)
-    
+    public function update(Request $request, Brand $brand, ToastrFactory $flasher)
     {
-        
-        
         if (isset($request->is_active)) {
-            $request->isactive=true;
-        }
-        else
-        {
-            $request->isactive=false;
+            $request->isactive = true;
+        } else {
+            $request->isactive = false;
         };
 
-        if (isset($request->img)){
-            
-            
-            
+        if (isset($request->img)) {
             if (Storage::exists('brands/' . $brand->image)) {
                 Storage::delete('brands/' . $brand->image);
             }
-            $ImageController=new ImageController();
-            $image_name=$ImageController->UploadeBrandImage($request);
-        }
-        else
-        {
-            $image_name=$brand->image;   
+            $ImageController = new ImageController();
+            $image_name = $ImageController->UploadeBrandImage($request, 100, 100, "brands");
+        } else {
+            $image_name = $brand->image;
         }
 
-       $brand->update([
+        $brand->update([
+            'name' => $request->name,
+            'index' => $request->index,
+            'image' => $image_name,
+            'is_active' => $request->isactive
+        ]);
 
-        'name' => $request->name,
-        'index' => $request->index,
-        'image' => $image_name,
-        'is_active' => $request->isactive
-
-
-       ]);
-
-       $flasher->addSuccess( 'برند با موفقیت تغییر کرد');
-       return redirect()->route('admin.brands.index');
-
+        $flasher->addSuccess('برند با موفقیت تغییر کرد');
+        return redirect()->route('admin.brands.index');
     }
 
     /**
@@ -164,7 +139,7 @@ class BrandController extends Controller
         //
     }
 
-   public function active(Request $request){
-       
-   }
+    public function active(Request $request)
+    {
+    }
 }

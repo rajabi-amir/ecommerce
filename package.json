@@ -15,7 +15,8 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "persian-date": "^1.1.0",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "webpack-cli": "^4.9.2"
     },
     "dependencies": {
         "bootstrap-fileinput": "^5.2.7",
@@ -25,9 +26,10 @@
         "d3": "^7.2.1",
         "dropify": "^0.2.2",
         "jquery": "^3.3.1",
-        "moment": "2.18.1",
+        "moment": "^2.29.1",
         "node-waves": "^0.7.6",
         "persian-datepicker": "^1.2.0",
-        "popper.js": "^1.16.1"
+        "popper.js": "^1.16.1",
+        "webpack": "^5.70.0"
     }
 }

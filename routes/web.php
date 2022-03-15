@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\BrandController;
-use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\Admin\ImageController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +18,14 @@ use Illuminate\Support\Facades\Storage;
 
 //admin routes
 
-Route::prefix('Admin-panel/managment')->name('admin.')->group(function(){
+Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
-
-    Route::post('brands', [BrandController::class , 'active'])->name('active');
     Route::resource('brands', BrandController::class);
-    
-  
-//admin route
-Route::get('/dashboard', function () {
-    return view('admin.page.dashboard');
-    })->name('home');
 
+    //admin route
+    Route::get('/dashboard', function () {
+        return view('admin.page.dashboard');
+    })->name('home');
 });
 
 
@@ -38,8 +34,23 @@ Route::get('/', function () {
     return view('admin.layout.MasterAdmin')->name('home');
 });
 
-Route::get('/upl',function(){
-return view('uploade');
+
+
+// dropzone upload multiple image routes
+Route::get('/upl', function () {
+    return view('uploade');
 });
 
-Route::post('/upl',[BrandController::class,'uploade'])->name('uploade');
+Route::post('/upl', function (Request $request) {
+    $images = $request->file();
+    // dd($images);
+    if (count($images) > 0) {
+        $paths = [];
+        foreach ($images['file'] as $image) {
+            $path = $image->store('test');
+            $paths[] = ['url' => $path];
+        }
+    }
+    return response()->json('success', 200);
+})->name('uploade');
+//end
