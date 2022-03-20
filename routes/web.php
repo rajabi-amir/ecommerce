@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
     Route::resource('brands', BrandController::class);
+    Route::resource('attributes', AttributeController::class);
+    Route::resource('categories', CategoryController::class);
 
     //admin route
-    Route::get('/dashboard', function () {
-        return view('admin.page.dashboard');
-    })->name('home');
+    Route::view('/dashboard', 'admin.page.dashboard')->name('home');
 });
 
 

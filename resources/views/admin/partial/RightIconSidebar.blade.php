@@ -138,18 +138,18 @@
                                     <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="width: 86%;">
                                         <span class="progress-value">86%</span>
                                     </div>
-                                </div>                        
+                                </div>
                                 <ul class="list-unstyled team-info">
                                     <li class="m-r-15"><small>تیم</small></li>
                                     <li>
-                                        <img src="assets/images/xs/avatar2.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar3.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar4.jpg" alt="Avatar">
-                                    </li>                            
+                                        <img src="" alt="Avatar">
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -164,19 +164,19 @@
                                 <ul class="list-unstyled team-info">
                                     <li class="m-r-15"><small>تیم</small></li>
                                     <li>
-                                        <img src="assets/images/xs/avatar10.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar9.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar8.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar7.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar6.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                 </ul>
                             </div>
@@ -192,14 +192,14 @@
                                 <ul class="list-unstyled team-info">
                                     <li class="m-r-15"><small>تیم</small></li>
                                     <li>
-                                        <img src="assets/images/xs/avatar5.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar2.jpg" alt="Avatar">
+                                        <img src="" alt="Avatar">
                                     </li>
                                     <li>
-                                        <img src="assets/images/xs/avatar7.jpg" alt="Avatar">
-                                    </li>                            
+                                        <img src="" alt="Avatar">
+                                    </li>
                                 </ul>
                             </div>
                         </li>

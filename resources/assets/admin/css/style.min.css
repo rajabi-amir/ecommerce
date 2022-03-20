@@ -16203,7 +16203,7 @@ section.content {
     background: #fff;
     font-size: 14px;
     color: #222;
-    padding: 6px;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -16612,7 +16612,7 @@ section.content {
 
 .bootstrap-select > .dropdown-toggle {
     border: 1px solid #ced4da;
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0.75rem 0.375rem 25px;
     height: calc(2.25rem + 2px);
     font-size: 15px;
     line-height: 26px;
@@ -16660,7 +16660,7 @@ section.content {
     font-family: "Material-Design-Iconic-Font";
     position: absolute;
     top: 14px;
-    right: 20px;
+    left: 20px;
 }
 
 .bootstrap-select ul.dropdown-menu {

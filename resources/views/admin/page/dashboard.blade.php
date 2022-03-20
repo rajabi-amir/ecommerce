@@ -174,7 +174,7 @@
                                 </li>
                             </ul>
                             <div class="img">
-                                <img src="assets/images/lg/avatar1.jpg" class="rounded-circle" alt="profile-image">
+                                <img src="" class="rounded-circle" alt="profile-image">
                             </div>
                             <div class="user">
                                 <h5 class="mt-3 mb-1">آرش خادملو</h5>
@@ -218,7 +218,7 @@
                             <div class="chat-widget">
                                 <ul class="list-unstyled">
                                     <li class="left">
-                                        <img src="assets/images/xs/avatar3.jpg" class="rounded-circle" alt="">
+                                        <img src="" class="rounded-circle" alt="">
                                         <ul class="list-unstyled chat_info">
                                             <li><small>آرش 11:00 صبح</small></li>
                                             <li><span class="message bg-blue">سلام, آرش</span></li>
@@ -238,14 +238,14 @@
                                         </ul>
                                     </li>
                                     <li class="left">
-                                        <img src="assets/images/xs/avatar2.jpg" class="rounded-circle" alt="">
+                                        <img src="" class="rounded-circle" alt="">
                                         <ul class="list-unstyled chat_info">
                                             <li><small>آرش 11:11 صبح</small></li>
                                             <li><span class="message bg-indigo">سلام, آرش و آرش</span></li>
                                         </ul>
                                     </li>
                                     <li class="left">
-                                        <img src="assets/images/xs/avatar5.jpg" class="rounded-circle" alt="">
+                                        <img src="" class="rounded-circle" alt="">
                                         <ul class="list-unstyled chat_info">
                                             <li><small>آرش 11:11 صبح</small></li>
                                             <li><span class="message bg-amber">سلام, تیم</span></li>

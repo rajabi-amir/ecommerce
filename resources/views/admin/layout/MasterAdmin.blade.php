@@ -31,7 +31,6 @@
     @yield('Content')
 
     <!-- Jquery Core Js -->
-
     <script src="{{asset('js/admin.js')}}"></script>
     @flasher_render
 
