@@ -3,9 +3,12 @@
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Tags\TagControll;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +28,11 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class);
     Route::resource('attributes', AttributeController::class);
     Route::resource('categories', CategoryController::class);
-
-    //admin route
+    Route::resource('tags', TagController::class);
+    Route::get('tags', [TagControll::class, "show"])->name('tags');
+    Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
+    
 });
 
 

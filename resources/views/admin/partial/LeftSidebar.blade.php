@@ -1,7 +1,8 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="#"><img src="{{$setting->icon ? asset('storage/'.$setting->icon):'/images/logo.png'}}" width="45" style="margin-right:20px" alt="meta-webs"><span class="m-l-10"></span></a>
+        <a href="#"><img src="{{$setting->icon ? asset('storage/'.$setting->icon):'/images/logo.png'}}" width="45"
+                style="margin-right:20px" alt="meta-webs"><span class="m-l-10"></span></a>
 
     </div>
     <div class="menu">
@@ -21,19 +22,35 @@
                 </a>
             </li>
 
-            <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
-                        ها</span></a>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-label"></i><span>محصولات</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'])><a href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
-                    <li @class(['active'])><a href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
+                    <li><a href={{ route('admin.products.index') }}>لیست محصولات</a></li>
+                    <li><a href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
                 </ul>
             </li>
-            <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
+
+
+
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
+                        ها</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
+                    <li><a href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
+                </ul>
+            </li>
+            <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
                 <ul class="ml-menu">
                     <li @class(['active'])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
                 </ul>
             </li>
 
+            <li> <a href="{{ route('admin.tags.create') }}"><i class="zmdi zmdi-label"></i><span>تگ
+                        ها</span></a>
+                <ul class="ml-menu">
+                </ul>
+            </li>
 
             <li><a target="_blank" href="https://app.raychat.io/login"><i class="zmdi zmdi-hc-fw"></i><span>چت
                         آنلاین</span></a>
@@ -43,7 +60,8 @@
             <li><a href="#"><i class="zmdi zmdi-hc-fw"></i><span>
                         درباره ما </span></a></li>
             <!-- تنظیمات -->
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
                     <li><a href="#">ویرایش پروفایل کاربری </a></li>
                     <li><a href="#">تغییر کلمه عبور </a></li>
