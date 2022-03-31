@@ -30,6 +30,7 @@
             </li>
             <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
                 <ul class="ml-menu">
+                    <li @class(['active'])><a href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
                     <li @class(['active'])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
                 </ul>
             </li>

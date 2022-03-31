@@ -1,5 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
+@section('title','ایجاد دسته بندی')
 @section('Content')
 <section class="content">
     <div class="body_scroll">
@@ -73,7 +73,7 @@
                                     <div class="col-md-3">
                                         <label for="switch">وضعیت</label>
                                         <div class="switchToggle">
-                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active')?null:'checked'}}>
+                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active') ? 'checked' : null}}>
                                             <label for="switch">Toggle</label>
                                         </div>
                                     </div>
@@ -95,7 +95,11 @@
                                         <label for="attributeIsFilter">انتخاب ویژگی های قابل فیلتر</label>
                                         <div class="form-group">
                                             <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick" title="انتخاب فیلتر" multiple data-selected-text-format="count > 3" required>
-                                            
+                                                @if (old('attribute_ids') && old('attribute_is_filter_ids'))
+                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
+                                                <option value="{{$selected_attribute->id}}" {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>{{$selected_attribute->name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -103,6 +107,11 @@
                                         <label for="attributeVariation">انتخاب ویژگی متغیر</label>
                                         <div class="form-group">
                                             <select id="attributeVariation" name="variation_id" class="form-control show-tick" required>
+                                                @if (old('attribute_ids') && old('variation_id'))
+                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
+                                                <option value="{{$selected_attribute->id}}" {{$selected_attribute->id == old('variation_id') ? "selected" : null}}>{{$selected_attribute->name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>

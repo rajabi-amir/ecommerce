@@ -1,5 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
+@section('title','ویرایش دسته بندی')
 @section('Content')
 <section class="content">
     <div class="body_scroll">
@@ -74,7 +74,7 @@
                                     <div class="col-md-3">
                                         <label for="switch">وضعیت</label>
                                         <div class="switchToggle">
-                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active') || !$category->is_active ? null:'checked'}}>
+                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active') || !$category->is_active ? 'checked': null}}>
                                             <label for="switch">Toggle</label>
                                         </div>
                                     </div>
@@ -84,8 +84,7 @@
                                         <div class="form-group">
                                             <select id="attributesId" name="attribute_ids[]" class="form-control show-tick" title="انتخاب ویژگی" multiple data-live-search="true" data-selected-text-format="count > 3" required>
                                                 @foreach ($attributes as $attribute)
-                                                <option value="{{$attribute->id}}" @php if(old('attribute_ids')){
-                                                    if(in_array($attribute->id, old('attribute_ids'))) echo "selected";
+                                                <option value="{{$attribute->id}}" @php if(old('attribute_ids')){ if(in_array($attribute->id, old('attribute_ids'))) echo "selected";
                                                     }
                                                     elseif($category->attributes){
                                                     if(in_array($attribute->id, $category->attributes()->pluck('id')->toArray())) echo "selected";
@@ -100,9 +99,15 @@
                                         <label for="attributeIsFilter">انتخاب ویژگی های قابل فیلتر</label>
                                         <div class="form-group">
                                             <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick" title="انتخاب فیلتر" multiple data-selected-text-format="count > 3" required>
-                                               @foreach ($category->attributes()->wherePivot('is_filter', 1)->get() as $attribute)
-                                                    <option value="{{$attribute->id}}" selected>{{$attribute->name}}</option>
-                                               @endforeach
+                                                @if (old('attribute_ids') && old('attribute_is_filter_ids'))
+                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
+                                                <option value="{{$selected_attribute->id}}" {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>{{$selected_attribute->name}}</option>
+                                                @endforeach
+                                                @else
+                                                @foreach ($category->attributes as $attribute)
+                                                <option value="{{$attribute->id}}" {{in_array($attribute->id,$category->attributes()->wherePivot('is_filter', 1)->pluck('id')->toArray())?"selected":null}}>{{$attribute->name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -110,10 +115,15 @@
                                         <label for="attributeVariation">انتخاب ویژگی متغیر</label>
                                         <div class="form-group">
                                             <select id="attributeVariation" name="variation_id" class="form-control show-tick" required>
-                                            <option value="{{$category->attributes()->wherePivot('is_variation', 1)->first()->id}}">
-                                                {{$category->attributes()->wherePivot('is_variation', 1)->first()->name}}
-                                            </option>
-
+                                                @if (old('attribute_ids') && old('variation_id'))
+                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
+                                                <option value="{{$selected_attribute->id}}" {{$selected_attribute->id == old('variation_id') ? "selected" : null}}>{{$selected_attribute->name}}</option>
+                                                @endforeach
+                                                @else
+                                                @foreach ($category->attributes as $attribute)
+                                                <option value="{{$attribute->id}}" {{$attribute->id == $category->attributes()->wherePivot('is_variation', 1)->first()->id ? "selected" : null}}>{{$attribute->name}}</option>
+                                                @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>

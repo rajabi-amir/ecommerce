@@ -37,7 +37,8 @@
     width: 90px;
     max-width: 90px;
     height: 30px;
-    background: #d1d1d1;
+    background: #00b89e;
+
     display: block;
     border-radius: 100px;
     position: relative;
@@ -55,24 +56,25 @@
 }
 .switchToggle input:checked + label,
 .switchToggle input:checked + input + label {
-    background: #00b89e;
+    background: #d1d1d1;
 }
 .switchToggle input + label:before,
 .switchToggle input + input + label:before {
-    content: "غیرفعال";
+    content: "فعال";
     position: absolute;
     top: 5px;
-    left: 35px;
+    left: 45px;
     width: fit-content;
     height: 26px;
     border-radius: 90px;
     transition: 0.3s;
     text-indent: 0;
-    color: #7f7777;
+    color: #fff;
+
 }
 .switchToggle input:checked + label:before,
 .switchToggle input:checked + input + label:before {
-    content: "فعال";
+    content: "غیرفعال";
     position: absolute;
     top: 5px;
     left: 10px;
@@ -81,7 +83,8 @@
     border-radius: 90px;
     transition: 0.3s;
     text-indent: 0;
-    color: #fff;
+    color: #7f7777;
+
 }
 .switchToggle input:checked + label:after,
 .switchToggle input:checked + input + label:after {
