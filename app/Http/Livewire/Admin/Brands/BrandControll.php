@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
-
+namespace App\Http\Livewire\Admin\Brands;
 use Livewire\Component;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +15,7 @@ class BrandControll extends Component
 
         $this->brands=$brands;  
         
-        return view('livewire.brand-controll');
+        return view('livewire.admin.brands.brand-controll');
 
     }
 
