@@ -54,15 +54,15 @@
                                             <td>{{$category->name}}</td>
                                             <td>{{$category->slug}}</td>
                                             <td>@if ($category->parent_id ==0)
-                                                <span class="badge badge-info">اصلی</span>
+                                                <span class="badge badge-info p-2">اصلی</span>
                                                 @else
                                                 {{$category->parent->name}}
                                                 @endif
                                             </td>
                                             <td>@if ($category->is_active)
-                                                <span class="badge badge-success">فعال</span>
+                                                <span class="badge badge-success p-2">فعال</span>
                                                 @else
-                                                <span class="badge badge-warning">غیرفعال</span>
+                                                <span class="badge badge-warning p-2">غیرفعال</span>
                                                 @endif
                                             </td>
                                             <td class="text-center js-sweetalert">

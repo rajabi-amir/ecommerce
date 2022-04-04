@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\Category;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -44,11 +45,10 @@ class CategoryController extends Controller
     public function store(Request $request, ToastrFactory $flasher)
     {
         $request->whenHas('is_active', function ($input) use ($request) {
-            $request['is_active'] = true;
-        }, function () use ($request) {
             $request['is_active'] = false;
+        }, function () use ($request) {
+            $request['is_active'] = true;
         });
-
         $data = $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,slug',
@@ -69,12 +69,12 @@ class CategoryController extends Controller
             $category = Category::create($filtered);
 
             foreach ($data['attribute_ids'] as  $attribute_id) {
-                $attribute = Attribute::findOrFail($attribute_id);
-                $attribute->categories()->attach($category->id, [
+                $array[$attribute_id] = [
                     'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
                     'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0
-                ]);
+                ];
             }
+            $category->attributes()->attach($array);
 
             DB::commit();
         } catch (\Exception $ex) {
@@ -106,10 +106,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        // dd($category->attributes()->pluck('id')->toArray());
         $parentCategories = Category::where('parent_id', 0)->get();
         $attributes = Attribute::all();
-        return view('admin.page.categories.edit',compact('category','parentCategories','attributes'));
+        return view('admin.page.categories.edit', compact('category', 'parentCategories', 'attributes'));
     }
 
     /**
@@ -119,9 +118,50 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category, ToastrFactory $flasher)
     {
-        //
+        $request->whenHas('is_active', function ($input) use ($request) {
+            $request['is_active'] = false;
+        }, function () use ($request) {
+            $request['is_active'] = true;
+        });
+
+        $data = $request->validate([
+            'name' => 'required',
+            'slug' => ['required', Rule::unique('categories')->ignore($category)],
+            'parent_id' => 'required',
+            'is_active' => 'nullable',
+            'description' => 'nullable|string',
+            'icon' => 'nullable|string',
+            'attribute_ids' => 'required',
+            'attribute_is_filter_ids' => 'required',
+            'variation_id' => 'required',
+        ]);
+
+        $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_filter_ids']);
+
+        try {
+            DB::beginTransaction();
+
+            $category->update($filtered);
+
+            foreach ($data['attribute_ids'] as  $attribute_id) {
+                $array[$attribute_id] = [
+                    'is_filter' => in_array($attribute_id, $data['attribute_is_filter_ids']) ? 1 : 0,
+                    'is_variation' => $attribute_id == $data['variation_id'] ? 1 : 0
+                ];
+            }
+            $category->attributes()->sync($array);
+
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            $flasher->addError($ex->getMessage());
+            return redirect()->route('admin.categories.index');
+        }
+
+        $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
