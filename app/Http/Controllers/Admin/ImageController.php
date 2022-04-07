@@ -11,8 +11,9 @@ class ImageController extends Controller
 
     public function UploadeImage($image, $directory, $heigh = null, $width = null)
     {
+        
         if ($image) {
-
+           
             //درایور پیش فرض ذخیره
             $filesystem = config('filesystems.default');
 
@@ -24,6 +25,8 @@ class ImageController extends Controller
 
             //ساخت نام تصویر از هلپر فانکشن
             $image_name = Persian_generateImageName($extension);
+            
+         
 
             if (!Storage::exists($directory)) {
                 // این پوشه را بساز
@@ -44,4 +47,6 @@ class ImageController extends Controller
             return null;
         }
     }
+    
+  
 }
