@@ -1824,7 +1824,7 @@
                             i.options.container
                                 ? i.$button.trigger("click")
                                 : (i.setSize(),
-                                  i.$menu.parent().addClass("open"),
+                                  i.$menu.parent().addClass("open1"),
                                   (f = !0)),
                             void i.$searchbox.focus()
                         );
