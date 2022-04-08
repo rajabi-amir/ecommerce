@@ -3,12 +3,14 @@
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ use App\Http\Livewire\Admin\Tags\TagControll;
 
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
+    Route::resource('products', ProductController::class);
     Route::resource('brands', BrandController::class);
     Route::resource('attributes', AttributeController::class);
     Route::resource('categories', CategoryController::class);
@@ -50,15 +53,32 @@ Route::get('/upl', function () {
 
 Route::post('/upl', function (Request $request) {
     $images = $request->file();
-    // dd($images);
+    $fileNameImages = [];
+
     if (count($images) > 0) {
-        $paths = [];
-        foreach ($images['file'] as $image) {
+    
+        foreach ($images as $image) {
+            
             $ImageController = new ImageController();
             $image_name = $ImageController->UploadeImage($image, "test");
             $paths[] = ['url' => $image_name];
         }
+        
+
     }
-    return response()->json('success', 200);
+  
+    
+    return response()->json($image_name, 200);
+   
 })->name('uploade');
+
+
+
+Route::post('/del', function (Request $request) { 
+
+$namefile = $request->name;
+ProductImage::where('image',$namefile)->delete();
+Storage::delete('test/' .$namefile);
+return response()->json(['success' =>"تصویر حذف شد"]);
+})->name('del');
 //end

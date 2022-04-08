@@ -4,25 +4,36 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="body">
+
                     <div class="row clearfix">
                         <div class="col-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label class="form-label">تگ ها</label>
-                                    <input type="text" name="name" wire:model="tag_name" class="form-control" required>
+                                    <input type="text" name="name" wire:model.defer="tag_name" class="form-control">
+                                    @error('tag_name')
+                                    <p class="text-danger">{{ $message }}</p>
 
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 ">
-                            <button wire:click="addTag()"
+                            <button wire:click="addTag" wire:loading.attr="disabled"
                                 class="btn btn-raised {{$is_edit ? 'btn-warning' : 'btn-primary'}}  waves-effect">
                                 {{$is_edit ? 'ویرایش' : 'اضافه کردن'}}
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                    wire:target="addTag()"></span>
+                                    wire:target="addTag"></span>
                             </button>
+                            <button class="btn btn-raised btn-info waves-effect" wire:loading.attr="disabled"
+                                wire:click="ref">صرف نظر
+                                <span class="spinner-border spinner-border-sm text-light" wire:loading
+                                    wire:target="ref"></span>
+                            </button>
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -47,29 +58,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tags as $key => $tags)
-                                <tr>
-                                    <td scope="row">{{$key+1}}</td>
-                                    <td>{{$tags->name}}</td>
+                                @foreach ($tags as $tag)
+                                <tr wire:key="{{ $tag->name}} {{$tag->id }}" wire:loading.attr="disabled">
+                                    <td scope="row">{{$tag->id}}</td>
+                                    <td>{{$tag->name}}</td>
                                     <td class="text-center js-sweetalert">
 
-                                        <button wire:click="edit_tag({{$tags->id}})" wire:key="{{$tags->id}}"
-                                            class="btn btn-raised btn-info waves-effect scroll">
+                                        <button wire:click="edit_tag({{$tag->id}})" wire:loading.attr="disabled"
+                                            {{$display}} class="btn btn-raised btn-info waves-effect scroll">
                                             <i class="zmdi zmdi-edit"></i>
                                             <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="edit_tag({{$tags->id}}) "></span>
+                                                wire:target="edit_tag({{$tag->id}}) "></span>
                                         </button>
 
                                         <button class="btn btn-raised btn-danger waves-effect"
-                                            wire:click="del_tag({{$tags->id}})">
+                                            wire:loading.attr="disabled" wire:click="del_tag({{$tag->id}})"
+                                            {{$display}}>
                                             <i class="zmdi zmdi-delete"></i>
 
                                             <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="del_tag({{$tags->id}})"></span>
+                                                wire:target="del_tag({{$tag->id}})"></span>
                                         </button>
 
                                     </td>
                                 </tr>
+
                                 @endforeach
 
                             </tbody>

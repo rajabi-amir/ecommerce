@@ -14,6 +14,7 @@ require("../assets/admin/plugins/sweetalert/sweetalert.min.js");
 require("../assets/admin/plugins/jquery-validation/jquery.validate.js");
 require("../assets/admin/plugins/jquery-steps/jquery.steps");
 require("../assets/admin/plugins/light-gallery/js/lightgallery-all.min.js");
+require("../assets/admin/plugins/select2/select2.min.js");
 require("../assets/admin/bundles/mainscripts.bundle");
 require("../assets/admin/js/pages/ui/sweetalert.js");
 require("../assets/admin/js/pages/forms/form-validation.js");
@@ -22,6 +23,7 @@ require("../assets/admin/js/pages/forms/dropify");
 require("../assets/admin/js/pages/forms/form-wizard");
 require("../assets/admin/js/pages/medias/image-gallery.js");
 require("../assets/admin/js/validation.js");
+require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 
 //date farsi
 // index
