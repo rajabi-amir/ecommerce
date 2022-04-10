@@ -3,8 +3,9 @@
 window.c3 = require("c3");
 
 window.$ = window.jQuery = window.jquery = require("jquery");
+
 require("node-waves");
-// require("bootstrap-fileinput");
+require("bootstrap-fileinput");
 require("../assets/admin/bundles/libscripts.bundle");
 require("../assets/admin/bundles/vendorscripts.bundle");
 
@@ -28,6 +29,7 @@ require("../assets/admin/js/validation.js");
 require("../assets/admin/js/dropzone.min.js");
 require("../assets/admin/js/dropzone.js");
 require("../assets/admin/js/pages/forms/advanced-form-elements.js");
+require("../assets/admin/js/jquery.czMore-latest.js");
 
 //date farsi
 // index

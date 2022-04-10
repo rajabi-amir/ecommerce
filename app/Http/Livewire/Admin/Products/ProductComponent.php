@@ -21,7 +21,10 @@ class ProductComponent extends Component
         public function send(){
             dd($this->photo);
         }
+     public function storeProduct($data){
 
+        dd($data);
+     }
             public function render()
             {
                 $this->brands=Brand::all();

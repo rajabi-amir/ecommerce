@@ -35,6 +35,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::get('tags', [TagControll::class, "show"])->name('tags');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
+    Route::get('/category-attributes/{category}',[CategoryController::class , 'getCategoryAttributes']);
     
 });
 
@@ -51,34 +52,9 @@ Route::get('/upl', function () {
     return view('uploade');
 });
 
-Route::post('/upl', function (Request $request) {
-    $images = $request->file();
-    $fileNameImages = [];
-
-    if (count($images) > 0) {
-    
-        foreach ($images as $image) {
-            
-            $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($image, "test");
-            $paths[] = ['url' => $image_name];
-        }
-        
-
-    }
-  
-    
-    return response()->json($image_name, 200);
-   
-})->name('uploade');
+Route::post('/upl',[ProductController::class,'uploadImage'])->name('uploade');
 
 
 
-Route::post('/del', function (Request $request) { 
-
-$namefile = $request->name;
-ProductImage::where('image',$namefile)->delete();
-Storage::delete('test/' .$namefile);
-return response()->json(['success' =>"تصویر حذف شد"]);
-})->name('del');
+Route::post('/del', [ProductController::class , 'deleteImage'])->name('del');
 //end
