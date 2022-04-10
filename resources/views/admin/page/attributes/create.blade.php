@@ -45,7 +45,7 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name"  class="form-control" placeholder="عنوان" value="{{old('value')}}" required>
+                                            <input type="text" name="name" class="form-control" placeholder="عنوان" value="{{old('value')}}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">

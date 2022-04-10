@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="no-js " lang="fa">
+<html class="no-js " lang="fa" dir="rtl">
 
 <head>
     @include('admin.partial.Head')
