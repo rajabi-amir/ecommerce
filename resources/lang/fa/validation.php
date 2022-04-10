@@ -136,6 +136,8 @@ return array(
         "rent" =>"قیمت اجاره",
         "rahn" =>"قیمت رهن",
         "index" =>"محل قرار گیری",
-        "tag_name" => "نام تک"
+        "tag_name" => "نام تک",
+        "attribute_ids.*"=> "ویژگی",
+        "delivery_amount"=> "هزینه ارسال"
     ),
 );
