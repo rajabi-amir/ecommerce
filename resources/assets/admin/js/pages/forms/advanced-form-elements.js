@@ -111,6 +111,7 @@ $(function () {
         dir: "rtl",
         closeOnSelect: false,
         language: "fa",
+        width: "100%",
     });
     $(".search-select").select2({
         allowClear: true,

@@ -35126,7 +35126,22 @@ section.content {
 .select2-container .select2-search--inline .select2-search__field{
     font: inherit;
 }
-
+.select2-container--default .select2-selection--single{
+    display: flex;
+    align-items: center;
+    height: calc(2.25rem + 2px);
+}
+.select2-container--default .select2-selection--multiple{
+    display: flex;
+    align-items: center;
+    min-height: calc(2.25rem + 2px);
+}
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow{
+    top: 5px;
+}
+.select2-results__option--selectable{
+    text-align: right;
+}
 /* bootstrap select */
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
     white-space: nowrap;

@@ -25,6 +25,8 @@ require("../assets/admin/js/pages/forms/dropify");
 require("../assets/admin/js/pages/forms/form-wizard");
 require("../assets/admin/js/pages/medias/image-gallery.js");
 require("../assets/admin/js/validation.js");
+require("../assets/admin/js/dropzone.min.js");
+require("../assets/admin/js/dropzone.js");
 require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 
 //date farsi
