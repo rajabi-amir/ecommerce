@@ -10,6 +10,9 @@ class AttributeList extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    protected $listeners = [
+        'sweetAlertConfirmed', // only when confirm button is clicked
+    ];
 
     public $attribute_name;
     public $attribute;
@@ -27,7 +30,7 @@ class AttributeList extends Component
 
     public function edit_attribute(Attribute $attribute)
     {
-
+        $this->dispatchBrowserEvent('name-updated', ['newName' => 'amir rajabi']);
         $this->is_edit = true;
         $this->attribute_name = $attribute->name;
         $this->attribute = $attribute;
@@ -36,11 +39,17 @@ class AttributeList extends Component
 
     public function del_attribute(Attribute $attribute)
     {
-        try {
-            $attribute->delete();
-        } catch (\Exception $e) {
-            redirect('admin.attributes.create');
-        }
+        $this->attribute=$attribute;
+        sweetAlert()
+            ->livewire()
+            ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
+            ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+
+    }
+    public function sweetAlertConfirmed(array $data)
+    {
+            $this->attribute->delete();
+            toastr()->livewire()->addSuccess('ویژگی با موفقیت حذف شد');
     }
 
     public function addAttribute()
@@ -58,6 +67,7 @@ class AttributeList extends Component
             $this->is_edit = false;
             $this->reset("attribute_name");
             $this->reset("display");
+            toastr()->livewire()->addSuccess('تغییرات با موفقیت ذخیره شد');
         } else {
             $this->validate([
                 'attribute_name' => 'required|string|max:50|unique:attributes,name'
@@ -67,6 +77,8 @@ class AttributeList extends Component
                 "name" => $this->attribute_name,
             ]);
             $this->reset("attribute_name");
+            toastr()->livewire()->addSuccess('ویژگی با موفقیت ایجاد شد');
+
         }
     }
 

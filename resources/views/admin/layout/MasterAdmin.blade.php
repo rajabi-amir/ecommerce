@@ -32,11 +32,11 @@
 
     <!-- Jquery Core Js -->
     <script src="{{asset('js/admin.js')}}"></script>
+
     @flasher_render
-
-    @stack('scripts')
-
+    @flasher_livewire_render
     @livewireScripts()
+    @stack('scripts')
 
 </body>
 

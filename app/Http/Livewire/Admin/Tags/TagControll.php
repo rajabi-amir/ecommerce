@@ -21,23 +21,23 @@ class TagControll extends Component
         $this->is_edit=false;
         $this->reset("tag_name");
         $this->reset("display");
+        $this->resetValidation();
     }
 
 
     public function render()
     {
-        $this->tags= Tag::latest()->get();
+        $this->tags= Tag::latest()->paginate(10);
         return view('livewire.admin.tags.tag-controll');
     }
 
 
-    public function edit_tag(Tag $tag){
-
+    public function edit_tag(Tag $tag)
+    {
         $this->is_edit=true;
         $this->tag_name=$tag->name;
         $this->tag=$tag;
         $this->display="disabled";
-
     }
 
 

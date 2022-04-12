@@ -77,3 +77,13 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    $('.scroll').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+</script>
+@endpush
