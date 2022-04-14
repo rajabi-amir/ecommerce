@@ -6,7 +6,5 @@ return array(
         'https://cdn.jsdelivr.net/npm/@flasher/flasher-sweet-alert@0.2.1/dist/flasher-sweet-alert.min.js',
     ),
     'styles' => array(),
-    'options' => array(
-        'rtl' =>true
-    ),
+    'options' => array(),
 );

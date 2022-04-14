@@ -10,10 +10,11 @@ use Livewire\WithPagination;
 class TagControll extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $tag_name;
     public $tag;
     public $is_edit=false;
-    public $tags;
     public $display;
 
     public function ref()
@@ -27,8 +28,7 @@ class TagControll extends Component
 
     public function render()
     {
-        $this->tags= Tag::latest()->paginate(10);
-        return view('livewire.admin.tags.tag-controll');
+        return view('livewire.admin.tags.tag-controll',['tags'=>Tag::latest()->paginate(10)]);
     }
 
 
