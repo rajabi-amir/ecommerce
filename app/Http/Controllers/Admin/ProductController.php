@@ -101,8 +101,6 @@ class ProductController extends Controller
     $flasher->addSuccess('محصول مورد نظر ایجاد شد');
     return redirect()->route('admin.products.index');
 
-
-
        
     }
     
