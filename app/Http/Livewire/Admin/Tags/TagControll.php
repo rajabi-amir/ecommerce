@@ -16,6 +16,7 @@ class TagControll extends Component
     public $tags;
     public $display;
 
+    
     public function ref()
     {
         $this->is_edit=false;
@@ -69,6 +70,7 @@ class TagControll extends Component
         $this->tag->update([
         'name'=> $this->tag_name,
         ]);
+
         $this->is_edit=false;
         $this->reset("tag_name");
         $this->reset("display");
@@ -80,8 +82,8 @@ class TagControll extends Component
             $this->validate([
                 'tag_name' => 'required|unique:tags,name'
               ]);
-            Tag::create([
 
+            Tag::create([
                 "name" => $this->tag_name,
                ]);
                $this->reset("tag_name");
@@ -94,7 +96,6 @@ class TagControll extends Component
 
 
      public function show(){
-
         return view('admin.page.tags.create');
      }
 }

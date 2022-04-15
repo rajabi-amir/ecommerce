@@ -299,10 +299,10 @@
         $('#attributesContainer').hide();
         $('#categorySelect').on('changed.bs.select', function() {
             let categoryId = $(this).val();
+            
 
             $.get(`{{url('Admin-panel/managment/category-attributes/${categoryId}')}}`,
-                function(response,
-                    status) {
+                function(response, status) {
 
                     if (status == 'success') {
                         $('#attributesContainer').fadeIn();
