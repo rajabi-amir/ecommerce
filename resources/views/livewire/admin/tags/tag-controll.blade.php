@@ -30,7 +30,6 @@
                                 <span class="spinner-border spinner-border-sm text-light" wire:loading
                                     wire:target="ref"></span>
                             </button>
-
                         </div>
                     </div>
 
@@ -43,7 +42,6 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-
                 <div class="body">
                     @if(count($tags)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
@@ -82,15 +80,14 @@
 
                                     </td>
                                 </tr>
-
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
                     @endif
                 </div>
             </div>
+            {{ $tags->links() }}
         </div>
     </div>
     <!-- پایان لیست -->

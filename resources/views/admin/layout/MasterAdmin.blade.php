@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="no-js " lang="fa">
+<html class="no-js " lang="fa" dir="rtl">
 
 <head>
     @include('admin.partial.Head')
@@ -32,11 +32,11 @@
 
     <!-- Jquery Core Js -->
     <script src="{{asset('js/admin.js')}}"></script>
+
     @flasher_render
-
-    @stack('scripts')
-
+    @flasher_livewire_render
     @livewireScripts()
+    @stack('scripts')
 
 </body>
 

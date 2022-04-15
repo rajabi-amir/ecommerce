@@ -1,5 +1,6 @@
 @extends('admin.layout.MasterAdmin')
 @section('title','ایجاد دسته بندی')
+
 @section('Content')
 <section class="content">
     <div class="body_scroll">
@@ -62,7 +63,7 @@
                                     <div class="col-md-3">
                                         <label for="parent_id">والد</label>
                                         <div class="form-group">
-                                            <select id="parent_id" name="parent_id" class="form-control show-tick" required>
+                                            <select id="parent_id" name="parent_id" class="form-control show-tick ms select2" required>
                                                 <option value="0">بدون والد</option>
                                                 @foreach ($parentCategories as $parentCategory)
                                                 <option {{ old('parent_id') === $parentCategory->id ? "selected":null}} value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
@@ -81,7 +82,7 @@
                                     <div class="col-md-3">
                                         <label for="attributesId">ویژگی</label>
                                         <div class="form-group">
-                                            <select id="attributesId" name="attribute_ids[]" class="form-control show-tick" title="انتخاب ویژگی" multiple data-live-search="true" data-selected-text-format="count > 3" required>
+                                            <select id="attributesId" name="attribute_ids[]" class="form-control show-tick ms select2" data-placeholder="انتخاب ویژگی" multiple required>
                                                 @foreach ($attributes as $attribute)
                                                 <option value="{{$attribute->id}}" @php if(old('attribute_ids')){ if(in_array($attribute->id, old('attribute_ids'))) echo "selected";
                                                     }
@@ -94,7 +95,7 @@
                                     <div class="col-md-3">
                                         <label for="attributeIsFilter">انتخاب ویژگی های قابل فیلتر</label>
                                         <div class="form-group">
-                                            <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick" title="انتخاب فیلتر" multiple data-selected-text-format="count > 3" required>
+                                            <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick ms select2" multiple data-placeholder="انتخاب فیلتر" required>
                                                 @if (old('attribute_ids') && old('attribute_is_filter_ids'))
                                                 @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
                                                 <option value="{{$selected_attribute->id}}" {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>{{$selected_attribute->name}}</option>
@@ -106,7 +107,7 @@
                                     <div class="col-md-3">
                                         <label for="attributeVariation">انتخاب ویژگی متغیر</label>
                                         <div class="form-group">
-                                            <select id="attributeVariation" name="variation_id" class="form-control show-tick" required>
+                                            <select id="attributeVariation" name="variation_id" class="form-control show-tick ms select2" required>
                                                 @if (old('attribute_ids') && old('variation_id'))
                                                 @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
                                                 <option value="{{$selected_attribute->id}}" {{$selected_attribute->id == old('variation_id') ? "selected" : null}}>{{$selected_attribute->name}}</option>
@@ -146,25 +147,15 @@
 @endsection
 @push('scripts')
 <script>
-    $('#attributesId').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-        let selectedAttributes = $(this).val();
-        let attributes = @json($attributes);
+    $('#attributesId').on('change',function(){
+        let selectedAttributes =$(this).select2('data');
         let options = ''
 
-        let filterAttributes = attributes.filter((item) => {
-            return selectedAttributes.includes(`${item.id}`);
-        })
-
-        filterAttributes.forEach(element => {
-            options += `<option value="${element.id}">${element.name}</option>`
+        selectedAttributes.forEach(element => {
+            options += `<option value="${element.id}">${element.text}</option>`
         });
-
-        $('#attributeIsFilter').html(options);
-        $("#attributeIsFilter").selectpicker("refresh");
-
-        $('#attributeVariation').html(options);
-        $("#attributeVariation").selectpicker("refresh");
-
-    });
+        $('#attributeIsFilter').html(options).trigger('change');
+        $('#attributeVariation').html(options).trigger('change');
+    })
 </script>
 @endpush

@@ -18,7 +18,7 @@ class CreateSettingsTable extends Migration
 
             $table->string('address');
             $table->string('telephone');
-            $table->string('links')->nullable();
+            $table->text('links')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('instagram')->nullable();

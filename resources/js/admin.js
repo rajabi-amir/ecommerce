@@ -8,13 +8,16 @@ require("node-waves");
 require("bootstrap-fileinput");
 require("../assets/admin/bundles/libscripts.bundle");
 require("../assets/admin/bundles/vendorscripts.bundle");
+
 require("../assets/admin/plugins/dropify/js/dropify.min");
-require("../assets/admin/bundles/jvectormap.bundle");
+// require("../assets/admin/bundles/jvectormap.bundle");
 require("../assets/admin/bundles/sparkline.bundle");
 require("../assets/admin/plugins/sweetalert/sweetalert.min.js");
 require("../assets/admin/plugins/jquery-validation/jquery.validate.js");
 require("../assets/admin/plugins/jquery-steps/jquery.steps");
 require("../assets/admin/plugins/light-gallery/js/lightgallery-all.min.js");
+require("../assets/admin/plugins/select2/select2.min.js");
+
 require("../assets/admin/bundles/mainscripts.bundle");
 require("../assets/admin/js/pages/ui/sweetalert.js");
 require("../assets/admin/js/pages/forms/form-validation.js");
