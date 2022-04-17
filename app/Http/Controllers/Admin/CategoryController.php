@@ -50,7 +50,9 @@ class CategoryController extends Controller
             $request['is_active'] = true;
         });
         $data = $request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('categories')->where(function ($query) use ($request) {
+                $query->where('parent_id', $request->input('parent_id'));
+            })],
             'slug' => 'required|unique:categories,slug',
             'parent_id' => 'required',
             'is_active' => 'nullable',
@@ -127,7 +129,9 @@ class CategoryController extends Controller
         });
 
         $data = $request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('categories')->ignore($category)->where(function ($query) use ($request) {
+                $query->where('parent_id', $request->input('parent_id'));
+            })],
             'slug' => ['required', Rule::unique('categories')->ignore($category)],
             'parent_id' => 'required',
             'is_active' => 'nullable',
@@ -175,14 +179,14 @@ class CategoryController extends Controller
         //
     }
 
-    public function getCategoryAttributes(Category $category){
+    public function getCategoryAttributes(Category $category)
+    {
 
-      
-        $attrubtes=$category->attributes()->wherePivot('is_variation', 0)->get();
 
-        $variation=$category->attributes()->wherePivot('is_variation', 1)->first();
-        
-        return ['attrubtes'=>$attrubtes,'variation'=>$variation];
-        
+        $attrubtes = $category->attributes()->wherePivot('is_variation', 0)->get();
+
+        $variation = $category->attributes()->wherePivot('is_variation', 1)->first();
+
+        return ['attrubtes' => $attrubtes, 'variation' => $variation];
     }
 }

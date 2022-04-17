@@ -131,13 +131,10 @@ return array(
         "name_family"=> "نام و نام خانوادگی",
         "province" => "استان",
         "district" =>"محله",
-        "bidprice" => "قیمت پیشنهادی",
-        "ugprice" =>"قیمت کارشناسی",
-        "rent" =>"قیمت اجاره",
-        "rahn" =>"قیمت رهن",
         "index" =>"محل قرار گیری",
         "tag_name" => "نام تک",
         "attribute_ids.*"=> "ویژگی",
-        "delivery_amount"=> "هزینه ارسال"
+        "delivery_amount"=> "هزینه ارسال",
+        "slug" => "عنوان انگلیسی"
     ),
 );

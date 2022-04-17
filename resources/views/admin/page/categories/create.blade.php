@@ -7,13 +7,13 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>ایجاد برند</h2>
+                    <h2>ایجاد دسته بندی</h2>
                     </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">برند ها</a></li>
-                        <li class="breadcrumb-item active">ایجاد برند</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.categories.index')}}">دسته بندی ها</a></li>
+                        <li class="breadcrumb-item active">ایجاد دسته بندی</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -51,13 +51,13 @@
                                     <div class="col-md-3">
                                         <label for="name">عنوان دسته بندی</label>
                                         <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" value="{{old('name')}}" required>
+                                            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="slug">نام انگلیسی</label>
+                                        <label for="slug">عنوان انگلیسی</label>
                                         <div class="form-group">
-                                            <input type="text" name="slug" id="slug" class="form-control" value="{{old('slug')}}" required>
+                                            <input type="text" name="slug" id="slug" class="form-control @error('slug') is-invalid @enderror" value="{{old('slug')}}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -82,7 +82,7 @@
                                     <div class="col-md-3">
                                         <label for="attributesId">ویژگی</label>
                                         <div class="form-group">
-                                            <select id="attributesId" name="attribute_ids[]" class="form-control show-tick ms select2" data-placeholder="انتخاب ویژگی" multiple required>
+                                            <select id="attributesId" name="attribute_ids[]" class="form-control show-tick ms select2-multiple" data-placeholder="انتخاب ویژگی" multiple required>
                                                 @foreach ($attributes as $attribute)
                                                 <option value="{{$attribute->id}}" @php if(old('attribute_ids')){ if(in_array($attribute->id, old('attribute_ids'))) echo "selected";
                                                     }
@@ -95,7 +95,7 @@
                                     <div class="col-md-3">
                                         <label for="attributeIsFilter">انتخاب ویژگی های قابل فیلتر</label>
                                         <div class="form-group">
-                                            <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick ms select2" multiple data-placeholder="انتخاب فیلتر" required>
+                                            <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick ms select2-multiple" multiple data-placeholder="انتخاب فیلتر" required>
                                                 @if (old('attribute_ids') && old('attribute_is_filter_ids'))
                                                 @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
                                                 <option value="{{$selected_attribute->id}}" {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>{{$selected_attribute->name}}</option>
