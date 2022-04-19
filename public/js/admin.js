@@ -16157,89 +16157,100 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
   \*************************************************************************/
 /***/ (() => {
 
-$(function () {
-  $(".colorpicker").colorpicker(); //Masked Input =========
+/* $(function () {
+    $(".colorpicker").colorpicker();
 
-  var $demoMaskedInput = $(".masked-input"); //Date
+    //Masked Input =========
+    var $demoMaskedInput = $(".masked-input");
 
-  $demoMaskedInput.find(".date").inputmask("dd/mm/yyyy", {
-    placeholder: "__/__/____"
-  }); //Time
+    //Date
+    $demoMaskedInput
+        .find(".date")
+        .inputmask("dd/mm/yyyy", { placeholder: "__/__/____" });
 
-  $demoMaskedInput.find(".time12").inputmask("hh:mm t", {
-    placeholder: "__:__ _m",
-    alias: "time12",
-    hourFormat: "12"
-  });
-  $demoMaskedInput.find(".time24").inputmask("hh:mm", {
-    placeholder: "__:__ _m",
-    alias: "time24",
-    hourFormat: "24"
-  }); //Date Time
+    //Time
+    $demoMaskedInput.find(".time12").inputmask("hh:mm t", {
+        placeholder: "__:__ _m",
+        alias: "time12",
+        hourFormat: "12",
+    });
+    $demoMaskedInput.find(".time24").inputmask("hh:mm", {
+        placeholder: "__:__ _m",
+        alias: "time24",
+        hourFormat: "24",
+    });
 
-  $demoMaskedInput.find(".datetime").inputmask("d/m/y h:s", {
-    placeholder: "__/__/____ __:__",
-    alias: "datetime",
-    hourFormat: "24"
-  }); //Mobile Phone Number
+    //Date Time
+    $demoMaskedInput.find(".datetime").inputmask("d/m/y h:s", {
+        placeholder: "__/__/____ __:__",
+        alias: "datetime",
+        hourFormat: "24",
+    });
 
-  $demoMaskedInput.find(".mobile-phone-number").inputmask("+99 (999) 999-99-99", {
-    placeholder: "+__ (___) ___-__-__"
-  }); //Phone Number
+    //Mobile Phone Number
+    $demoMaskedInput
+        .find(".mobile-phone-number")
+        .inputmask("+99 (999) 999-99-99", {
+            placeholder: "+__ (___) ___-__-__",
+        });
+    //Phone Number
+    $demoMaskedInput.find(".phone-number").inputmask("+99 (999) 999-99-99", {
+        placeholder: "+__ (___) ___-__-__",
+    });
 
-  $demoMaskedInput.find(".phone-number").inputmask("+99 (999) 999-99-99", {
-    placeholder: "+__ (___) ___-__-__"
-  }); //Dollar Money
+    //Dollar Money
+    $demoMaskedInput
+        .find(".money-dollar")
+        .inputmask("99,99 $", { placeholder: "__,__ $" });
 
-  $demoMaskedInput.find(".money-dollar").inputmask("99,99 $", {
-    placeholder: "__,__ $"
-  }); //IP Address
+    //IP Address
+    $demoMaskedInput
+        .find(".ip")
+        .inputmask("999.999.999.999", { placeholder: "___.___.___.___" });
 
-  $demoMaskedInput.find(".ip").inputmask("999.999.999.999", {
-    placeholder: "___.___.___.___"
-  }); //Credit Card
+    //Credit Card
+    $demoMaskedInput.find(".credit-card").inputmask("9999 9999 9999 9999", {
+        placeholder: "____ ____ ____ ____",
+    });
 
-  $demoMaskedInput.find(".credit-card").inputmask("9999 9999 9999 9999", {
-    placeholder: "____ ____ ____ ____"
-  }); //Email
+    //Email
+    $demoMaskedInput.find(".email").inputmask({ alias: "email" });
 
-  $demoMaskedInput.find(".email").inputmask({
-    alias: "email"
-  }); //Serial Key
+    //Serial Key
+    $demoMaskedInput.find(".key").inputmask("****-****-****-****", {
+        placeholder: "____-____-____-____",
+    });
+    //======================
 
-  $demoMaskedInput.find(".key").inputmask("****-****-****-****", {
-    placeholder: "____-____-____-____"
-  }); //======================
-  //Multi-select
+    //Multi-select
+    $("#optgroup").multiSelect({ selectableOptgroup: true });
 
-  $("#optgroup").multiSelect({
-    selectableOptgroup: true
-  }); //noUISlider
+    //noUISlider
+    var sliderBasic = document.getElementById("nouislider_basic_example");
+    noUiSlider.create(sliderBasic, {
+        start: [30],
+        connect: "lower",
+        step: 1,
+        range: {
+            min: [0],
+            max: [100],
+        },
+    });
+    getNoUISliderValue(sliderBasic, true);
 
-  var sliderBasic = document.getElementById("nouislider_basic_example");
-  noUiSlider.create(sliderBasic, {
-    start: [30],
-    connect: "lower",
-    step: 1,
-    range: {
-      min: [0],
-      max: [100]
-    }
-  });
-  getNoUISliderValue(sliderBasic, true); //Range Example
-
-  var rangeSlider = document.getElementById("nouislider_range_example");
-  noUiSlider.create(rangeSlider, {
-    start: [32500, 62500],
-    connect: true,
-    range: {
-      min: 25000,
-      max: 100000
-    }
-  });
-  getNoUISliderValue(rangeSlider, false);
-}); //Get noUISlider Value and write on
-
+    //Range Example
+    var rangeSlider = document.getElementById("nouislider_range_example");
+    noUiSlider.create(rangeSlider, {
+        start: [32500, 62500],
+        connect: true,
+        range: {
+            min: 25000,
+            max: 100000,
+        },
+    });
+    getNoUISliderValue(rangeSlider, false);
+}); */
+//Get noUISlider Value and write on
 function getNoUISliderValue(slider, percentage) {
   slider.noUiSlider.on("update", function () {
     var val = slider.noUiSlider.get();
@@ -16256,6 +16267,11 @@ function getNoUISliderValue(slider, percentage) {
 
 $(function () {
   $(".select2multiple").select2({
+    dir: "rtl",
+    language: "fa",
+    width: "100%"
+  });
+  $(".select2-multiple").select2({
     dir: "rtl",
     closeOnSelect: false,
     language: "fa",
@@ -16331,9 +16347,10 @@ $(function () {
     formatSelection: format,
     formatResult: format
   });
-});
+}); // define persian language for select2
+
 $.fn.select2.amd.define("select2/i18n/fa", [], function () {
-  // Russian
+  // persian
   return {
     errorLoading: function errorLoading() {
       return "امکان بارگذاری نتایج وجود ندارد.";

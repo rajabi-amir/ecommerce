@@ -1,4 +1,4 @@
-$(function () {
+/* $(function () {
     $(".colorpicker").colorpicker();
 
     //Masked Input =========
@@ -90,7 +90,7 @@ $(function () {
         },
     });
     getNoUISliderValue(rangeSlider, false);
-});
+}); */
 
 //Get noUISlider Value and write on
 function getNoUISliderValue(slider, percentage) {
@@ -108,6 +108,11 @@ function getNoUISliderValue(slider, percentage) {
 
 $(function () {
     $(".select2multiple").select2({
+        dir: "rtl",
+        language: "fa",
+        width: "100%",
+    });
+    $(".select2-multiple").select2({
         dir: "rtl",
         closeOnSelect: false,
         language: "fa",
@@ -161,8 +166,10 @@ $(function () {
         formatResult: format,
     });
 });
+
+// define persian language for select2
 $.fn.select2.amd.define("select2/i18n/fa", [], function () {
-    // Russian
+    // persian
     return {
         errorLoading: function () {
             return "امکان بارگذاری نتایج وجود ندارد.";
