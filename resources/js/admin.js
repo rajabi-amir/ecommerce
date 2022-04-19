@@ -6,11 +6,14 @@ window.$ = window.jQuery = window.jquery = require("jquery");
 
 require("node-waves");
 require("bootstrap-fileinput");
+require("../assets/admin/plugins/bootstrap/js/bootstrap.min.js");
 require("../assets/admin/bundles/libscripts.bundle");
 require("../assets/admin/bundles/vendorscripts.bundle");
-
+require("../assets/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js");
+require("../assets/admin/plugins/jquery-inputmask/jquery.inputmask.bundle.js");
+require("../assets/admin/plugins/multi-select/js/jquery.multi-select.js");
 require("../assets/admin/plugins/dropify/js/dropify.min");
-// require("../assets/admin/bundles/jvectormap.bundle");
+
 require("../assets/admin/bundles/sparkline.bundle");
 require("../assets/admin/plugins/sweetalert/sweetalert.min.js");
 require("../assets/admin/plugins/jquery-validation/jquery.validate.js");
@@ -30,6 +33,7 @@ require("../assets/admin/js/dropzone.min.js");
 require("../assets/admin/js/dropzone.js");
 require("../assets/admin/js/pages/forms/advanced-form-elements.js");
 require("../assets/admin/js/jquery.czMore-latest.js");
+require("md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.js");
 
 //date farsi
 // index

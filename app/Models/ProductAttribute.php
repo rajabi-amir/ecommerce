@@ -10,4 +10,8 @@ class ProductAttribute extends Model
     use HasFactory;
     protected $guarded=[];
     protected $table="product_attributes";
+
+    public function attribute(){
+        return $this->belongsTo(Attribute::class);
+    }
 }

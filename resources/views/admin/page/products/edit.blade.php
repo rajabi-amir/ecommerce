@@ -1,182 +1,356 @@
 @extends('admin.layout.MasterAdmin')
-@section('title','ویرایش دسته بندی')
+@section('title','ویرایش محصول')
 @section('Content')
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>ویرایش دسته بندی</h2>
+                    <h2>ویرایش محصول</h2>
                     </br>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
                                 خانه</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">دسته بندی ها</a></li>
-                        <li class="breadcrumb-item active">ویرایش {{$category->name}}</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">محصولات</a></li>
+                        <li class="breadcrumb-item active">ویرایش محصول</li>
                     </ul>
-                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
+                            class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
-                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
+                            class="zmdi zmdi-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-
         <div class="container-fluid">
-
-            <!-- Hover Rows -->
+            <!-- Input -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    @foreach($errors->all() as $error)
-                    <div class="alert alert-danger" role="alert">
-                        <div class="container">
-                            <div class="alert-icon">
-                                <i class="zmdi zmdi-block"></i>
-                            </div>
-                            {{ $error }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">
-                                    <i class="zmdi zmdi-close"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                    @endforeach
                     <div class="card">
-                        <div class="body">
-                            <form id="form_advanced_validation" class="needs-validation" action={{route('admin.categories.update',$category->id)}} method="POST">
-                                @csrf
-                                @method('PUT')
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <form id="form_advanced_validation" class="needs-validation"
+                            action="{{ route('admin.products.update', ['product' => $product->id]) }}" method="POST"
+                            enctype="multipart/form-data">
+
+                            @method('put')
+                            @csrf
+
+                            <div class="body">
+                                <div class="header p-0">
+                                    <h2><strong>اطلاعات اصلی محصول</strong></h2>
+                                </div>
+                                <hr>
                                 <div class="row clearfix">
-                                    <div class="col-md-3">
-                                        <label for="name">عنوان دسته بندی</label>
+                                    <div class="col-md-6">
+                                        <label>نام محصول *</label>
                                         <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?? $category->name}}" required>
+                                            <input type="text" name="name" value="{{$product->name}}"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                value="{{ old('name') }}" />
+                                            @error('name')
+                                            <span class="text-danger m-0">{{$message}}</span>
+                                            @enderror
                                         </div>
+
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="slug">نام انگلیسی</label>
-                                        <div class="form-group">
-                                            <input type="text" name="slug" id="slug" class="form-control" value="{{old('slug') ?? $category->slug}}" required>
-                                        </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="brand_id">برند</label>
+                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند"
+                                            class="form-control ms select2 @error('brand_id') is-invalid @enderror">
+                                            <option></option>
+                                            @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}"
+                                                {{$brand->id == $product->brand->id ? 'selected' : ''}}>
+                                                {{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand_id')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="parent_id">والد</label>
-                                        <div class="form-group">
-                                            <select id="parent_id" name="parent_id" class="form-control show-tick" required>
-                                                <option value="0">بدون والد</option>
-                                                @foreach ($parentCategories as $parentCategory)
-                                                <option {{ old('parent_id') === $parentCategory->id || $category->parent_id === $parentCategory->id ? "selected":null}} value="{{$parentCategory->id}}">{{$parentCategory->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="switch">وضعیت</label>
-                                        <div class="switchToggle">
-                                            <input type="checkbox" name="is_active" id="switch" {{old('is_active') || !$category->is_active ? 'checked': null}}>
-                                            <label for="switch">Toggle</label>
-                                        </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="form-group col-md-3">
+                                        <label for="is_active">وضعیت</label>
+                                        <select id="is_active" name="is_active"
+                                            class="form-control ms select2 @error('is_active') is-invalid @enderror">
+                                            <option value="1" {{$product->is_active == 1 ? 'selected' : ''}}>فعال
+                                            </option>
+                                            <option value="0" {{$product->is_active == 0 ? 'selected' : ''}}>غیرفعال
+                                            </option>
+                                        </select>
+                                        @error('is_active')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <label for="attributesId">ویژگی</label>
-                                        <div class="form-group">
-                                            <select id="attributesId" name="attribute_ids[]" class="form-control show-tick" title="انتخاب ویژگی" multiple data-live-search="true" data-selected-text-format="count > 3" required>
-                                                @foreach ($attributes as $attribute)
-                                                <option value="{{$attribute->id}}" @php if(old('attribute_ids')){ if(in_array($attribute->id, old('attribute_ids'))) echo "selected";
-                                                    }
-                                                    elseif($category->attributes){
-                                                    if(in_array($attribute->id, $category->attributes()->pluck('id')->toArray())) echo "selected";
-                                                    }
-                                                    @endphp
-                                                    >{{$attribute->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group col-md-9">
+                                        <label for="tag_ids">تگ ها</label>
+                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ"
+                                            class="form-control ms select2 @error('tag_ids.*') is-invalid @enderror"
+                                            multiple data-live-search="true">
+                                            @php
+                                            $productTagIds = $product->tags()->pluck('id')->toArray()
+                                            @endphp
+                                            @foreach ($tags as $tag)
+                                            <option value="{{ $tag->id }}"
+                                                {{ in_array($tag->id, $productTagIds) ? 'selected' : '' }}>
+                                                {{ $tag->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tag_ids.*')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="attributeIsFilter">انتخاب ویژگی های قابل فیلتر</label>
-                                        <div class="form-group">
-                                            <select id="attributeIsFilter" name="attribute_is_filter_ids[]" class="form-control show-tick" title="انتخاب فیلتر" multiple data-selected-text-format="count > 3" required>
-                                                @if (old('attribute_ids') && old('attribute_is_filter_ids'))
-                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
-                                                <option value="{{$selected_attribute->id}}" {{in_array($selected_attribute->id, old('attribute_is_filter_ids'))? "selected":null}}>{{$selected_attribute->name}}</option>
-                                                @endforeach
-                                                @else
-                                                @foreach ($category->attributes as $attribute)
-                                                <option value="{{$attribute->id}}" {{in_array($attribute->id,$category->attributes()->wherePivot('is_filter', 1)->pluck('id')->toArray())?"selected":null}}>{{$attribute->name}}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
+
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="form-group col-md-12">
+                                        <label for="description">توضیحات</label>
+                                        <textarea class="form-control @error('description') is-invalid @enderror"
+                                            id="description" rows="6"
+                                            name="description">{{ $product->description }}</textarea>
+                                        @error('description')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="attributeVariation">انتخاب ویژگی متغیر</label>
-                                        <div class="form-group">
-                                            <select id="attributeVariation" name="variation_id" class="form-control show-tick" required>
-                                                @if (old('attribute_ids') && old('variation_id'))
-                                                @foreach ($attributes->only(old('attribute_ids')) as $selected_attribute )
-                                                <option value="{{$selected_attribute->id}}" {{$selected_attribute->id == old('variation_id') ? "selected" : null}}>{{$selected_attribute->name}}</option>
-                                                @endforeach
-                                                @else
-                                                @foreach ($category->attributes as $attribute)
-                                                <option value="{{$attribute->id}}" {{$attribute->id == $category->attributes()->wherePivot('is_variation', 1)->first()->id ? "selected" : null}}>{{$attribute->name}}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="header p-0 mt-3">
+                                    <h2><strong>ویژگی ها </strong></h2>
+                                </div>
+                                <hr>
+                                <!-- ویژگی های ثابت -->
+                                <div class="row clearfix">
+                                    @foreach ($product_attributes as $productAttribute)
+                                    <div class="form-group col-md-4">
+                                        <label>{{ $productAttribute->attribute->name }}</label>
+                                        <input class="form-control" type="text"
+                                            name="attribute_values[{{ $productAttribute->id }}]"
+                                            value="{{ $productAttribute->value }}">
+                                        @error('attribute_values.{{$productAttribute->id}}')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="icon">آیکون</label>
-                                        <div class="form-group">
-                                            <input type="text" name="icon" id="icon" class="form-control" value="{{old('icon') ?? $category->icon}}">
-                                        </div>
+                                    @endforeach
+
+                                </div>
+                                <!-- ویژگی های ثابت -->
+
+                                <!-- ویژگی های متغییر -->
+                                @foreach ($product_variation as $variation)
+                                <div class="col-md-12">
+                                    <hr>
+                                    <div class="d-flex">
+
+                                        <p class="mb-0 mr-3">
+                                            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse"
+                                                data-target="#collapse-{{ $variation->id }}">
+                                                قیمت و موجودی برای متغیر ( {{ $variation->value }} )
+                                            </button>
+                                        </p>
                                     </div>
-                                    <div class="col-12">
-                                        <label for="decription">توضیحات</label>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <textarea rows="4" name="description" class="form-control no-resize" placeholder="لطفا آنچه را که میخواهید تایپ کنید...">{{old('description') ?? $category->description}}</textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="collapse mt-2" id="collapse-{{ $variation->id }}">
+                                        <div class="card card-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-4 col-sm-4">
+                                                    <label> قیمت </label>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][price]"
+                                                        value="{{ $variation->price }}">
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label> تعداد </label>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][quantity]"
+                                                        value="{{ $variation->quantity }}">
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label> sku </label>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][sku]"
+                                                        value="{{ $variation->sku }}">
+                                                </div>
+
+                                                {{-- Sale Section --}}
+                                                <div class="col-md-12">
+                                                    <p> حراج : </p>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label> قیمت حراجی </label>
+                                                    <input type="text"
+                                                        name="variation_values[{{ $variation->id }}][sale_price]"
+                                                        value="{{ $variation->sale_price }}" class="form-control">
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label> تاریخ شروع حراجی </label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                            id="variationInputDateOnSaleFrom-{{ $variation->id }}"
+                                                            name="variation_values[{{ $variation->id }}][date_on_sale_from]"
+                                                            value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label> تاریخ پایان حراجی </label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                            id="variationInputDateOnSaleTo-{{ $variation->id }}"
+                                                            name="variation_values[{{ $variation->id }}][date_on_sale_to]"
+                                                            value="{{ $variation->date_on_sale_to == null ? null : verta($variation->date_on_sale_to) }}">
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-raised btn-primary waves-effect">ذخیره</button>
+                                @endforeach
+                                <!-- هزینه ارسال -->
+                                <div class="header p-0 mt-5">
+                                    <h2><strong>هزینه ارسال</strong></h2>
                                 </div>
-                            </form>
-                        </div>
+                                <hr>
+
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <label for="delivery_amount">هزینه ارسال*</label>
+                                        <div class="form-group">
+                                            <input class="form-control @error('delivery_amount') is-invalid @enderror"
+                                                onfocus="itpro_1(this.value);" id="delivery_amount"
+                                                name="delivery_amount" type="text"
+                                                value="{{ $product->delivery_amount}}">
+                                            @error('delivery_amount')
+                                            <span class="text-danger m-0">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                        <span id="delivery_1"></span>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="delivery_amount_per_product"> هزینه ارسال به ازای محصول
+                                            اضافی*</label>
+
+                                        <div class="form-group">
+                                            <input wire:model="essage"
+                                                class="form-control @error('delivery_amount_per_product') is-invalid @enderror"
+                                                id="delivery_amount_per_product" name="delivery_amount_per_product"
+                                                type="text" value="{{ $product->delivery_amount_per_product }}">
+                                            @error('delivery_amount_per_product')
+                                            <span class="text-danger m-0">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                        <span id="delivery_2"></span>
+                                    </div>
+                                </div>
+                        </form>
+
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" form="form_advanced_validation"
+                            class="btn btn-raised btn-success waves-effect">ویرایش</button>
                     </div>
                 </div>
             </div>
-            <!-- #END# Hover Rows -->
         </div>
-    </div>
-</section>
-@endsection
-@push('scripts')
-<script>
-    $('#attributesId').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-        let selectedAttributes = $(this).val();
-        let attributes = @json($attributes);
-        let options = ''
+        @push('styles')
+        <!-- تاریخ -->
+        <link rel="stylesheet" type="text/css"
+            href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+        <!-- تاریخ پایان-->
+        @endpush
 
-        let filterAttributes = attributes.filter((item) => {
-            return selectedAttributes.includes(`${item.id}`);
-        })
+        @push('scripts')
+        <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+        <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+        <script>
+        let variations = @json($product_variation);
+        variations.forEach(variation => {
 
-        filterAttributes.forEach(element => {
-            options += `<option value="${element.id}">${element.name}</option>`
+            $(document).ready(function() {
+
+                $(`#variationInputDateOnSaleFrom-${variation.id}`).pDatepicker({
+                    initialValue: false,
+                    format: 'L'
+                });
+                $(`#variationInputDateOnSaleTo-${variation.id}`).pDatepicker({
+                    initialValue: false,
+                    format: 'L'
+                });
+            });
         });
+        </script>
 
-        $('#attributeIsFilter').html(options);
-        $("#attributeIsFilter").selectpicker("refresh");
 
-        $('#attributeVariation').html(options);
-        $("#attributeVariation").selectpicker("refresh");
+        <script>
+        $('#delivery_amount').on('keyup keypress focus change', function(e) {
+            Number = $(this).val()
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+                document.getElementById("delivery_1").innerHTML = output + 'تومان';
+            } else {
+                document.getElementById("delivery_1").innerHTML = '';
+            }
+        });
+        $('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
+            Number = $(this).val()
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+                document.getElementById("delivery_2").innerHTML = output + 'تومان';
+            } else {
+                document.getElementById("delivery_2").innerHTML = '';
+            }
+        });
+        </script>
+        @endpush
+    </div>
+    <!-- #END# Hover Rows -->
+    </div>
 
-    });
-</script>
-@endpush
+</section>
+
+
+@endsection

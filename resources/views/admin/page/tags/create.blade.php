@@ -28,6 +28,13 @@
 
 
             @livewire('admin.tags.tag-controll' , key($tags->id))
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        {{$tags->links('vendor.pagination.bootstrap-4')}}
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -26,6 +26,7 @@
         "d3": "^7.2.1",
         "dropify": "^0.2.2",
         "jquery": "^3.3.1",
+        "md.bootstrappersiandatetimepicker": "^3.9.2",
         "moment": "^2.29.1",
         "node-waves": "^0.7.6",
         "persian-datepicker": "^1.2.0",

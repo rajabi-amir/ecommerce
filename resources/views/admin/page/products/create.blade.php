@@ -63,9 +63,9 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="brand_id">برند</label>
-                                        <select id="brandSelect" name="brand_id"
-                                            class="form-control @error('brand_id') is-invalid @enderror"
-                                            data-live-search="true">
+                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند"
+                                            class="form-control ms select2 @error('brand_id') is-invalid @enderror">
+                                            <option></option>
                                             @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}">
                                                 {{ $brand->name }}</option>
@@ -80,7 +80,7 @@
                                     <div class="form-group col-md-3">
                                         <label for="is_active">وضعیت</label>
                                         <select id="is_active" name="is_active"
-                                            class="form-control @error('is_active') is-invalid @enderror">
+                                            class="form-control ms select2 @error('is_active') is-invalid @enderror">
                                             <option value="1" selected>فعال</option>
                                             <option value="0">غیرفعال</option>
                                         </select>
@@ -91,9 +91,9 @@
 
                                     <div class="form-group col-md-9">
                                         <label for="tag_ids">تگ ها</label>
-                                        <select id="tagSelect" name="tag_ids[]"
-                                            class="form-control @error('tag_ids.*') is-invalid @enderror" multiple
-                                            data-live-search="true">
+                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ"
+                                            class="form-control ms select2 @error('tag_ids.*') is-invalid @enderror"
+                                            multiple data-live-search="true">
                                             @foreach ($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                             @endforeach
@@ -125,9 +125,10 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="category_id">دسته بندی</label>
-                                        <select id="categorySelect" name="category_id"
-                                            class="form-control @error('category_id') is-invalid @enderror"
+                                        <select id="categorySelect" name="category_id" data-placeholder="انتخاب دسته"
+                                            class="form-control ms select2 @error('category_id') is-invalid @enderror"
                                             data-live-search="true">
+                                            <option></option>
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">
                                                 {{ $category->name }}-{{ $category->parent->name }}
@@ -207,6 +208,7 @@
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
                                         </div>
+                                        <span id="delivery_1"></span>
                                     </div>
 
                                     <div class="col-sm-6">
@@ -221,6 +223,7 @@
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
                                         </div>
+                                        <span id="delivery_2"></span>
                                     </div>
                                 </div>
                                 <div class="header p-0 mt-3">
@@ -297,9 +300,9 @@
 
         <script>
         $('#attributesContainer').hide();
-        $('#categorySelect').on('changed.bs.select', function() {
+        $('#categorySelect').on('change', function() {
             let categoryId = $(this).val();
-            
+
 
             $.get(`{{url('Admin-panel/managment/category-attributes/${categoryId}')}}`,
                 function(response, status) {
@@ -435,6 +438,52 @@
         };
         </script>
         <!-- dropzone script end -->
+        <script>
+        $('#delivery_amount').on('keyup keypress focus change', function(e) {
+            Number = $(this).val()
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+                document.getElementById("delivery_1").innerHTML = output + 'تومان';
+            } else {
+                document.getElementById("delivery_1").innerHTML = '';
+            }
+        });
+        $('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
+            Number = $(this).val()
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+                document.getElementById("delivery_2").innerHTML = output + 'تومان';
+            } else {
+                document.getElementById("delivery_2").innerHTML = '';
+            }
+        });
+        </script>
 
         @endpush
         <!-- Textarea -->

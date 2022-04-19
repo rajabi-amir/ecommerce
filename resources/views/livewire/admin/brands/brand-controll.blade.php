@@ -2,12 +2,15 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
+                <div class="header">
+                    <h2><strong>لیست ویژگی ها </strong>( {{$brands->total()}} )</h2>
+                </div>
                 <div class="body">
                     @if(count($brands)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
                     @else
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover c_table theme-color">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -18,7 +21,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($brands as $key => $brand)
-                                <tr>
+                                <tr wire:key="brand-field-{{ $brand->id }}">
                                     <td scope="row">{{$key+1}}</td>
                                     @if(Storage::exists('brand/'.$brand->image))
                                     <td>
@@ -36,7 +39,8 @@
                                                         style="color: white;">منتشر
                                                         شده </span>
                                                     <span class="spinner-border spinner-border-sm text-light"
-                                                        wire:loading wire:target="Inactive_brand ,active_brand"></span>
+                                                        wire:loading
+                                                        wire:target="Inactive_brand({{$brand->id}})"></span>
 
                                                 </a>
                                                 @else
@@ -45,7 +49,8 @@
                                                         style="color: white;">عدم
                                                         انتشار</span>
                                                     <span class="spinner-border spinner-border-sm text-light"
-                                                        wire:loading wire:target="Inactive_brand ,active_brand"></span>
+                                                        wire:loading wire:target="active_brand({{$brand->id}})"></span>
+
 
                                                 </a>
                                                 @endif
@@ -61,7 +66,7 @@
                                             wire:click="delbrand({{$brand->id}})">
                                             <i class="zmdi zmdi-delete"></i>
                                             <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="delbrand"></span>
+                                                wire:target="delbrand({{$brand->id}})"></span>
                                         </button>
                                         <!-- <form action="{{route('admin.brands.destroy',$brand->id)}}"
                                             id="del-brand-{{$brand->id}}" method="POST">

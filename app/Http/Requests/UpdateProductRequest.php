@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true ;
     }
 
     /**
@@ -25,18 +25,18 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'brand_id' => 'required',
+            'brand_id' => 'required|exists:brands,id',
             'is_active' => 'required',
             'tag_ids' => 'required',
+            'tag_ids.*' => 'exists:tags,id',
             'description' => 'required',
-            'primary_image' => 'required|mimes:jpg,jpeg,png,svg',
-            'category_id' => 'required',
-            'attribute_ids' => 'required',
-            'attribute_ids.*' => 'required',
+            'attribute_values.*' => 'required',
             'variation_values' => 'required',
-            'variation_values.*.*' => 'required',
-            'variation_values.price.*' => 'integer',
-            'variation_values.quantity.*' => 'integer',
+            'variation_values.*.price' => 'required|integer',
+            'variation_values.*.quantity' => 'required|integer',
+            'variation_values.*.sale_price' => 'nullable|integer',
+            'variation_values.*.date_on_sale_from' => 'nullable',
+            'variation_values.*.date_on_sale_to' => 'nullable',
             'delivery_amount' => 'required|integer',
             'delivery_amount_per_product' => 'nullable|integer',
         ];

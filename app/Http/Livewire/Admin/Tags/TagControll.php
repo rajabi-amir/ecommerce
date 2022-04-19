@@ -16,6 +16,9 @@ class TagControll extends Component
     public $tag;
     public $is_edit=false;
     public $display;
+    protected $listeners = [
+      'sweetAlertConfirmed', // only when confirm button is clicked
+  ];
 
     
     public function ref()
@@ -46,16 +49,18 @@ class TagControll extends Component
     public function del_tag(Tag $tag){
 
         try {
+          $this->tag=$tag;
+          sweetAlert()
+              ->livewire()
+              ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
+              ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
 
-            $tag->delete();
+           
 
           } catch (\Exception $e) {
 
             redirect('admin.tags.create');
          }
-
-
-
 
     }
 
@@ -74,6 +79,7 @@ class TagControll extends Component
         $this->is_edit=false;
         $this->reset("tag_name");
         $this->reset("display");
+        toastr()->livewire()->addSuccess('تغییرات با موفقیت ذخیره شد');
 
 
         }
@@ -87,6 +93,8 @@ class TagControll extends Component
                 "name" => $this->tag_name,
                ]);
                $this->reset("tag_name");
+               toastr()->livewire()->addSuccess('ویژگی با موفقیت ایجاد شد');
+
 
 
         }
@@ -94,8 +102,15 @@ class TagControll extends Component
 
     }
 
+    public function sweetAlertConfirmed(array $data)
+    { 
+            $this->tag->delete();
+            toastr()->livewire()->addSuccess('ویژگی با موفقیت حذف شد');
+    }
 
-     public function show(){
-        return view('admin.page.tags.create');
+
+     public function createTag(){
+      $tags=Tag::latest()->paginate(10);
+      return view('admin.page.tags.create', compact('tags'));
      }
 }

@@ -3,19 +3,21 @@
 namespace App\Http\Livewire\Admin\Brands;
 use Livewire\Component;
 use App\Models\Brand;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
 
 class BrandControll extends Component
 {
-    public $brands  ;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    
     public function render()
     {
         
-        $brands=Brand::all(); 
-
-        $this->brands=$brands;  
-        
-        return view('livewire.admin.brands.brand-controll');
+     
+       
+        return view('livewire.admin.brands.brand-controll',['brands'=>Brand::latest()->paginate(10)]);
 
     }
 

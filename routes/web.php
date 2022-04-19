@@ -31,11 +31,19 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('brands', BrandController::class);
     Route::resource('attributes', AttributeController::class);
     Route::resource('categories', CategoryController::class);
-    Route::resource('tags', TagController::class);
-    Route::get('tags', [TagControll::class, "show"])->name('tags');
+    // Route::resource('tags', TagController::class);
+    Route::get('tags/create', [TagControll::class, "createTag"])->name('tags.create');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
+
     Route::get('/category-attributes/{category}',[CategoryController::class , 'getCategoryAttributes']);
+
+    Route::get('/products/{product}/images-edit', [ImageController::class, 'edit'])->name('products.images.edit');
+
+
+      // Edit Product Category
+      Route::get('/products/{product}/category-edit', [ProductController::class, 'editCategory'])->name('products.category.edit');
+      Route::put('/products/{product}/category-update', [ProductController::class, 'updateCategory'])->name('products.category.update');
     
 });
 
@@ -47,14 +55,14 @@ Route::get('/', function () {
 
 
 
-// dropzone upload multiple image routes
-Route::get('/upl', function () {
-    return view('uploade');
-});
-
 Route::post('/upl',[ProductController::class,'uploadImage'])->name('uploade');
-
-
-
 Route::post('/del', [ProductController::class , 'deleteImage'])->name('del');
+
+Route::post('/editupl',[ImageController::class,'edit_uploadImage'])->name('edit_uploade');
+Route::post('/editdel', [ImageController::class , 'edit_deleteImage'])->name('edit_del');
+
+Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('product.images.add');
+
+
+
 //end

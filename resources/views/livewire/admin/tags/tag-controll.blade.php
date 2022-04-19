@@ -42,12 +42,15 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
+                <div class="header">
+                    <h2><strong>لیست تگ ها </strong>( {{$tags->total()}} )</h2>
+                </div>
                 <div class="body">
                     @if(count($tags)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
                     @else
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover c_table theme-color">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -87,7 +90,7 @@
                     @endif
                 </div>
             </div>
-            {{ $tags->links() }}
+
         </div>
     </div>
     <!-- پایان لیست -->
