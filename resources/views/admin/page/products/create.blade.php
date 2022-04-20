@@ -103,8 +103,9 @@
 
                                     <div class="form-group col-md-9">
                                         <label for="tag_ids">تگ ها</label>
-                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ" required
-                                            class="form-control ms select2" multiple data-live-search="true">
+                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ"
+                                            class="form-control ms select2 @error('tag_ids.*') is-invalid @enderror"
+                                            multiple data-close-on-select="false">
                                             @foreach ($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                             @endforeach

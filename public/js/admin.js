@@ -16266,20 +16266,8 @@ function getNoUISliderValue(slider, percentage) {
 
 
 $(function () {
-  $(".select2multiple").select2({
-    dir: "rtl",
-    language: "fa",
-    width: "100%"
-  });
-  $(".select2-multiple").select2({
-    dir: "rtl",
-    closeOnSelect: false,
-    language: "fa",
-    width: "100%"
-  });
   $(".select2").select2({
     dir: "rtl",
-    closeOnSelect: true,
     language: "fa",
     width: "100%"
   });

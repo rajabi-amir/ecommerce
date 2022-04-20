@@ -59,8 +59,10 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required',
+            'attribute_ids.*' => 'exists:attributes,id',
             'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required',
+            'attribute_is_filter_ids.*' => 'exists:attributes,id',
+            'variation_id' => 'required|exists:attributes,id',
         ]);
 
         $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_filter_ids']);
@@ -138,8 +140,10 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
             'icon' => 'nullable|string',
             'attribute_ids' => 'required',
+            'attribute_ids.*' => 'exists:attributes,id',
             'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required',
+            'attribute_is_filter_ids.*' => 'exists:attributes,id',
+            'variation_id' => 'required|exists:attributes,id',
         ]);
 
         $filtered = Arr::except($data, ['attribute_ids', 'variation_id', 'attribute_is_filter_ids']);
