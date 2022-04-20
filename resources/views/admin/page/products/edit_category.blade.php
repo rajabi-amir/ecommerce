@@ -28,15 +28,20 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="row clearfix">
+                            @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                            <div class="col-sm-4">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ $error }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
                         </div>
-                        @endif
                         <form id="form_advanced_validation" class="needs-validation"
                             action="{{ route('admin.products.category.update', ['product' => $product->id]) }}"
                             method="POST" enctype="multipart/form-data">
@@ -106,14 +111,14 @@
                                                     <label>تعداد *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[quantity][]"
-                                                            required type="text">
+                                                            type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>شناسه انبار *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[sku][]"
-                                                            required type="text">
+                                                            type="text">
                                                     </div>
                                                 </div>
                                             </div>
