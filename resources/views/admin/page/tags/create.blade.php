@@ -1,5 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
+@section('title','ایجاد تگ')
 @section('Content')
 <section class="content">
     <div class="body_scroll">
@@ -25,7 +25,6 @@
         </div>
 
         <div class="container-fluid">
-
 
             @livewire('admin.tags.tag-controll' , key($tags->id))
             <div class="row clearfix">

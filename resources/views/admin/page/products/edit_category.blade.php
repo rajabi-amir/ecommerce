@@ -87,7 +87,7 @@
                                                     <label>نام *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[value][]"
-                                                            type="text">
+                                                            required type="text">
 
                                                     </div>
                                                 </div>
@@ -95,7 +95,10 @@
                                                     <label>قیمت *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[price][]"
+                                                            required onkeyup="show_price(this.value)"
+                                                            onfocus="show_price(this.value)" id="price_input"
                                                             type="text">
+                                                        <span id="price" class="price"></span>
 
                                                     </div>
                                                 </div>
@@ -103,20 +106,21 @@
                                                     <label>تعداد *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[quantity][]"
-                                                            type="text">
+                                                            required type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>شناسه انبار *</label>
                                                     <div class="form-group">
                                                         <input class="form-control" name="variation_values[sku][]"
-                                                            type="text">
+                                                            required type="text">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <center> <span id="price1[1]"></span></center>
                             </div>
 
 
@@ -170,7 +174,8 @@
                                 type: 'text',
                                 class: "form-control @error('attribute_ids.*') is-invalid @enderror",
                                 id: attribute.name,
-                                name: `attribute_ids[${attribute.id}]`
+                                name: `attribute_ids[${attribute.id}]`,
+                                required: true
                             }));
 
                             $('#attributes').append(attributeFormGroup);
@@ -196,8 +201,8 @@
 
 
         <script>
-        $('#delivery_amount').on('keyup keypress focus change', function(e) {
-            Number = $(this).val()
+        function show_price(price) {
+            Number = price
             Number += '';
             Number = Number.replace(',', '');
             Number = Number.replace(',', '');
@@ -213,33 +218,14 @@
                 y = y.replace(rgx, '$1' + ',' + '$2');
             output = y + z;
             if (output != "") {
-                document.getElementById("delivery_1").innerHTML = output + 'تومان';
+
+                document.getElementById("price1[1]").innerHTML = output + 'تومان';
             } else {
-                document.getElementById("delivery_1").innerHTML = '';
+
+                document.getElementById("price1[1]").innerHTML = '';
             }
-        });
-        $('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
-            Number = $(this).val()
-            Number += '';
-            Number = Number.replace(',', '');
-            Number = Number.replace(',', '');
-            Number = Number.replace(',', '');
-            Number = Number.replace(',', '');
-            Number = Number.replace(',', '');
-            Number = Number.replace(',', '');
-            x = Number.split('.');
-            y = x[0];
-            z = x.length > 1 ? '.' + x[1] : '';
-            var rgx = /(\d+)(\d{3})/;
-            while (rgx.test(y))
-                y = y.replace(rgx, '$1' + ',' + '$2');
-            output = y + z;
-            if (output != "") {
-                document.getElementById("delivery_2").innerHTML = output + 'تومان';
-            } else {
-                document.getElementById("delivery_2").innerHTML = '';
-            }
-        });
+
+        }
         </script>
         @endpush
     </div>

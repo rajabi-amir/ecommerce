@@ -152,7 +152,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product,ToastrFactory $flasher)
     {
-       
+    
         try {
             DB::beginTransaction();
 
@@ -254,9 +254,9 @@ class ProductController extends Controller
 
         $request->validate([
             'category_id' => 'required',
-            // 'attribute_ids' => 'required',
+            'attribute_ids' => 'required',
             'attribute_ids.*' => 'required',
-            // 'variation_values' => 'required',
+            'variation_values' => 'required',
             'variation_values.*.*' => 'required',
             'variation_values.price.*' => 'integer',
             'variation_values.quantity.*' => 'integer'

@@ -33,6 +33,8 @@
     <!-- Jquery Core Js -->
     <script src="{{asset('js/admin.js')}}"></script>
 
+
+
     @flasher_render
     @flasher_livewire_render
 

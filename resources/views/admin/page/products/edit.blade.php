@@ -28,16 +28,29 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="row clearfix">
+                            @error('attribute_values.*')
+                            <div class="col-sm-4">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{$message}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            @enderror
+                            @error('variation_values.*')
+                            <div class="col-sm-4">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{$message}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            @enderror
                         </div>
-                        @endif
-                        <form id="form_advanced_validation" class="needs-validation"
+                        <form id="form_advanced_validation"
                             action="{{ route('admin.products.update', ['product' => $product->id]) }}" method="POST"
                             enctype="multipart/form-data">
 
@@ -54,8 +67,7 @@
                                         <label>نام محصول *</label>
                                         <div class="form-group">
                                             <input type="text" name="name" value="{{$product->name}}"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}" />
+                                                class="form-control" value="{{ old('name') }}" required />
                                             @error('name')
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
@@ -64,8 +76,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="brand_id">برند</label>
-                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند"
-                                            class="form-control ms select2 @error('brand_id') is-invalid @enderror">
+                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" required
+                                            class="form-control ms select2">
                                             <option></option>
                                             @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}"
@@ -81,8 +93,7 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-3">
                                         <label for="is_active">وضعیت</label>
-                                        <select id="is_active" name="is_active"
-                                            class="form-control ms select2 @error('is_active') is-invalid @enderror">
+                                        <select id="is_active" name="is_active" class="form-control ms">
                                             <option value="1" {{$product->is_active == 1 ? 'selected' : ''}}>فعال
                                             </option>
                                             <option value="0" {{$product->is_active == 0 ? 'selected' : ''}}>غیرفعال
@@ -96,8 +107,7 @@
                                     <div class="form-group col-md-9">
                                         <label for="tag_ids">تگ ها</label>
                                         <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ"
-                                            class="form-control ms select2 @error('tag_ids.*') is-invalid @enderror"
-                                            multiple data-live-search="true">
+                                            class="form-control ms select2" required multiple data-live-search="true">
                                             @php
                                             $productTagIds = $product->tags()->pluck('id')->toArray()
                                             @endphp
@@ -117,9 +127,8 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12">
                                         <label for="description">توضیحات</label>
-                                        <textarea class="form-control @error('description') is-invalid @enderror"
-                                            id="description" rows="6"
-                                            name="description">{{ $product->description }}</textarea>
+                                        <textarea class="form-control" id="description" rows="6" name="description"
+                                            required>{{ $product->description }}</textarea>
                                         @error('description')
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
@@ -136,7 +145,7 @@
                                         <label>{{ $productAttribute->attribute->name }}</label>
                                         <input class="form-control" type="text"
                                             name="attribute_values[{{ $productAttribute->id }}]"
-                                            value="{{ $productAttribute->value }}">
+                                            value="{{ $productAttribute->value }}" required>
                                         @error('attribute_values.{{$productAttribute->id}}')
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
@@ -168,8 +177,11 @@
                                                 <div class="form-group col-md-4 col-sm-4">
                                                     <label> قیمت </label>
                                                     <input type="text" class="form-control"
+                                                        onkeyup="show_price(this.value,'{{ $variation->id }}')"
+                                                        onfocus="show_price(this.value,'{{ $variation->id }}')"
                                                         name="variation_values[{{ $variation->id }}][price]"
                                                         value="{{ $variation->price }}">
+                                                    <span id="price1[{{$variation->id}}]"></span>
                                                 </div>
 
                                                 <div class="form-group col-md-4">
@@ -195,7 +207,10 @@
                                                     <label> قیمت حراجی </label>
                                                     <input type="text"
                                                         name="variation_values[{{ $variation->id }}][sale_price]"
+                                                        onkeyup="show_sale_price(this.value,'{{ $variation->id }}')"
+                                                        onfocus="show_sale_price(this.value,'{{ $variation->id }}')"
                                                         value="{{ $variation->sale_price }}" class="form-control">
+                                                    <span id="price2[{{$variation->id}}]"></span>
                                                 </div>
 
                                                 <div class="form-group col-md-4">
@@ -233,9 +248,8 @@
                                     <div class="col-sm-6">
                                         <label for="delivery_amount">هزینه ارسال*</label>
                                         <div class="form-group">
-                                            <input class="form-control @error('delivery_amount') is-invalid @enderror"
-                                                onfocus="itpro_1(this.value);" id="delivery_amount"
-                                                name="delivery_amount" type="text"
+                                            <input class="form-control" onfocus="itpro_1(this.value);"
+                                                id="delivery_amount" name="delivery_amount" type="text"
                                                 value="{{ $product->delivery_amount}}">
                                             @error('delivery_amount')
                                             <span class="text-danger m-0">{{$message}}</span>
@@ -249,8 +263,7 @@
                                             اضافی*</label>
 
                                         <div class="form-group">
-                                            <input wire:model="essage"
-                                                class="form-control @error('delivery_amount_per_product') is-invalid @enderror"
+                                            <input wire:model="essage" class="form-control"
                                                 id="delivery_amount_per_product" name="delivery_amount_per_product"
                                                 type="text" value="{{ $product->delivery_amount_per_product }}">
                                             @error('delivery_amount_per_product')
@@ -268,6 +281,7 @@
                             class="btn btn-raised btn-success waves-effect">ویرایش</button>
                     </div>
                 </div>
+
             </div>
         </div>
         @push('styles')
@@ -278,6 +292,9 @@
         @endpush
 
         @push('scripts')
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
         <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
         <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
         <script>
@@ -300,6 +317,59 @@
 
 
         <script>
+        function show_price(price, id) {
+            Number = price
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+
+                document.getElementById('price1[' + id + ']').innerHTML = output + 'تومان';
+            } else {
+
+                document.getElementById('price1[' + id + ']').innerHTML = '';
+            }
+
+        }
+
+        function show_sale_price(price, id) {
+            Number = price
+            Number += '';
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            Number = Number.replace(',', '');
+            x = Number.split('.');
+            y = x[0];
+            z = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(y))
+                y = y.replace(rgx, '$1' + ',' + '$2');
+            output = y + z;
+            if (output != "") {
+
+                document.getElementById('price2[' + id + ']').innerHTML = output + 'تومان';
+            } else {
+
+                document.getElementById('price2[' + id + ']').innerHTML = '';
+            }
+
+        }
+
+
         $('#delivery_amount').on('keyup keypress focus change', function(e) {
             Number = $(this).val()
             Number += '';
@@ -322,6 +392,7 @@
                 document.getElementById("delivery_1").innerHTML = '';
             }
         });
+
         $('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
             Number = $(this).val()
             Number += '';

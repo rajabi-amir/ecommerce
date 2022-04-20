@@ -2,6 +2,9 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
+                <div class="header">
+                    <h2><strong>لیست محصولات </strong>( {{$products->total()}} )</h2>
+                </div>
                 <div class="body">
                     @if(count($products)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
@@ -12,7 +15,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>نام</th>
-                                    <th>نام برند</th>
+                                    <th> تاریخ و زمان ثبت محصول</th>
                                     <th>نام دسته بندی</th>
                                     <th>وضعیت</th>
                                     <th class="text-center">عملیات</th>
@@ -20,41 +23,32 @@
                             </thead>
                             <tbody>
                                 @foreach ($products as $key => $product)
-                                <tr wire:key="{{ $product->name }}_{{ $product->id }}">
+                                <tr wire:key="name_{{ $product->id }}">
                                     <td scope="row">{{$key+1}}</td>
                                     <td><a
                                             href="{{route('admin.products.show',['product' => $product->id ])}}">{{$product->name}}</a>
                                     </td>
-                                    <td><a
-                                            href="{{route('admin.brands.edit',['brand' => $product->brand->id ])}}">{{$product->brand->name}}</a>
+                                    <td>
+                                        <a href="{{route('admin.products.show',['product' => $product->id ])}}">
+                                            {{verta($product->created_at)}}
+                                        </a>
+
                                     </td>
                                     <td><a
                                             href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
                                     </td>
 
-                                    <td wire:key="{{ $product->name }}_{{ $product->id }}">
+                                    <td>
                                         <div class="row clearfix">
                                             <div class="col-6">
-                                                @if ($product->is_active)
-                                                <a wire:click="Inactive_product({{$product->id}})"
-                                                    class="btn btn-raised btn-success waves-effect"><span
-                                                        style="color: white;">منتشر
-                                                        شده </span>
-                                                    <span class="spinner-border spinner-border-sm text-light"
-                                                        wire:loading
-                                                        wire:target="Inactive_product({{$product->id}})"></span>
 
+
+                                                <a wire:click="ChengeActive_product({{$product->id}})"
+                                                    wire:loading.attr="disabled"
+                                                    class="btn btn-raised btn-{{$color}} waves-effect"><span
+                                                        style="color:white;">{{$title}}</span>
                                                 </a>
-                                                @else
-                                                <a wire:click="active_product({{$product->id}})"
-                                                    class="btn btn-raised btn-danger waves-effect"><span
-                                                        style="color: white;">عدم
-                                                        انتشار</span>
-                                                    <span class="spinner-border spinner-border-sm text-light"
-                                                        wire:loading
-                                                        wire:target="active_product({{$product->id}})"></span>
-                                                </a>
-                                                @endif
+
                                             </div>
                                         </div>
                                     </td>
@@ -83,7 +77,7 @@
                                             wire:click="delproduct({{$product->id}})">
                                             <i class="zmdi zmdi-delete"></i>
                                             <span class="spinner-border spinner-border-sm text-light" wire:loading
-                                                wire:target="delproduct"></span>
+                                                wire:target="delproduct({{$product->id}})"></span>
                                         </button>
 
 
@@ -99,18 +93,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-<script>
-$(document).ready(function() {
-    $("#loading").hide();
-    $("#loading1").hide();
-    $(document).ajaxStart(function() {
-        $("#loading").show();
-        $("#loading1").show();
-    }).ajaxStop(function() {
-        $("#loading").hide();
-        $("#loading1").hide();
-    });
-});
-</script>
-@endpush

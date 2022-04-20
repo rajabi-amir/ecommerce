@@ -38,12 +38,18 @@ if (!function_exists('convertShamsiToGregorianDate')) {
         if ($date == null) {
             return null;
         }
+        
+        
+       
+
         $pattern = "/[-\s]/";
+        
         $shamsiDateSplit = preg_split($pattern, $date);
-
+       
+        dd($shamsiDateSplit);
         $arrayGergorianDate = verta()->getGregorian($shamsiDateSplit[0], $shamsiDateSplit[1], $shamsiDateSplit[2]);
-
-        return implode("-", $arrayGergorianDate) . " " . $shamsiDateSplit[3];
+        dd($shamsiDateSplit);
+        return implode("-", $arrayGergorianDate);
     }
 }
 ?>

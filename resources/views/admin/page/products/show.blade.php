@@ -85,13 +85,19 @@
                                     <button type="button" class="list-group-item list-group-item-action">
                                         <div class="row clearfix">
                                             <div class="col-6"><strong>هزینه ارسال:</strong></div>
-                                            <div class="col-6">{{$product->delivery_amount}}</div>
+                                            @if ($product->delivery_amount)
+                                            <div class="col-6">{{number_format($product->delivery_amount)}} تومان</div>
+
+                                            @endif
                                         </div>
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action">
                                         <div class="row clearfix">
                                             <div class="col-6"><strong>هزینه ارسال به ازای محصول:</strong></div>
-                                            <div class="col-6">{{$product->delivery_amount_per_product}}</div>
+                                            @if ($product->delivery_amount_per_product)
+                                            <div class="col-6">{{number_format($product->delivery_amount_per_product)}}
+                                                تومان</div>
+                                            @endif
                                         </div>
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action">
@@ -207,8 +213,12 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label> قیمت </label>
+                                            @if($variation->price!=null)
                                             <input type="text" disabled class="form-control"
-                                                value="{{ $variation->price }}">
+                                                value="{{ number_format($variation->price)}} تومان">
+
+                                            @endif
+
                                         </div>
 
                                         <div class="form-group col-md-3">
@@ -230,8 +240,14 @@
 
                                         <div class="form-group col-md-3">
                                             <label> قیمت حراجی </label>
-                                            <input type="text" value="{{ $variation->sale_price }}" disabled
-                                                class="form-control">
+                                            @if ($variation->sale_price)
+
+                                            <input type="text" value="{{ number_format($variation->sale_price)}} تومان"
+                                                disabled class="form-control">
+                                            @else
+                                            <input type="text" disabled class="form-control">
+                                            @endif
+
                                         </div>
 
                                         <div class="form-group col-md-3">
@@ -267,7 +283,8 @@
                             <div class="card">
                                 <div class="blogitem mb-5">
                                     <div class="blogitem-image">
-                                        <a href="blog-details.html"><img
+                                        <a href="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                            target="_blank"><img
                                                 src={{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}
                                                 alt="{{$product->name}}"></a>
                                         <span class="blogitem-date">{{verta($product->created_at)}} <span
@@ -281,8 +298,9 @@
                             <div class="card">
                                 <div class="blogitem mb-5">
                                     <div class="blogitem-image">
-                                        <a href="blog-details.html"><img
-                                                src={{url('storage/other_product_image/'.$item->image)}}
+                                        <a href="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$item->image)}}"
+                                            target="_blank"><img
+                                                src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$item->image)}}"
                                                 alt="blog image"></a>
                                         <span class="blogitem-date">{{verta($item->created_at)}}</span>
                                     </div>

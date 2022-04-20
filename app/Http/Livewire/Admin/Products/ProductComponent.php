@@ -13,7 +13,27 @@ use Livewire\WithFileUploads;
 class ProductComponent extends Component
 {
     use WithFileUploads;
+public $title;
+public $color;
+public $product;
+protected $listeners = [
+    'sweetAlertConfirmed', // only when confirm button is clicked
+];
 
+public function mount(Product $product)
+{ 
+    if($product->is_active){
+      
+           $this->title="عدم انتشار";
+           $this->color="danger";
+
+    }else{
+       
+           $this->title="انتشار";
+           $this->color="success";
+
+        }
+}
        
             public function render()
             {
@@ -23,24 +43,49 @@ class ProductComponent extends Component
             
     public function delproduct(product $product){
 
-        if (Storage::exists('products/' . $product->image)) {
-            Storage::delete('products/' . $product->image);
+      $this->product=$product;
+        sweetAlert()
+        ->livewire()
+        ->showDenyButton(true,'انصراف')->confirmButtonText("تایید")
+        ->addInfo('از حذف رکورد مورد نظر اطمینان دارید؟');
+       
+    }
+
+   public function ChengeActive_product (product $product){
+
+    if($product->is_active){
+        $product->update([
+            "is_active"=> false
+           ]);
+           $this->title="عدم انتشار";
+           $this->color="danger";
+
+    }else{
+        $product->update([
+            "is_active"=> true
+           ]);
+           $this->title="انتشار";
+           $this->color="success";
+
+        }
+        
+     }
+     
+     public function sweetAlertConfirmed(array $data)
+     { 
+        foreach ($this->product->images as $value) {
+            
+         if (Storage::exists("other_product_image/" .  $value->image)) {
+          
+           Storage::delete("other_product_image/" .  $value->image);
+         };        
+        }
+         
+        if (Storage::exists("primary_image/" .  $this->product->primary_image)) {
+            Storage::delete("primary_image/" .  $this->product->primary_image);
         };
-        $product->delete();
-    }
 
-   public function Inactive_product (product $product){
-
-       $product->update([
-        "is_active"=> false
-       ]);
-
-   }
-   public function active_product (product $product){
-
-    $product->update([
-     "is_active"=> true
-    ]);
-
-}
-    }
+        $this->product->delete();
+             toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
+     }
+  }

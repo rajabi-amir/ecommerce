@@ -2,7 +2,6 @@
 @section('title','ایجاد محصول')
 @section('Content')
 
-
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
@@ -53,42 +52,31 @@
                                     <button type="submit" class="btn btn-raised btn-success waves-effect">آپلود تصویر
                                         اصلی</button>
                                 </div>
-
                             </form>
 
                         </div>
-
                         <!-- هزینه ارسال پایان-->
-
-
                     </div>
-
-
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="header mt-0">
                                 <label class="mb-1">سایر تصاویر</label>
                             </div>
-
                             <div class="form-group">
                                 <form action="{{route('edit_uploade' , ['product'=>$product])}}" id="myDropzone"
                                     class="dropzone" method="POST" id="my-awesome-dropzone">
                                     @csrf
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
 
     @push('styles')
-    <!-- Latest compiled and minified CSS -->
-
 
     <link rel=" stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <style>
@@ -190,14 +178,19 @@
             dzClosure =
                 this; // Makes sure that 'this' is understood inside the functions below.
             // for Dropzone to process the queue (instead of default form behavior):
-            document
-                .getElementById("submit-all")
-                .addEventListener("click", function(e) {
+            var el = document.getElementById("submit-all");
+
+
+            if (el) {
+                el.addEventListener("click", function(e) {
                     // Make sure that the form isn't actually being sent.
                     e.preventDefault();
                     e.stopPropagation();
                     dzClosure.processQueue();
+
+
                 });
+            }
             //send all the form data along with the files:
             this.on("sendingmultiple", function(data, xhr, formData) {
                 formData.append("firstname", jQuery("#firstname").val());
@@ -215,13 +208,9 @@
         },
     };
     </script>
-    <!-- dropzone script end -->
-
 
     @endpush
 
-
 </section>
-
 
 @endsection

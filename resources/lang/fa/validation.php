@@ -135,6 +135,39 @@ return array(
         "tag_name" => "نام تک",
         "attribute_ids.*"=> "ویژگی",
         "delivery_amount"=> "هزینه ارسال",
-        "slug" => "عنوان انگلیسی"
+        "slug" => "عنوان انگلیسی",
+        "brand_id"=> "برند",
+        "tag_ids" => "تگ",
+        "primary_image" => "تصویر اصلی",
+        "category_id"=> "دسته بندی",
+        "attribute_ids" => "ویژگی ها",
+        "variation_values" => "ویژگی متغییر",
+        "attribute_values.*" => "ویژگی ها",
+        "variation_values.*.price" => "قیمت",
+        "variation_values.*.quantity" => "تعداد",
+        "variation_values.*.sku" => "شناسه انبار",
+        "variation_values.value.*" => "ویژگی متغییر",
+
+        "variation_values.value.0" => "1ویژگی متغییر",
+        "variation_values.value.1" => "2ویژگی متغییر",
+        "variation_values.value.2" => "3ویژگی متغییر",
+
+        "variation_values.quantity.*" => "تعداد",
+        "variation_values.sku.*" => "شناسه انبار",
+        "variation_values.price.*" => "قیمت",
+
+        "variation_values.quantity.0" => "1تعداد",
+        "variation_values.sku.0" => "1شناسه انبار",
+        "variation_values.price.0" => "1قیمت",
+
+        "variation_values.quantity.1" => "2تعداد",
+        "variation_values.sku.1" => "2شناسه انبار",
+        "variation_values.price.1" => "2قیمت",
+
+        
+        "variation_values.quantity.2" => "3تعداد",
+        "variation_values.sku.2" => "3شناسه انبار",
+        "variation_values.price.2" => "3قیمت",
+
     ),
 );

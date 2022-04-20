@@ -31,7 +31,7 @@
         <div class="container-fluid">
 
             <!-- Hover Rows -->
-            @livewire('admin.products.product-component')
+            @livewire('admin.products.product-component',key($products->id))
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
@@ -44,3 +44,7 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+
+
+@endpush

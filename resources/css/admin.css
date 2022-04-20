@@ -11,10 +11,9 @@
 /* @import "../assets/admin/plugins/bootstrap-select/css/bootstrap-select.css"; */
 @import "../assets/admin/plugins/select2/select2.css";
 @import "../assets/admin/css/style.min.css";
+@import "../assets/admin/css/modal.css";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
-@import "~md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.style.css";
-
-/* @import "../../assets/admin/persian-datepicker/dist/css/persian-datepicker.css"; */
+@import "../assets/admin/plugins/MD.BootstrapPersianDateTimePicker/Content/MdBootstrapPersianDateTimePicker/jquery.Bootstrap-PersianDateTimePicker.css";
 
 /* select2 */
 .select2-container .select2-search--inline .select2-search__field {
