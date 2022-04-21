@@ -142,6 +142,7 @@ return array(
         "category_id"=> "دسته بندی",
         "attribute_ids" => "ویژگی ها",
         "variation_values" => "ویژگی متغییر",
+        "variation_values.*" => "ویژگی متغییر",
         "attribute_values.*" => "ویژگی ها",
         "variation_values.*.price" => "قیمت",
         "variation_values.*.quantity" => "تعداد",
