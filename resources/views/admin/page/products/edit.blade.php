@@ -14,10 +14,12 @@
                         <li class="breadcrumb-item"><a href="javascript:void(0);">محصولات</a></li>
                         <li class="breadcrumb-item active">ویرایش محصول</li>
                     </ul>
-                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
+                            class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
-                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
+                            class="zmdi zmdi-arrow-right"></i></button>
                 </div>
             </div>
         </div>
@@ -48,7 +50,9 @@
                             </div>
                             @enderror
                         </div>
-                        <form id="form_advanced_validation" autocomplete="off" action="{{ route('admin.products.update', ['product' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form id="form_advanced_validation" autocomplete="off"
+                            action="{{ route('admin.products.update', ['product' => $product->id]) }}" method="POST"
+                            enctype="multipart/form-data">
 
                             @method('put')
                             @csrf
@@ -62,7 +66,8 @@
                                     <div class="col-md-6">
                                         <label>نام محصول *</label>
                                         <div class="form-group">
-                                            <input type="text" name="name" value="{{$product->name}}" required class="form-control" value="{{ old('name') }}" />
+                                            <input type="text" name="name" value="{{$product->name}}" required
+                                                class="form-control" value="{{ old('name') }}" />
                                             @error('name')
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
@@ -71,10 +76,12 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="brand_id">برند</label>
-                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" required class="form-control ms select2">
+                                        <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند" required
+                                            class="form-control ms select2">
                                             <option></option>
                                             @foreach ($brands as $brand)
-                                            <option value="{{ $brand->id }}" {{$brand->id == $product->brand->id ? 'selected' : ''}}>
+                                            <option value="{{ $brand->id }}"
+                                                {{$brand->id == $product->brand->id ? 'selected' : ''}}>
                                                 {{ $brand->name }}
                                             </option>
                                             @endforeach
@@ -87,7 +94,8 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-3">
                                         <label for="is_active">وضعیت</label>
-                                        <select id="is_active" name="is_active" required class="form-control ms select2">
+                                        <select id="is_active" name="is_active" required
+                                            class="form-control ms select2">
                                             <option value="1" {{$product->is_active == 1 ? 'selected' : ''}}>فعال
                                             </option>
                                             <option value="0" {{$product->is_active == 0 ? 'selected' : ''}}>غیرفعال
@@ -100,12 +108,15 @@
 
                                     <div class="form-group col-md-9">
                                         <label for="tag_ids">تگ ها</label>
-                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ" data-close-on-select="false" class="form-control ms select2" required multiple>
+                                        <select id="tagSelect" name="tag_ids[]" data-placeholder="انتخاب تگ"
+                                            data-close-on-select="false" class="form-control ms select2" required
+                                            multiple>
                                             @php
                                             $productTagIds = $product->tags()->pluck('id')->toArray()
                                             @endphp
                                             @foreach ($tags as $tag)
-                                            <option value="{{ $tag->id }}" {{ in_array($tag->id, $productTagIds) ? 'selected' : '' }}>
+                                            <option value="{{ $tag->id }}"
+                                                {{ in_array($tag->id, $productTagIds) ? 'selected' : '' }}>
                                                 {{ $tag->name }}
                                             </option>
                                             @endforeach
@@ -119,7 +130,8 @@
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12">
                                         <label for="description">توضیحات</label>
-                                        <textarea class="form-control" id="description" rows="6" required name="description">{{ $product->description }}</textarea>
+                                        <textarea class="form-control" id="description" rows="6" required
+                                            name="description">{{ $product->description }}</textarea>
                                         @error('description')
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
@@ -134,7 +146,9 @@
                                     @foreach ($product_attributes as $productAttribute)
                                     <div class="form-group col-md-4">
                                         <label>{{ $productAttribute->attribute->name }}</label>
-                                        <input class="form-control" type="text" required name="attribute_values[{{ $productAttribute->id }}]" value="{{ $productAttribute->value }}">
+                                        <input class="form-control" type="text" required
+                                            name="attribute_values[{{ $productAttribute->id }}]"
+                                            value="{{ $productAttribute->value }}">
                                         @error('attribute_values.{{$productAttribute->id}}')
                                         <span class="text-danger m-0">{{$message}}</span>
                                         @enderror
@@ -151,7 +165,8 @@
                                     <div class="d-flex">
 
                                         <p class="mb-0 mr-3">
-                                            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapse-{{ $variation->id }}">
+                                            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse"
+                                                data-target="#collapse-{{ $variation->id }}">
                                                 قیمت و موجودی برای متغیر ( {{ $variation->value }} )
                                             </button>
                                         </p>
@@ -164,18 +179,26 @@
                                             <div class="row">
                                                 <div class="form-group col-md-4 col-sm-4">
                                                     <label> قیمت </label>
-                                                    <input type="text" class="form-control" onkeyup="show_price_1(this.value,'{{ $variation->id }}')" onfocus="show_price_1(this.value,'{{ $variation->id }}')" name="variation_values[{{ $variation->id }}][price]" value="{{ $variation->price }}" required>
+                                                    <input type="text" class="form-control"
+                                                        onkeyup="show_price_1(this.value,'{{ $variation->id }}')"
+                                                        onfocus="show_price_1(this.value,'{{ $variation->id }}')"
+                                                        name="variation_values[{{ $variation->id }}][price]"
+                                                        value="{{ $variation->price }}" required>
                                                     <span id="price1[{{ $variation->id }}]" class="mt-2"></span>
                                                 </div>
 
                                                 <div class="form-group col-md-4">
                                                     <label> تعداد </label>
-                                                    <input type="text" class="form-control" name="variation_values[{{ $variation->id }}][quantity]" value="{{ $variation->quantity }}" required>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][quantity]"
+                                                        value="{{ $variation->quantity }}" required>
                                                 </div>
 
                                                 <div class="form-group col-md-4">
                                                     <label> sku </label>
-                                                    <input type="text" class="form-control" name="variation_values[{{ $variation->id }}][sku]" value="{{ $variation->sku }}" required>
+                                                    <input type="text" class="form-control"
+                                                        name="variation_values[{{ $variation->id }}][sku]"
+                                                        value="{{ $variation->sku }}" required>
                                                 </div>
 
                                                 {{-- Sale Section --}}
@@ -185,7 +208,11 @@
 
                                                 <div class="form-group col-md-4">
                                                     <label> قیمت حراجی </label>
-                                                    <input type="text" name="variation_values[{{ $variation->id }}][sale_price]" required onkeyup="show_price(this.value,'{{ $variation->id }}')" onfocus="show_price(this.value,'{{ $variation->id }}')" value="{{ $variation->sale_price }}" class="form-control">
+                                                    <input type="text"
+                                                        name="variation_values[{{ $variation->id }}][sale_price]"
+                                                        required onkeyup="show_price(this.value,'{{ $variation->id }}')"
+                                                        onfocus="show_price(this.value,'{{ $variation->id }}')"
+                                                        value="{{ $variation->sale_price }}" class="form-control">
                                                     <span id="price[{{ $variation->id }}]" class="mt-2"></span>
                                                 </div>
 
@@ -196,6 +223,7 @@
                                                         <input type="hidden" id="variationInputDateOnSaleFrom-alt-{{ $variation->id }}" name="variation_values[{{ $variation->id }}][date_on_sale_from]" value="{{ $variation->date_on_sale_from  ?? null }}">
                                                     </div>
                                                 </div>
+
 
                                                 <div class="form-group col-md-4">
                                                     <label> تاریخ پایان حراجی </label>
@@ -220,7 +248,10 @@
                                     <div class="col-sm-6">
                                         <label for="delivery_amount">هزینه ارسال*</label>
                                         <div class="form-group">
-                                            <input class="form-control @error('delivery_amount') is-invalid @enderror" onfocus="itpro_1(this.value);" id="delivery_amount" name="delivery_amount" type="text" value="{{ $product->delivery_amount}}">
+                                            <input class="form-control @error('delivery_amount') is-invalid @enderror"
+                                                onfocus="itpro_1(this.value);" id="delivery_amount"
+                                                name="delivery_amount" type="text"
+                                                value="{{ $product->delivery_amount}}">
                                             @error('delivery_amount')
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
@@ -233,7 +264,10 @@
                                             اضافی*</label>
 
                                         <div class="form-group">
-                                            <input wire:model="essage" class="form-control" id="delivery_amount_per_product" name="delivery_amount_per_product" required type="text" value="{{ $product->delivery_amount_per_product }}">
+                                            <input wire:model="essage" class="form-control"
+                                                id="delivery_amount_per_product" name="delivery_amount_per_product"
+                                                required type="text"
+                                                value="{{ $product->delivery_amount_per_product }}">
                                             @error('delivery_amount_per_product')
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
@@ -245,7 +279,8 @@
 
                     </div>
                     <div class="form-group">
-                        <button type="submit" form="form_advanced_validation" class="btn btn-raised btn-success waves-effect">ویرایش</button>
+                        <button type="submit" form="form_advanced_validation"
+                            class="btn btn-raised btn-success waves-effect">ویرایش</button>
                     </div>
                 </div>
             </div>
@@ -260,7 +295,8 @@
 
 @push('styles')
 <!-- تاریخ -->
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+<link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
 <!-- تاریخ پایان-->
 @endpush
 
@@ -356,105 +392,106 @@
 
         });
     });
+});
 </script>
 
 
 <script>
-    $('#delivery_amount').on('keyup keypress focus change', function(e) {
-        Number = $(this).val()
-        Number += '';
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        x = Number.split('.');
-        y = x[0];
-        z = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(y))
-            y = y.replace(rgx, '$1' + ',' + '$2');
-        output = y + z;
-        if (output != "") {
-            document.getElementById("delivery_1").innerHTML = output + 'تومان';
-        } else {
-            document.getElementById("delivery_1").innerHTML = '';
-        }
-    });
-    $('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
-        Number = $(this).val()
-        Number += '';
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        x = Number.split('.');
-        y = x[0];
-        z = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(y))
-            y = y.replace(rgx, '$1' + ',' + '$2');
-        output = y + z;
-        if (output != "") {
-            document.getElementById("delivery_2").innerHTML = output + 'تومان';
-        } else {
-            document.getElementById("delivery_2").innerHTML = '';
-        }
-    });
-
-    function show_price(price, id) {
-        Number = price
-        Number += '';
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        x = Number.split('.');
-        y = x[0];
-        z = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(y))
-            y = y.replace(rgx, '$1' + ',' + '$2');
-        output = y + z;
-        if (output != "") {
-
-            document.getElementById("price[" + id + "]").innerHTML = output + 'تومان';
-        } else {
-
-            document.getElementById("price[" + id + "]").innerHTML = '';
-        }
-    };
-
-    function show_price_1(price, id) {
-
-        Number = price
-        Number += '';
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        Number = Number.replace(',', '');
-        x = Number.split('.');
-        y = x[0];
-        z = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(y))
-            y = y.replace(rgx, '$1' + ',' + '$2');
-        output = y + z;
-        if (output != "") {
-
-            document.getElementById("price1[" + id + "]").innerHTML = output + 'تومان';
-        } else {
-
-            document.getElementById("price1[" + id + "]").innerHTML = '';
-        }
-
+$('#delivery_amount').on('keyup keypress focus change', function(e) {
+    Number = $(this).val()
+    Number += '';
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    x = Number.split('.');
+    y = x[0];
+    z = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(y))
+        y = y.replace(rgx, '$1' + ',' + '$2');
+    output = y + z;
+    if (output != "") {
+        document.getElementById("delivery_1").innerHTML = output + 'تومان';
+    } else {
+        document.getElementById("delivery_1").innerHTML = '';
     }
+});
+$('#delivery_amount_per_product').on('keyup keypress focus change', function(e) {
+    Number = $(this).val()
+    Number += '';
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    x = Number.split('.');
+    y = x[0];
+    z = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(y))
+        y = y.replace(rgx, '$1' + ',' + '$2');
+    output = y + z;
+    if (output != "") {
+        document.getElementById("delivery_2").innerHTML = output + 'تومان';
+    } else {
+        document.getElementById("delivery_2").innerHTML = '';
+    }
+});
+
+function show_price(price, id) {
+    Number = price
+    Number += '';
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    x = Number.split('.');
+    y = x[0];
+    z = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(y))
+        y = y.replace(rgx, '$1' + ',' + '$2');
+    output = y + z;
+    if (output != "") {
+
+        document.getElementById("price[" + id + "]").innerHTML = output + 'تومان';
+    } else {
+
+        document.getElementById("price[" + id + "]").innerHTML = '';
+    }
+};
+
+function show_price_1(price, id) {
+
+    Number = price
+    Number += '';
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    Number = Number.replace(',', '');
+    x = Number.split('.');
+    y = x[0];
+    z = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(y))
+        y = y.replace(rgx, '$1' + ',' + '$2');
+    output = y + z;
+    if (output != "") {
+
+        document.getElementById("price1[" + id + "]").innerHTML = output + 'تومان';
+    } else {
+
+        document.getElementById("price1[" + id + "]").innerHTML = '';
+    }
+
+}
 </script>
 @endpush

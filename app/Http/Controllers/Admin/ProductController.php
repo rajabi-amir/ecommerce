@@ -152,8 +152,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product,ToastrFactory $flasher)
     {
-        // dd($request->variation_values[1]);
 
+  
         try {
             DB::beginTransaction();
 

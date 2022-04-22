@@ -37,12 +37,20 @@
                                     <td><a
                                             href="{{route('admin.categories.edit',['category' => $product->category->id ])}}">{{$product->category->name}}</a>
                                     </td>
-
+                                    @if ($product->is_active==0)
+                                    @php
+                                    $color="danger";
+                                    $title="عدم انتشار";
+                                    @endphp
+                                    @else
+                                    @php
+                                    $color="success";
+                                    $title="انتشار";
+                                    @endphp
+                                    @endif
                                     <td>
                                         <div class="row clearfix">
                                             <div class="col-6">
-
-
                                                 <a wire:click="ChengeActive_product({{$product->id}})"
                                                     wire:loading.attr="disabled"
                                                     class="btn btn-raised btn-{{$color}} waves-effect"><span
