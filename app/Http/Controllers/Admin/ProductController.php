@@ -152,6 +152,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product,ToastrFactory $flasher)
     {
+        
     
         try {
             DB::beginTransaction();

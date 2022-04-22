@@ -33,23 +33,34 @@ if (!function_exists('Persian_GenerateImageName')) {
 }
 
 if (!function_exists('convertShamsiToGregorianDate')) {
+function convert($string) {
+    $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
+
+    $num = range(0, 9);
+    $convertedPersianNums = str_replace($persian, $num, $string);
+    $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
+
+    return $englishNumbersOnly;
+}
+}
+
+if (!function_exists('convertShamsiToGregorianDate')) {
     function convertShamsiToGregorianDate($date)
     {
         if ($date == null) {
             return null;
         }
-        
-        
-       
-
+        $enghlishDate=convert($date);
         $pattern = "/[-\s]/";
+        $shamsiDateSplit = preg_split($pattern, $enghlishDate);
+
         
-        $shamsiDateSplit = preg_split($pattern, $date);
        
-        dd($shamsiDateSplit);
         $arrayGergorianDate = verta()->getGregorian($shamsiDateSplit[0], $shamsiDateSplit[1], $shamsiDateSplit[2]);
-        dd($shamsiDateSplit);
-        return implode("-", $arrayGergorianDate);
+      
+        return implode("-", $arrayGergorianDate) . " " . $shamsiDateSplit[3];
     }
+   
 }
 ?>
