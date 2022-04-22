@@ -45,22 +45,5 @@ function convert($string) {
 }
 }
 
-if (!function_exists('convertShamsiToGregorianDate')) {
-    function convertShamsiToGregorianDate($date)
-    {
-        if ($date == null) {
-            return null;
-        }
-        $enghlishDate=convert($date);
-        $pattern = "/[-\s]/";
-        $shamsiDateSplit = preg_split($pattern, $enghlishDate);
 
-        
-       
-        $arrayGergorianDate = verta()->getGregorian($shamsiDateSplit[0], $shamsiDateSplit[1], $shamsiDateSplit[2]);
-      
-        return implode("-", $arrayGergorianDate) . " " . $shamsiDateSplit[3];
-    }
-   
-}
 ?>

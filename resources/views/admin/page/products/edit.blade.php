@@ -219,8 +219,13 @@
                                                 <div class="form-group col-md-4">
                                                     <label> تاریخ شروع حراجی </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="variationInputDateOnSaleFrom-{{ $variation->id }}" value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
-                                                        <input type="hidden" id="variationInputDateOnSaleFrom-alt-{{ $variation->id }}" name="variation_values[{{ $variation->id }}][date_on_sale_from]" value="{{ $variation->date_on_sale_from  ?? null }}">
+                                                        <input type="text" class="form-control"
+                                                            id="variationInputDateOnSaleFrom-{{ $variation->id }}"
+                                                            value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
+                                                        <input type="hidden"
+                                                            id="variationInputDateOnSaleFrom-alt-{{ $variation->id }}"
+                                                            name="variation_values[{{ $variation->id }}][date_on_sale_from]"
+                                                            value="{{ $variation->date_on_sale_from  ?? null }}">
                                                     </div>
                                                 </div>
 
@@ -228,8 +233,13 @@
                                                 <div class="form-group col-md-4">
                                                     <label> تاریخ پایان حراجی </label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="variationInputDateOnSaleTo-{{ $variation->id }}" value="{{ $variation->date_on_sale_to == null ? null : $variation->date_on_sale_to }}">
-                                                        <input type="hidden" id="variationInputDateOnSaleTo-alt-{{ $variation->id }}" name="variation_values[{{ $variation->id }}][date_on_sale_to]" value="{{ $variation->date_on_sale_to ?? null }}">
+                                                        <input type="text" class="form-control"
+                                                            id="variationInputDateOnSaleTo-{{ $variation->id }}"
+                                                            value="{{ $variation->date_on_sale_to == null ? null : $variation->date_on_sale_to }}">
+                                                        <input type="hidden"
+                                                            id="variationInputDateOnSaleTo-alt-{{ $variation->id }}"
+                                                            name="variation_values[{{ $variation->id }}][date_on_sale_to]"
+                                                            value="{{ $variation->date_on_sale_to ?? null }}">
                                                     </div>
 
                                                 </div>
@@ -304,93 +314,94 @@
 <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
 <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
 <script>
-    let variations = @json($product_variation);
-    var to, from;
-    variations.forEach(variation => {
-        $(`#variationInputDateOnSaleFrom-${variation.id}`).pDatepicker({
-            initialValueType: 'gregorian',
-            format: 'LLLL',
-            altField: `#variationInputDateOnSaleFrom-alt-${variation.id}`,
-            altFormat: 'g',
-            minDate: "new persianDate().unix()",
-            timePicker: {
-                enabled: true,
-                second: {
-                    enabled: false
-                },
+let variations = @json($product_variation);
+var to, from;
+variations.forEach(variation => {
+    $(`#variationInputDateOnSaleFrom-${variation.id}`).pDatepicker({
+        initialValueType: 'gregorian',
+        format: 'LLLL',
+        altField: `#variationInputDateOnSaleFrom-alt-${variation.id}`,
+        altFormat: 'g',
+        minDate: "new persianDate().unix()",
+        timePicker: {
+            enabled: true,
+            second: {
+                enabled: false
             },
-            altFieldFormatter: function(unixDate) {
-                var self = this;
-                var thisAltFormat = self.altFormat.toLowerCase();
-                if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
-                    persianDate.toLocale('en');
-                    var p = new persianDate(unixDate).toCalendar('gregorian').format('YYYY-MM-DD HH:mm:ss');;
-                    return p;
+        },
+        altFieldFormatter: function(unixDate) {
+            var self = this;
+            var thisAltFormat = self.altFormat.toLowerCase();
+            if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
+                persianDate.toLocale('en');
+                var p = new persianDate(unixDate).toCalendar('gregorian').format(
+                    'YYYY-MM-DD HH:mm:ss');;
+                return p;
+            }
+            if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
+                return unixDate;
+            } else {
+                var pd = new persianDate(unixDate);
+                pd.formatPersian = this.persianDigit;
+                return pd.format(self.altFormat);
+            }
+        },
+        onSelect: function(unix) {
+            to.touched = true;
+            if (from && from.options && from.options.maxDate != unix) {
+                var cachedValue = from.getState().selected.unixDate;
+                from.options = {
+                    maxDate: unix
+                };
+                if (from.touched) {
+                    from.setDate(cachedValue);
                 }
-                if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
-                    return unixDate;
-                } else {
-                    var pd = new persianDate(unixDate);
-                    pd.formatPersian = this.persianDigit;
-                    return pd.format(self.altFormat);
-                }
-            },
-            onSelect: function(unix) {
-                to.touched = true;
-                if (from && from.options && from.options.maxDate != unix) {
-                    var cachedValue = from.getState().selected.unixDate;
-                    from.options = {
-                        maxDate: unix
-                    };
-                    if (from.touched) {
-                        from.setDate(cachedValue);
-                    }
-                }
-            },
+            }
+        },
 
-        });
-        $(`#variationInputDateOnSaleTo-${variation.id}`).pDatepicker({
-            initialValueType: 'gregorian',
-            format: 'LLLL',
-            altField: `#variationInputDateOnSaleTo-alt-${variation.id}`,
-            altFormat: 'g',
-            minDate: "new persianDate().unix()",
-            timePicker: {
-                enabled: true,
-                second: {
-                    enabled: false
-                },
+    });
+    $(`#variationInputDateOnSaleTo-${variation.id}`).pDatepicker({
+        initialValueType: 'gregorian',
+        format: 'LLLL',
+        altField: `#variationInputDateOnSaleTo-alt-${variation.id}`,
+        altFormat: 'g',
+        minDate: "new persianDate().unix()",
+        timePicker: {
+            enabled: true,
+            second: {
+                enabled: false
             },
-            altFieldFormatter: function(unixDate) {
-                var self = this;
-                var thisAltFormat = self.altFormat.toLowerCase();
-                if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
-                    persianDate.toLocale('en');
-                    var p = new persianDate(unixDate).toCalendar('gregorian').format('YYYY-MM-DD HH:mm:ss');;
-                    return p;
+        },
+        altFieldFormatter: function(unixDate) {
+            var self = this;
+            var thisAltFormat = self.altFormat.toLowerCase();
+            if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
+                persianDate.toLocale('en');
+                var p = new persianDate(unixDate).toCalendar('gregorian').format(
+                    'YYYY-MM-DD HH:mm:ss');;
+                return p;
+            }
+            if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
+                return unixDate;
+            } else {
+                var pd = new persianDate(unixDate);
+                pd.formatPersian = this.persianDigit;
+                return pd.format(self.altFormat);
+            }
+        },
+        onSelect: function(unix) {
+            from.touched = true;
+            if (to && to.options && to.options.minDate != unix) {
+                var cachedValue = to.getState().selected.unixDate;
+                to.options = {
+                    minDate: unix
+                };
+                if (to.touched) {
+                    to.setDate(cachedValue);
                 }
-                if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
-                    return unixDate;
-                } else {
-                    var pd = new persianDate(unixDate);
-                    pd.formatPersian = this.persianDigit;
-                    return pd.format(self.altFormat);
-                }
-            },
-            onSelect: function(unix) {
-                from.touched = true;
-                if (to && to.options && to.options.minDate != unix) {
-                    var cachedValue = to.getState().selected.unixDate;
-                    to.options = {
-                        minDate: unix
-                    };
-                    if (to.touched) {
-                        to.setDate(cachedValue);
-                    }
-                }
-            },
+            }
+        },
 
-        });
     });
 });
 </script>
