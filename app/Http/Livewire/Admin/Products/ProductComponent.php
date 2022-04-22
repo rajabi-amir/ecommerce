@@ -14,7 +14,7 @@ class ProductComponent extends Component
 {
     use WithFileUploads;
 public $title;
-public $color;
+
 public $product;
 protected $listeners = [
     'sweetAlertConfirmed', // only when confirm button is clicked
@@ -52,6 +52,7 @@ public function mount(Product $product)
     }
 
    public function ChengeActive_product (product $product){
+       
 
     if($product->is_active){
         $product->update([
