@@ -225,12 +225,7 @@
                                                             value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
                                                     </div>
                                                 </div>
-                                                <!-- <div class="form-group col-md-4">
-                                                    <label> تاریی </label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="input-alt-field" name="variation_values[{{ $variation->id }}][date_on_sale_from]" value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
-                                                    </div>
-                                                </div> -->
+
 
                                                 <div class="form-group col-md-4">
                                                     <label> تاریخ پایان حراجی </label>
