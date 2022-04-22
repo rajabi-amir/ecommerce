@@ -12,12 +12,12 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductImage;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session ;
 use Illuminate\Support\Facades\Storage;
 use Flasher\Toastr\Prime\ToastrFactory;
-
-
+use Verta;
 class ProductController extends Controller
 {
     /**
@@ -25,7 +25,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
         $products = Product::latest()->paginate(10);
@@ -40,11 +40,11 @@ class ProductController extends Controller
     public function create()
     {
         Session::forget('images');
-        
+
         $brands=Brand::all();
         $tags=Tag::all();
         $categories=Category::where('parent_id','!=' , 0)->get();
-       
+
         return view('admin.page.products.create' , compact('brands','tags','categories') );
     }
 
@@ -77,7 +77,7 @@ class ProductController extends Controller
         ]);
         $imagesStore = Session::pull('images', []);
 
-        foreach ($imagesStore as $imageStore) 
+        foreach ($imagesStore as $imageStore)
         {
             ProductImage::create([
                 'product_id' => $product->id,
@@ -87,7 +87,7 @@ class ProductController extends Controller
 
         $productAttributeController = new ProductAttributeController();
         $productAttributeController->store($request->attribute_ids, $product);
-   
+
         $category = Category::find($request->category_id);
         $productVariationController = new ProductVariationController();
         $productVariationController->store($request->variation_values, $category->attributes()->wherePivot('is_variation', 1)->first()->id, $product);
@@ -96,7 +96,7 @@ class ProductController extends Controller
         DB::commit();
     } catch (\Exception $ex) {
         DB::rollBack();
-        
+
         $flasher->addError('مشکل در ایجاد محصول');
 
         return redirect()->back();
@@ -106,7 +106,7 @@ class ProductController extends Controller
     return redirect()->route('admin.products.index');
 
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -121,7 +121,7 @@ class ProductController extends Controller
         $images=$product->images;
         $tags=$product->tags;
 
-        
+
         return view('admin.page.products.show',compact('product','product_attributes','product_variation','images','tags'));
     }
 
@@ -138,9 +138,9 @@ class ProductController extends Controller
         $categories=Category::where('parent_id','!=' , 0)->get();
         $product_attributes=$product->attributes()->with('attribute')->get();
         $product_variation=$product->variations()->with('attribute')->get();
-       
+
         return view('admin.page.products.edit',compact('brands','tags','categories','product','product_attributes','product_variation'));
-        
+
     }
 
     /**
@@ -152,7 +152,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product,ToastrFactory $flasher)
     {
-    
+        // dd($request->variation_values[1]);
+
         try {
             DB::beginTransaction();
 
@@ -182,8 +183,8 @@ class ProductController extends Controller
 
         $flasher->addSuccess('محصول مورد نظر ویرایش شد');
         return redirect()->route('admin.products.index');
-   
-       
+
+
     }
 
     /**
@@ -197,35 +198,35 @@ class ProductController extends Controller
         //
     }
 
-  
+
 
     public function uploadImage(Request $request){
-  
+
             $images = $request->file();
-           
-        
+
+
             if (count($images) > 0) {
-            
+
                 foreach ($images as $image) {
-                    
+
                     $ImageController = new ImageController();
                     $image_name = $ImageController->UploadeImage($image, "other_product_image" , 800 , 600);
                     Session::push('images', $image_name);
                     $paths[] = ['url' => $image_name];
                 }
-        
+
             }
-          
-            
+
+
             return response()->json($image_name, 200);
-           
-        
+
+
     }
 
- 
+
 
     public function deleteImage(Request $request){
-        
+
             $namefile = $request->name;
             ProductImage::where('image',$namefile)->delete();
             Storage::delete('test/' .$namefile);
@@ -235,10 +236,10 @@ class ProductController extends Controller
                 unset($images[$key]);
             }
             Session::put('images', $images);
-            
-            
+
+
             return response()->json(['success' =>"تصویر حذف شد"]);
-           
+
     }
 
     //دسته بندی
@@ -250,7 +251,7 @@ class ProductController extends Controller
 
     public function updateCategory(Request $request, Product $product,ToastrFactory $flasher)
     {
-       
+
 
         $request->validate([
             'category_id' => 'required',
@@ -261,8 +262,8 @@ class ProductController extends Controller
             'variation_values.price.*' => 'integer',
             'variation_values.quantity.*' => 'integer'
         ]);
-        
-        
+
+
 
             $product->update([
                 'category_id' => $request->category_id
