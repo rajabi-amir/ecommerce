@@ -59,7 +59,7 @@
                                 <tr wire:key="attribute-field-{{ $attribute->id }}">
                                     <td scope="row">{{$attributes->firstItem() + $key}}</td>
                                     <td>{{$attribute->name}}</td>
-                                    <td class="text-center js-sweetalert">
+                                    <td class="text-center">
                                         <button wire:click="edit_attribute({{$attribute->id}})"
                                             wire:loading.attr="disabled" {{$display}}
                                             class="btn btn-raised btn-info waves-effect scroll">

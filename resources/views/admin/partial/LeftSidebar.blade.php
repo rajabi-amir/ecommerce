@@ -52,6 +52,13 @@
                 <ul class="ml-menu">
                 </ul>
             </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>بنر
+                        ها</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.banners.index') }}>لیست بنر ها</a></li>
+                    <li><a href={{ route('admin.banners.create') }}>ایجاد بنر</a></li>
+                </ul>
+            </li>
 
             <li><a target="_blank" href="https://app.raychat.io/login"><i class="zmdi zmdi-hc-fw"></i><span>چت
                         آنلاین</span></a>

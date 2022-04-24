@@ -315,6 +315,7 @@
 <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
 <script>
 let variations = @json($product_variation);
+
 variations.forEach(variation => {
     $(`#variationInputDateOnSaleFrom-${variation.id}`).pDatepicker({
         initialValueType: 'gregorian',
@@ -345,9 +346,8 @@ variations.forEach(variation => {
                 return pd.format(self.altFormat);
             }
         },
-
-
     });
+
     $(`#variationInputDateOnSaleTo-${variation.id}`).pDatepicker({
         initialValueType: 'gregorian',
         format: 'LLLL',
@@ -377,8 +377,6 @@ variations.forEach(variation => {
                 return pd.format(self.altFormat);
             }
         },
-
-
     });
 });
 </script>

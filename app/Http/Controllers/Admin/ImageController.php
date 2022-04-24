@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Storage;
 class ImageController extends Controller
 {
 
-    public function UploadeImage($image, $directory, $heigh = null, $width = null)
+    public function UploadeImage($image, $directory, $height = null, $width = null)
     {
-        
+
         if ($image) {
-           
+
             //درایور پیش فرض ذخیره
             $filesystem = config('filesystems.default');
 
@@ -30,16 +30,16 @@ class ImageController extends Controller
 
             //ساخت نام تصویر از هلپر فانکشن
             $image_name = Persian_generateImageName($extension);
-            
-         
+
+
 
             if (!Storage::exists($directory)) {
                 // این پوشه را بساز
                 Storage::makeDirectory($directory);
             }
 
-            if ($heigh && $width) {
-                $img = Image::make($image)->resize($heigh, $width);
+            if ($height && $width) {
+                $img = Image::make($image)->resize($height, $width);
 
                 $img->save($pach . '/' . $directory . '/' . $image_name);
             } else {
@@ -71,10 +71,10 @@ class ImageController extends Controller
                     'product_id' => $request->product,
                     'image' => $image_name
                 ]);
-               
+
                 $paths[] = ['url' => $image_name];
             }
-    
+
         }
         return response()->json($image_name, 200);
     }
@@ -82,30 +82,30 @@ class ImageController extends Controller
 
 
     public function edit_deleteImage(Request $request){
-        
+
        $product= Product::find($request->id);
             $namefile = $request->name;
             ProductImage::where('image',$namefile)->delete();
             Storage::delete('test/' .$namefile);
             return response()->json(['success' =>"تصویر حذف شد"]);
-        
+
     }
 
 
     public function setPrimary(Request $request, Product $product,ToastrFactory $flasher)
     {
-        
+
         $product =Product::find($request->product);
-        
+
         if ($request->has('primary_image')) {
-            
+
             if (isset($request->primary_image)) {
                 $ImageController = new ImageController();
                 $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 800, 600);
             } else {
                 $image_name = null;
             }
-            
+
             $product->update([
                 'primary_image' => $image_name
             ]);
@@ -116,6 +116,6 @@ class ImageController extends Controller
             return redirect()->back();
     }
 
-    
-  
+
+
 }

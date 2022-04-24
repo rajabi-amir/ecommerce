@@ -14,11 +14,7 @@ class BrandControll extends Component
     
     public function render()
     {
-        
-     
-       
         return view('livewire.admin.brands.brand-controll',['brands'=>Brand::latest()->paginate(10)]);
-
     }
 
     public function delbrand(Brand $brand){
