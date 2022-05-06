@@ -65,6 +65,9 @@ Route::post('/editdel', [ImageController::class , 'edit_deleteImage'])->name('ed
 
 Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('product.images.add');
 
-
-
 //end
+
+// home route
+ Route::get('/',function(){
+     return view('home.page.home');
+ });

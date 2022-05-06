@@ -14,8 +14,11 @@ const mix = require("laravel-mix");
 //admin
 mix.js("resources/js/admin.js", "public/js").postCss(
     "resources/css/admin.css",
-    "public/css",
-    [
-        //
-    ]
+    "public/css"
+);
+
+// home
+mix.js("resources/js/home.js", "public/js").sass(
+    "resources/css/home.scss",
+    "public/css"
 );

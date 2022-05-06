@@ -1,0 +1,9 @@
+require("../assets/home/vendor/jquery/jquery.min.js");
+require("../assets/home/vendor/jquery.plugin/jquery.plugin.min.js");
+require("../assets/home/vendor/parallax/parallax.min.js");
+require("../assets/home/vendor/imagesloaded/imagesloaded.pkgd.min.js");
+require("../assets/home/vendor/jquery.countdown/jquery.countdown.min.js");
+require("../assets/home/vendor/magnific-popup/jquery.magnific-popup.min.js");
+require("../assets/home/vendor/zoom/jquery.zoom.min.js");
+require("../assets/home/vendor/skrollr/skrollr.min.js");
+require("../assets/home/js/main.min.js");
