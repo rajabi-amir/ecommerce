@@ -30,7 +30,6 @@ class AttributeList extends Component
 
     public function edit_attribute(Attribute $attribute)
     {
-        $this->dispatchBrowserEvent('name-updated', ['newName' => 'amir rajabi']);
         $this->is_edit = true;
         $this->attribute_name = $attribute->name;
         $this->attribute = $attribute;
