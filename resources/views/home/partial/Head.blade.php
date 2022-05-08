@@ -30,7 +30,12 @@ WebFontConfig = {
     crossorigin="anonymous" />
 <link rel="preload" href="{{asset('fonts/wolmart87d5.ttf?png09e')}}" as="font" type="font/ttf"
     crossorigin="anonymous" />
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}" />
+
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animate/animate.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/magnific-popup/magnific-popup.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/demo5.min.css')}}" />
 
 
 
@@ -38,4 +43,4 @@ WebFontConfig = {
 <link rel="icon" href="{{asset('/favicon.ico')}}" type='image/x-icon'> <!-- Favicon-->
 
 <!-- Custom Css -->
-<link rel="stylesheet" href="{{asset('css/home.css')}}">
+<!-- <link rel="stylesheet" href="{{asset('css/home.css')}}"> -->

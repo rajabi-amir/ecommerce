@@ -71,3 +71,7 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
  Route::get('/',function(){
      return view('home.page.home');
  });
+
+ Route::get('/assets/ajax', function(){
+return view('home.partial.login');
+ });
