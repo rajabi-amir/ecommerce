@@ -7,6 +7,7 @@
             <div class="row">
                 <div class="col-md-8 mb-4">
                     <div class="owl-carousel owl-theme row gutter-no cols-1 animation-slider owl-dot-inner" data-owl-options="{
+                                'rtl':true,
                                 'nav': false,
                                 'dots': true,
                                 'items': 1,
