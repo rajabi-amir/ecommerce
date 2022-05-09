@@ -98,7 +98,7 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-left">
-                <p class="copyright">کپی رایت © 1400 فروشگاه وولـمارت. تمام حقوق سایت برای جعفر عباسی محفوظ است..</p>
+                <p class="copyright">کپی رایت © 1400 فروشگاه وولـمارت. تمام حقوق سایت برای  محفوظ است..</p>
             </div>
             <div class="footer-right">
                 <span class="payment-label mr-lg-8">پرداخت امن و مطمئن با </span>

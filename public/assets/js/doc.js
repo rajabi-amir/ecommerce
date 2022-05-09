@@ -1,8 +1,6 @@
 
 /**
  * Wolmart Documentation Javascript File
- طراحی این قالب توسط جعفر عباسی انجام شده است 
- تم فایل
  */
 "use strict";
 

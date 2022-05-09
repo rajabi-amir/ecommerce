@@ -1,6 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title','خانه')
-@section('Content')
+@section('content')
 <main class="main">
     <div class="container">
         <div class="intro-wrapper">
