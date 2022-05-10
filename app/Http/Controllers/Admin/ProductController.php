@@ -67,6 +67,7 @@ class ProductController extends Controller
         }
         $product = Product::create([
             'name' => $request->name,
+            'position' => $request->position,
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
             'primary_image' => $image_name,
@@ -159,6 +160,7 @@ class ProductController extends Controller
 
             $product->update([
                 'name' => $request->name,
+                'position' => $request->position,
                 'brand_id' => $request->brand_id,
                 'description' => $request->description,
                 'is_active' => $request->is_active,

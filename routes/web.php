@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('banners', BannerController::class)->except(['show','destroy']);
     // Route::resource('tags', TagController::class);
+    Route::resource('/services', ServiceController::class)->except(['show']);
     Route::get('tags/create', [TagControll::class, "createTag"])->name('tags.create');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
@@ -68,9 +71,8 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
 //end
 
 // home route
- Route::get('/',function(){
-     return view('home.page.home');
- });
+ Route::get('/',[HomeController::class , 'index']);
+
 
  Route::get('/assets/ajax', function(){
 return view('home.partial.login');

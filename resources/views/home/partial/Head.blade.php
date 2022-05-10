@@ -22,6 +22,8 @@ WebFontConfig = {
     s.parentNode.insertBefore(wf, s);
 })(document);
 </script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
 <link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2"
     crossorigin="anonymous" />
 <link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2"
