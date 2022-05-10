@@ -190,7 +190,7 @@
                             <a href="product-default.html" class="rating-reviews">(1 نظر )</a>
                         </div>
                         <div class="product-price">
-                            <ins class="new-price">27000 تومان</ins><del class="old-price">{{$Product_auction_today->}} تومان</del>
+                            <ins class="new-price">27000 تومان</ins><del class="old-price">تومان</del>
                         </div>
                     </div>
                 </div>

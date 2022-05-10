@@ -29,8 +29,8 @@ use App\Http\Livewire\Home\ProductsList;
 
 //admin routes
 
-use App\Http\Livewire\Admin\Tags\TagControll;
-use App\Http\Livewire\Home\ProductsList;('Admin-panel/managment')->name('admin.')->group(function () {
+
+Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
     Route::resource('products', ProductController::class);
     Route::resource('brands', BrandController::class);
