@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header header-border">
     <div class="header-top">
         <div class="container">
             <div class="header-left">
@@ -15,15 +15,15 @@
                 <!-- End of DropDown Menu -->
 
                 <div class="dropdown">
-                    <a href="#language"><img src="assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
+                    <a href="#language"><img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
                             class="dropdown-image" /> تومان </a>
                     <div class="dropdown-box">
                         <a href="#ENG">
-                            <img src="assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
+                            <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
                                 class="dropdown-image" />
                             فارسی </a>
                         <a href="#FRA">
-                            <img src="assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
+                            <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
                                 class="dropdown-image" />
                             انگلیسی </a>
                     </div>
@@ -33,9 +33,10 @@
                 <a href="blog.html" class="d-lg-show">وبلاگ </a>
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                 <a href="my-account.html" class="d-lg-show">حساب کاربری من </a>
-                <a href="assets/ajax/login.html" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود </a>
+                <a href="/assets/ajax/login.html" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود
+                </a>
                 <span class="delimiter d-lg-show">/</span>
-                <a href="assets/ajax/login.html" class="ml-0 d-lg-show login register">ثبت نام </a>
+                <a href="/assets/ajax/login.html" class="ml-0 d-lg-show login register">ثبت نام </a>
             </div>
         </div>
     </div>
@@ -47,7 +48,7 @@
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger">
                 </a>
                 <a href="demo5.html" class="logo ml-lg-0">
-                    <img src="assets/images/demos/demo5/Logo-1.png" alt="logo" width="145" height="45" />
+                    <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo" width="145" height="45" />
                 </a>
                 <form method="get" action="#" class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
                     <div class="select-box">
@@ -113,7 +114,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="assets/images/cart/product-1.jpg" alt="product" height="84"
+                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84"
                                             width="94" />
                                     </a>
                                 </figure>
@@ -132,7 +133,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="assets/images/cart/product-2.jpg" alt="product" width="84"
+                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84"
                                             height="94" />
                                     </a>
                                 </figure>
@@ -159,11 +160,12 @@
     </div>
     <!-- End of Header Middle -->
 
-    <div class="header-bottom sticky-content fix-top sticky-header has-dropdown">
+    <div class="header-bottom sticky-content fix-top sticky-header {{request()->routeIs('home') ? 'has-dropdown':''}}">
         <div class="container">
             <div class="inner-wrap">
                 <div class="header-left">
-                    <div class="dropdown category-dropdown show-dropdown" data-visible="true">
+                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}"
+                        data-visible="true">
                         <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
                             <i class="w-icon-category"></i>

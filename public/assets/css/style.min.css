@@ -15,8 +15,6 @@
 /* 3. Plugins */
 /* -------------------------------------------
     Owl Carousel
-	 طراحی این قالب توسط جعفر عباسی انجام شده است 
- تم فایل
 ---------------------------------------------- */
 /*Start Fonts*/
 @font-face {
@@ -86,7 +84,7 @@
     src: url('fonts/iransans/eot/IRANSansWeb_Black.eot');
     src: url('fonts/iransans/eot/IRANSansWeb_Black.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/iransans/woff2/IRANSansWeb_Black.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-	
+
 	url('fonts/iransans/woff/IRANSansWeb_Black.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
     url('fonts/iransans/ttf/IRANSansWeb_Black.ttf') format('truetype');
 }
@@ -333,7 +331,7 @@
     src: url('fonts/dana/eot/dana-medium.eot');
     src: url('fonts/dana/eot/dana-medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/dana/woff2/dana-medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-	
+
 	url('fonts/dana/woff/dana-medium.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 }
 @font-face {
@@ -421,7 +419,7 @@
     font-family: dana;
     font-style: italic;
     font-weight: 500;
-	
+
 	src: url('fonts/dana/eot/dana-mediumitalic.eot');
     src: url('fonts/dana/eot/dana-mediumitalic.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/dana/woff2/dana-mediumitalic.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
@@ -502,7 +500,7 @@
 @font-face {
     font-family: anjoman;
     font-style: normal;
-	
+
 	font-weight: bold;
     src: url('fonts/anjoman/eot/Anjoman-Bold.eot?#') format('eot'),  /* IE6â€“8 */
     url('fonts/anjoman/woff/Anjoman-Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
@@ -13115,8 +13113,8 @@ body .product-popup {
 }
 
 .header-bottom {
-  color: #333;
-  background: #fff;
+  color: #fff;
+  background: #333;
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 0;
@@ -13815,7 +13813,7 @@ body .product-popup {
 }
 
 .category-dropdown > a {
-  background: #fff;
+  background: #2A9CF5;
   min-width: 28rem;
   padding: 1.9rem 2rem 1.7rem 1.8rem;
   letter-spacing: 0;
@@ -14027,7 +14025,7 @@ body .product-popup {
   right: -1.5rem;
 }
 .menu > li:hover > a:not(.menu-title), .menu > li.active > a:not(.menu-title) {
-  color: #336699;
+  color: #fff;
 }
 .menu > li:hover > .submenu,
 .menu > li:hover .megamenu, .menu > li.show > .submenu,

@@ -6,7 +6,7 @@
 <meta name="keywords" content="HTML5 Template" />
 <meta name="description" content="وولـمارت - قالب چند منظوره و مارکت پلیس html">
 <meta name="author" content="JafarAbbasi">
-<link rel="icon" type="image/png" href="assets/images/icons/favicon.png">
+<link rel="icon" type="image/png" href="/assets/images/icons/favicon.png">
 
 <script>
 WebFontConfig = {
@@ -37,12 +37,10 @@ WebFontConfig = {
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animate/animate.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/magnific-popup/magnific-popup.min.css')}}" />
+@if (request()->routeIs('home'))
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/demo5.min.css')}}" />
-
-
-
+@else
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.min.css')}}" />
+@endif
 
 <link rel="icon" href="{{asset('/favicon.ico')}}" type='image/x-icon'> <!-- Favicon-->
-
-<!-- Custom Css -->
-<!-- <link rel="stylesheet" href="{{asset('css/home.css')}}"> -->

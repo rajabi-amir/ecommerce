@@ -12,8 +12,9 @@ use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
-use App\Models\ProductImage;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Livewire\Home\ProductsList;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ use Illuminate\Support\Facades\Storage;
 
 //admin routes
 
-Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
+use App\Http\Livewire\Admin\Tags\TagControll;
+use App\Http\Livewire\Home\ProductsList;('Admin-panel/managment')->name('admin.')->group(function () {
 
     Route::resource('products', ProductController::class);
     Route::resource('brands', BrandController::class);
@@ -52,14 +54,6 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
 });
 
-
-
-Route::get('/', function () {
-    return view('admin.layout.MasterAdmin')->name('home');
-});
-
-
-
 Route::post('/upl',[ProductController::class,'uploadImage'])->name('uploade');
 Route::post('/del', [ProductController::class , 'deleteImage'])->name('del');
 
@@ -70,9 +64,12 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
 
 //end
 
-// home route
- Route::get('/',[HomeController::class , 'index']);
 
+ 
+
+// home routes
+Route::get('/',[HomeController::class , 'index']);
+ Route::get('/categories/{category:slug}',ProductsList::class)->name('home.categories.show');
 
  Route::get('/assets/ajax', function(){
 return view('home.partial.login');
