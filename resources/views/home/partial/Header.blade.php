@@ -178,7 +178,7 @@
                                 @foreach ($categories as $category)
                                 <li>
                                     <a href="shop-fullwidth-banner.html">
-                                        <i class="w-icon-tshirt2"></i>{{$category->name}}
+                                        <i class="{{$category->icon}}"></i>{{$category->name}}
                                     </a>
                                     @if(count($category->children))
                                     <ul class="megamenu">

@@ -68,7 +68,7 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
  
 
 // home routes
-Route::get('/',[HomeController::class , 'index']);
+Route::get('/',[HomeController::class , 'index'])->name('home');
  Route::get('/categories/{category:slug}',ProductsList::class)->name('home.categories.show');
 
  Route::get('/assets/ajax', function(){

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ class Product extends Model
     
     protected $guarded=[];
     protected $table="products";
-
+    protected $appends = ['quantity_check', 'sale_check', 'price_check'];
     public function sluggable():array
     {
         return [
@@ -20,6 +21,21 @@ class Product extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getPriceCheckAttribute()
+    {
+        return $this->variations()->where('quantity', '>', 0)->orderBy('price')->first() ?? false;
+    }
+
+    public function getSaleCheckAttribute()
+    {
+        return $this->variations()->where('quantity', '>', 0)->where('sale_price', '!=', null)->where('date_on_sale_from', '<', Carbon::now())->where('date_on_sale_to', '>', Carbon::now())->orderBy('sale_price')->first() ?? false;
+    }
+
+    public function getQuantityCheckAttribute()
+    {
+        return $this->variations()->where('quantity', '>', 0)->first() ?? 0;
     }
     
     public function tags()

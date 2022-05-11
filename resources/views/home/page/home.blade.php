@@ -130,12 +130,12 @@
             <h2 class="title title-link">معاملات روز</h2>
             <div class="product-countdown-container font-size-sm text-white bg-secondary align-items-center mr-auto">
                 <label>پایان پیشنهاد در: </label>
-                <div class="product-countdown countdown-compact ml-1 font-weight-bold" data-until="+10d"
-                    data-relative="true" data-compact="true">10روز ,00:00:00</div>
+                <div class="product-countdown countdown-compact ml-1 font-weight-bold" data-until="+1d"
+                    data-relative="true" data-compact="true">2:05:12</div>
             </div>
             <a href="#" class="ml-0">محصولات بیشتر <i class="w-icon-long-arrow-left"></i></a>
         </div>
-        <div class="owl-carousel owl-theme appear-animate row cols-lg-5 cols-md-4 cols-sm-3 cols-2 mb-6"
+        <div class="owl-carousel owl-theme appear-animate row cols-lg-5 cols-md-4 cols-sm-12 cols-4 mb-6"
             data-owl-options="{
                     'rtl': true,
                     'nav': false,
@@ -143,10 +143,10 @@
                     'margin': 20,
                     'responsive': {
                         '0': {
-                            'items': 2
+                            'items': 1
                         },
                         '576': {
-                            'items': 3
+                            'items': 2
                         },
                         '768': {
                             'items': 4
@@ -159,44 +159,10 @@
 
 
             <!-- End of Product Wrap -->
-            @foreach ( $Products_auction_today as $Product_auction_today)
-            <div class="product-wrap">
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product-default.html">
-                            <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product_auction_today->primary_image)}}"
-                                alt=" Product" width="300" height="338">
-                            <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$Product_auction_today->images->first()->image)}}"
-                                alt="Product" width="300" height="338">
-                        </a>
 
-                        <div class=" product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="افزودن به سبد خرید"></a>
-                            <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                title="افزودن به علاقه مندیها"></a>
-                            <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="نمایش سریع"></a>
-                            <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                title="افزودن برای مقایسه"></a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <h4 class="product-name"><a href="product-default.html">{{$Product_auction_today->name}}</a>
-                        </h4>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width: 60%;"></span>
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <a href="product-default.html" class="rating-reviews">(1 نظر )</a>
-                        </div>
-                        <div class="product-price">
-                            <ins class="new-price">27000 تومان</ins><del class="old-price">تومان</del>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @endforeach
+            <!-- محصولات تخفیف دار -->
+            @each('home.partial.product-item', $Products_auction_today, 'Product_auction_today')
+            <!-- محصولات تخفیف دار پایان-->
 
         </div>
         <!-- End of Prodcut Deals Wrapper -->
@@ -225,86 +191,20 @@
                         }
                     }
                 }">
+            @foreach ($categories as $category)
             <div class="category category-icon">
                 <a href="shop-banner-sidebar.html">
                     <figure class="category-media">
-                        <i class="w-icon-tshirt"></i>
+                        <i class="{{$category->icon}}"></i>
                     </figure>
                 </a>
                 <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">مدل </a></h4>
+                    <h4 class="category-name"><a href="shop-banner-sidebar.html">{{$category->name}} </a></h4>
                 </div>
             </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-sofa"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">مبلمان </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-basketball"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">ورزشی </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-bow"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">اسباب بازی </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-camera"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">دوربین ها </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-gamepad"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">بازی </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-headphone"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">هدفونها </a></h4>
-                </div>
-            </div>
-            <div class="category category-icon">
-                <a href="shop-banner-sidebar.html">
-                    <figure class="category-media">
-                        <i class="w-icon-mobile"></i>
-                    </figure>
-                </a>
-                <div class="category-content">
-                    <h4 class="category-name"><a href="shop-banner-sidebar.html">اسمارت فون </a></h4>
-                </div>
-            </div>
+            @endforeach
+
+
         </div>
         <!-- End of Icon Category Wrapper -->
 
