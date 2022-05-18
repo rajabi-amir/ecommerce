@@ -56,7 +56,7 @@ class BrandController extends Controller
         if (isset($request->img)) {
 
             $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($request->img, "brands", 100, 100);
+            $image_name = $ImageController->UploadeImage($request->img, "brands", 310, 180);
         } else {
             $image_name = null;
         }
@@ -112,7 +112,7 @@ class BrandController extends Controller
                 Storage::delete('brands/' . $brand->image);
             }
             $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($request->img, "brands", 100, 100);
+            $image_name = $ImageController->UploadeImage($request->img, "brands", 310, 180);
         } else {
             $image_name = $brand->image;
         }

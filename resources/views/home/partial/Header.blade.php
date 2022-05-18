@@ -2,34 +2,9 @@
     <div class="header-top">
         <div class="container">
             <div class="header-left">
-                <p class="welcome-msg">به سایت فروشگاه وول مارت خوش آمدید دکمه را بزنید تا حذف شوم:)!</p>
+                <p class="welcome-msg">به فروشگاه {{env('APP_NAME')}} خوش آمدید</p>
             </div>
             <div class="header-right">
-                <div class="dropdown">
-                    <a href="#currency">تومان </a>
-                    <div class="dropdown-box">
-                        <a href="#USD">تومان </a>
-                        <a href="#EUR">دلار </a>
-                    </div>
-                </div>
-                <!-- End of DropDown Menu -->
-
-                <div class="dropdown">
-                    <a href="#language"><img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                            class="dropdown-image" /> تومان </a>
-                    <div class="dropdown-box">
-                        <a href="#ENG">
-                            <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                                class="dropdown-image" />
-                            فارسی </a>
-                        <a href="#FRA">
-                            <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
-                                class="dropdown-image" />
-                            انگلیسی </a>
-                    </div>
-                </div>
-                <!-- End of Dropdown Menu -->
-                <span class="divider d-lg-show"></span>
                 <a href="blog.html" class="d-lg-show">وبلاگ </a>
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                 <a href="my-account.html" class="d-lg-show">حساب کاربری من </a>

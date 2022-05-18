@@ -2,31 +2,31 @@
     <div class="product text-center">
         <figure class="product-media">
             <a href="product-default.html">
-                <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product_auction_today->primary_image)}}"
-                    alt=" Product" width="300" height="338">
-                <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$Product_auction_today->images->first()->image)}}"
-                    alt="Product" width="300" height="338">
+                <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product->primary_image)}}" alt=" Product"
+                    width="300" height="338">
+                <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$Product->images->first()->image)}}" alt="Product"
+                    width="300" height="338">
             </a>
 
             <div class=" product-action-vertical">
 
                 <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="افزودن به علاقه مندیها"></a>
-                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                    data-product="{{$Product_auction_today->toJson()}}" title="نمایش سریع"></a>
+                <a href="#" class="btn-product-icon btn-quickview w-icon-search" data-product="{{$Product->toJson()}}"
+                    title="نمایش سریع"></a>
                 <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="افزودن برای مقایسه"></a>
             </div>
         </figure>
         <div class="product-details">
-            <h4 class="product-name"><a href="product-default.html">{{$Product_auction_today->name}}</a>
+            <h4 class="product-name"><a href="product-default.html">{{$Product->name}}</a>
             </h4>
 
             <div class="product-price">
-                @if ($Product_auction_today->quantity_check)
+                @if ($Product->quantity_check)
 
-                @if ($Product_auction_today->sale_check)
+                @if ($Product->sale_check)
 
-                <ins class="new-price">{{number_format($Product_auction_today->sale_check->sale_price)}}
-                    تومان</ins><del class="old-price">{{number_format($Product_auction_today->sale_check->price)}}
+                <ins class="new-price">{{number_format($Product->sale_check->sale_price)}}
+                    تومان</ins><del class="old-price">{{number_format($Product->sale_check->price)}}
                     تومان</del>
 
                 @endif

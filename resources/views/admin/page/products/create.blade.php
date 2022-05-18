@@ -81,6 +81,7 @@
                                             <option>تخفیف روزانه</option>
                                             <option>فروش ویژه</option>
                                             <option>پیشنهاد ما</option>
+                                            <option>تک محصول</option>
                                         </select>
                                         @error('position')
                                         <span class="text-danger m-0">{{$message}}</span>

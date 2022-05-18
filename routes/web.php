@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\TagController;
@@ -39,18 +40,15 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('banners', BannerController::class)->except(['show','destroy']);
     // Route::resource('tags', TagController::class);
     Route::resource('/services', ServiceController::class)->except(['show']);
+    Route::resource('/posts', PostController::class)->except('show');
     Route::get('tags/create', [TagControll::class, "createTag"])->name('tags.create');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
-
     Route::get('/category-attributes/{category}',[CategoryController::class , 'getCategoryAttributes']);
-
     Route::get('/products/{product}/images-edit', [ImageController::class, 'edit'])->name('products.images.edit');
-
-
       // Edit Product Category
-      Route::get('/products/{product}/category-edit', [ProductController::class, 'editCategory'])->name('products.category.edit');
-      Route::put('/products/{product}/category-update', [ProductController::class, 'updateCategory'])->name('products.category.update');
+    Route::get('/products/{product}/category-edit', [ProductController::class, 'editCategory'])->name('products.category.edit');
+    Route::put('/products/{product}/category-update', [ProductController::class, 'updateCategory'])->name('products.category.update');
 
 });
 

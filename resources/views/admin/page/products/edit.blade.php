@@ -84,6 +84,8 @@
                                                 ویژه</option>
                                             <option {{$product->position == 'پیشنهاد ما' ? 'selected' : ''}}>پیشنهاد
                                                 ما</option>
+                                            <option {{$product->position == 'تک محصول' ? 'selected' : ''}}>تک محصول
+                                            </option>
                                         </select>
                                         @error('position')
                                         <span class="text-danger m-0">{{$message}}</span>

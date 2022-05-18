@@ -39,11 +39,13 @@ class ImageController extends Controller
             }
 
             if ($height && $width) {
-                $img = Image::make($image)->resize($height, $width);
+                $img = Image::make($image)->resize($width, $height);
 
                 $img->save($pach . '/' . $directory . '/' . $image_name);
             } else {
+
                 $image->storeAs($directory, $image_name);
+
             }
 
             return $image_name;
@@ -66,7 +68,7 @@ class ImageController extends Controller
             foreach ($images as $image) {
                 $image_upload=ProductImage::where('image',$image)->get();
                 $ImageController = new ImageController();
-                $image_name = $ImageController->UploadeImage($image, "other_product_image" , 800 , 600);
+                $image_name = $ImageController->UploadeImage($image, "other_product_image" , 300 , 338);
                 ProductImage::create([
                     'product_id' => $request->product,
                     'image' => $image_name
@@ -101,7 +103,7 @@ class ImageController extends Controller
 
             if (isset($request->primary_image)) {
                 $ImageController = new ImageController();
-                $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 800, 600);
+                $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 300, 338);
             } else {
                 $image_name = null;
             }

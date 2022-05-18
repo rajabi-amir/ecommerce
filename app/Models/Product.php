@@ -13,7 +13,7 @@ class Product extends Model
     
     protected $guarded=[];
     protected $table="products";
-    protected $appends = ['quantity_check', 'sale_check', 'price_check'];
+    protected $appends = ['quantity_check', 'sale_check', 'price_check' , 'pro_check'];
     public function sluggable():array
     {
         return [
@@ -23,6 +23,16 @@ class Product extends Model
         ];
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+  public function getProCheckAttribute()
+    {
+        return $this->category()->where('name', 'موبایل')->first() ?? false;
+    }
+    
     public function getPriceCheckAttribute()
     {
         return $this->variations()->where('quantity', '>', 0)->orderBy('price')->first() ?? false;

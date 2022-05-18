@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model
+class Image extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    public $timestamps = false;
+    protected $guarded = [];
 
-    public function scopeActive($query)
+    public function imageable()
     {
-        return $query->where('is_active', true);
+        return $this->morphTo();
     }
-
-
 }
