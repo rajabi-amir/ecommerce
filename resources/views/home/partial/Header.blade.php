@@ -6,7 +6,7 @@
             </div>
             <div class="header-right">
                 <div class="dropdown">
-                    <a href="#currency">تومان </a>
+                    <a href="#">تومان </a>
                     <div class="dropdown-box">
                         <a href="#USD">تومان </a>
                         <a href="#EUR">دلار </a>
@@ -15,16 +15,13 @@
                 <!-- End of DropDown Menu -->
 
                 <div class="dropdown">
-                    <a href="#language"><img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                            class="dropdown-image" /> تومان </a>
+                    <a href="#language"><img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" /> تومان </a>
                     <div class="dropdown-box">
                         <a href="#ENG">
-                            <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                                class="dropdown-image" />
+                            <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
                             فارسی </a>
                         <a href="#FRA">
-                            <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
-                                class="dropdown-image" />
+                            <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8" class="dropdown-image" />
                             انگلیسی </a>
                     </div>
                 </div>
@@ -49,26 +46,15 @@
                 <a href="demo5.html" class="logo ml-lg-0">
                     <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo" width="145" height="45" />
                 </a>
-                <form method="get" action="#" class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
-                    <div class="select-box">
-                        <select id="category" name="category">
-                            <option value="">تمام دسته بندیها</option>
-                            <option value="4">مدلینگ </option>
-                            <option value="5">مبلمان </option>
-                            <option value="6">کفشها </option>
-                            <option value="7">اسپورتی </option>
-                            <option value="8">گیم/بازی </option>
-                            <option value="9">کامپیوترها </option>
-                            <option value="10">الکترونیکی </option>
-                            <option value="11">آشپرخانه </option>
-                            <option value="12">لباس </option>
-                        </select>
-                    </div>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="جستجو ..."
-                        required />
-                    <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
-                    </button>
-                </form>
+                @livewire('home.sections.search-box')
+                <div class="dropdown-box">
+                    <a href="#ENG">
+                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
+                        فارسی </a>
+                    <a href="#FRA">
+                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8" class="dropdown-image" />
+                        انگلیسی </a>
+                </div>
             </div>
             <div class="header-right ml-4">
                 <div class="header-call d-xs-show d-lg-flex align-items-center">
@@ -113,8 +99,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84"
-                                            width="94" />
+                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84" width="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -132,8 +117,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84"
-                                            height="94" />
+                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84" height="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -164,8 +148,7 @@
             <div class="inner-wrap">
                 <div class="header-left">
                     <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}" data-visible="true">
-                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
+                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
                             <i class="w-icon-category"></i>
                             <span>کاووش دسته بندیها </span>
                         </a>
@@ -215,8 +198,7 @@
                                         <li>
                                             <div class="banner-fixed menu-banner menu-banner2">
                                                 <figure>
-                                                    <img src="/assets/images/menu/banner-2.jpg" alt="بنر منو" width="235"
-                                                        height="347" />
+                                                    <img src="/assets/images/menu/banner-2.jpg" alt="بنر منو" width="235" height="347" />
                                                 </figure>
                                                 <div class="banner-content">
                                                     <div class="banner-price-info mb-1 ls-normal">دریافت تخفیف
@@ -224,8 +206,7 @@
                                                         </strong>
                                                     </div>
                                                     <h3 class="banner-title ls-normal">حراجی داغ </h3>
-                                                    <a href="shop-banner-sidebar.html"
-                                                        class="btn btn-dark btn-sm btn-link btn-slide-right btn-icon-right">
+                                                    <a href="shop-banner-sidebar.html" class="btn btn-dark btn-sm btn-link btn-slide-right btn-icon-right">
                                                         اکنون میخرم <i class="w-icon-long-arrow-left"></i>
                                                     </a>
                                                 </div>
@@ -294,8 +275,7 @@
                                         <li>
                                             <div class="menu-banner banner-fixed menu-banner3">
                                                 <figure>
-                                                    <img src="/assets/images/menu/banner-3.jpg" alt="بنر منو" width="235"
-                                                        height="461" />
+                                                    <img src="/assets/images/menu/banner-3.jpg" alt="بنر منو" width="235" height="461" />
                                                 </figure>
                                                 <div class="banner-content">
                                                     <h4 class="banner-subtitle font-weight-normal text-white mb-1">
@@ -303,11 +283,9 @@
                                                     <h3 class="banner-title font-weight-bolder text-white ls-normal">
                                                         فروش مبلمان</h3>
                                                     <div class="banner-price-info text-white font-weight-normal ls-25">
-                                                        تا تخفیف <span
-                                                            class="text-secondary text-uppercase font-weight-bold">25%
+                                                        تا تخفیف <span class="text-secondary text-uppercase font-weight-bold">25%
                                                         </span></div>
-                                                    <a href="shop-banner-sidebar.html"
-                                                        class="btn btn-white btn-link btn-sm btn-slide-right btn-icon-right">
+                                                    <a href="shop-banner-sidebar.html" class="btn btn-white btn-link btn-sm btn-slide-right btn-icon-right">
                                                         اکنون میخرم <i class="w-icon-long-arrow-left"></i>
                                                     </a>
                                                 </div>
@@ -369,18 +347,15 @@
                                         <li>
                                             <div class="menu-banner banner-fixed menu-banner4">
                                                 <figure>
-                                                    <img src="/assets/images/menu/banner-4.jpg" alt="بنر منو" width="235"
-                                                        height="433" />
+                                                    <img src="/assets/images/menu/banner-4.jpg" alt="بنر منو" width="235" height="433" />
                                                 </figure>
                                                 <div class="banner-content">
                                                     <h4 class="banner-subtitle font-weight-normal">تخفیفات هفته</h4>
                                                     <h3 class="banner-title text-white">صرفه جویی در گوشی هوشمند
                                                     </h3>
-                                                    <div
-                                                        class="banner-price-info text-secondary font-weight-bolder text-uppercase text-secondary">
+                                                    <div class="banner-price-info text-secondary font-weight-bolder text-uppercase text-secondary">
                                                         20% تخفیف </div>
-                                                    <a href="shop-banner-sidebar.html"
-                                                        class="btn btn-white btn-outline btn-sm btn-rounded">اکنون بخرید
+                                                    <a href="shop-banner-sidebar.html" class="btn btn-white btn-outline btn-sm btn-rounded">اکنون بخرید
                                                     </a>
                                                 </div>
                                             </div>
@@ -452,16 +427,12 @@
                                             <div class="col-6">
                                                 <div class="banner banner-fixed menu-banner5 br-xs">
                                                     <figure>
-                                                        <img src="/assets/images/menu/banner-5.jpg" alt="Banner"
-                                                            width="410" height="123"
-                                                            style="background-color: #D2D2D2;" />
+                                                        <img src="/assets/images/menu/banner-5.jpg" alt="Banner" width="410" height="123" style="background-color: #D2D2D2;" />
                                                     </figure>
                                                     <div class="banner-content text-right y-50">
-                                                        <h4
-                                                            class="banner-subtitle font-weight-normal text-default text-capitalize">
+                                                        <h4 class="banner-subtitle font-weight-normal text-default text-capitalize">
                                                             تازه رسیده ها </h4>
-                                                        <h3
-                                                            class="banner-title font-weight-bolder text-capitalize ls-normal">
+                                                        <h3 class="banner-title font-weight-bolder text-capitalize ls-normal">
                                                             مبل شگفت انگیز </h3>
                                                         <div class="banner-price-info font-weight-normal ls-normal">
                                                             شروع از <strong>125000 تومان</strong></div>
@@ -471,19 +442,14 @@
                                             <div class="col-6">
                                                 <div class="banner banner-fixed menu-banner5 br-xs">
                                                     <figure>
-                                                        <img src="/assets/images/menu/banner-6.jpg" alt="Banner"
-                                                            width="410" height="123"
-                                                            style="background-color: #9F9888;" />
+                                                        <img src="/assets/images/menu/banner-6.jpg" alt="Banner" width="410" height="123" style="background-color: #9F9888;" />
                                                     </figure>
                                                     <div class="banner-content y-50">
-                                                        <h4
-                                                            class="banner-subtitle font-weight-normal text-white text-capitalize">
+                                                        <h4 class="banner-subtitle font-weight-normal text-white text-capitalize">
                                                             بیشترین فروش </h4>
-                                                        <h3
-                                                            class="banner-title font-weight-bolder text-capitalize text-white ls-normal">
+                                                        <h3 class="banner-title font-weight-bolder text-capitalize text-white ls-normal">
                                                             صندلی و لامپ</h3>
-                                                        <div
-                                                            class="banner-price-info font-weight-normal ls-normal text-white">
+                                                        <div class="banner-price-info font-weight-normal ls-normal text-white">
                                                             از <strong>165000 تومان</strong></div>
                                                     </div>
                                                 </div>
@@ -536,10 +502,10 @@
                     </div>
                     <nav class="main-nav">
                         <ul class="menu active-underline">
-                            <li class="active">
-                                <a href="demo5.html">صفحه اصلی </a>
+                            <li @class(['active'=>request()->routeIs('home')])>
+                                <a href="{{route('home')}}">صفحه اصلی </a>
                             </li>
-                            <li>
+                            <li @class(['active'=>request()->is('categories/*')])>
                                 <a href="shop-banner-sidebar.html">فروشگاه </a>
 
                                 <!-- Start of Megamenu -->
@@ -550,8 +516,7 @@
                                             <li><a href="shop-banner-sidebar.html">بنر با نوار کناری</a></li>
                                             <li><a href="shop-boxed-banner.html">بنر جعبه ای </a></li>
                                             <li><a href="shop-fullwidth-banner.html">بنر عرض کامل </a></li>
-                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span
-                                                        class="tip tip-hot">داغ </span></a></li>
+                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span class="tip tip-hot">داغ </span></a></li>
                                             <li><a href="shop-off-canvas.html">نوار کناری <span class="tip tip-new">جدید
                                                     </span></a></li>
                                             <li><a href="shop-infinite-scroll.html">اسکرول بی نهایت آژاکس</a>
@@ -584,8 +549,7 @@
                                             <li><a href="product-extended.html">اطلاعات گسترده </a>
                                             </li>
                                             <li><a href="product-without-sidebar.html">بدون نوار کناری </a></li>
-                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span
-                                                        class="tip tip-new">جدید </span></a></li>
+                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span class="tip tip-new">جدید </span></a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -631,7 +595,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li @class(['active'=>request()->is('blogs/*')])>
                                 <a href="blog.html">وبلاگ </a>
                                 <ul>
                                     <li><a href="blog.html">کلاسیک </a></li>

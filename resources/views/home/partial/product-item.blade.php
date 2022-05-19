@@ -1,7 +1,7 @@
 <div class="product text-center">
     <figure class="product-media">
         <a href="product-default.html">
-            <img src="/assets/images/products/elements/2.jpg" alt="Product" width="295" height="335">
+            <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="Product" width="295" height="335">
         </a>
         <div class="product-action-vertical">
             <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="افزودن به سبد خرید"></a>
@@ -12,8 +12,8 @@
     </figure>
     <div class="product-details">
         <h3 class="product-name">
-            <a href="product-default.html">کفش اسپرت تابستانی</a>
+            <a href="product-default.html">{{$product->name}}</a>
         </h3>
-        <div class="product-price">86000 تومان</div>
+        <div class="product-price">{{$product->variations()->orderBy('price','desc')->first()->price}} تومان</div>
     </div>
 </div>
