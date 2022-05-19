@@ -10,4 +10,10 @@ class Banner extends Model
     use HasFactory;
     protected $guarded=[];
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+
 }

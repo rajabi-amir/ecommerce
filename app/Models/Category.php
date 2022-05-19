@@ -10,6 +10,11 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
      public function parent()
      {
          return $this->belongsTo(Category::class,'parent_id');

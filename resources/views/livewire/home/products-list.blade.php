@@ -360,7 +360,7 @@
                         </div>
                     </nav>
                     <div class="product-wrapper row cols-lg-4 cols-md-3 cols-sm-2 cols-2">
-                        @each('home.partial.product-item',$products,'product','home.partial.product-item-empty')
+                        @each('home.partial.product-item',$products,'Product','home.partial.product-item-empty')
                     </div>
                     {{$products->links('home.partial.pagination')}}
 

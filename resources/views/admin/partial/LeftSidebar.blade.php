@@ -30,6 +30,13 @@
                 </ul>
             </li>
 
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>وبلاگ</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.posts.index') }}>لیست مطالب</a></li>
+                    <li><a href={{ route('admin.posts.create') }}>ایجاد مطلب</a></li>
+                </ul>
+            </li>
+
 
 
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
@@ -57,6 +64,14 @@
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.banners.index') }}>لیست بنر ها</a></li>
                     <li><a href={{ route('admin.banners.create') }}>ایجاد بنر</a></li>
+                </ul>
+            </li>
+
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>سرویس
+                        ها</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.services.index') }}>لیست سرویس ها</a></li>
+                    <li><a href={{ route('admin.services.create') }}>ایجاد سرویس</a></li>
                 </ul>
             </li>
 

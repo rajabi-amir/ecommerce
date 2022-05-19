@@ -62,7 +62,7 @@
                                 </div>
                                 <hr>
                                 <div class="row clearfix">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label>نام محصول *</label>
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control"
@@ -71,9 +71,25 @@
                                             <span class="text-danger m-0">{{$message}}</span>
                                             @enderror
                                         </div>
-
                                     </div>
-                                    <div class="form-group col-md-6">
+
+                                    <div class="form-group col-md-4">
+                                        <label for="position_id">محل قرار گیری </label>
+                                        <select id="positionSelect" name="position" data-placeholder="انتخاب محل"
+                                            class="form-control ms select2">
+                                            <option></option>
+                                            <option>تخفیف روزانه</option>
+                                            <option>فروش ویژه</option>
+                                            <option>پیشنهاد ما</option>
+                                            <option>تک محصول</option>
+                                        </select>
+                                        @error('position')
+                                        <span class="text-danger m-0">{{$message}}</span>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group col-md-4">
                                         <label for="brand_id">برند</label>
                                         <select id="brandSelect" name="brand_id" data-placeholder="انتخاب برند"
                                             class="form-control ms select2" required>

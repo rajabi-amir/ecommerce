@@ -9,6 +9,7 @@ require("lightbox2");
 require("../assets/admin/plugins/bootstrap/js/bootstrap.min.js");
 require("../assets/admin/bundles/libscripts.bundle");
 require("../assets/admin/bundles/vendorscripts.bundle");
+require("../assets/admin/plugins/dropzone/dropzone.js");
 
 require("../assets/admin/plugins/jquery-inputmask/jquery.inputmask.bundle.js");
 require("../assets/admin/plugins/multi-select/js/jquery.multi-select.js");

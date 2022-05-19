@@ -57,7 +57,67 @@ class BannerController extends Controller
         ]);
 
         $image_controller = new ImageController();
-        $data['image'] = $image_controller->UploadeImage($request->image, "banners");
+        
+        switch ($request->type) {
+
+            case 'اسلایدر':
+                $height=509;
+                $width=730;
+                break;
+                
+            case 'هدر-چپ-بالا':
+                $height=239;
+                $width=330;
+                break;
+
+            case 'هدر-چپ-پایین':
+                $height=239;
+                $width=330;
+                break;
+
+            case 'راست-دسته بندی':
+                $height=160;
+                $width=680;
+                break;
+
+             case 'چپ-دسته بندی':
+                $height=160;
+                $width=680;
+                break;
+
+            case 'عرضی':
+                $height=260;
+                $width=1380;
+                break;
+
+            case 'آخر-راست':
+                $height=420;
+                $width=680;
+                break;
+
+            case 'آخر-چپ-بالا':
+                $height=200;
+                $width=680;
+                break;
+
+            case 'آخر-چپ-پایین-1':
+                $height=200;
+                $width=330;
+                break;
+
+            case 'آخر-چپ-پایین-2':
+                $height=200;
+                $width=330;
+                break;
+
+            default:
+            $height=null;
+            $width=null;
+                break;
+        }
+        
+        
+        $data['image'] = $image_controller->UploadeImage($request->image, "banners", $height , $width);
 
         Banner::create($data);
         $flasher->addSuccess('بنر جدید ایجاد شد');
@@ -119,7 +179,66 @@ class BannerController extends Controller
                 Storage::delete('banners/' . $banner->image);
             }
             $image_controller = new ImageController();
-            $data['image'] = $image_controller->UploadeImage($request->image, "banners");
+
+            switch ($request->type) {
+
+                case 'اسلایدر':
+                    $height=509;
+                    $width=730;
+                    break;
+                    
+                case 'هدر-چپ-بالا':
+                    $height=239;
+                    $width=330;
+                    break;
+
+                case 'هدر-چپ-پایین':
+                    $height=239;
+                    $width=330;
+                    break;
+
+                case 'راست-دسته بندی':
+                    $height=160;
+                    $width=680;
+                    break;
+    
+                 case 'چپ-دسته بندی':
+                    $height=160;
+                    $width=680;
+                    break;
+
+                case 'عرضی':
+                    $height=260;
+                    $width=1380;
+                    break;
+
+                case 'آخر-راست':
+                    $height=420;
+                    $width=680;
+                    break;
+    
+                case 'آخر-چپ-بالا':
+                    $height=200;
+                    $width=680;
+                    break;
+    
+                case 'آخر-چپ-پایین-1':
+                    $height=200;
+                    $width=330;
+                    break;
+    
+                case 'آخر-چپ-پایین-2':
+                    $height=200;
+                    $width=330;
+                    break;
+    
+                default:
+                $height=null;
+                $width=null;
+                    break;
+            }
+            
+            $data['image'] = $image_controller->UploadeImage($request->image, "banners" ,$height , $width);
         } else {
             $data['image'] = $banner->image;
         }

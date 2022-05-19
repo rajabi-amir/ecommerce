@@ -9,23 +9,29 @@
 <link rel="icon" type="image/png" href="/assets/images/icons/favicon.png">
 
 <script>
-    WebFontConfig = {
-        google: {
-            families: ['Poppins:400,500,600,700,800']
-        }
-    };
-    (function(d) {
-        var wf = d.createElement('script'),
-            s = d.scripts[0];
-        wf.src = "{{asset('/assets/js/webfont.js')}}";
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-    })(document);
+WebFontConfig = {
+    google: {
+        families: ['Poppins:400,500,600,700,800']
+    }
+};
+(function(d) {
+    var wf = d.createElement('script'),
+        s = d.scripts[0];
+    wf.src = "{{asset('/assets/js/webfont.js')}}";
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+})(document);
 </script>
-<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin="anonymous" />
-<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin="anonymous" />
-<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin="anonymous" />
-<link rel="preload" href="{{asset('fonts/wolmart87d5.ttf?png09e')}}" as="font" type="font/ttf" crossorigin="anonymous" />
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2"
+    crossorigin="anonymous" />
+<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2"
+    crossorigin="anonymous" />
+<link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2"
+    crossorigin="anonymous" />
+<link rel="preload" href="{{asset('fonts/wolmart87d5.ttf?png09e')}}" as="font" type="font/ttf"
+    crossorigin="anonymous" />
 
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />

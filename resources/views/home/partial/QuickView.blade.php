@@ -1,5 +1,6 @@
-<div class="product product-single product-popup">
+<div class="product product-single product-popup" id="product-single">
     <div class="row gutter-lg">
+
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="product-gallery product-gallery-sticky mb-0">
                 <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no" data-owl-options="{
@@ -54,6 +55,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-6 overflow-hidden p-relative">
             <div class="product-details scrollable pl-0">
                 <h2 class="product-title">ساعت مچی الکترونیکی بلک مچی</h2>
@@ -154,5 +156,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

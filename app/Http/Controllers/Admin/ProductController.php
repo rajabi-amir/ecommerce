@@ -61,12 +61,13 @@ class ProductController extends Controller
 
         if (isset($request->primary_image)) {
             $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 800, 600);
+            $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 300, 338);
         } else {
             $image_name = null;
         }
         $product = Product::create([
             'name' => $request->name,
+            'position' => $request->position,
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
             'primary_image' => $image_name,
@@ -159,6 +160,7 @@ class ProductController extends Controller
 
             $product->update([
                 'name' => $request->name,
+                'position' => $request->position,
                 'brand_id' => $request->brand_id,
                 'description' => $request->description,
                 'is_active' => $request->is_active,
@@ -210,7 +212,7 @@ class ProductController extends Controller
                 foreach ($images as $image) {
 
                     $ImageController = new ImageController();
-                    $image_name = $ImageController->UploadeImage($image, "other_product_image" , 800 , 600);
+                    $image_name = $ImageController->UploadeImage($image, "other_product_image" , 300 , 338);
                     Session::push('images', $image_name);
                     $paths[] = ['url' => $image_name];
                 }
