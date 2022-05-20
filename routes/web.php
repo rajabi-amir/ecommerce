@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -67,7 +68,8 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
 
 // home routes
 Route::get('/',[HomeController::class , 'index'])->name('home');
- Route::get('/categories/{category:slug}',ProductsList::class)->name('home.categories.show');
+Route::get('/categories/{category:slug}',ProductsList::class)->name('home.categories.show');
+Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] )->name('home.products.show');
 
  Route::get('/assets/ajax', function(){
 return view('home.partial.login');
