@@ -24,9 +24,11 @@ class SearchBox extends Component
             request()->whenFilled('q', function () {
                 $this->search = request()->query('q');
             });
-            if (request()->route('category')) {
-                $this->categoryId = request()->route('category')->id;
-                $this->category = request()->route('category');
+            // dd(request()->route('slug'));
+            if (request()->route('slug')) {
+                $category=Category::where('slug', request()->route('slug'))->firstOrFail();
+                $this->categoryId = $category->id;
+                $this->category = $category;
             }
         }
     }
@@ -55,7 +57,7 @@ class SearchBox extends Component
     public function search()
     {
         if ($this->categoryId) {
-            redirect()->route('home.products.search', ['category' => $this->category->slug, 'q' => $this->search]);
+            redirect()->route('home.products.search', ['slug' => $this->category->slug, 'q' => $this->search]);
         } else {
             redirect()->route('home.products.search', ['q' => $this->search]);
         }

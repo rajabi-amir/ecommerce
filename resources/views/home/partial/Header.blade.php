@@ -1,3 +1,6 @@
+@php
+    $categories = \App\Models\Category::where('parent_id', 0)->get();
+@endphp
 <header class="header header-border">
     <div class="header-top">
         <div class="container">

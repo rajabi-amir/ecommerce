@@ -68,8 +68,8 @@ Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product
 
 // home routes
 Route::get('/',[HomeController::class , 'index'])->name('home');
-Route::get('/search/{category:slug?}', ProductsList::class)->name('home.products.search');
-Route::get('/main/{category:slug}', ProductsList::class)->name('home.products.index');
+Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
+Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
 
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');

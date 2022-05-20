@@ -254,7 +254,7 @@
                                 <h3 @class(['widget-title', 'collapsed'=>!$collapsible['categories']]) wire:click="collapse('categories')"><span>{{$category->name}}</span><span class="toggle-btn"></span></h3>
                                 <ul class="widget-body filter-items search-ul">
                                     @foreach ($category->children as $child)
-                                    <li><a class="pl-2" href="{{route('home.products.index',['category'=>$child->slug])}}">{{$child->name}}</a></li>
+                                    <li><a class="pl-2" href="{{route('home.products.index',['slug'=>$child->slug])}}">{{$child->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -263,7 +263,7 @@
                                 <h3 @class(['widget-title', 'collapsed'=>!$collapsible['categories']]) wire:click="collapse('categories')"><span>دسته بندی ها</span><span class="toggle-btn"></span></h3>
                                 <ul class="widget-body filter-items search-ul">
                                     @foreach ($categories as $category)
-                                    <li><a class="pl-2" href="{{route('home.products.search',['category'=>$category->slug])}}">{{$category->name}}</a></li>
+                                    <li><a class="pl-2" href="{{route('home.products.search',['slug'=>$category->slug])}}">{{$category->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

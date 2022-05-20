@@ -12,7 +12,7 @@ class ProductsList extends Component
 {
     use WithPagination;
 
-    public Category $category;
+    public $category;
     public $routeName = '';
     public $collapsible = [
         'categories' => true,
@@ -29,9 +29,15 @@ class ProductsList extends Component
         'search' => '',
     ];
 
-    public function mount()
+    public function mount($slug)
     {
         $this->routeName = Route::currentRouteName();
+        if (Route::currentRouteName()=='home.products.index') {
+            $this->category = Category::where('parent_id', '<>', 0)->where('slug', $slug)->firstOrFail();
+        } else {
+            $this->category = Category::where('parent_id', 0)->where('slug', $slug)->firstOrFail();
+        }
+
         request()->whenFilled('q', function () {
             $this->filterd['search'] = request()->query('q');
         });
@@ -99,18 +105,15 @@ class ProductsList extends Component
     public function render()
     {
         if ($this->routeName == 'home.products.index') {
-
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $variation = $this->category->attributes()->where('is_variation', 1)->with('variationValues')->first();
             $products = $this->category->products()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'variation', 'products'))->extends('home.layout.MasterHome');
-
         } elseif ($this->routeName == 'home.products.search' && isset($this->category)) {
 
             $attributes = $this->category->attributes()->where('is_filter', 1)->has('categoryValues')->with('categoryValues')->get();
             $products = $this->category->productsFromParent()->filter($this->filterd)->paginate($this->filterd['displayCount']);
             return view('livewire.home.products-list', compact('attributes', 'products'))->extends('home.layout.MasterHome');
-
         } else {
             $products = Product::filter($this->filterd)->paginate($this->filterd['displayCount']);
             $categories = Category::where('parent_id', 0)->get();
