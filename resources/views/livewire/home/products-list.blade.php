@@ -1,11 +1,12 @@
+@section('title','لیست محصولات')
 <main class="main">
     <!-- Start of Breadcrumb -->
     <nav class="breadcrumb-nav">
         <div class="container">
             <ul class="breadcrumb bb-no">
-                <li><a href="demo1.html">صفحه اصلی </a></li>
-                <li><a href="shop-banner-sidebar.html">فروشگاه </a></li>
-                <li>4 ستون </li>
+                <li><a href="{{route('home')}}">صفحه اصلی </a></li>
+                <li><a href="#">فروشگاه</a></li>
+                <li>{{$category ? $category->name : 'جستجوی: "'.$filterd['search'].'"'}}</li>
             </ul>
         </div>
     </nav>
@@ -236,86 +237,84 @@
                         <div class="sticky-sidebar">
                             <div class="filter-actions">
                                 <label>فیلتر : </label>
-                                <a href="#" class="btn btn-dark btn-link filter-clean">حذف همه </a>
+                                <a href="#" wire:click="resetFilters" class="btn btn-dark btn-link filter-clean">حذف همه </a>
                             </div>
                             <!-- Start of Collapsible widget -->
+                            @if($routeName == 'home.products.index')
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title"><span>تمام دسته بندیها</span></h3>
+                                <h3 @class(['widget-title', 'collapsed'=>!$collapsible['categories']]) wire:click="collapse('categories')"><span>{{$category->parent->name}}</span><span class="toggle-btn"></span></h3>
                                 <ul class="widget-body filter-items search-ul">
-                                    <li><a href="#">تجهیزات جانبی </a></li>
-                                    <li><a href="#">کودکانه </a></li>
-                                    <li><a href="#">زیبایی </a></li>
-                                    <li><a href="#">تزیین </a></li>
-                                    <li><a href="#">الکترونیک </a></li>
-                                    <li><a href="#">مدل </a></li>
-                                    <li><a href="#">غذا </a></li>
-                                    <li><a href="#">مبلمان </a></li>
-                                    <li><a href="#">آشپزخانه </a></li>
-                                    <li><a href="#">پزشکی </a></li>
-                                    <li><a href="#">ورزشی </a></li>
-                                    <li><a href="#">ساعت مچی </a></li>
+                                    @foreach ($category->parent->children as $child)
+                                    <li @class(['bg-grey'=>$child->name == $category->name]) ><a class="pl-2" href="{{route('home.products.index',$child->slug)}}">{{$child->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
-                            <!-- End of Collapsible Widget -->
-
+                            @elseif ($routeName == 'home.products.search' && isset($category))
+                            <div class="widget widget-collapsible">
+                                <h3 @class(['widget-title', 'collapsed'=>!$collapsible['categories']]) wire:click="collapse('categories')"><span>{{$category->name}}</span><span class="toggle-btn"></span></h3>
+                                <ul class="widget-body filter-items search-ul">
+                                    @foreach ($category->children as $child)
+                                    <li><a class="pl-2" href="{{route('home.products.index',['slug'=>$child->slug])}}">{{$child->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @else
+                            <div class="widget widget-collapsible">
+                                <h3 @class(['widget-title', 'collapsed'=>!$collapsible['categories']]) wire:click="collapse('categories')"><span>دسته بندی ها</span><span class="toggle-btn"></span></h3>
+                                <ul class="widget-body filter-items search-ul">
+                                    @foreach ($categories as $category)
+                                    <li><a class="pl-2" href="{{route('home.products.search',['slug'=>$category->slug])}}">{{$category->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <!-- Start of Collapsible Widget -->
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title"><span>قیمت </span></h3>
+                                <h3 @class(['widget-title', 'collapsed'=>!$collapsible['price']]) wire:click="collapse('price')"><span>قیمت </span><span class="toggle-btn"></h3>
                                 <div class="widget-body">
-                                    <ul class="filter-items search-ul">
-                                        <li><a href="#">0 تومان - 100000 تومان</a></li>
-                                        <li><a href="#">100000 تومان - 200000 تومان</a></li>
-                                        <li><a href="#">200000 تومان - 300000 تومان</a></li>
-                                        <li><a href="#">300000 تومان - 590000 تومان</a></li>
-                                        <li><a href="#">590000 تومان+</a></li>
-                                    </ul>
-                                    <form class="price-range">
-                                        <input type="number" name="min_price" class="min_price text-center" placeholder="حداقل به تومان"><span class="delimiter">-</span><input type="number" name="max_price" class="max_price text-center" placeholder="حداکثر به تومان"><a href="#" class="btn btn-primary btn-rounded">برو </a>
-                                    </form>
+                                    <div class="price-range mt-2">
+                                        <div class="form-group">
+                                            <label class="mb-1">حداقل (تومان)</label>
+                                            <input id="min-price" type="text" class="form-control form-control-sm" wire:model.debounce.500ms="filterd.price.low">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1">حداکثر (تومان)</label>
+                                            <input id="max-price" type="text" class="form-control form-control-sm" wire:model.debounce.500ms="filterd.price.high">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- End of Collapsible Widget -->
 
-                            <!-- Start of Collapsible Widget -->
+                            @isset($attributes)
+                            @foreach ($attributes as $attribute)
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title"><span>سایز </span></h3>
+                                <h3 @class(['widget-title', 'collapsed'=>!in_array($attribute->id,$collapsible['attribute'])]) wire:click="collapse('attribute','{{$attribute->id}}')"><span>{{$attribute->name}}</span><span class="toggle-btn"></span></h3>
                                 <ul class="widget-body filter-items item-check mt-1">
-                                    <li><a href="#">خیلی بزرگ </a></li>
-                                    <li><a href="#">بزرگ </a></li>
-                                    <li><a href="#">متوسط </a></li>
-                                    <li><a href="#">کوچک </a></li>
+                                    @foreach ($attribute->categoryValues as $value)
+                                    <li wire:key="attr-{{$attribute->id}}" @class(['active'=>array_key_exists($attribute->id,$filterd['attribute']) && in_array($value->value,$filterd['attribute'][$attribute->id]) ])>
+                                        <a href="javascript:void(0)" wire:click="addFilter('attribute','{{$attribute->id}}','{{$value->value}}')">{{$value->value}}</a>
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
+                            @endforeach
+                            @endisset
                             <!-- End of Collapsible Widget -->
 
-                            <!-- Start of Collapsible Widget -->
+                            <!-- Start of Collapsible Variation Widget -->
+                            @if (isset($variation) && count($variation->variationValues) > 0)
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title"><span>برند </span></h3>
+                                <h3 @class(['widget-title', 'collapsed'=>!in_array($variation->id,$collapsible['variation'])]) wire:click="collapse('variation','{{$variation->id}}')"><span>{{$variation->name}}</span><span class="toggle-btn"></span></h3>
                                 <ul class="widget-body filter-items item-check mt-1">
-                                    <li><a href="#">گروه خودروهای شیک</a></li>
-                                    <li><a href="#">علف سبز </a></li>
-                                    <li><a href="#">نود Js</a></li>
-                                    <li><a href="#">NS8</a></li>
-                                    <li><a href="#">قرمز </a></li>
-                                    <li><a href="#">Skysuite تکنولوژی </a></li>
-                                    <li><a href="#">استرلینگ</a></li>
+                                    @foreach ($variation->variationValues as $value)
+                                    <li @class(['active'=>array_key_exists($variation->id,$filterd['variation']) && in_array($value->value,$filterd['variation'][$variation->id]) ])>
+                                        <a href="javascript:void(0)" wire:click="addFilter('variation','{{$variation->id}}','{{$value->value}}')">{{$value->value}} </a>
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
-                            <!-- End of Collapsible Widget -->
-
-                            <!-- Start of Collapsible Widget -->
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title"><span>رنگ </span></h3>
-                                <ul class="widget-body filter-items item-check mt-1">
-                                    <li><a href="#">مشکی </a></li>
-                                    <li><a href="#">آبی </a></li>
-                                    <li><a href="#">قهوه ای </a></li>
-                                    <li><a href="#">سبز </a></li>
-                                    <li><a href="#">خاکستری </a></li>
-                                    <li><a href="#">نارنجی </a></li>
-                                    <li><a href="#">زرد </a></li>
-                                </ul>
-                            </div>
+                            @endif
                             <!-- End of Collapsible Widget -->
                         </div>
                         <!-- End of Sidebar Content -->
@@ -332,23 +331,22 @@
                                         btn-icon-left d-block d-lg-none"><i class="w-icon-category"></i><span>فیلتر </span></a>
                             <div class="toolbox-item toolbox-sort select-box text-dark">
                                 <label>مرتب سازی بر اساس: </label>
-                                <select name="orderby" class="form-control">
-                                    <option value="default" selected="selected">مرتب سازی پیش فرض</option>
-                                    <option value="popularity">مرتب سازی بر اساس محبوبیت</option>
-                                    <option value="rating">مرتب سازی بر اساس رتبه بندی متوسط</option>
-                                    <option value="date">مرتب سازی بر اساس آخرین</option>
-                                    <option value="price-low">مرتب سازی بر اساس قیمت: کم به زیاد</option>
-                                    <option value="price-high">مرتب سازی بر اساس قیمت: بالا به پایین</option>
+                                <select name="orderby" class="form-control" wire:model="filterd.orderBy">
+                                    <option value="default">پیش فرض</option>
+                                    <option value="date-old">قدیمی ترین</option>
+                                    <option value="date-new">جدیدترین</option>
+                                    <option value="price-low">قیمت: کم به زیاد</option>
+                                    <option value="price-high">قیمت: زیاد به کم</option>
                                 </select>
                             </div>
                         </div>
                         <div class="toolbox-right">
                             <div class="toolbox-item toolbox-show select-box">
-                                <select name="count" class="form-control">
-                                    <option value="9">نمایش 9</option>
-                                    <option value="12" selected="selected">نمایش 12</option>
-                                    <option value="24">نمایش 24</option>
-                                    <option value="36">نمایش 36</option>
+                                <select name="count" class="form-control" wire:model="filterd.displayCount">
+                                    <option value=2>نمایش 12</option>
+                                    <option value=4>نمایش 16</option>
+                                    <option value=24>نمایش 24</option>
+                                    <option value=36>نمایش 36</option>
                                 </select>
                             </div>
                             <div class="toolbox-item toolbox-layout">
@@ -362,66 +360,12 @@
                         </div>
                     </nav>
                     <div class="product-wrapper row cols-lg-4 cols-md-3 cols-sm-2 cols-2">
-                        @include('home.partial.product-item')
-                        <div class="product-wrap">
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="/assets/images/shop/1.jpg" alt="Product" width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-horizontal">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="افزودن به سبد خرید"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="علاقه مندیها"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="مقایسه کردن"></a>
-                                        <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="نمایش سریع"></a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <div class="product-cat">
-                                        <a href="shop-banner-sidebar.html">الکترونیک </a>
-                                    </div>
-                                    <h3 class="product-name">
-                                        <a href="product-default.html">3D تلویزیون </a>
-                                    </h3>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 100%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(3 نظر )</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">
-                                            220000 تومان - 230000 تومان
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @each('home.partial.product-item',$products,'Product','home.partial.product-item-empty')
                     </div>
+                    {{$products->links('home.partial.pagination')}}
 
-                    <div class="toolbox toolbox-pagination justify-content-between">
-                        <p class="showing-info mb-2 mb-sm-0">
-                            نمایش <span>1-12 از 60</span>محصول
-                        </p>
-                        <ul class="pagination">
-                            <li class="prev disabled">
-                                <a href="#" aria-label="قبلی " tabindex="-1" aria-disabled="true">
-                                    <i class="w-icon-long-arrow-right"></i>قبلی
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="next">
-                                <a href="#" aria-label="بعدی ">
-                                    بعدی <i class="w-icon-long-arrow-left"></i>
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="loader" wire:loading.flex wire:target="addFilter,resetFilters">
+                        درحال بارگذاری ...
                     </div>
                 </div>
                 <!-- End of Shop Main Content -->
@@ -431,3 +375,34 @@
     </div>
     <!-- End of Page Content -->
 </main>
+@push('scripts')
+<script>
+    function updateTextView(_obj) {
+        var num = getNumber(_obj.val());
+        if (num == 0) {
+            _obj.val('');
+        } else {
+            _obj.val(num.toLocaleString());
+        }
+    }
+
+    function getNumber(_str) {
+        var arr = _str.split('');
+        var out = new Array();
+        for (var cnt = 0; cnt < arr.length; cnt++) {
+            if (isNaN(arr[cnt]) == false) {
+                out.push(arr[cnt]);
+            }
+        }
+        return Number(out.join(''));
+    }
+    $(document).ready(function() {
+        $('#min-price').on('keyup', function() {
+            updateTextView($(this));
+        });
+        $('#max-price').on('keyup', function() {
+            updateTextView($(this));
+        });
+    });
+</script>
+@endpush

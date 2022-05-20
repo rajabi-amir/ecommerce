@@ -1,3 +1,6 @@
+@php
+    $categories = \App\Models\Category::where('parent_id', 0)->get();
+@endphp
 <header class="header header-border">
     <div class="header-top">
         <div class="container">
@@ -25,26 +28,15 @@
                 <a href="demo5.html" class="logo ml-lg-0">
                     <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo" width="145" height="45" />
                 </a>
-                <form method="get" action="#" class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
-                    <div class="select-box">
-                        <select id="category" name="category">
-                            <option value="">تمام دسته بندیها</option>
-                            <option value="4">مدلینگ </option>
-                            <option value="5">مبلمان </option>
-                            <option value="6">کفشها </option>
-                            <option value="7">اسپورتی </option>
-                            <option value="8">گیم/بازی </option>
-                            <option value="9">کامپیوترها </option>
-                            <option value="10">الکترونیکی </option>
-                            <option value="11">آشپرخانه </option>
-                            <option value="12">لباس </option>
-                        </select>
-                    </div>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="جستجو ..."
-                        required />
-                    <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
-                    </button>
-                </form>
+                @livewire('home.sections.search-box')
+                <div class="dropdown-box">
+                    <a href="#ENG">
+                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
+                        فارسی </a>
+                    <a href="#FRA">
+                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8" class="dropdown-image" />
+                        انگلیسی </a>
+                </div>
             </div>
             <div class="header-right ml-4">
                 <div class="header-call d-xs-show d-lg-flex align-items-center">
@@ -89,8 +81,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84"
-                                            width="94" />
+                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84" width="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -108,8 +99,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84"
-                                            height="94" />
+                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84" height="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -175,10 +165,10 @@
                     </div>
                     <nav class="main-nav">
                         <ul class="menu active-underline">
-                            <li class="active">
-                                <a href="demo5.html">صفحه اصلی </a>
+                            <li @class(['active'=>request()->routeIs('home')])>
+                                <a href="{{route('home')}}">صفحه اصلی </a>
                             </li>
-                            <li>
+                            <li @class(['active'=>request()->is('categories/*')])>
                                 <a href="shop-banner-sidebar.html">فروشگاه </a>
 
                                 <!-- Start of Megamenu -->
@@ -189,8 +179,7 @@
                                             <li><a href="shop-banner-sidebar.html">بنر با نوار کناری</a></li>
                                             <li><a href="shop-boxed-banner.html">بنر جعبه ای </a></li>
                                             <li><a href="shop-fullwidth-banner.html">بنر عرض کامل </a></li>
-                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span
-                                                        class="tip tip-hot">داغ </span></a></li>
+                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span class="tip tip-hot">داغ </span></a></li>
                                             <li><a href="shop-off-canvas.html">نوار کناری <span class="tip tip-new">جدید
                                                     </span></a></li>
                                             <li><a href="shop-infinite-scroll.html">اسکرول بی نهایت آژاکس</a>
@@ -223,8 +212,7 @@
                                             <li><a href="product-extended.html">اطلاعات گسترده </a>
                                             </li>
                                             <li><a href="product-without-sidebar.html">بدون نوار کناری </a></li>
-                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span
-                                                        class="tip tip-new">جدید </span></a></li>
+                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span class="tip tip-new">جدید </span></a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -270,7 +258,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li @class(['active'=>request()->is('blogs/*')])>
                                 <a href="blog.html">وبلاگ </a>
                                 <ul>
                                     <li><a href="blog.html">کلاسیک </a></li>

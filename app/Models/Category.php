@@ -27,8 +27,15 @@ class Category extends Model
     {
         return $this->belongsToMany(Attribute::class,'attribute_category');
     }
+
     public function products()
     {
         return $this->hasMany(Product::class);
     }
+
+    public function productsFromParent()
+    {
+        return $this->hasManyThrough(Product::class,Category::class,'parent_id','category_id','id','id');
+    }
+
 }

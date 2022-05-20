@@ -1,3 +1,6 @@
+@php
+    $categories = \App\Models\Category::where('parent_id', 0)->get();
+@endphp
 <div class="mobile-menu-wrapper">
     <div class="mobile-menu-overlay"></div>
     <!-- End of .mobile-menu-overlay -->

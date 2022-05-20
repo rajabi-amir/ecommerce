@@ -2,8 +2,7 @@
     <div class="row gutter-lg">
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="product-gallery product-gallery-sticky mb-0">
-                <div id="zoom-image"
-                    class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no"
+                <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no"
                     data-owl-options="{
                                 'rtl': true,
                                 'items': 1,
@@ -32,7 +31,7 @@
                 <h2 class="product-title">defoult</h2>
                 <div class="product-bm-wrapper">
                     <figure class="brand">
-                        <img src="assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
+                        <img src="/assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
                     </figure>
                     <div class="product-meta">
                         <div class="product-categories">

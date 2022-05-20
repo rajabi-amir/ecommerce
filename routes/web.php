@@ -14,6 +14,7 @@ use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
+use App\Http\Livewire\Home\ProductSearch;
 use App\Http\Livewire\Home\ProductsList;
 
 
@@ -36,9 +37,9 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
     Route::resource('products', ProductController::class);
     Route::resource('brands', BrandController::class);
-    Route::resource('attributes', AttributeController::class)->except(['show','destroy']);
+    Route::resource('attributes', AttributeController::class)->except(['show', 'destroy']);
     Route::resource('categories', CategoryController::class);
-    Route::resource('banners', BannerController::class)->except(['show','destroy']);
+    Route::resource('banners', BannerController::class)->except(['show', 'destroy']);
     // Route::resource('tags', TagController::class);
     Route::resource('/services', ServiceController::class)->except(['show']);
     Route::resource('/posts', PostController::class)->except('show');
@@ -53,13 +54,13 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
 });
 
-Route::post('/upl',[ProductController::class,'uploadImage'])->name('uploade');
-Route::post('/del', [ProductController::class , 'deleteImage'])->name('del');
+Route::post('/upl', [ProductController::class, 'uploadImage'])->name('uploade');
+Route::post('/del', [ProductController::class, 'deleteImage'])->name('del');
 
-Route::post('/editupl',[ImageController::class,'edit_uploadImage'])->name('edit_uploade');
-Route::post('/editdel', [ImageController::class , 'edit_deleteImage'])->name('edit_del');
+Route::post('/editupl', [ImageController::class, 'edit_uploadImage'])->name('edit_uploade');
+Route::post('/editdel', [ImageController::class, 'edit_deleteImage'])->name('edit_del');
 
-Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('product.images.add');
+Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product.images.add');
 
 //end
 
@@ -68,9 +69,14 @@ Route::post('/add_image', [ImageController::class , 'setPrimary'])->name('produc
 
 // home routes
 Route::get('/',[HomeController::class , 'index'])->name('home');
-Route::get('/categories/{category:slug}',ProductsList::class)->name('home.categories.show');
+
 Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] )->name('home.products.show');
 
- Route::get('/assets/ajax', function(){
-return view('home.partial.login');
- });
+Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
+Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
+
+Route::get('/assets/ajax', function () {
+    return view('home.partial.login');
+});
+
+ 

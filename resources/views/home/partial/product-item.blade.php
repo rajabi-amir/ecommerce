@@ -4,6 +4,7 @@
             <a href="{{route('home.products.show' , ['product' => $Product->slug])}}">
                 <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product->primary_image)}}" alt=" Product"
                     width="300" height="338">
+
                 <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$Product->images->first()->image)}}" alt="Product"
                     width="300" height="338">
             </a>
