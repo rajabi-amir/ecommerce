@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         if (isset($request->primary_image)) {
             $ImageController = new ImageController();
-            $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 300, 338);
+            $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 338, 330);
         } else {
             $image_name = null;
         }
@@ -212,7 +212,7 @@ class ProductController extends Controller
                 foreach ($images as $image) {
 
                     $ImageController = new ImageController();
-                    $image_name = $ImageController->UploadeImage($image, "other_product_image" , 300 , 338);
+                    $image_name = $ImageController->UploadeImage($image, "other_product_image" , 338 , 330);
                     Session::push('images', $image_name);
                     $paths[] = ['url' => $image_name];
                 }

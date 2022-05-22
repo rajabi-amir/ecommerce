@@ -1,54 +1,24 @@
 <div class="product product-single product-popup" id="product-single">
     <div class="row gutter-lg">
-
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="product-gallery product-gallery-sticky mb-0">
-                <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no" data-owl-options="{
+                <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no"
+                    data-owl-options="{
                                 'rtl': true,
                                 'items': 1,
                                 'nav': false,
                                 'dots': true,
                                 'loop': true
                             }">
-                    <figure class="product-image">
-                        <img src="/assets/images/products/popup/1-440x494.jpg"
-                            data-zoom-image="/assets/images/products/popup/1-800x900.jpg" alt="آب جوش ظروف سیاه"
-                            width="800" height="900">
-                    </figure>
-                    <figure class="product-image">
-                        <img src="/assets/images/products/popup/2-440x494.jpg"
-                            data-zoom-image="/assets/images/products/popup/2-800x900.jpg" alt="آب جوش ظروف سیاه"
-                            width="800" height="900">
-                    </figure>
-                    <figure class="product-image">
-                        <img src="/assets/images/products/popup/3-440x494.jpg"
-                            data-zoom-image="/assets/images/products/popup/3-800x900.jpg" alt="آب جوش ظروف سیاه"
-                            width="800" height="900">
-                    </figure>
-                    <figure class="product-image">
-                        <img src="/assets/images/products/popup/4-440x494.jpg"
-                            data-zoom-image="/assets/images/products/popup/4-800x900.jpg" alt="آب جوش ظروف سیاه"
-                            width="800" height="900">
-                    </figure>
+
+                    <!-- محصول زوم -->
+
                 </div>
                 <div class="product-thumbs-wrap">
                     <div class="product-thumbs">
-                        <div class="product-thumb active">
-                            <img src="/assets/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
-                                height="116">
-                        </div>
-                        <div class="product-thumb">
-                            <img src="/assets/images/products/popup/2-103x116.jpg" alt="Product Thumb" width="103"
-                                height="116">
-                        </div>
-                        <div class="product-thumb">
-                            <img src="/assets/images/products/popup/3-103x116.jpg" alt="Product Thumb" width="103"
-                                height="116">
-                        </div>
-                        <div class="product-thumb">
-                            <img src="/assets/images/products/popup/4-103x116.jpg" alt="Product Thumb" width="103"
-                                height="116">
-                        </div>
+
+                        <!-- محصلات بند انگشتی -->
+
                     </div>
                     <button class="thumb-up disabled"><i class="w-icon-angle-left"></i></button>
                     <button class="thumb-down disabled"><i class="w-icon-angle-right"></i></button>
@@ -58,7 +28,7 @@
 
         <div class="col-md-6 overflow-hidden p-relative">
             <div class="product-details scrollable pl-0">
-                <h2 class="product-title">ساعت مچی الکترونیکی بلک مچی</h2>
+                <h2 class="product-title">defoult</h2>
                 <div class="product-bm-wrapper">
                     <figure class="brand">
                         <img src="/assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
