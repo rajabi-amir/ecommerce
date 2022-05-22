@@ -271,10 +271,10 @@
                 <a href="#">محصولات بیشتر <i class="w-icon-long-arrow-left"></i></a>
             </div>
             <div class="row grid grid-type">
+                @if ($Products_our_suggestion_unit)
                 <div class="grid-item grid-item-single">
                     <div class="product product-single">
                         <div class="row align-items-center">
-                            @if ($Products_our_suggestion_unit)
                             <div class="col-md-6">
                                 <div class="product-gallery mb-0">
                                     <figure class="product-image">
@@ -363,9 +363,9 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
+                @endif
 
                 <!-- Grid Item -->
                 @each('home.partial.product-item-style-01', $Products_our_suggestion, 'Product_our_suggestion')
@@ -378,7 +378,7 @@
 
     <div class="container mt-10 pt-2">
         @if ($banner_width)
-        <div class="banner banner-simple appear-animate br-sm mb-10" style=" background-color: #414548; 
+        <div class="banner banner-simple appear-animate br-sm mb-10" style=" background-color: #414548;
         background-image:url('{{env("BANNER_IMAGES_PATCH").$banner_width->image}}'); ">
             <div class=" banner-content align-items-center">
                 <div class="banner-price-info">
