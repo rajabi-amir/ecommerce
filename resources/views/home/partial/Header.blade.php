@@ -142,7 +142,7 @@
 
                                 @foreach ($categories as $category)
                                 <li>
-                                    <a href="shop-fullwidth-banner.html">
+                                    <a href="{{route('home.products.search',['slug'=>$category->slug])}}">
                                         <i class="{{$category->icon}}"></i>{{$category->name}}
                                     </a>
                                     @if(count($category->children))
@@ -150,7 +150,7 @@
                                         <li>
                                             <ul>
                                                 @foreach ($category->children as $ChildrenCategory )
-                                                <li><a href="shop-fullwidth-banner.html">{{$ChildrenCategory->name}}
+                                                <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
                                                     </a>
                                                 </li>
                                                 @endforeach

@@ -29,12 +29,12 @@ class ProductsList extends Component
         'search' => '',
     ];
 
-    public function mount($slug=null)
+    public function mount($slug = null)
     {
         $this->routeName = Route::currentRouteName();
-        if (Route::currentRouteName()=='home.products.index') {
+        if (Route::currentRouteName() == 'home.products.index') {
             $this->category = Category::where('parent_id', '<>', 0)->where('slug', $slug)->firstOrFail();
-        } elseif($slug) {
+        } elseif ($slug) {
             $this->category = Category::where('parent_id', 0)->where('slug', $slug)->firstOrFail();
         }
 
