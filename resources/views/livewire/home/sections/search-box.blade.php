@@ -20,7 +20,7 @@
     <div class="search-suggestion" id="search-suggestion">
         <div class="suggestion-items">
             @forelse ($sProducts as $product )
-            <a href="#ENG">
+            <a href="{{route('home.products.show',$product->slug)}}">
                 <img src="{{asset('storage/primary_image/'.$product->primary_image)}}" alt="image" width="70" height="70" class="suggestion-image">
                 {{$product->name}}
                 <span class="text-light">{{$product->category->parent->name}} <i class=" w-icon-angle-left"></i> {{$product->category->name}}</span> </a>
@@ -42,7 +42,7 @@
         });
 
         $('.header-search input').blur(function() {
-            $('#search-suggestion').hide();
+            $('#search-suggestion').hide(1000);
         });
     });
 </script>

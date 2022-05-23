@@ -377,7 +377,7 @@
 
     <div class="container mt-10 pt-2">
         @if ($banner_width)
-        <div class="banner banner-simple appear-animate br-sm mb-10" style=" background-color: #414548; 
+        <div class="banner banner-simple appear-animate br-sm mb-10" style=" background-color: #414548;
         background-image:url('{{env("BANNER_IMAGES_PATCH").$banner_width->image}}'); ">
             <div class=" banner-content align-items-center">
                 <div class="banner-price-info">

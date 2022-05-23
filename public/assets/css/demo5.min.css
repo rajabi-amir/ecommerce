@@ -13567,7 +13567,7 @@ body .product-popup {
     padding: 0.9rem;
     border: 2px solid #ccc;
     border-left: 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     letter-spacing: 0;
     font-family: IRANSansfanum;
 }
@@ -13590,7 +13590,7 @@ body .product-popup {
 }
 
 .header-search .btn-search i {
-    font-size: 1.7rem;
+    font-size: 2rem;
     line-height: 1;
     letter-spacing: 0;
     font-weight: 500;
@@ -13612,7 +13612,7 @@ body .product-popup {
     position: relative;
     padding: 0 1.5rem 0 2rem;
     border: 0;
-    font-weight: 400;
+    font-weight: 500;
     z-index: 1;
 }
 
