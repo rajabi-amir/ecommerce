@@ -271,10 +271,10 @@
                 <a href="#">محصولات بیشتر <i class="w-icon-long-arrow-left"></i></a>
             </div>
             <div class="row grid grid-type">
+                @if ($Products_our_suggestion_unit)
                 <div class="grid-item grid-item-single">
                     <div class="product product-single">
                         <div class="row align-items-center">
-                            @if ($Products_our_suggestion_unit)
                             <div class="col-md-6">
                                 <div class="product-gallery mb-0">
                                     <figure class="product-image">
@@ -363,10 +363,9 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
-
+                @endif
                 <!-- Grid Item -->
                 @each('home.partial.product-item-style-01', $Products_our_suggestion, 'Product_our_suggestion')
                 <!-- End of Grid Item -->

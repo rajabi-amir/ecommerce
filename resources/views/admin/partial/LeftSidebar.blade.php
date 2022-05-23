@@ -6,19 +6,27 @@
 
     </div>
     <div class="menu">
-        <ul class="list">
-            <li>
+        <ul class="list" id="myList">
+            <td>
                 <div class="user-info">
                     <a class="image" href="#"><img default="" src="{{asset('storage/profile/admin.png')}}"></a>
-
                     <div class="detail">
                         <h6><strong>نام</strong></h6>
                         <small>مدیر سایت</small>
                     </div>
                 </div>
-            </li>
+            </td>
+            <td>
+                <div class="form-group row mr-1" id="search-item">
+                    <label for="inputEmail3" class="col-11 col-form-label">جستجو </label>
+                    <div class="col-11">
+                        <input id="searchInput" class="form-control col-md-11" placeholder="یک عبارت بنویسید....">
+                    </div>
+                </div>
+            </td>
+
             <li @class(['active'=>Route::currentRouteName()==='admin.home'])>
-                <a href="#"><i class="zmdi zmdi-view-dashboard zmdi-hc-2x"></i><span> داشبورد</span>
+                <a href="#"><i class="zmdi zmdi-view-dashboard zmdi-hc-1x"></i><span> داشبورد</span>
                 </a>
             </li>
 
@@ -54,7 +62,7 @@
                 </ul>
             </li>
 
-            <li> <a href="{{ route('admin.tags.create') }}"><i class="zmdi zmdi-label"></i><span>تگ
+            <li> <a href={{ route('admin.tags.create') }}><i class="zmdi zmdi-label"></i><span>تگ
                         ها</span></a>
                 <ul class="ml-menu">
                 </ul>
@@ -77,7 +85,7 @@
 
             <li><a target="_blank" href="https://app.raychat.io/login"><i class="zmdi zmdi-hc-fw"></i><span>چت
                         آنلاین</span></a>
-            <li> <a href="#">
+            <li> <a href={{route('admin.comments.index')}}>
                     <i class="zmdi zmdi-hc-fw"></i><span>نظرات</span></a>
             </li>
             <li><a href="#"><i class="zmdi zmdi-hc-fw"></i><span>
@@ -98,3 +106,31 @@
         </ul>
     </div>
 </aside>
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myList li").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
+$(document).ready(function() {
+    if ($("#cheack_collapsed").hasClass("ls-toggle-menu")) {
+        $('#search-item').hide();
+    } else {
+        $('#search-item').show();
+    }
+
+    $('.btn-menu').on('click', function() {
+        if ($("#cheack_collapsed").hasClass("ls-toggle-menu")) {
+            $('#search-item').hide();
+        } else {
+            $('#search-item').show();
+        }
+    });
+});
+</script>
+@endpush

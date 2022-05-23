@@ -68,7 +68,7 @@ class ImageController extends Controller
             foreach ($images as $image) {
                 $image_upload=ProductImage::where('image',$image)->get();
                 $ImageController = new ImageController();
-                $image_name = $ImageController->UploadeImage($image, "other_product_image" , 338 , 330);
+                $image_name = $ImageController->UploadeImage($image, "other_product_image" , 900 , 800);
                 ProductImage::create([
                     'product_id' => $request->product,
                     'image' => $image_name
@@ -103,7 +103,7 @@ class ImageController extends Controller
 
             if (isset($request->primary_image)) {
                 $ImageController = new ImageController();
-                $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 338, 330);
+                $image_name = $ImageController->UploadeImage($request->primary_image, "primary_image", 900, 800);
             } else {
                 $image_name = null;
             }

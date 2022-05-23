@@ -46,7 +46,6 @@ class HomeController extends Controller
         
 
         $Products_our_suggestion_unit=  Product::active()->where('position' , 'تک محصول')->get()->first();
-     
         
         return view('home.page.home' , 
         compact(

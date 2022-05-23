@@ -22,7 +22,9 @@ WebFontConfig = {
     s.parentNode.insertBefore(wf, s);
 })(document);
 </script>
+@if (!request()->routeIs('home.user_profile'))
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+@endif
 
 <link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2"
     crossorigin="anonymous" />

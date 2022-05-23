@@ -1,5 +1,5 @@
 @php
-    $categories = \App\Models\Category::where('parent_id', 0)->get();
+$categories = \App\Models\Category::where('parent_id', 0)->get();
 @endphp
 <header class="header header-border">
     <div class="header-top">
@@ -10,7 +10,7 @@
             <div class="header-right">
                 <a href="blog.html" class="d-lg-show">وبلاگ </a>
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
-                <a href="my-account.html" class="d-lg-show">حساب کاربری من </a>
+                <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
                 <a href="/assets/ajax/login.html" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود
                 </a>
                 <span class="delimiter d-lg-show">/</span>
@@ -31,10 +31,12 @@
                 @livewire('home.sections.search-box')
                 <div class="dropdown-box">
                     <a href="#ENG">
-                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
+                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
+                            class="dropdown-image" />
                         فارسی </a>
                     <a href="#FRA">
-                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8" class="dropdown-image" />
+                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
+                            class="dropdown-image" />
                         انگلیسی </a>
                 </div>
             </div>
@@ -48,11 +50,11 @@
                         <a href="tel:#" class="phone-number font-weight-bolder ls-50">0(800)123-456</a>
                     </div>
                 </div>
-                <a class="wishlist label-down link d-xs-show" href="wishlist.html">
+                <a class="wishlist label-down link d-xs-show" href="{{route('home.profile.wishlist.index')}}">
                     <i class="w-icon-heart"></i>
                     <span class="wishlist-label d-lg-show">لیست علاقه مندیها </span>
                 </a>
-                <a class="compare label-down link d-xs-show" href="compare.html">
+                <a class="compare label-down link d-xs-show" href="{{route('home.compare.index')}}">
                     <i class="w-icon-compare"></i>
                     <span class="compare-label d-lg-show">مقایسه کردن </span>
                 </a>
@@ -81,7 +83,8 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84" width="94" />
+                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84"
+                                            width="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -99,7 +102,8 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84" height="94" />
+                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84"
+                                            height="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close">
@@ -179,7 +183,8 @@
                                             <li><a href="shop-banner-sidebar.html">بنر با نوار کناری</a></li>
                                             <li><a href="shop-boxed-banner.html">بنر جعبه ای </a></li>
                                             <li><a href="shop-fullwidth-banner.html">بنر عرض کامل </a></li>
-                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span class="tip tip-hot">داغ </span></a></li>
+                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span
+                                                        class="tip tip-hot">داغ </span></a></li>
                                             <li><a href="shop-off-canvas.html">نوار کناری <span class="tip tip-new">جدید
                                                     </span></a></li>
                                             <li><a href="shop-infinite-scroll.html">اسکرول بی نهایت آژاکس</a>
@@ -212,7 +217,8 @@
                                             <li><a href="product-extended.html">اطلاعات گسترده </a>
                                             </li>
                                             <li><a href="product-without-sidebar.html">بدون نوار کناری </a></li>
-                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span class="tip tip-new">جدید </span></a></li>
+                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span
+                                                        class="tip tip-new">جدید </span></a></li>
                                         </ul>
                                     </li>
                                     <li>

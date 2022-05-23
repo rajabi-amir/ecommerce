@@ -7,7 +7,7 @@
     @livewireStyles()
 </head>
 
-<body>
+<body @class(['my-account'=> request()->routeIs('home.user_profile')])>
     <div class="page-wrapper">
 
         @include('home.partial.Header')
@@ -38,9 +38,14 @@
     <script src="{{asset('assets/vendor/zoom/jquery.zoom.min.js')}}"></script>
     <script src="{{asset('assets/vendor/skrollr/skrollr.min.js')}}"></script>
     <script src="{{asset('assets/js/main.min.js')}}"></script>
+    <script src="{{asset('assets/js/rating.js')}}"></script>
+    <script src="{{asset('assets/js/notify.js')}}"></script>
+
 
     @flasher_render
     @flasher_livewire_render
+
+    @include('sweetalert::alert')
 
     @livewireScripts()
     @stack('scripts')
