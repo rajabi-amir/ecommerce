@@ -28,6 +28,7 @@ class CompareController extends Controller
             };
         } else {
             session()->put('compareProducts', [$product->id]);
+            return response(['errors' => 'saved']);
         }
     }
 
