@@ -39,6 +39,10 @@ WebFontConfig = {
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animate/animate.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/magnific-popup/magnific-popup.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/assets/vendor/photoswipe/photoswipe.min.css')}}" />
+<link rel="stylesheet" type="text/css"
+    href="{{asset('assets/assets/vendor/photoswipe/default-skin/default-skin.min.css')}}" />
+
 @if (request()->routeIs('home'))
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/demo5.min.css')}}" />
 @else

@@ -71,7 +71,7 @@
 function send(product) {
     let url =
         window.location.origin +
-        "/add-to-wishlist" +
+        "/profile/add-to-wishlist" +
         "/" + [product];
     console.log(url);
 

@@ -22,8 +22,7 @@
                         @foreach ($sliders as $slider )
 
                         <div class="intro-slide intro-slide2 banner banner-fixed br-sm" style=' background-color: #EBEDEC;background-image: url(
-                            "{{env('BANNER_IMAGES_PATCH').$slider->image}}");
-'>
+                            "{{env('BANNER_IMAGES_PATCH').$slider->image}}");'>
                             <div class="banner-content y-50">
                                 <div class="slide-animate" data-animation-options="{
                                             'name': 'fadeInRightShorter', 'duration': '1s'
@@ -145,7 +144,7 @@
         </div>
         <div class="owl-carousel owl-theme appear-animate row cols-lg-5 cols-md-4 cols-sm-12 cols-4 mb-6"
             data-owl-options="{
-                    'rtl': true,
+                    
                     'nav': false,
                     'dots': true,
                     'margin': 20,
