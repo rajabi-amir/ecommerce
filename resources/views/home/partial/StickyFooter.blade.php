@@ -1,5 +1,5 @@
 <div class="sticky-footer sticky-content fix-bottom">
-    <a href="demo5.html" class="sticky-link active">
+    <a href="{{route('home')}}" class="sticky-link active">
         <i class="w-icon-home"></i>
         <p>خانه </p>
     </a>
@@ -7,7 +7,7 @@
         <i class="w-icon-category"></i>
         <p>فروشگاه </p>
     </a>
-    <a href="my-account.html" class="sticky-link">
+    <a href="{{route('home.user_profile')}}" class="sticky-link">
         <i class="w-icon-account"></i>
         <p>حساب کاربری </p>
     </a>

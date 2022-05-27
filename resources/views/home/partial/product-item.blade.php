@@ -11,8 +11,30 @@
 
             <div class=" product-action-vertical">
 
-                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="افزودن به علاقه مندیها"></a>
-                <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="افزودن برای مقایسه"></a>
+                @if ($Product->checkUserWishlist(1))
+                <a data-product="{{$Product->id}}" class="btn-product-icon btn-wishlist added w-icon-heart-full"
+                    title="افزودن به علاقه مندیها"></a>
+                @else
+                <a data-product="{{$Product->id}}" class="btn-product-icon btn-wishlist w-icon-heart"
+                    title="افزودن به علاقه مندیها"></a>
+                @endif
+
+                @if (session()->has('compareProducts'))
+
+                @if (in_array($Product->id, session()->get('compareProducts')) )
+                <a data-product="{{$Product->id}}" class="btn-product-icon btn-compare added w-icon-check-solid"
+                    title="افزودن برای مقایسه"></a>
+                @else
+                <a data-product="{{$Product->id}}" class="btn-product-icon btn-compare w-icon-compare"
+                    title="افزودن برای مقایسه"></a>
+                @endif
+
+                @else
+                <a data-product="{{$Product->id}}" class="btn-product-icon btn-compare w-icon-compare"
+                    title="افزودن برای مقایسه"></a>
+                @endif
+
+
             </div>
         </figure>
         <div class="product-details">
@@ -26,11 +48,14 @@
                 @if ($Product->sale_check)
 
                 <ins class="new-price">{{number_format($Product->sale_check->sale_price)}}
-                    تومان</ins><del class="old-price">{{number_format($Product->sale_check->price)}}
+                    تومان</ins>
+
+                <del class="old-price">{{number_format($Product->sale_check->price)}}
                     تومان</del>
-
+                @else
+                <ins class="new-price">{{ number_format($Product->price_check->price) }}
+                    تومان</ins>
                 @endif
-
                 @else
                 <ins class="new-price">نا موجود</ins>
 

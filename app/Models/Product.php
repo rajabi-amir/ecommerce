@@ -83,6 +83,22 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function rates()
+    {
+
+        return $this->hasMany(ProductRate::class);
+    }
+    
+    public function approvedComments()
+    {
+        return $this->hasMany(Comment::class)->where('approved' , 1);
+    }
+
+    public function checkUserWishlist($userId)
+    {
+        return $this->hasMany(WishList::class)->where('user_id' , $userId)->exists();
+    }
+
     public function scopeFilter($query, $filters)
     {
         if (isset($filters['search'])) {

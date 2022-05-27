@@ -22,7 +22,9 @@ WebFontConfig = {
     s.parentNode.insertBefore(wf, s);
 })(document);
 </script>
+@if (!request()->routeIs('home.user_profile'))
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+@endif
 
 <link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2"
     crossorigin="anonymous" />
@@ -37,6 +39,10 @@ WebFontConfig = {
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animate/animate.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/magnific-popup/magnific-popup.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/assets/vendor/photoswipe/photoswipe.min.css')}}" />
+<link rel="stylesheet" type="text/css"
+    href="{{asset('assets/assets/vendor/photoswipe/default-skin/default-skin.min.css')}}" />
+
 @if (request()->routeIs('home'))
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/demo5.min.css')}}" />
 @else

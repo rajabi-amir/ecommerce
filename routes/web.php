@@ -4,20 +4,24 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Home\CommentController as HomeCommentController;
+use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\UserProfileController;
+use App\Http\Controllers\Home\WishListController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\ProductSearch;
 use App\Http\Livewire\Home\ProductsList;
-
-
+use App\Models\WishList;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +47,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     // Route::resource('tags', TagController::class);
     Route::resource('/services', ServiceController::class)->except(['show']);
     Route::resource('/posts', PostController::class)->except('show');
+    Route::resource('/comments', CommentController::class);
     Route::get('tags/create', [TagControll::class, "createTag"])->name('tags.create');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
@@ -74,9 +79,25 @@ Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] 
 
 Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
 Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
+Route::post('/comments/{product}', [HomeCommentController::class , 'store'])->name('home.comments.store');
 
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');
 });
+
+Route::prefix('profile')->name('home.')->group(function () {
+  Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
+  Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
+  Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
+});
+
+
+
+//user route
+
+
+Route::get('/add-to-compare/{product:id}', [CompareController::class, 'add'])->name('home.compare.add');
+Route::get('/compare',[CompareController::class, 'index'])->name('home.compare.index');
+Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
 
  

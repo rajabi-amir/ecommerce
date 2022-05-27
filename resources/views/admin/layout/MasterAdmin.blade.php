@@ -8,7 +8,7 @@
     @livewireStyles()
 </head>
 
-<body class="theme-blush">
+<body class="theme-blush" id="cheack_collapsed">
 
     <!-- Page Loader -->
     @include('admin.partial.PageLoader')
