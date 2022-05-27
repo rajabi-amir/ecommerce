@@ -1,5 +1,5 @@
 @php
-    $categories = \App\Models\Category::where('parent_id', 0)->get();
+$categories = \App\Models\Category::where('parent_id', 0)->get();
 @endphp
 <header class="header header-border">
     <div class="header-top">
@@ -10,11 +10,20 @@
             <div class="header-right">
                 <a href="blog.html" class="d-lg-show">وبلاگ </a>
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
+                @auth
                 <a href="my-account.html" class="d-lg-show">حساب کاربری من </a>
-                <a href="/assets/ajax/login.html" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود
+                <a href="#language"><i class="w-icon-account"></i>{{Auth::user()->name}} </a>
+                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
+                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+                @endauth
+                @guest
+                <a href="#login-popup" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود
                 </a>
                 <span class="delimiter d-lg-show">/</span>
-                <a href="/assets/ajax/login.html" class="ml-0 d-lg-show login register">ثبت نام </a>
+                <a href="#login-popup" class="ml-0 d-lg-show login register">ثبت نام </a>
+                @endguest
             </div>
         </div>
     </div>
@@ -129,10 +138,8 @@
         <div class="container">
             <div class="inner-wrap">
                 <div class="header-left">
-                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}"
-                        data-visible="true">
-                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
+                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}" data-visible="true">
+                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
                             <i class="w-icon-category"></i>
                             <span>دسته بندیها </span>
                         </a>

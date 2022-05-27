@@ -1915,6 +1915,9 @@ table {
 .text-dark {
     color: #333 !important;
 }
+.text-red{
+    color: #dc3545 !important;
+}
 
 .text-default {
     color: #666 !important;
@@ -16391,8 +16394,12 @@ body .product-popup {
     }
 }
 
-/* cutom css */
-.price-range {
+/* custom css */
+
+/*
+  * filter price range
+  */
+  .price-range {
     margin: 1rem;
 }
 
@@ -16445,6 +16452,9 @@ body .product-popup {
     text-transform: none;
 }
 
+/*
+  *loader
+  */
 .loader {
     position: absolute;
     text-align: center;
@@ -16468,6 +16478,9 @@ body .product-popup {
     filter: alpha(opacity=40);
 }
 
+/*
+  *  header search box
+  */
 .search-suggestion {
     position: absolute;
     top: 100%;
@@ -16530,4 +16543,16 @@ body .product-popup {
 
 .search-suggestion .page-subtitle {
     font-size: 1.5rem;
+}
+
+/*
+  * signin popup
+  */
+
+.login-popup label {
+    text-align: right;
+}
+
+button{
+    font-family: inherit;
 }

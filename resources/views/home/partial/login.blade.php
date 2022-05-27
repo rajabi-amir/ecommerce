@@ -1,51 +1,61 @@
-<div class="login-popup">
+<div id="login-popup" class="login-popup mfp-hide">
     <div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
         <ul class="nav nav-tabs text-uppercase" role="tablist">
             <li class="nav-item">
-                <a href="#sign-in" class="nav-link active">Sign In</a>
+                <a href="#sign-in" class="nav-link active">ورود </a>
             </li>
             <li class="nav-item">
-                <a href="#sign-up" class="nav-link">Sign Up</a>
+                <a href="#sign-up" class="nav-link">ثبت نام</a>
             </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="sign-in">
-                <div class="form-group">
-                    <label>Username or email address *</label>
-                    <input type="text" class="form-control" name="username" id="username" required>
-                </div>
-                <div class="form-group mb-0">
-                    <label>Password *</label>
-                    <input type="text" class="form-control" name="password" id="password" required>
-                </div>
-                <div class="form-checkbox d-flex align-items-center justify-content-between">
-                    <input type="checkbox" class="custom-checkbox" id="remember" name="remember" required="">
-                    <label for="remember">Remember me</label>
-                    <a href="#">Last your password?</a>
-                </div>
-                <a href="#" class="btn btn-primary">Sign In</a>
+                <form>
+                    <div class="form-group">
+                        <label>آدرس ایمیل یا نام کاربری *</label>
+                        <input type="text" class="form-control" name="email" />
+                        <span class="text-red email-error"></span>
+                    </div>
+                    <div class="form-group mb-0">
+                        <label>رمز عبور *</label>
+                        <input type="password" class="form-control" name="password" />
+                        <span class="text-red password-error"></span>
+                    </div>
+                    <div class="form-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-checkbox" name="remember" />
+                        <label for="remember">مرا به خاطر بسپار</label>
+                        <a href="#">فراموشی رمز عبور؟ </a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ورود </button>
+                </form>
             </div>
             <div class="tab-pane" id="sign-up">
-                <div class="form-group">
-                    <label>Your Email address *</label>
-                    <input type="text" class="form-control" name="email_1" id="email_1" required>
-                </div>
-                <div class="form-group mb-5">
-                    <label>Password *</label>
-                    <input type="text" class="form-control" name="password_1" id="password_1" required>
-                </div>
-                <p>Your personal data will be used to support your experience 
-                    throughout this website, to manage access to your account, 
-                    and for other purposes described in our <a href="#" class="text-primary">privacy policy</a>.</p>
-                <a href="#" class="d-block mb-5 text-primary">Signup as a vendor?</a>
-                <div class="form-checkbox d-flex align-items-center justify-content-between mb-5">
-                    <input type="checkbox" class="custom-checkbox" id="agree" name="agree" required="">
-                    <label for="agree" class="font-size-md">I agree to the <a  href="#" class="text-primary font-size-md">privacy policy</a></label>
-                </div>
-                <a href="#" class="btn btn-primary">Sign Up</a>
+                <form>
+                    <div class="form-group mb-5">
+                        <label>نام کوچک *</label>
+                        <input type="text" class="form-control" name="name" />
+                        <span class="text-red name-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label> آدرس ایمیل شما*</label>
+                        <input type="text" class="form-control" name="email" />
+                        <span class="text-red email-error"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label>رمز عبور *</label>
+                        <input type="password" class="form-control" name="password" />
+                        <span class="text-red password-error"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label>تکرار رمز عبور *</label>
+                        <input type="password" class="form-control" name="password_confirmation" />
+                        <span class="text-red password-confirmation-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">عضویت</button>
+                </form>
             </div>
         </div>
-        <p class="text-center">Sign in with social account</p>
+        <p class="text-center">با حساب اجتماعی وارد شوید</p>
         <div class="social-icons social-icon-border-color d-flex justify-content-center">
             <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
             <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
@@ -53,3 +63,85 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    $('#sign-in form').submit(function(event) {
+        event.preventDefault();
+        $('#sign-in .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+        $.post("{{route('login')}}", {
+                '_token': "{{csrf_token()}}",
+                'email': $('#sign-in input[name="email"]').val(),
+                'password': $('#sign-in input[name="password"]').val(),
+                'remember': $('#sign-in input[name="remember"]').is(":checked"),
+            },
+            function(response, status) {
+                window.location.replace("{{request()->fullUrl()}}");
+            }
+        ).fail(function(response) {
+            console.log(response.responseJSON.errors);
+
+            if (response.responseJSON.errors.email) {
+                $('#sign-in .email-error').html(response.responseJSON.errors.email[0]);
+            } else {
+                $('#sign-in .email-error').html('');
+            }
+            if (response.responseJSON.errors.password) {
+                $('#sign-in .password-error').html(response.responseJSON.errors.password[0]);
+            } else {
+                $('#sign-in .password-error').html('');
+            }
+        }).always(function() {
+            $('#sign-in .btn-primary').attr('disabled', false).find('span').remove();
+        });
+
+    });
+</script>
+
+<!-- sign oute -->
+<script>
+    $('#sign-up form').submit(function(event) {
+        event.preventDefault();
+        $('#sign-up .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+        $.post("{{route('register')}}", {
+                '_token': "{{csrf_token()}}",
+                'name': $('#sign-up input[name="name"]').val(),
+                'email': $('#sign-up input[name="email"]').val(),
+                'password': $('#sign-up input[name="password"]').val(),
+                "password_confirmation": $('#sign-up input[name="password_confirmation"]').val(),
+            },
+            function(response, status) {
+                window.location.replace("{{request()->fullUrl()}}");
+            }
+
+        ).fail(function(response) {
+            if (response.responseJSON.errors.name) {
+                $('#sign-up .name-error').html(response.responseJSON.errors.name[0]);
+            } else {
+                $('#sign-up .name-error').html('');
+            }
+
+            if (response.responseJSON.errors.email) {
+                $('#sign-up .email-error').html(response.responseJSON.errors.email[0]);
+            } else {
+                $('#sign-up .email-error').html('');
+            }
+
+            if (response.responseJSON.errors.password) {
+                $('#sign-up .password-error').html(response.responseJSON.errors.password[0]);
+            } else {
+                $('#sign-up .password-error').html('');
+            }
+
+            if (response.responseJSON.errors.password_confirmation) {
+                $('#sign-up .password-confirmation-error').html(response.responseJSON.errors.password_confirmation[0]);
+            } else {
+                $('#sign-up .password-confirmation-error').html('');
+            }
+            console.log(response.responseJSON.errors);
+        }).always(function() {
+            $('#sign-up .btn-primary').attr('disabled', false).find('span').remove();
+        });
+
+    });
+</script>
+@endpush
