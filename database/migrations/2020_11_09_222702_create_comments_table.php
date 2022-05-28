@@ -22,9 +22,14 @@ class CreateCommentsTable extends Migration
             $table->boolean('approved')->default(0);
             $table->text('text');
             $table->unsignedInteger('parent_id')->default(0);
-
+            
+            $table->integer('commentable_id')->unsigned();
+            $table->string('commentable_type');
+            
             $table->softDeletes();
             $table->timestamps();
+
+           
         });
     }
 

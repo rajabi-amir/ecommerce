@@ -49,7 +49,7 @@ class CommentController extends Controller
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ویرایش محصول', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
                 return redirect()->back();
             }
 
@@ -60,4 +60,19 @@ class CommentController extends Controller
             return redirect()->back();
         }
     }
+
+    public function replyStore(Request $request)
+    {
+        Comment::create([
+            'user_id' => 1,
+            'text' => $request->text,
+            'product_id' => $request->product,
+            'parent_id' => $request->comment,
+        ]);
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
+        return redirect()->back();
+   
+        return back();
+    }
+   
 }

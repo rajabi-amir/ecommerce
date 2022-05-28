@@ -21,4 +21,15 @@ class Comment extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id')->where('approved' , 1);
+    }
+
+    public function parent()
+    {
+         return $this->belongsTo(Comment::class,'parent_id');
+    }
+    
 }
