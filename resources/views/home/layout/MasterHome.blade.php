@@ -26,6 +26,8 @@
 
     @include('home.partial.QuickView')
 
+    @include('home.partial.login')
+
 
 
     <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
