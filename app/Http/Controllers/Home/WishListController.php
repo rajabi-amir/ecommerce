@@ -12,16 +12,16 @@ class WishListController extends Controller
     //auth()->id()=1
     public function add(Product $product)
     {    
-        if (1) {
+        if (auth()->check()) {
 
-            $wishlist = WishList::where("user_id" ,'=', 1)->where("product_id",'=', $product->id)->first();
+            $wishlist = WishList::where("user_id" ,'=', auth()->id())->where("product_id",'=', $product->id)->first();
            
             if ($wishlist) {
-                Wishlist::where('product_id', $product->id)->where('user_id', 1)->delete();
+                Wishlist::where('product_id', $product->id)->where('user_id', auth()->id())->delete();
                 return response(['errors' => 'deleted']);
             }else {
                 Wishlist::create([
-                    'user_id' => 1,
+                    'user_id' => auth()->id(),
                     'product_id' => $product->id
                 ]);
                 return response(['errors' => 'saved']);
@@ -38,8 +38,8 @@ class WishListController extends Controller
 
     public function usersProfileIndex()
     {
-        //auth()->id()=1
-        $wishlist = Wishlist::where('user_id' , 1)->get();
+       
+        $wishlist = Wishlist::where('user_id' , auth()->id())->get();
         
         return view('home.page.users_profile.wishlist' , compact('wishlist'));
     }

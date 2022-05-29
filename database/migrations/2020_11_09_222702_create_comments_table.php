@@ -17,14 +17,12 @@ class CreateCommentsTable extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
-
+            
             $table->boolean('approved')->default(0);
             $table->text('text');
             $table->unsignedInteger('parent_id')->default(0);
             
-            $table->integer('commentable_id')->unsigned();
-            $table->string('commentable_type');
+            $table->morphs('commentable');
             
             $table->softDeletes();
             $table->timestamps();

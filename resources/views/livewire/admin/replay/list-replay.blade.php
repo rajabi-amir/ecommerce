@@ -4,8 +4,8 @@
         <div class="col-md-8">
             <div class="form-group">
                 <div>
-                    <div>
-                        <h5>{{$comment->user->name}}</h5>
+                    <div class="mb-2">
+                        {{$comment->user->name}}
                     </div>
                     <div style="border: 1px solid gray; border-radius: 10px; padding:15px ">
                         {{$comment->text}}

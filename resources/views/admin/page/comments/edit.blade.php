@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                         <input type="text" id="product" disabled
                                             class="form-control @error('date') is-invalid @enderror"
-                                            value="{{old('product') ?? $comment->product->name}}">
+                                            value="{{old('product') ?? $comment->commentable->name}}">
                                     </div>
                                 </div>
                             </div>
@@ -82,10 +82,11 @@
                                 <button type="submit" class="btn btn-raised btn-primary waves-effect">ویرایش</button>
                             </div>
                         </form>
-
-                        @foreach ($comment->replies as $comment)
-                        <label> پاسخ ها</label>
+                        <h5>پاسخ ها</h5>
                         <hr>
+                        @foreach ($comment->replies as $comment)
+
+
                         @if($comment->approved ==0)
                         @php
                         $color="danger";

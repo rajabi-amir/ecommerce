@@ -28,7 +28,7 @@ public function mount(Comment $comment)
       
             public function render()
             {
-                return view('livewire.admin.comments.comments-list',['comments' => Comment::latest()->paginate(10)]);
+                return view('livewire.admin.comments.comments-list',['comments' => Comment::latest()->where('parent_id',0)->paginate(10)]);
             }
             
     public function delcomment(Comment $comment){

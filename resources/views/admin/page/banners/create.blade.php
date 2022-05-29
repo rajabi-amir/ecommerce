@@ -81,6 +81,7 @@
                                                 <option value="آخر-چپ-بالا">آخر-چپ-بالا</option>
                                                 <option value="آخر-چپ-پایین-1">آخر-چپ-پایین-1</option>
                                                 <option value="آخر-چپ-پایین-2">آخر-چپ-پایین-2</option>
+                                                <option value="محصول">محصول</option>
                                             </select>
                                         </div>
                                     </div>
@@ -185,9 +186,7 @@ $("#positionSelect").change(function() {
         $(".bone").attr("src", "/assets/images/position/width/01.png");
     }
 
-    if ($(this).val() == 'عرضی') {
-        $('.position_message').html('(سایز تصویر 260*1380)').css('color', 'red');
-    }
+
     if ($(this).val() == 'آخر-راست') {
         $('.position_message').html('(سایز تصویر 240*680)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/end/01.png");
@@ -206,6 +205,10 @@ $("#positionSelect").change(function() {
         $('.position_message').html('(سایز تصویر 200*330)').css('color', 'red');
         $(".bone").attr("src", "/assets/images/position/end/03.png");
 
+    }
+
+    if ($(this).val() == 'محصول') {
+        $('.position_message').html('(سایز تصویر 220*266)').css('color', 'red');
     }
 
 

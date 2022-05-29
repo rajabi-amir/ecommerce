@@ -88,9 +88,6 @@ class CommentController extends Controller
             $flasher->addError('مشکل در تغییر');
             return redirect()->route('admin.comments.index');
         }
-        
-
-    
     }
 
     /**

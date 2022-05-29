@@ -31,10 +31,12 @@
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                     </td>
+
+
                                     <td>
                                         <a
-                                            href="{{route('admin.products.show',['product' => $comment->product->id ])}}">
-                                            {{$comment->product->name}}
+                                            href="{{route('admin.products.show',['product' => $comment->commentable_id])}}">
+                                            {{$comment->commentable->name}}
                                         </a>
 
                                     </td>

@@ -33,7 +33,8 @@ class CompareController extends Controller
     }
 
     public function index()
-    {
+    {   
+        
         if (session()->has('compareProducts')) {
 
             $products = Product::findOrFail(session()->get('compareProducts'));
