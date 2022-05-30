@@ -73,7 +73,7 @@ Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product
 
 
 // home routes
-Route::get('/',[HomeController::class , 'index'])->name('home')->middleware('verified');
+Route::get('/',[HomeController::class , 'index'])->name('home');
 
 Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] )->name('home.products.show');
 
