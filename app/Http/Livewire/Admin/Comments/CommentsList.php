@@ -1,16 +1,11 @@
 <?php
-
 namespace App\Http\Livewire\Admin\Comments;
-
 use App\Models\Comment;
-use App\Models\Product;
 use Livewire\Component;
 
 class CommentsList extends Component
 {
-
-    public $title;
-
+public $title;
 public $comment;
 protected $listeners = [
     'sweetAlertConfirmed', // only when confirm button is clicked
@@ -30,10 +25,10 @@ public function mount(Comment $comment)
 
         }
 }
-       
+      
             public function render()
             {
-                return view('livewire.admin.comments.comments-list',['comments' => Comment::latest()->paginate(10)]);
+                return view('livewire.admin.comments.comments-list',['comments' => Comment::latest()->where('parent_id',0)->paginate(10)]);
             }
             
     public function delcomment(Comment $comment){
@@ -70,9 +65,8 @@ public function mount(Comment $comment)
      public function sweetAlertConfirmed(array $data)
      { 
         
-
         $this->comment->delete();
-             toastr()->livewire()->addSuccess('محصول با موفقیت حذف شد');
+             toastr()->livewire()->addSuccess('نظر با موفقیت حذف شد');
      }
 
 

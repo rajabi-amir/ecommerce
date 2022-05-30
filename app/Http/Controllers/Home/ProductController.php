@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -20,10 +21,12 @@ class ProductController extends Controller
         $category_simulation=Category::active()->where('name',$product->category->name)->get()->first();
         $product_simulation=$category_simulation->products->take(3)->sortBy('desc');
         $products_latest=Product::active()->latest()->take(3)->get();
-        $wishlist = WishList::where('user_id', 1)->get();
+        $wishlist = WishList::where('user_id', auth()->id())->get();
+        $banner_product=Banner::active()->where('type','محصول')->get()->first();
+
        
   
 
-        return view('home.page.products.show' , compact('product','categories','services','product_simulation' ,'products_latest' ,'wishlist'));
+        return view('home.page.products.show' , compact('product','categories','services','product_simulation' ,'products_latest' ,'wishlist' , 'banner_product'));
     }
 }

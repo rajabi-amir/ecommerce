@@ -81,6 +81,10 @@ Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search')
 Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
 Route::post('/comments/{product}', [HomeCommentController::class , 'store'])->name('home.comments.store');
 
+
+Route::post('/reply/store', [HomeCommentController::class , 'replyStore'])->name('reply.add');
+
+
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');
 });

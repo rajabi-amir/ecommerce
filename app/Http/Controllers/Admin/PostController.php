@@ -54,7 +54,7 @@ class PostController extends Controller
             'body'      => 'required|string',
         ]);
 
-        $user=auth()->id() ? auth()->id() : "1";
+        $user=auth()->id();
         $slug  = str_slug($request->title);
         $data['user_id'] = $user;
         $data['slug'] = $slug;
@@ -107,7 +107,7 @@ class PostController extends Controller
             'body'      => 'required|string'
         ]);
         $slug  = str_slug($request->title);
-        $data['user_id'] = 1;
+        $data['user_id'] = auth()->id();
         $data['slug'] = $slug;
         $data['status'] = $request['status'];
         $post->update($data);

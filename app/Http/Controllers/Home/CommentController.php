@@ -23,14 +23,17 @@ class CommentController extends Controller
             return redirect()->to(url()->previous() . '#comments')->withErrors($validator);
         }
 
-        if (1) {
+        if (auth()->check()) {
             try {
                 DB::beginTransaction();
 
                 Comment::create([
-                    'user_id' => 1,
-                    'product_id' => $product->id,
-                    'text' => $request->text
+
+                    'user_id' => auth()->id(),
+                    'text' => $request->text,
+                    'commentable_id' => $product->id,
+                    'commentable_type' => Product::class,
+                 
                 ]);
 
                 if ($product->rates()->where('user_id', auth()->id())->exists()) {
@@ -40,7 +43,7 @@ class CommentController extends Controller
                     ]);
                 } else {
                     ProductRate::create([
-                        'user_id' => 1,
+                        'user_id' => auth()->id(),
                         'product_id' => $product->id,
                         'rate' => $request->rate
                     ]);
@@ -49,15 +52,33 @@ class CommentController extends Controller
                 DB::commit();
             } catch (\Exception $ex) {
                 DB::rollBack();
-                alert()->error('مشکل در ویرایش محصول', $ex->getMessage())->persistent('حله');
+                alert()->error('مشکل در ایجاد پست', $ex->getMessage())->persistent('حله');
                 return redirect()->back();
             }
 
             alert()->success('نظر شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
             return redirect()->back();
         } else {
-            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید', 'دقت کنید')->persistent('حله');
+            alert()->warning('برای ثبت نظر ابتدا وارد سایت شوید')->persistent('حله');
             return redirect()->back();
         }
     }
+
+    public function replyStore(Request $request)
+    {
+        
+        Comment::create([
+            'user_id' => auth()->id(),
+            'text' => $request->text,
+            'commentable_id' => $request->product,
+            'commentable_type' => Product::class,
+            'parent_id' => $request->comment,
+          
+        ]);
+        alert()->success('پاسخ شما با موفقیت برای این محصول ثبت شد', 'باتشکر');
+        return redirect()->back();
+   
+        return back();
+    }
+   
 }

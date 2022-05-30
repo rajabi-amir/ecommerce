@@ -30,13 +30,13 @@
                                     <figure class="product-image">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                             data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                            alt="" width="800" height="900">
+                                            alt="$product->slug" width="800" height="900">
                                     </figure>
                                     @foreach ($product->images as $image_value )
                                     <figure class="product-image">
                                         <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
                                             data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
-                                            alt="" width="800" height="900">
+                                            alt="$product->slug" width="800" height="900">
                                     </figure>
                                     @endforeach
                                 </div>
@@ -44,12 +44,12 @@
                                     <div class="product-thumbs row cols-4 gutter-sm">
                                         <div class="product-thumb">
                                             <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                alt="Product Thumb" width="800" height="900">
+                                                alt="$product->slug" width="800" height="900">
                                         </div>
                                         @foreach ( $product->images as $image_value_second )
                                         <div class="product-thumb">
                                             <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value_second->image)}}"
-                                                alt="Product Thumb" width="800" height="900">
+                                                alt="$product->slug" width="800" height="900">
                                         </div>
                                         @endforeach
                                     </div>
@@ -96,8 +96,8 @@
 
                                 <div class="product-bm-wrapper">
                                     <figure class="brand">
-                                        <img src="{{url(env('BRAND_IMAGES_PATCH').$product->brand->image)}}" alt="Brand"
-                                            width="105" height="48" />
+                                        <img src="{{url(env('BRAND_IMAGES_PATCH').$product->brand->image)}}"
+                                            alt="$product->brand->slug" width="105" height="48" />
                                     </figure>
                                     <div class="product-meta">
                                         <div class="product-categories">
@@ -455,7 +455,60 @@
                                                             <p>{{$comment->text}}</p>
                                                             <div class="comment-action">
                                                                 <a href="#"
-                                                                    class="btn btn-secondary btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
+                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
+                                                                    <i class="far fa-thumbs-up"></i> مفید (1)
+                                                                </a>
+                                                                <a href="#"
+                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
+                                                                    <i class="far fa-thumbs-down"></i>بی فایده
+                                                                    (0)
+                                                                </a>
+                                                                <a style="float: left;"
+                                                                    onclick="reply('{{$comment->id}}')"
+                                                                    class="btn btn-secondary btn-dark btn-link btn-underline sm btn-icon-right font-weight-normal text-capitalize">
+                                                                    پاسخ
+                                                                    <i class="fa fa-reply"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <form style="margin-top: 3rem; margin-right: 14rem;" hidden
+                                                        id="reply-form-{{$comment->id}}"
+                                                        action="{{route('reply.add' , ['product' => $product->id , 'comment' => $comment->id])}}"
+                                                        method="POST" class="review-form">
+                                                        @csrf
+
+                                                        <textarea name="text" cols="30" rows="6"
+                                                            placeholder="پاسخ خود را اینجا بنویسید..."
+                                                            class="form-control" id="review"></textarea>
+
+                                                        <button type="submit" class="btn btn-dark">پاسخ
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- پاسخ -->
+                                                    @foreach ($comment->replies as $reply)
+                                                    @if ($reply->approved == 1)
+
+                                                    <div class="comment-body"
+                                                        style="margin-top: 3rem; margin-right:5rem ;">
+                                                        <figure class="comment-avatar">
+                                                            <img src="{{ $reply->user->avatar == null ? asset('/assets/images/agents/01.png') : $reply->user->avatar }}"
+                                                                alt="Commenter Avatar" width="45" height="45">
+                                                        </figure>
+                                                        <div class="comment-content">
+                                                            <h4 class="comment-author">
+                                                                <a
+                                                                    href="#">{{$reply->user->name == null ? "بدون نام" : $reply->user->name }}</a>
+                                                                <span
+                                                                    class="
+                                                                comment-date">{{Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('Y/n/j')}}</span>
+                                                            </h4>
+
+                                                            <p>{{$reply->text}}</p>
+                                                            <div class="comment-action">
+                                                                <a href="#"
+                                                                    class="btn btn-dark btn-link btn-underline sm btn-icon-left font-weight-normal text-capitalize">
                                                                     <i class="far fa-thumbs-up"></i> مفید (1)
                                                                 </a>
                                                                 <a href="#"
@@ -467,6 +520,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    @endif
+
+                                                    @endforeach
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -477,6 +535,7 @@
 
                                         </div>
                                     </div>
+
                                     @endforeach
 
                                 </div>
@@ -487,7 +546,8 @@
                     <section class="related-product-section">
                         <div class="title-link-wrapper mb-4">
                             <h4 class="title">محصولات اخیر </h4>
-                            <a href="#" class="btn btn-dark btn-link btn-slide-right btn-icon-right">ادامه محصولات <i
+                            <a href="{{route('home.products.show' , ['product' => $product->slug])}}"
+                                class="btn btn-dark btn-link btn-slide-right btn-icon-right">ادامه محصولات <i
                                     class="w-icon-long-arrow-left"></i></a>
                         </div>
                         <div class="owl-carousel owl-theme row cols-lg-3 cols-md-4 cols-sm-3 cols-2" data-owl-options="{
@@ -514,13 +574,14 @@
                             @foreach ($products_latest as $product_latest )
                             <div class="product">
                                 <figure class="product-media">
-                                    <a href="product-default.html">
+                                    <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product_latest->primary_image)}}"
-                                            alt="Product" width="300" height="338" />
+                                            alt="$product->slug" width="300" height="338" />
                                     </a>
                                 </figure>
                                 <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">{{$product_latest->name}}
+                                    <h4 class="product-name"><a
+                                            href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product_latest->name}}
                                         </a></h4>
                                     <div class="ratings-container">
                                         <div class="ht-product-ratting-wrap mt-4">
@@ -528,8 +589,8 @@
                                                 data-rating-value="{{ceil($product->rates->avg('rate'))}}">
                                             </div>
                                         </div>
-                                        <a href="product-default.html"
-                                            class="rating-reviews">({{$product->approvedComments()->count()}} نظر )</a>
+                                        <a href="" class="rating-reviews">({{$product->approvedComments()->count()}} نظر
+                                            )</a>
 
                                     </div>
 
@@ -582,23 +643,25 @@
                                 @endforeach
                             </div>
                             <!-- End of Widget Icon Box -->
-
+                            @isset($banner_product)
                             <div class="widget widget-banner mb-9">
                                 <div class="banner banner-fixed br-sm">
                                     <figure>
-                                        <img src="/assets/images/shop/banner3.jpg" alt="Banner" width="266" height="220"
-                                            style="background-color: #1D2D44" />
+                                        <img src="{{url(env('BANNER_IMAGES_PATCH').$banner_product->image)}}"
+                                            alt="Banner" width="266" height="220" style="background-color: #1D2D44" />
                                     </figure>
                                     <div class="banner-content">
                                         <div class="banner-price-info font-weight-bolder text-white lh-1 ls-25">
-                                            40<sup class="font-weight-bold">%</sup><sub
-                                                class="font-weight-bold text-uppercase ls-25">تخفیف </sub>
+                                            {{$banner_product->title}}<sup class="font-weight-bold">%</sup><sub
+                                                class="font-weight-bold text-uppercase ls-25">{{$banner_product->text}}</sub>
                                         </div>
                                         <h4 class="banner-subtitle text-white font-weight-bolder text-uppercase mb-0">
-                                            فروش نهایی</h4>
+                                            {{$banner_product->button_text}}</h4>
                                     </div>
                                 </div>
                             </div>
+                            @endisset
+
                             <!-- End of Widget Banner -->
 
                             <div class="widget widget-products">
@@ -619,14 +682,17 @@
 
                                         <div class="product product-widget">
                                             <figure class="product-media">
-                                                <a href="#">
+                                                <a
+                                                    href="{{route('home.products.show' , ['product' => $product->slug])}}">
                                                     <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                                         alt="{{$product->slug}}" width="100" height="113" />
                                                 </a>
                                             </figure>
                                             <div class="product-details">
                                                 <h4 class="product-name">
-                                                    <a href="#">{{$product->name}} </a>
+                                                    <a
+                                                        href="{{route('home.products.show' , ['product' => $product->slug])}}">{{$product->name}}
+                                                    </a>
                                                 </h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings-full">
@@ -765,6 +831,13 @@ $('#var-select').on('change', function() {
 
 
 })
+
+function reply(id) {
+
+    let sid = 'reply-form-' + id;
+    console.log(sid);
+    $('#' + sid).toggle();
+}
 </script>
 <script>
 (function($) {

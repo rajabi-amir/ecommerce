@@ -16,7 +16,7 @@ use function PHPSTORM_META\type;
 class HomeController extends Controller
 {
     public function index(){
-        
+       
         $brands=                        Brand::active()->get();
 
         $posts=                         Post::active()->get()->take(5);

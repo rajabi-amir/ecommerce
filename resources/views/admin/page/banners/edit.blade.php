@@ -92,6 +92,7 @@
                                                 آخر-چپ-پایین-1</option>
                                             <option {{$banner->type == 'آخر-چپ-پایین-2' ? 'selected' : ''}}>
                                                 آخر-چپ-پایین-2</option>
+                                            <option {{$banner->type == 'محصول' ? 'selected' : ''}}>محصول</option>
 
                                         </select>
                                         @error('position')
@@ -223,6 +224,11 @@ $(document).ready(function(e) {
         $(".bone").attr("src", "/assets/images/position/end/03.png");
 
     }
+    if ($('#positionSelect').val() == 'محصول') {
+        $('.position_message').html('(سایز تصویر 220*266)').css('color', 'red');
+
+
+    }
 
 
     $("#positionSelect").on('change onload', function() {
@@ -274,6 +280,10 @@ $(document).ready(function(e) {
         if ($(this).val() == 'آخر-چپ-پایین-2') {
             $('.position_message').html('(سایز تصویر 200*330)').css('color', 'red');
             $(".bone").attr("src", "/assets/images/position/end/03.png");
+
+        }
+        if ($(this).val() == 'محصول') {
+            $('.position_message').html('(سایز تصویر 220*266)').css('color', 'red');
 
         }
 

@@ -91,7 +91,12 @@ class Product extends Model
     
     public function approvedComments()
     {
-        return $this->hasMany(Comment::class)->where('approved' , 1);
+        return $this->morphMany(Comment::class, 'commentable')->where('approved' , 1)->where('parent_id' , 0);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 
     public function checkUserWishlist($userId)

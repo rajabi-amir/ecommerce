@@ -110,6 +110,11 @@ class BannerController extends Controller
                 $width=330;
                 break;
 
+            case 'محصول':
+                $height=220;
+                $width=266;
+                break;
+
             default:
             $height=null;
             $width=null;
@@ -230,6 +235,11 @@ class BannerController extends Controller
                 case 'آخر-چپ-پایین-2':
                     $height=200;
                     $width=330;
+                    break;
+
+                case 'محصول':
+                    $height=220;
+                    $width=266;
                     break;
     
                 default:

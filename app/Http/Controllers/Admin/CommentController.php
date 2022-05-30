@@ -88,9 +88,6 @@ class CommentController extends Controller
             $flasher->addError('مشکل در تغییر');
             return redirect()->route('admin.comments.index');
         }
-        
-
-    
     }
 
     /**
@@ -99,8 +96,11 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment,ToastrFactory $flasher)
     {
-        //
+        $comment->delete();
+        $flasher->addSuccess('کامنت مورد نظر حذف شد');
+        return back();
+
     }
 }
