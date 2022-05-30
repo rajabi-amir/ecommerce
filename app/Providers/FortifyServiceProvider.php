@@ -27,14 +27,26 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Fortify::loginView(function () {
+            return view('home.auth.login');
+        });
+        
+        Fortify::registerView(function () {
+            return view('home.auth.login');
+        });
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {
                 return redirect()->back();
             }
         });
+
         Fortify::resetPasswordView(function ($request) {
-            return view('home.page.auth.reset-password', ['request' => $request]);
+            return view('home.auth.reset-password', ['request' => $request]);
+        });
+
+        Fortify::verifyEmailView(function () {
+            return view('home.auth.verify-email');
         });
     }
 

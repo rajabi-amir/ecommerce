@@ -70,10 +70,10 @@ Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product
 //end
 
 
- 
+
 
 // home routes
-Route::get('/',[HomeController::class , 'index'])->name('home');
+Route::get('/',[HomeController::class , 'index'])->name('home')->middleware('verified');
 
 Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] )->name('home.products.show');
 
@@ -104,4 +104,3 @@ Route::get('/add-to-compare/{product:id}', [CompareController::class, 'add'])->n
 Route::get('/compare',[CompareController::class, 'index'])->name('home.compare.index');
 Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
 
- 
