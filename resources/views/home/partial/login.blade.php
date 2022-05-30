@@ -70,7 +70,7 @@
 
 <script>
     $(document).ready(function() {
-        @if(session('status')=='password.reset')
+        @if(session('status')=='passwords.reset')
         Swal.fire({
             text: "{{ __(session('status')) }}",
             icon: 'success',
