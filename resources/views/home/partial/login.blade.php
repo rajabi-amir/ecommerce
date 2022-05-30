@@ -24,7 +24,7 @@
                     <div class="form-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-checkbox" name="remember" />
                         <label for="remember">مرا به خاطر بسپار</label>
-                        <a href="#">فراموشی رمز عبور؟ </a>
+                        <a id="reset-pass" href="#">فراموشی رمز عبور؟ </a>
                     </div>
                     <button type="submit" class="btn btn-primary">ورود </button>
                 </form>
@@ -63,85 +63,142 @@
         </div>
     </div>
 </div>
+
+@include('home.partial.reset-password')
+
 @push('scripts')
-<script>
-    $('#sign-in form').submit(function(event) {
-        event.preventDefault();
-        $('#sign-in .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
-        $.post("{{route('login')}}", {
-                '_token': "{{csrf_token()}}",
-                'email': $('#sign-in input[name="email"]').val(),
-                'password': $('#sign-in input[name="password"]').val(),
-                'remember': $('#sign-in input[name="remember"]').is(":checked"),
-            },
-            function(response, status) {
-                window.location.replace("{{request()->fullUrl()}}");
-            }
-        ).fail(function(response) {
-            console.log(response.responseJSON.errors);
 
-            if (response.responseJSON.errors.email) {
-                $('#sign-in .email-error').html(response.responseJSON.errors.email[0]);
-            } else {
-                $('#sign-in .email-error').html('');
+<script>
+    $(document).ready(function() {
+        @if(session('status'))
+        Swal.fire({
+            text: "{{ __(session('status')) }}",
+            icon: 'success',
+            confirmButtonText: 'تایید',
+            toast: true,
+            position: 'top-right',
+            customClass: {
+                confirmButton: 'content-end'
             }
-            if (response.responseJSON.errors.password) {
-                $('#sign-in .password-error').html(response.responseJSON.errors.password[0]);
-            } else {
-                $('#sign-in .password-error').html('');
+        })
+        $.magnificPopup.open({
+            items: {
+                src: '#login-popup',
+                type: 'inline'
             }
-        }).always(function() {
-            $('#sign-in .btn-primary').attr('disabled', false).find('span').remove();
+        });
+        @endif
+
+        $('#sign-in form').submit(function(event) {
+            event.preventDefault();
+            $('#sign-in .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+            $.post("{{route('login')}}", {
+                    '_token': "{{csrf_token()}}",
+                    'email': $('#sign-in input[name="email"]').val(),
+                    'password': $('#sign-in input[name="password"]').val(),
+                    'remember': $('#sign-in input[name="remember"]').is(":checked"),
+                },
+                function(response, status) {
+                    window.location.replace("{{request()->fullUrl()}}");
+                }, 'json').fail(function(response) {
+                console.log(response.responseJSON.errors);
+
+                if (response.responseJSON.errors.email) {
+                    $('#sign-in .email-error').html(response.responseJSON.errors.email[0]);
+                } else {
+                    $('#sign-in .email-error').html('');
+                }
+                if (response.responseJSON.errors.password) {
+                    $('#sign-in .password-error').html(response.responseJSON.errors.password[0]);
+                } else {
+                    $('#sign-in .password-error').html('');
+                }
+            }).always(function() {
+                $('#sign-in .btn-primary').attr('disabled', false).find('span').remove();
+            });
+
         });
 
+        $('#sign-up form').submit(function(event) {
+            event.preventDefault();
+            $('#sign-up .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+            $.post("{{route('register')}}", {
+                    '_token': "{{csrf_token()}}",
+                    'name': $('#sign-up input[name="name"]').val(),
+                    'email': $('#sign-up input[name="email"]').val(),
+                    'password': $('#sign-up input[name="password"]').val(),
+                    "password_confirmation": $('#sign-up input[name="password_confirmation"]').val(),
+                },
+                function(response, status) {
+                    window.location.replace("{{request()->fullUrl()}}");
+                }
+
+                , 'json').fail(function(response) {
+                if (response.responseJSON.errors.name) {
+                    $('#sign-up .name-error').html(response.responseJSON.errors.name[0]);
+                } else {
+                    $('#sign-up .name-error').html('');
+                }
+
+                if (response.responseJSON.errors.email) {
+                    $('#sign-up .email-error').html(response.responseJSON.errors.email[0]);
+                } else {
+                    $('#sign-up .email-error').html('');
+                }
+
+                if (response.responseJSON.errors.password) {
+                    $('#sign-up .password-error').html(response.responseJSON.errors.password[0]);
+                } else {
+                    $('#sign-up .password-error').html('');
+                }
+
+                if (response.responseJSON.errors.password_confirmation) {
+                    $('#sign-up .password-confirmation-error').html(response.responseJSON.errors.password_confirmation[0]);
+                } else {
+                    $('#sign-up .password-confirmation-error').html('');
+                }
+                console.log(response.responseJSON.errors);
+            }).always(function() {
+                $('#sign-up .btn-primary').attr('disabled', false).find('span').remove();
+            });
+
+        });
+
+        $('#reset-pass-form form').submit(function(event) {
+            event.preventDefault();
+            $('#reset-pass-form .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
+            $.post("{{route('password.email')}}", {
+                    '_token': "{{csrf_token()}}",
+                    'email': $('#reset-pass-form input[name="email"]').val(),
+                },
+                function(response, status) {
+                    $.magnificPopup.close();
+                    Swal.fire({
+                        text: 'لینک تغییر رمز عبور به ایمیل شما ارسال شد',
+                        icon: 'success',
+                        confirmButtonText: 'تایید'
+                    })
+                }, 'json').fail(function(response) {
+                console.log(response.responseJSON.errors);
+
+                if (response.responseJSON.errors.email) {
+                    $('#reset-pass-form .email-error').html(response.responseJSON.errors.email[0]);
+                } else {
+                    $('#reset-pass-form .email-error').html('');
+                }
+            }).always(function() {
+                $('#reset-pass-form .btn-primary').attr('disabled', false).find('span').remove();
+            });
+
+        });
+
+        $('#reset-pass').magnificPopup({
+            items: {
+                src: '#reset-pass-form',
+                type: 'inline'
+            }
+        });
     });
 </script>
 
-<!-- sign oute -->
-<script>
-    $('#sign-up form').submit(function(event) {
-        event.preventDefault();
-        $('#sign-up .btn-primary').attr('disabled', true).append('<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
-        $.post("{{route('register')}}", {
-                '_token': "{{csrf_token()}}",
-                'name': $('#sign-up input[name="name"]').val(),
-                'email': $('#sign-up input[name="email"]').val(),
-                'password': $('#sign-up input[name="password"]').val(),
-                "password_confirmation": $('#sign-up input[name="password_confirmation"]').val(),
-            },
-            function(response, status) {
-                window.location.replace("{{request()->fullUrl()}}");
-            }
-
-        ).fail(function(response) {
-            if (response.responseJSON.errors.name) {
-                $('#sign-up .name-error').html(response.responseJSON.errors.name[0]);
-            } else {
-                $('#sign-up .name-error').html('');
-            }
-
-            if (response.responseJSON.errors.email) {
-                $('#sign-up .email-error').html(response.responseJSON.errors.email[0]);
-            } else {
-                $('#sign-up .email-error').html('');
-            }
-
-            if (response.responseJSON.errors.password) {
-                $('#sign-up .password-error').html(response.responseJSON.errors.password[0]);
-            } else {
-                $('#sign-up .password-error').html('');
-            }
-
-            if (response.responseJSON.errors.password_confirmation) {
-                $('#sign-up .password-confirmation-error').html(response.responseJSON.errors.password_confirmation[0]);
-            } else {
-                $('#sign-up .password-confirmation-error').html('');
-            }
-            console.log(response.responseJSON.errors);
-        }).always(function() {
-            $('#sign-up .btn-primary').attr('disabled', false).find('span').remove();
-        });
-
-    });
-</script>
 @endpush

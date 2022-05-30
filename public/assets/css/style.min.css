@@ -4062,7 +4062,8 @@ blockquote {
 .text-default {
     color: #666 !important;
 }
-.text-red{
+
+.text-red {
     color: #dc3545 !important;
 }
 
@@ -9335,11 +9336,11 @@ textarea {
         - Popup - Image PhotoSwipe
 -----------------------------------*/
 .mfp-wrap {
-    z-index: 2500;
+    z-index: 1045;
 }
 
 .mfp-bg {
-    z-index: 2500;
+    z-index: 1040;
     background: #000;
     opacity: 0.4;
     transition: opactiy 0.3s ease-out;
@@ -22248,6 +22249,18 @@ aside .sp-sidebar-banner span {
     text-align: right;
 }
 
-button{
+button {
     font-family: inherit;
+}
+
+/*
+*  sweet alert
+*
+*/
+.swal2-popup {
+    font-size: 1.4rem !important;
+}
+
+.content-end {
+    margin-right: auto !important;
 }
