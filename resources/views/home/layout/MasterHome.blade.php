@@ -45,6 +45,7 @@
     <script src="{{asset('assets/js/notify.js')}}"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe.min.js')}}"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe-ui-default.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('assets/js/main.min.js')}}"></script>
 
     @flasher_render
@@ -54,6 +55,39 @@
 
     @livewireScripts()
     @stack('scripts')
+    <script>
+    function delete_product_cart(id) {
+        console.log(id);
+        let url =
+            window.location.origin +
+            "/remove-from-cart" +
+            "/" + id;
+        console.log(url);
+
+        $.get(url,
+            function(response, status, xyz) {
+                console.log(status);
+                if (status == 'success') {
+                    let price = number_format(response);
+                    $(".price").html(price + ' ' + 'تومان');
+                    $("#" + id).remove();
+                    $("#header-cart-count").html(
+                        parseInt(
+                            $(
+                                "#header-cart-count"
+                            ).html(),
+                            10
+                        ) - 1
+                    );
+                    $.notify("محصول از سبد خرید حذف شد", "info", {
+                        position: "tap",
+                    });
+                }
+            }).fail(function() {
+            console.log(status)
+        })
+    }
+    </script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-xl-3 col-lg-2">
                     <a href="demo5.html" class="logo-footer">
-                        <img src="assets/images/demos/demo5/Logo-1.png" alt="logo-footer" width="145" height="45" />
+                        <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo-footer" width="145" height="45" />
                     </a>
                 </div>
                 <div class="col-xl-4 col-lg-5">
@@ -98,12 +98,12 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-left">
-                <p class="copyright">کپی رایت © 1400 فروشگاه وولـمارت. تمام حقوق سایت برای  محفوظ است..</p>
+                <p class="copyright">کپی رایت © 1400 فروشگاه وولـمارت. تمام حقوق سایت برای محفوظ است..</p>
             </div>
             <div class="footer-right">
                 <span class="payment-label mr-lg-8">پرداخت امن و مطمئن با </span>
                 <figure class="payment">
-                    <img src="assets/images/payment.png" alt="payment" width="159" height="25" />
+                    <img src="/assets/images/payment.png" alt="payment" width="159" height="25" />
                 </figure>
             </div>
         </div>

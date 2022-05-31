@@ -116,98 +116,97 @@
 
                                 <hr class="product-divider">
 
-                                <div class="product-price variation-price">
+                                <form class="cart-form" style="display:inline">
 
-                                    @if ($product->quantity_check)
+                                    <div class="product-price variation-price">
 
-                                    @if ($product->sale_check)
+                                        @if ($product->quantity_check)
 
-                                    <ins class="new-price">{{number_format($product->sale_check->sale_price)}}
-                                        تومان</ins>
+                                        @if ($product->sale_check)
 
-                                    <del class="old-price">{{number_format($product->sale_check->price)}}
-                                        تومان</del>
-                                    @else
-                                    <ins class="new-price">{{ number_format($product->price_check->price) }}
-                                        تومان</ins>
-                                    @endif
-                                    @else
-                                    <ins class="new-price">نا موجود</ins>
+                                        <ins class="new-price">{{number_format($product->sale_check->sale_price)}}
+                                            تومان</ins>
 
-                                    @endif
-                                </div>
+                                        <del class="old-price">{{number_format($product->sale_check->price)}}
+                                            تومان</del>
+                                        @else
+                                        <ins class="new-price">{{ number_format($product->price_check->price) }}
+                                            تومان</ins>
+                                        @endif
+                                        @else
+                                        <ins class="new-price">نا موجود</ins>
 
-                                <div class="ratings-container">
-                                    <div class="ht-product-ratting-wrap mt-4">
-                                        <div data-rating-stars="5" data-rating-readonly="true"
-                                            data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                        @endif
+                                    </div>
+
+                                    <div class="ratings-container">
+                                        <div class="ht-product-ratting-wrap mt-4">
+                                            <div data-rating-stars="5" data-rating-readonly="true"
+                                                data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                            </div>
+                                        </div>
+                                        <a href="#product-tab-reviews"
+                                            class="rating-reviews">({{$product->approvedComments()->count()}} نظر )</a>
+                                    </div>
+
+
+
+                                    <div class="product-short-desc">
+                                        <ul class="list-type-check list-style-none">
+
+                                            <li>
+                                                {{$product->description}};
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <hr class="product-divider">
+                                    @foreach ($product->attributes()->with('attribute')->get() as $attribute )
+                                    <div class="product-form product-variation-form product-color-swatch">
+                                        <label>{{$attribute->attribute->name}}:</label>
+                                        <div class="d-flex align-items-center product-variations">
+                                            {{$attribute->value}}
                                         </div>
                                     </div>
-                                    <a href="#product-tab-reviews"
-                                        class="rating-reviews">({{$product->approvedComments()->count()}} نظر )</a>
-                                </div>
+                                    @endforeach
 
 
 
-                                <div class="product-short-desc">
-                                    <ul class="list-type-check list-style-none">
+                                    @php
+                                    if($product->sale_check)
+                                    {
+                                    $variationProductSelected = $product->sale_check;
+                                    }else{
+                                    $variationProductSelected = $product->price_check;
+                                    }
+                                    @endphp
 
-                                        <li>
-                                            {{$product->description}};
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <div class="product-form product-variation-form product-size-swatch">
+                                        <label
+                                            class="mb-1">{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}
+                                            : </label>
+                                        <div class="flex-wrap d-flex align-items-center product-variations">
+                                            <select name="variation_id" id="var-select" class="select-var">
 
-                                <hr class="product-divider">
-                                @foreach ($product->attributes()->with('attribute')->get() as $attribute )
-                                <div class="product-form product-variation-form product-color-swatch">
-                                    <label>{{$attribute->attribute->name}}:</label>
-                                    <div class="d-flex align-items-center product-variations">
-                                        {{$attribute->value}}
+                                                @foreach ($product->variations()->where('quantity', '>' , 0)->get() as
+                                                $variation )
+                                                <option
+                                                    value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
+                                                    {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
+                                                    {{$variation->value}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                @endforeach
 
 
+                                    <button class="btn btn-primary btn-cart" style="margin-top: 8px; margin-right:20rem"
+                                        type="submit">
+                                        <i class="w-icon-cart"></i>
+                                        <span>افزودن به سبد </span>
+                                    </button>
 
-                                @php
-                                if($product->sale_check)
-                                {
-                                $variationProductSelected = $product->sale_check;
-                                }else{
-                                $variationProductSelected = $product->price_check;
-                                }
-                                @endphp
-
-                                <div class="product-form product-variation-form product-size-swatch">
-                                    <label
-                                        class="mb-1">{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}
-                                        : </label>
-                                    <div class="flex-wrap d-flex align-items-center product-variations">
-                                        <select id="var-select">
-
-                                            @foreach ($product->variations()->where('quantity', '>' , 0)->get() as
-                                            $variation )
-                                            <option
-                                                value="{{ json_encode($variation->only(['id' , 'sku' , 'quantity','is_sale' , 'sale_price' , 'price'])) }}"
-                                                {{ $variationProductSelected->id == $variation->id ? 'selected' : '' }}>
-                                                {{$variation->value}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="fix-bottom product-sticky-content sticky-content">
-                                    <div class="product-form container">
-                                        <input class="numberstyle" style="background-color: #ececec ; color:#666666"
-                                            type="number" min="1" step="1" value="1" readonly>
-
-                                        <button class="btn btn-primary btn-cart" style="margin-top: 8px;">
-                                            <i class="w-icon-cart"></i>
-                                            <span>افزودن به سبد </span>
-                                        </button>
-                                    </div>
-                                </div>
+                                </form>
                                 <div class="social-links-wrapper">
                                     <div class="social-links">
                                         <div class="social-icons social-no-color border-thin">
@@ -948,12 +947,14 @@ function reply(id) {
     };
     $('.numberstyle').numberstyle();
 
-
-
 }(jQuery));
 </script>
+
 @endpush
 @push('styles')
+<style>
+
+</style>
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/number.css')}}" />
 
 @endpush

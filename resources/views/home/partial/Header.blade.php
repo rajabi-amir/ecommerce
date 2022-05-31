@@ -13,7 +13,9 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 @auth
                 <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
                 <a href="#language"><i class="w-icon-account"></i>{{Auth::user()->name}} </a>
-                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
+                <a href="{{route('logout')}}"
+                    onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i
+                        class="w-icon-power-off"></i> خروج</a>
                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -69,9 +71,12 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 </a>
                 <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
                     <div class="cart-overlay"></div>
-                    <a href="#" class="cart-toggle label-down link">
+                    <a href="{{route('home.cart.index')}}" class="cart-toggle label-down link">
+
                         <i class="w-icon-cart">
-                            <span class="cart-count">2</span>
+
+                            <span class="cart-count" id="header-cart-count">{{Cart::getContent()->count()}}</span>
+
                         </i>
                         <span class="cart-label">سبد خرید </span>
                     </a>
@@ -80,54 +85,46 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                             <span>سبد خرید فروشگاه </span>
                             <a href="#" class="btn-close">بستن <i class="w-icon-long-arrow-left"></i></a>
                         </div>
-
                         <div class="products">
-                            <div class="product product-cart">
-                                <div class="product-detail">
-                                    <a href="product-default.html" class="product-name">لوازم آرایشی <br>با کیف چرم </a>
-                                    <div class="price-box">
-                                        <span class="product-quantity">1</span>
-                                        <span class="product-price">250000 تومان</span>
-                                    </div>
-                                </div>
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-1.jpg" alt="product" height="84"
-                                            width="94" />
-                                    </a>
-                                </figure>
-                                <button class="btn btn-link btn-close">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
 
-                            <div class="product product-cart">
+                            @if (! \Cart::isEmpty())
+                            @foreach (\Cart::getContent() as $item)
+                            <div class="product product-cart" id="{{$item->id}}">
                                 <div class="product-detail">
-                                    <a href="product-default.html" class="product-name">زود پز <br>استیل برقی </a>
+                                    <a href="product-default.html" class="product-name">{{$item->name}} -
+                                        <span>{{$item->attributes->value}}</span></a>
+
                                     <div class="price-box">
-                                        <span class="product-quantity">1</span>
-                                        <span class="product-price">320000 تومان</span>
+                                        <span class="product-quantity">{{$item->quantity}} </span>
+                                        <span class="product-price">{{number_format($item->price)}} تومان</span>
                                     </div>
                                 </div>
                                 <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="/assets/images/cart/product-2.jpg" alt="product" width="84"
-                                            height="94" />
+                                    <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
+                                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
+                                            alt="product" height="84" width="94" />
                                     </a>
                                 </figure>
-                                <button class="btn btn-link btn-close">
+                                <button class="btn btn-link btn-close"
+                                    onclick="return delete_product_cart('{{$item->id}}')">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
+                            @endforeach
+                            @endif
                         </div>
 
                         <div class="cart-total">
                             <label>مجموع کل: </label>
-                            <span class="price">570000 تومان</span>
+                            <span class="price">
+                                {{number_format(\Cart::getTotal())}}
+
+                                تومان</span>
                         </div>
 
                         <div class="cart-action">
-                            <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">نمایش سبد </a>
+                            <a href="{{route('home.cart.index')}}" class="btn btn-dark btn-outline btn-rounded">نمایش
+                                سبد </a>
                             <a href="checkout.html" class="btn btn-primary  btn-rounded">پرداخت </a>
                         </div>
                     </div>
@@ -142,8 +139,10 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
         <div class="container">
             <div class="inner-wrap">
                 <div class="header-left">
-                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}" data-visible="true">
-                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
+                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}"
+                        data-visible="true">
+                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
                             <i class="w-icon-category"></i>
                             <span>دسته بندیها </span>
                         </a>
@@ -161,7 +160,8 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                         <li>
                                             <ul>
                                                 @foreach ($category->children as $ChildrenCategory )
-                                                <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
+                                                <li><a
+                                                        href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
                                                     </a>
                                                 </li>
                                                 @endforeach

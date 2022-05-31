@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
@@ -101,7 +102,15 @@ Route::prefix('profile')->name('home.')->group(function () {
 
 
 Route::get('/add-to-compare/{product:id}', [CompareController::class, 'add'])->name('home.compare.add');
+
 Route::get('/compare',[CompareController::class, 'index'])->name('home.compare.index');
 Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
 
- 
+//cart
+Route::post('/add-to-cart', [CartController::class, 'add'])->name('home.cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('home.cart.index');
+Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
+Route::get('/test', function () {
+  \Cart::clear();
+  //  dd(\Cart::getContent()) ;
+});

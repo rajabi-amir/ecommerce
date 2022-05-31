@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+       
 
         /*
          * Package Service Providers...
@@ -178,7 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class
+        App\Providers\FortifyServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
 
     ],
 
@@ -195,7 +197,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Verta' => Hekmatinasser\Verta\Verta::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     ])->toArray(),
 
 ];

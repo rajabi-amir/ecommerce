@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "cviebrock/eloquent-sluggable": "^9.0",
+        "darryldecode/cart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^2.1",
         "intervention/image": "^2.7",

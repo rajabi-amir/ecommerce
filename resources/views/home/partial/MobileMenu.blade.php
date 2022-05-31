@@ -1,5 +1,5 @@
 @php
-    $categories = \App\Models\Category::where('parent_id', 0)->get();
+$categories = \App\Models\Category::where('parent_id', 0)->get();
 @endphp
 <div class="mobile-menu-wrapper">
     <div class="mobile-menu-overlay"></div>
@@ -162,7 +162,7 @@
                             <li><a href="error-404.html">ارور 404 </a></li>
                             <li><a href="coming-soon.html">به زودی </a></li>
                             <li><a href="wishlist.html">علاقه مندیها </a></li>
-                            <li><a href="cart.html">سبد خرید </a></li>
+                            <li><a href="{{route('home.cart.index')}}">سبد خرید </a></li>
                             <li><a href="checkout.html">پرداخت </a></li>
                             <li><a href="my-account.html">حساب کاربری من </a></li>
                         </ul>
