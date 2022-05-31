@@ -37,15 +37,18 @@
                             @else
                             <tbody>
                                 <input type="number" wire:model='quantitypro'>
-                                {{$quantitypro}}
+
                                 @foreach($cartitems as $item)
+                                @php
+                                $id=$item->attributes->product_id;
+                                $product=\App\Models\Product::find($id);
+                                @endphp
                                 <tr>
                                     <td class="product-thumbnail">
                                         <div class="p-relative">
-                                            <a
-                                                href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
+                                            <a href="{{route('home.products.show',['product'=>$product->slug])}}">
                                                 <figure>
-                                                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
+                                                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                                         alt="product" width="300" height="338">
                                                 </figure>
                                             </a>
@@ -54,8 +57,7 @@
                                         </div>
                                     </td>
                                     <td class="product-name">
-                                        <a
-                                            href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
+                                        <a href="{{route('home.products.show',['product'=>$product->slug])}}">
                                             {{$item->name}}
                                         </a>
                                     </td>

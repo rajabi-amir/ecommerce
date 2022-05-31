@@ -13,7 +13,7 @@ class ShowCart extends Component
     public function mount()
     {
         $this->cartitems = \Cart::getContent();
-        dd(\Cart::getContent());
+       
     }
 
     public function change()
