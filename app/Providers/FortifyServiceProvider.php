@@ -6,6 +6,10 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+
+use App\Http\Responses\PasswordResetResponse;
+use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseContract;
+
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -23,11 +27,26 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Fortify::loginView(function () {
+            return view('home.auth.login');
+        });
+        
+        Fortify::registerView(function () {
+            return view('home.auth.login');
+        });
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {
                 return redirect()->back();
             }
+        });
+
+        Fortify::resetPasswordView(function ($request) {
+            return view('home.auth.reset-password', ['request' => $request]);
+        });
+
+        Fortify::verifyEmailView(function () {
+            return view('home.auth.verify-email');
         });
     }
 
@@ -52,5 +71,8 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+
+        $this->app->singleton(PasswordResetResponseContract::class, PasswordResetResponse::class);
+
     }
 }

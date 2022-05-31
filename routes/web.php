@@ -71,7 +71,7 @@ Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product
 //end
 
 
- 
+
 
 // home routes
 Route::get('/',[HomeController::class , 'index'])->name('home');

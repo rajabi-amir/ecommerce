@@ -1,4 +1,7 @@
 {
+    "Hello!":"سلام!",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:":"اگر شما مشکلی در کلیک دکمه \":actionText\" دارید، لینک زیر را در مرورگر خود کپی و بر روی آن کلیک کنید:",
+    "Regards":"با احترام",
     "Reset Password Notification": "بازیابی رمز عبور",
     "You are receiving this email because we received a password reset request for your account.": "شما این ایمیل را برای بازیابی رمز عبور از ما دریافت کرده اید.",
     "Reset Password": "بازیابی رمز عبور",

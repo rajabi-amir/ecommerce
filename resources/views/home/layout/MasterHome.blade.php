@@ -7,7 +7,7 @@
     @livewireStyles()
 </head>
 
-<body @class(['my-account'=> request()->routeIs('home.user_profile')])>
+<body dir="rtl" @class(['my-account'=> request()->routeIs('home.user_profile')])>
     <div class="page-wrapper">
 
         @include('home.partial.Header')
@@ -29,7 +29,6 @@
     @include('home.partial.login')
 
 
-
     <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/sticky/sticky.min.js')}}"></script>
 
@@ -43,6 +42,7 @@
     <script src="{{asset('assets/vendor/skrollr/skrollr.min.js')}}"></script>
     <script src="{{asset('assets/js/rating.js')}}"></script>
     <script src="{{asset('assets/js/notify.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe.min.js')}}"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe-ui-default.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

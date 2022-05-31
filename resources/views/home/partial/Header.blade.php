@@ -21,10 +21,12 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 </form>
                 @endauth
                 @guest
+                @if (!request()->routeIs('login') && !request()->routeIs('register'))
                 <a href="#login-popup" class="d-lg-show login sign-in"><i class="w-icon-account"></i>ورود
                 </a>
                 <span class="delimiter d-lg-show">/</span>
                 <a href="#login-popup" class="ml-0 d-lg-show login register">ثبت نام </a>
+                @endif
                 @endguest
             </div>
         </div>
