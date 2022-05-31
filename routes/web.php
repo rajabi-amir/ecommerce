@@ -20,6 +20,7 @@ use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
+use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductSearch;
 use App\Http\Livewire\Home\ProductsList;
 use App\Models\WishList;
@@ -108,7 +109,9 @@ Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'
 
 //cart
 Route::post('/add-to-cart', [CartController::class, 'add'])->name('home.cart.add');
-Route::get('/cart', [CartController::class, 'index'])->name('home.cart.index');
+
+Route::get('/cart', ShowCart::class)->name('home.cart.index');
+
 Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
 Route::get('/test', function () {
   \Cart::clear();

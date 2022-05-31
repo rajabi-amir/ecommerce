@@ -186,8 +186,7 @@
                                             class="mb-1">{{App\Models\Attribute::find($product->variations->first()->attribute_id)->name}}
                                             : </label>
                                         <div class="flex-wrap d-flex align-items-center product-variations">
-                                            <select name="variation_id" id="var-select" class="select-var">
-
+                                            <select name="variation" id="var-select" class="select-var">
                                                 @foreach ($product->variations()->where('quantity', '>' , 0)->get() as
                                                 $variation )
                                                 <option
@@ -198,14 +197,20 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <input type="hidden" id="product_id" name="product" value="{{$product->id}}">
 
-
+                                    <div class="fix-bottom product-sticky-content sticky-content">
+                                        <div class="product-form container">
+                                            <input class="numberstyle" name="qtybutton" id="qtybutton"
+                                                style="background-color: #ececec ; color:#666666" type="number" min="1"
+                                                step="1" value="1" readonly>
+                                        </div>
+                                    </div>
                                     <button class="btn btn-primary btn-cart" style="margin-top: 8px; margin-right:20rem"
                                         type="submit">
                                         <i class="w-icon-cart"></i>
                                         <span>افزودن به سبد </span>
                                     </button>
-
                                 </form>
                                 <div class="social-links-wrapper">
                                     <div class="social-links">
@@ -952,9 +957,7 @@ function reply(id) {
 
 @endpush
 @push('styles')
-<style>
 
-</style>
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/number.css')}}" />
 
 @endpush
