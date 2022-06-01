@@ -45,5 +45,46 @@ function convert($string) {
 }
 }
 
+if (!function_exists('cartTotalSaleAmount')) {
+    function cartTotalSaleAmount()
+    {
+        $cartTotalSaleAmount = 0;
+        foreach (\Cart::getContent() as $item) {
+            if ($item->attributes->is_sale) {
+                $cartTotalSaleAmount += $item->quantity * ($item->attributes->price - $item->attributes->sale_price);
+            }
+        }
+
+        return $cartTotalSaleAmount;
+    }
+}
+
+if (!function_exists('cartTotalDeliveryAmount')) {
+    function cartTotalDeliveryAmount()
+    {
+        $cartTotalDeliveryAmount = 0;
+        foreach (\Cart::getContent() as $item) {
+            $cartTotalDeliveryAmount += $item->associatedModel->delivery_amount;
+        }
+
+        return $cartTotalDeliveryAmount;
+    }
+}
+
+if (!function_exists('cartTotalAmount')) {
+    function cartTotalAmount()
+    {
+        if (session()->has('coupon')) {
+            if (session()->get('coupon.amount') > (\Cart::getTotal() + cartTotalDeliveryAmount())) {
+                return 0;
+            } else {
+                return (\Cart::getTotal() + cartTotalDeliveryAmount()) - session()->get('coupon.amount');
+            }
+        } else {
+            return \Cart::getTotal() + cartTotalDeliveryAmount();
+        }
+    }
+}
+
 
 ?>

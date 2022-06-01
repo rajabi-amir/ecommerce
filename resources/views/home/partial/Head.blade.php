@@ -42,6 +42,8 @@ WebFontConfig = {
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/magnific-popup/magnific-popup.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/photoswipe/photoswipe.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/photoswipe/default-skin/default-skin.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/number.css')}}" />
+
 
 @if (request()->routeIs('home'))
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/demo5.min.css')}}" />

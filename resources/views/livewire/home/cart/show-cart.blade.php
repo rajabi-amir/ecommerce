@@ -23,6 +23,7 @@
                                 <tr>
                                     <th class="product-name"><span>محصول </span></th>
                                     <th></th>
+                                    <th>ویژگی</th>
                                     <th class="product-price"><span>قیمت</span></th>
                                     <th class="product-quantity"><span>تعداد</span></th>
                                     <th class="product-subtotal"><span>جمع کل</span></th>
@@ -36,48 +37,70 @@
                             </tbody>
                             @else
                             <tbody>
-                                <input type="number" wire:model='quantitypro'>
 
-                                @foreach($cartitems as $item)
-                                @php
-                                $id=$item->attributes->product_id;
-                                $product=\App\Models\Product::find($id);
-                                @endphp
-                                <tr>
+
+                                @foreach($cartitems->sort() as $item)
+
+                                <tr wire:key="cart-'{{$item->id}}'">
+                                    @php
+                                    $quantity = $item->quantity;
+                                    @endphp
                                     <td class="product-thumbnail">
                                         <div class="p-relative">
-                                            <a href="{{route('home.products.show',['product'=>$product->slug])}}">
+                                            <a
+                                                href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                                 <figure>
-                                                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
+                                                    <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
                                                         alt="product" width="300" height="338">
                                                 </figure>
                                             </a>
-                                            <button type="submit" class="btn btn-close"><i
+                                            <button type="submit" class="btn btn-close"
+                                                wire:click="delete('{{$item->id}}')"><i
                                                     class="fas fa-times"></i></button>
                                         </div>
                                     </td>
                                     <td class="product-name">
-                                        <a href="{{route('home.products.show',['product'=>$product->slug])}}">
+                                        <a
+                                            href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                             {{$item->name}}
                                         </a>
                                     </td>
+                                    <td class="product-name">
+                                        {{ \App\Models\Attribute::find($item->attributes->attribute_id)->name }}
+                                        :
+                                        {{ $item->attributes->value }}
+                                    </td>
                                     <td class="product-price"><span class="amount"
-                                            id="amount">{{number_format($item->price)}}
-                                            تومان</span></td>
-                                    <span id="price-1" hidden>{{$item->price}}</span>
+                                            id="amount">{{ number_format($item->price) }}
+                                            تومان
+                                        </span>
+                                        @if($item->attributes->is_sale)
+                                        <p style="font-size: 12px ; color:red">
+                                            {{ $item->attributes->percent_sale }}%
+                                            تخفیف
+                                        </p>
+                                        @endif
+
+
                                     <td class="product-quantity">
                                         <div class="input-group">
-                                            <input class="quantity form-control" id="quantity-1"
-                                                value="{{$item->quantity}}" type="number" min="1"
-                                                max="{{$item->attributes->quantity}}">
-                                            <button class="quantity-plus w-icon-plus"></button>
-                                            <button class="quantity-minus w-icon-minus"></button>
-                                        </div>
+                                            <input class="quantity form-control" readonly value="{{$item->quantity}}"
+                                                type="number" min="1" max="{{$item->attributes->quantity}}">
 
+
+                                            <button class="quantity-plus w-icon-plus" wire:loading.attr="disabled"
+                                                wire:click="increment('{{$item->id}}')"></button>
+
+
+                                            <button class="quantity-minus w-icon-minus" wire:loading.attr="disabled"
+                                                wire:click="decrement('{{$item->id}}')"></button>
+                                        </div>
                                     </td>
+                                    <span wire:loading>loading ...</span>
+
                                     <td class="product-subtotal">
                                         <span class="amount" id="product-subtotal">
-
+                                            {{number_format($item->price*$item->quantity)}}
                                             تومان
                                         </span>
                                     </td>
@@ -92,10 +115,9 @@
                             <a href="{{route('home')}}"
                                 class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i
                                     class="w-icon-long-arrow-right"></i>ادامه خرید </a>
-                            <button type="submit" class="btn btn-rounded btn-default btn-clear" name="clear_cart"
-                                value="پاک کردن سبد">پاک کردن سبد </button>
-                            <button type="submit" class="btn btn-rounded btn-update disabled" name="update_cart"
-                                value="بروزرسانی سبد">بروزرسانی سبد</button>
+                            <button type="submit" class="btn btn-rounded btn-default btn-clear" wire:click="clearCart()"
+                                name="clear_cart" value="پاک کردن سبد">پاک کردن سبد </button>
+
                         </div>
 
                         <form class="coupon">
@@ -107,34 +129,48 @@
                     <div class="col-lg-4 sticky-sidebar-wrapper">
                         <div class="sticky-sidebar">
                             <div class="cart-summary mb-4">
-                                <h3 class="cart-title text-uppercase">مجموع سبد خرید</h3>
+                                <center>
+                                    <h3 class="cart-title text-uppercase">مجموع سبد خرید</h3>
+                                </center>
                                 <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                    <label class="ls-25">جمع کل</label>
-                                    <span>100000 تومان</span>
+                                    <label class="ls-25">مبلغ سفارش</label>
+                                    <span>{{ number_format( \Cart::getTotal() + cartTotalSaleAmount() ) }}
+                                        تومان</span>
                                 </div>
 
                                 <hr class="divider">
 
                                 <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                    <label class="ls-25">جمع کل</label>
-                                    <span>100000 تومان</span>
+                                    <label class="ls-25">مبلع تخفیف کالا ها</label>
+                                    <span>{{ number_format( cartTotalSaleAmount() ) }}
+                                        تومان</span>
                                 </div>
 
                                 <hr class="divider">
 
                                 <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                    <label class="ls-25">جمع کل</label>
-                                    <span>100000 تومان</span>
+                                    <label class="ls-25">کد تخیف</label>
+                                    <span>{{ number_format( session()->get('coupon.amount') ) }}
+                                        تومان</span>
                                 </div>
 
                                 <hr class="divider">
                                 <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                    <label class="ls-25">جمع کل</label>
-                                    <span>100000 تومان</span>
+                                    <label class="ls-25">هزینه ارسال</label>
+                                    <span>@if(cartTotalDeliveryAmount() == 0)
+                                        <span style="color: red">
+                                            رایگان
+                                        </span>
+                                        @else
+                                        <span>
+                                            {{ number_format( cartTotalDeliveryAmount() ) }}
+                                            تومان
+                                        </span>
+                                        @endif</span>
                                 </div>
 
-                                <hr class="divider">
 
+                                <hr class="divider">
                                 <ul class="shipping-methods mb-2">
 
                                 </ul>
@@ -142,7 +178,8 @@
                                 <hr class="divider mb-6">
                                 <div class="order-total d-flex justify-content-between align-items-center">
                                     <label>مجموع خرید</label>
-                                    <span class="ls-50">100000 تومان</span>
+                                    <span class="ls-50"><span>{{ number_format( cartTotalAmount() ) }}
+                                            تومان</span></span>
                                 </div>
                                 <a href="#" class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
                                     برای تسویه حساب ادامه دهید<i class="w-icon-long-arrow-left"></i></a>

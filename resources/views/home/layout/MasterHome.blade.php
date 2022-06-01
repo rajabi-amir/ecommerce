@@ -4,6 +4,7 @@
 <head>
     @include('home.partial.Head')
     @stack('styles')
+
     @livewireStyles()
 </head>
 
@@ -73,7 +74,7 @@
     }
 
     function delete_product_cart(id) {
-        console.log(id);
+
         let url =
             window.location.origin +
             "/remove-from-cart" +
@@ -84,6 +85,8 @@
             function(response, status, xyz) {
                 console.log(status);
                 if (status == 'success') {
+
+
                     let price = number_format(response);
                     $(".price").html(price + ' ' + 'تومان');
                     $("#" + id).remove();
@@ -98,18 +101,36 @@
                     $.notify("محصول از سبد خرید حذف شد", "info", {
                         position: "tap",
                     });
+                    Livewire.emit('delete', id);
                 }
             }).fail(function() {
             console.log(status)
         })
     }
     </script>
+    <script>
+    window.addEventListener('say-goodbye', event => {
+        $("#header-cart-count").html(
+            parseInt(
+                $(
+                    "#header-cart-count"
+                ).html(),
+                10
+            ) - 1
+        );
 
-    @flasher_render
+        $("#" + event.detail.rowId).remove();
+
+        $(".price").remove();
+
+    });
+    </script>
+
     @flasher_livewire_render
 
-    @include('sweetalert::alert')
+    @flasher_render
 
+    @include('sweetalert::alert')
     @livewireScripts()
     @stack('scripts')
 

@@ -29,14 +29,13 @@ class CartController extends Controller
 
         $rowId = $product->id . '-' . $productVariation->id;
 
-
         if (Cart::get($rowId) == null) {
             Cart::add(array(
                 'id' => $rowId,
                 'name' => $product->name,
                 'price' => $productVariation->is_sale ? $productVariation->sale_price : $productVariation->price,
                 'quantity' => $request->qtybutton,
-                'attributes' => $productVariation,
+                'attributes' => $productVariation->toArray(),
                 'associatedModel' => $product
             ));
            return response()->json(['product'=>$product,'rowId'=>$rowId , 'cart' => Cart::getContent($rowId) , 'rowId' =>$rowId , 'all_cart' => Cart::getTotal()],200);    
