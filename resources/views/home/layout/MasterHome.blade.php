@@ -98,8 +98,13 @@
                             10
                         ) - 1
                     );
-                    $.notify("محصول از سبد خرید حذف شد", "info", {
-                        position: "tap",
+                    Swal.fire({
+                        title: "حله",
+                        text: " محصول حذف شد",
+                        icon: "success",
+                        timer: 1500,
+                        ConfirmButton: "باشه",
+
                     });
                     Livewire.emit('delete', id);
                 }

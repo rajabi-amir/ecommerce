@@ -37,7 +37,7 @@ class ShowCart extends Component
            
             if(\Cart::remove($rowId)){
                 \Cart::remove($rowId);
-            toastr()->livewire()->addError('محصول قبلا از سبد خرید حذف شده ');
+            toastr()->livewire()->addError('محصول از سبد خرید حذف شده ');
     
             }
         }   
@@ -51,7 +51,7 @@ class ShowCart extends Component
                 ]);
         }else{
                 \Cart::remove($rowId);
-                toastr()->livewire()->addError('محصول قبلا از سبد خرید حذف شده ');
+                toastr()->livewire()->addError('محصول از سبد خرید حذف شده ');
         }
     }
 
@@ -65,7 +65,7 @@ class ShowCart extends Component
             toastr()->livewire()->addSuccess('محصول مورد نظر حذف گردید');
             }else{
             \Cart::remove($rowId);
-            toastr()->livewire()->addError('محصول قبلا از سبد خرید حذف شده ');
+            toastr()->livewire()->addError('محصول از سبد خرید حذف شده ');
     }
       
 
