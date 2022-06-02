@@ -9,8 +9,12 @@ class ShowCart extends Component
     
     public $price;
     public $quantity;
+    public $code;
     protected $listeners = ['delete' => 'delete'];
-
+    
+    protected $rules = [
+        'code' => 'required|exists:coupons,code',
+    ];
     
     public function mount()
     {
@@ -77,6 +81,28 @@ class ShowCart extends Component
         \Cart::clear();
         toastr()->livewire()->addSuccess('سبد خرید حذف شد');
 
+    }
+
+    
+    //coupon
+    public function checkCoupon()
+    {
+        $this->validate([
+            'code' => 'required|exists:coupons,code',
+        ]);
+        
+  
+
+        if (!auth()->check()) {
+           return toastr()->livewire()->addError('برای استفاده از کد تخفیف نیاز هست ابتدا وارد وب سایت شوید');
+        }
+
+        $result = checkCoupon($this->code);
+        if (array_key_exists('error', $result)) {
+            return toastr()->livewire()->addError($result['error']);
+        } else {
+            return toastr()->livewire()->addSuccess($result['success']);
+        }
     }
     
 

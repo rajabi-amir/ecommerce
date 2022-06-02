@@ -16,6 +16,7 @@
                     </div>
                 </div>
             </td>
+
             <td>
                 <div class="form-group row mr-1" id="search-item">
                     <label for="inputEmail3" class="col-11 col-form-label">جستجو </label>
@@ -45,8 +46,6 @@
                 </ul>
             </li>
 
-
-
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
                         ها</span></a>
                 <ul class="ml-menu">
@@ -54,6 +53,15 @@
                     <li><a href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
                 </ul>
             </li>
+
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>کد
+                        تخفیف</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.coupons.index') }}>لیست</a></li>
+                    <li><a href={{ route('admin.coupons.create') }}>ایجاد کد تخفیف</a></li>
+                </ul>
+            </li>
+
             <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i
                         class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
                 <ul class="ml-menu">

@@ -18,7 +18,7 @@ class CreateCouponsTable extends Migration
 
             $table->string('name');
             $table->string('code');
-
+            $table->boolean('is_active')->default(1);
             $table->enum('type' , ['amount' , 'percentage']);
 
             $table->unsignedInteger('amount')->nullable();

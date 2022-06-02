@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Coupon;
+use App\Models\Order;
 use Carbon\Carbon;
 
 if (!function_exists('generateImageName')) {
@@ -83,6 +85,35 @@ if (!function_exists('cartTotalAmount')) {
         } else {
             return \Cart::getTotal() + cartTotalDeliveryAmount();
         }
+    }
+}
+
+if (!function_exists('checkCoupon')) {
+    function checkCoupon($code)
+    {
+        $coupon = Coupon::where('code', $code)->where('expired_at', '>', Carbon::now())->first();
+
+        if ($coupon == null) {
+            session()->forget('coupon');
+            return ['error' => 'کد تخفیف وارد شده وجود ندارد'];
+        }
+
+        if (Order::where('user_id', auth()->id())->where('coupon_id', $coupon->code)->where('payment_status', 1)->exists()) {
+            session()->forget('coupon');
+            return ['error' => 'شما قبلا از این کد تخفیف استفاده کرده اید'];
+        }
+
+        if ($coupon->getRawOriginal('type') == 'amount') {
+            session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
+        } else {
+            $total = \Cart::getTotal();
+
+            $amount = (($total * $coupon->percentage) / 100) > $coupon->max_percentage_amount ? $coupon->max_percentage_amount : (($total * $coupon->percentage) / 100);
+
+            session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $amount]);
+        }
+
+        return ['success' => 'کد تخفیف برای شما ثبت شد'];
     }
 }
 

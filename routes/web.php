@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
@@ -50,6 +51,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('/services', ServiceController::class)->except(['show']);
     Route::resource('/posts', PostController::class)->except('show');
     Route::resource('/comments', CommentController::class);
+    Route::resource('/coupons', CouponController::class);
     Route::get('tags/create', [TagControll::class, "createTag"])->name('tags.create');
     Route::resource('products', ProductController::class);
     Route::view('/dashboard', 'admin.page.dashboard')->name('home');
