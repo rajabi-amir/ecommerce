@@ -121,12 +121,14 @@
                         </div>
 
                         <form class="coupon" wire:submit.prevent="checkCoupon">
-                            <h5 class="title coupon-title font-weight-bold text-uppercase">انواع کد تخفیف </h5>
+                            <h5 class="title coupon-title font-weight-bold text-uppercase">کد تخفیف </h5>
                             <input type="text" wire:model.defer="code" class="form-control mb-4"
-                                placeholder="وارد کردن کد تخفیف..." />
-                            @error('code') <span class="error">{{ $message }}</span> @enderror
+                                placeholder="کد تخفیف را وارد کنید..." />
 
                             <button type="submit" class="btn btn-dark btn-outline btn-rounded">اعمال کد</button>
+                            @error('code') <span class="error"
+                                style="color: red; margin-right: 2rem;">{{ $message }}</span> @enderror
+
                         </form>
 
                     </div>

@@ -169,6 +169,7 @@ return array(
         "variation_values.quantity.2" => "3تعداد",
         "variation_values.sku.2" => "3شناسه انبار",
         "variation_values.price.2" => "3قیمت",
+        "code" => "کد تخفیف",
 
     ),
 );
