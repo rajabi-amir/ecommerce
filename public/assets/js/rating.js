@@ -68,9 +68,7 @@
             filledStar: "fas fa-star",
             color: "#fcd703",
             readonly: !1,
-            click: function (t) {
-                console.error("No click callback provided!");
-            },
+            click: function (t) {},
         };
         jQuery.fn.extend({
             rating: function (t = {}) {
