@@ -61,12 +61,12 @@
 
                 @endif
             </div>
-            <div class="ratings-container">
+            <!-- <div class="ratings-container">
 
                 <a class="btn btn-primary btn-outline btn-rounded btn-sm light"><i class="w-icon-cart"> </i> افزودن به
                     سبد
                     خرید</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

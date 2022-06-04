@@ -170,6 +170,10 @@ return array(
         "variation_values.sku.2" => "3شناسه انبار",
         "variation_values.price.2" => "3قیمت",
         "code" => "کد تخفیف",
+        "cellphone" => "شماره تماس",
+        "province_id" => "استان",
+        "city_id" => "شهر",
+        "postal_code" => "کد پستی",
 
     ),
 );

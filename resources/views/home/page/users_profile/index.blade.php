@@ -38,7 +38,7 @@
                         <a href="#account-downloads" class="nav-link">دانلودها </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#account-addresses" class="nav-link">آدرسها </a>
+                        <a href="{#account-addresses}" class="nav-link">آدرسها </a>
                     </li>
                     <li class="nav-item">
                         <a href="#account-details" class="nav-link">جزئیات حساب کاربری </a>
@@ -48,6 +48,9 @@
                     </li>
                     <li class="link-item">
                         <a href="{{route('home.profile.wishlist.index')}}">علاقه مندیها </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="{{route('home.addreses.index')}}">آدرس ها </a>
                     </li>
                     <li class="link-item">
                         <a href="login.html">خروج </a>

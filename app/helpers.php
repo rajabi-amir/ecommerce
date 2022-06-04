@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Province;
 use Carbon\Carbon;
 
 if (!function_exists('generateImageName')) {
@@ -115,7 +117,22 @@ if (!function_exists('checkCoupon')) {
 
         return ['success' => 'کد تخفیف برای شما ثبت شد'];
     }
+
 }
+
+if (!function_exists('province_name')) {
+    function province_name($provinceId)
+    {
+        return Province::findOrFail($provinceId)->name;
+    }
+}
+
+if (!function_exists('city_name')) {
+    function city_name($cityId)
+    {
+        return City::findOrFail($cityId)->name;
+    }
+    }
 
 
 ?>

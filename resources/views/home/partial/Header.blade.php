@@ -127,7 +127,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                         <div class="cart-action">
                             <a href="{{route('home.cart.index')}}" class="btn btn-dark btn-outline btn-rounded">نمایش
                                 سبد </a>
-                            <a href="checkout.html" class="btn btn-primary  btn-rounded">پرداخت </a>
+                            <a href="{{route('home.orders.checkout')}}" class="btn btn-primary  btn-rounded">پرداخت </a>
                         </div>
                     </div>
                     <!-- End of Dropdown Box -->
@@ -319,7 +319,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                     <li><a href="error-404.html">ارور 404 </a></li>
                                     <li><a href="coming-soon.html">به زودی </a></li>
                                     <li><a href="wishlist.html">علاقه مندیها </a></li>
-                                    <li><a href="cart.html">سبد خرید </a></li>
+                                    <li><a href="#">سبد خرید </a></li>
                                     <li><a href="checkout.html">پرداخت </a></li>
                                     <li><a href="my-account.html">حساب کاربری من </a></li>
                                     <li><a href="compare.html">مقایسه </a></li>

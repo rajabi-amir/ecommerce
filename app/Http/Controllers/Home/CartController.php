@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariation;
+use App\Models\Province;
+use App\Models\UserAddress;
 use Cart;
 use Illuminate\Http\Request;
 use SebastianBergmann\Environment\Console;
@@ -55,6 +57,19 @@ class CartController extends Controller
         Cart::remove($rowId);
         $prices=Cart::getTotal();
         return response($prices , 200);
+    }
+
+    public function checkout()
+    {
+        if (\Cart::isEmpty()) {
+            alert()->warning('سبد خرید شما خالی میباشد');
+            return redirect()->route('home');
+        }
+
+        $addresses = UserAddress::where('user_id', auth()->id())->get();
+        $provinces = Province::all();
+
+        return view('home.page.cart.checkout', compact('addresses' , 'provinces'));
     }
 
 }

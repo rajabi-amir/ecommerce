@@ -24,6 +24,7 @@ class CreateUserAddressesTable extends Migration
 
             $table->bigInteger('province_id');
             $table->bigInteger('city_id');
+            $table->bigInteger('cellphone');
 
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();

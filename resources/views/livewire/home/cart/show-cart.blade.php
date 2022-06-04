@@ -6,7 +6,7 @@
             <div class="container">
                 <ul class="breadcrumb shop-breadcrumb bb-no">
                     <li class="active"><a href="{{route('home.cart.index')}}">سبد خرید فروشگاه </a></li>
-                    <li><a href="checkout.html">پرداخت </a></li>
+                    <li><a href="{{route('home.orders.checkout')}}">پرداخت </a></li>
                     <li><a href="order.html">سفارش کامل شد</a></li>
                 </ul>
             </div>
@@ -106,6 +106,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
+
                             </tbody>
                             @endif
 
@@ -187,7 +188,8 @@
                                     <span class="ls-50"><span>{{ number_format( cartTotalAmount() ) }}
                                             تومان</span></span>
                                 </div>
-                                <a href="#" class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
+                                <a href="{{route('home.orders.checkout')}}"
+                                    class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
                                     برای تسویه حساب ادامه دهید<i class="w-icon-long-arrow-left"></i></a>
                             </div>
                         </div>
