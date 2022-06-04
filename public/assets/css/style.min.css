@@ -4940,7 +4940,8 @@ blockquote {
 
 .banner figure img {
     display: block;
-    width: 100%;
+    width: 50%;
+    margin: auto;
 }
 
 .banner .banner-content {
@@ -19341,8 +19342,8 @@ body .product-popup {
     Error 404
 --------------------------*/
 .error-404 {
-    padding-top: 14.5rem;
-    padding-bottom: 10rem;
+    padding-top: 4rem;
+    padding-bottom: 8rem;
     background-color: #f7f7f7;
 }
 
@@ -19352,7 +19353,7 @@ body .product-popup {
 }
 
 .error-404 .banner-content {
-    margin-top: 5.5rem;
+    /* margin-top: 5.5rem; */
 }
 
 .error-404 .banner-title {
@@ -22263,4 +22264,12 @@ button {
 
 .content-end {
     margin-right: auto !important;
+}
+
+input.without-spin::-webkit-inner-spin-button,
+input.without-spin::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }

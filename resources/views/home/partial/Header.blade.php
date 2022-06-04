@@ -12,8 +12,8 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                 @auth
                 <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
-                <a href="#language"><i class="w-icon-account"></i>{{Auth::user()->name}} </a>
-                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
+                <a href="#" class="font-size-md"><i class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}} </a>
+                <a href="{{route('logout')}}" class="font-size-md" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>

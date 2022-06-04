@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
@@ -21,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\ProductSearch;
 use App\Http\Livewire\Home\ProductsList;
+use App\Models\User;
 use App\Models\WishList;
+use App\Notifications\OtpSms;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +87,15 @@ Route::post('/comments/{product}', [HomeCommentController::class , 'store'])->na
 
 Route::post('/reply/store', [HomeCommentController::class , 'replyStore'])->name('reply.add');
 
+Route::get('test',function(){
+    $user=User::all()->first();
+    $user->notify(new OtpSms(465));
+    // return view('test');
+});
+// otp auth
+Route::post('/otp/verify', [OtpController::class , 'checkVerificationCode'])->name('otp.verify');
+Route::post('/otp/resend', [OtpController::class , 'resendVerificationCode'])->name('otp.resend');
+Route::post('/otp', [OtpController::class , 'sendVerificationCode'])->name('otp.auth');
 
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');
