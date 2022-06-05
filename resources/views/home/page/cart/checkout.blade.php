@@ -37,133 +37,133 @@
             </div>
             @endif
 
-            @if ($addresses->count() > 0)
 
-            <div class="icon-box-content">
-                <h4 class="title title-underline ls-25 font-weight-bold mt-3">
-                    ایجاد آدرس جدید </h4>
-            </div>
-            <form class="form checkout-form" action="#" method="post">
-                <div>
-                    <div class="col-lg-7 pr-lg-4 mb-4">
-                        <div class="row gutter-sm">
-                            <div class="col-xs-4">
-                                <div class="form-group">
-                                    <label>انتخاب آدرس</label>
-                                    <select class="form-control form-control-md">
-                                        @foreach ($addresses as $address)
-                                        <option value="{{$address->id}}">
-                                            {{$address->title}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="form-group">
-                                    <label>نام کوچک *</label>
-                                    <input type="text" class="form-control form-control-md" name="firstname" required>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="form-group">
-                                    <label>نام خانوادگی *</label>
-                                    <input type="text" class="form-control form-control-md" name="lastname" required>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form class="form account-details-form" action="{{route('home.addreses.store')}}" method="POST">
-                @csrf
+            <div>
                 <div class="row mb-9">
                     <div class="col-lg-7 pr-lg-4 mb-4">
-                        <div class="row gutter-sm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="firstname">عنوان *
-                                            @error('title')
-                                            <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
-                                            @enderror
-                                        </label>
-                                        <input type="text" id="firstname" name="title" value="{{old('title')}}"
-                                            class="form-control form-control-md">
+                        <form class="form account-details-form" action="{{route('home.addreses.store')}}" method="POST">
+                            @csrf
+                            <div class="row gutter-sm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstname">عنوان *
+                                                @error('title')
+                                                <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
+                                                @enderror
+                                            </label>
+                                            <input type="text" id="firstname" name="title" value="{{old('title')}}"
+                                                class="form-control form-control-md">
 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="cellphone">شماره تماس *
+                                                @error('cellphone')
+                                                <strong style="color: red;margin-right: 1rem">{{ $message }}</strong>
+                                                @enderror
+                                            </label>
+                                            <input type="text" id="cellphone" name="cellphone"
+                                                value="{{old('cellphone')}}" class="form-control form-control-md">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cellphone">شماره تماس *
-                                            @error('cellphone')
-                                            <strong style="color: red;margin-right: 1rem">{{ $message }}</strong>
-                                            @enderror
-                                        </label>
-                                        <input type="text" id="cellphone" name="cellphone" value="{{old('cellphone')}}"
-                                            class="form-control form-control-md">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="firstname">استان *
+                                                @error('province_id')
+                                                <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
+                                                @enderror
+                                            </label>
+                                            <select name="province_id"
+                                                class="form-control form-control-md province-select" id="province_id">
+                                                <option></option>
+                                                @foreach ($provinces as $province)
+                                                <option value="{{ $province->id }}">{{ $province->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="firstname">شهر *
+                                                @error('city_id')
+                                                <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
+                                                @enderror
+                                            </label>
+                                            <select class="form-control form-control-md city-select" name="city_id">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="postal_code">کد پستی *
+                                                @error('postal_code')
+                                                <strong style="color: red;margin-right: 1rem">{{ $message }}</strong>
+                                                @enderror
+                                            </label>
+                                            <input type="text" id="postal_code" name="postal_code"
+                                                value="{{old('postal_code')}}" class="form-control form-control-md">
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="display-name">آدرس *
+                                        @error('address')
+                                        <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
+                                        @enderror
+                                    </label>
+
+
+                                    <textarea name="address" id="address" cols="30" rows="6"
+                                        class="form-control form-control-md mb-0">{{old('cellphone')}}</textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">ایجاد آدرس</button>
+
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                        </form>
+
+                        <form class="form checkout-form" id="checkout" action="{{route('home.payment')}}" method="POST">
+
+                            @if ($addresses ->count() > 0)
+                            @csrf
+                            <div class="row gutter-sm">
+                                <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label for="firstname">استان *
-                                            @error('province_id')
-                                            <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
-                                            @enderror
-                                        </label>
-                                        <select name="province_id" class="form-control form-control-md province-select"
-                                            id="province_id">
-                                            <option></option>
-                                            @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}">{{ $province->name }}
-                                            </option>
+                                        <label>انتخاب آدرس</label>
+                                        <select class="form-control form-control-md">
+                                            @foreach ($addresses as $address)
+                                            <option value="{{$address->id}}">
+                                                {{$address->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label for="firstname">شهر *
-                                            @error('city_id')
-                                            <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
-                                            @enderror
-                                        </label>
-                                        <select class="form-control form-control-md city-select" name="city_id">
-                                        </select>
+                                        <label>نام کوچک *</label>
+                                        <input type="text" class="form-control form-control-md" name="firstname"
+                                            required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label for="postal_code">کد پستی *
-                                            @error('postal_code')
-                                            <strong style="color: red;margin-right: 1rem">{{ $message }}</strong>
-                                            @enderror
-                                        </label>
-                                        <input type="text" id="postal_code" name="postal_code"
-                                            value="{{old('postal_code')}}" class="form-control form-control-md">
+                                        <label>نام خانوادگی *</label>
+                                        <input type="text" class="form-control form-control-md" name="lastname"
+                                            required>
                                     </div>
                                 </div>
                             </div>
+                            @endif
 
-                            <div class="form-group mb-3">
-                                <label for="display-name">آدرس *
-                                    @error('address')
-                                    <strong style="color: red; margin-right: 1rem;">{{ $message }}</strong>
-                                    @enderror
-                                </label>
-
-
-                                <textarea name="address" id="address" cols="30" rows="6"
-                                    class="form-control form-control-md mb-0">{{old('cellphone')}}</textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">ایجاد آدرس</button>
-
-                        </div>
-
+                        </form>
                     </div>
+
                     <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
                         <div class="order-summary-wrapper sticky-sidebar">
                             <div class="order-summary">
@@ -328,14 +328,15 @@
                                 </div>
 
                                 <div class="form-group place-order pt-6">
-                                    <button type="submit" class="btn btn-dark btn-block btn-rounded">ثبت
+                                    <button type="submit" form="checkout" class="btn btn-dark btn-block btn-rounded">ثبت
                                         سفارش</button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <!-- End of PageContent -->
