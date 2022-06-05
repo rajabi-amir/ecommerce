@@ -16919,3 +16919,11 @@ button {
 .content-end {
     margin-right: auto !important;
 }
+
+input.without-spin::-webkit-inner-spin-button,
+input.without-spin::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}

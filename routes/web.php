@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
@@ -76,6 +77,10 @@ Route::post('/comments/{product}', [HomeCommentController::class , 'store'])->na
 
 Route::post('/reply/store', [HomeCommentController::class , 'replyStore'])->name('reply.add');
 
+// otp auth
+Route::post('/otp/verify', [OtpController::class , 'checkVerificationCode'])->name('otp.verify');
+Route::post('/otp/resend', [OtpController::class , 'resendVerificationCode'])->name('otp.resend');
+Route::post('/otp', [OtpController::class , 'sendVerificationCode'])->name('otp.auth');
 
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');
