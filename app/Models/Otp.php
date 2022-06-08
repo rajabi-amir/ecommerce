@@ -15,7 +15,7 @@ class Otp extends Model
 
     public $incrementing = false;
     protected $keyType = 'uuid';
-    // const EXPIRATION_TIME = env('OTP_TIME', 2); // minutes
+    protected $guarded = [];
     protected $fillable = [
         'id',
         'code',
@@ -23,6 +23,7 @@ class Otp extends Model
         'user_id',
         'used'
     ];
+
     public function __construct(array $attributes = [])
     {
         if (!isset($attributes['code'])) {
@@ -77,7 +78,7 @@ class Otp extends Model
      */
     public function isExpired()
     {
-        return $this->updated_at->diffInMinutes(Carbon::now()) > env('OTP_TIME', 2);
+        return $this->updated_at->diffInSeconds(Carbon::now()) > env('OTP_TIME', 2) * 60;
     }
     public function sendCode($phone = null, $resend = false)
     {

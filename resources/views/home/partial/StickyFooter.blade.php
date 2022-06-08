@@ -7,10 +7,16 @@
         <i class="w-icon-category"></i>
         <p>فروشگاه </p>
     </a>
+    @auth
     <a href="{{route('home.user_profile')}}" class="sticky-link">
         <i class="w-icon-account"></i>
         <p>حساب کاربری </p>
     </a>
+    @else
+    <a href="{{route('login')}}" class="sticky-link"><i class="w-icon-account"></i>
+        <p>ورود/ثبت نام</p>
+    </a>
+    @endauth
     <div class="cart-dropdown dir-up">
         <a href="{{route('home.cart.index')}}" class="sticky-link">
             <i class="w-icon-cart"></i>

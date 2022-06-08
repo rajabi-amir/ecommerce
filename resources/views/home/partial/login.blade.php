@@ -106,8 +106,7 @@ i<div id="login-popup" class="login-popup mfp-hide">
                     Swal.fire({
                         text: "خوش آمدید",
                         icon: 'success',
-                        timer: 5000,
-                        timerProgressBar: true,
+                        showConfirmButton: false
                     });
                     window.location.replace("{{request()->fullUrl()}}");
                 }, 'json').fail(function(response) {
@@ -227,9 +226,9 @@ i<div id="login-popup" class="login-popup mfp-hide">
                         }
                     });
                     // start count down
-                    var minutesToAdd = "{{env('OTP_TIME', 2)}}";
+                    var secondsToAdd = response.time_to_expire;
                     var currentDate = new Date();
-                    var futureDate = new Date(currentDate.getTime() + minutesToAdd * 60000);
+                    var futureDate = new Date(currentDate.getTime() + secondsToAdd * 1000);
                     $('#resendOtpTimer').countdown({
                         until: futureDate,
                         format: 'MS',
@@ -295,9 +294,9 @@ i<div id="login-popup" class="login-popup mfp-hide">
                     $('#resendOtp').addClass('d-none');
                     $('#resendOtpTimer').removeClass('d-none');
                     // start count down
-                    var minutesToAdd = "{{env('OTP_TIME', 2)}}";
+                    var secondsToAdd = response.time_to_expire;
                     var currentDate = new Date();
-                    var futureDate = new Date(currentDate.getTime() + minutesToAdd * 60000);
+                    var futureDate = new Date(currentDate.getTime() + secondsToAdd * 1000);
                     $('#resendOtpTimer').countdown({
                         until: futureDate,
                         format: 'MS',
@@ -349,7 +348,7 @@ i<div id="login-popup" class="login-popup mfp-hide">
                     '_token': "{{csrf_token()}}",
                     'code': $('#otp-verify-form input[name="code"]').val(),
                     'id': opt_id,
-                    'remember': $('#otp-login-form input[name="remember"]').is(":checked") ? 1 : 0
+                    'remember': $('#otp-login-form input[name="otpRemember"]').is(":checked") ? 1 : 0
                 },
                 function(response, status) {
                     Swal.fire({
