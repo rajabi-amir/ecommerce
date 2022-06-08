@@ -16,6 +16,7 @@ use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
@@ -114,6 +115,8 @@ Route::get('/cart', ShowCart::class)->name('home.cart.index');
 Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name('home.cart.remove');
 
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
+
+Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
