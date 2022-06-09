@@ -18,9 +18,7 @@
     <!-- Start of PageContent -->
     <div class="page-content">
         <div class="container">
-            <div class="login-toggle">
-                مشتری برمی گردد؟ <a href="#" class="show-login font-weight-bold text-uppercase text-dark">ورود </a>
-            </div>
+
             @if (!session()->has('coupon'))
             <div class="coupon-toggle">
                 کوپن دارید؟ <a href="#" class="show-coupon font-weight-bold text-uppercase text-dark">کد را وارد
@@ -41,7 +39,11 @@
             <div>
                 <div class="row mb-9">
                     <div class="col-lg-7 pr-lg-4 mb-4">
-                        <form class="form account-details-form" action="{{route('home.addreses.store')}}" method="POST">
+                        @if (auth()->check())
+                        <button id='address-checkout' class="btn btn-primary btn-car mb-4">ایجاد آدرس جدید</button>
+                        <form class="form account-details-form"
+                            style={{$addresses ->count() > 0 ? 'display:none' : '' }} id="address-form"
+                            action="{{route('home.addreses.store')}}" method="POST">
                             @csrf
                             <div class="row gutter-sm">
                                 <div class="row">
@@ -123,10 +125,19 @@
                                         class="form-control form-control-md mb-0">{{old('cellphone')}}</textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">ایجاد آدرس</button>
+                                <button type="submit" class="btn btn-primary btn-car mb-4">ایجاد </button>
 
                             </div>
                         </form>
+
+                        @else
+                        <div>
+                            <a href="#login-popup" class="d-lg-show login sign-in">برای ادامه خرید باید وارد حساب کاربری
+                                خود شوید.
+                            </a>
+                        </div>
+                        @endif
+
 
                         <form class="form checkout-form" id="checkout" action="{{route('home.payment')}}" method="POST">
 
@@ -136,7 +147,7 @@
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label>انتخاب آدرس</label>
-                                        <select class="form-control form-control-md">
+                                        <select class="form-control form-control-md" name="address_id">
                                             @foreach ($addresses as $address)
                                             <option value="{{$address->id}}">
                                                 {{$address->title}}</option>
@@ -159,6 +170,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="payment_method" id="pay-methode">
+                            @else
+                            ابتدا باید آدرس خود را ایجاد کنید
                             @endif
 
                         </form>
@@ -274,43 +288,18 @@
                                     <div class="accordion payment-accordion">
                                         <div class="card">
                                             <div class="card-header">
-                                                <a href="#cash-on-delivery" class="collapse">انتقال مستقیم بانکی</a>
+                                                <a href="#cash-on-delivery" id="zarinpal" class="collapse">زرین پال</a>
                                             </div>
                                             <div id="cash-on-delivery" class="card-body expanded">
                                                 <p class="mb-0">
-                                                    پرداخت خود را مستقیماً به حساب بانکی ما انجام دهید. لطفاً از
-                                                    شناسه
-                                                    سفارش خود به عنوان مرجع پرداخت استفاده کنید. تا زمانی که وجوه
-                                                    حساب
-                                                    شما پاک نشده باشد ، سفارش شما ارسال نمی شود.
+                                                    زرین پال برای انتقال به حساب شما استفاده میشود
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#payment" class="expand">بررسی پرداخت ها</a>
-                                            </div>
-                                            <div id="payment" class="card-body collapsed">
-                                                <p class="mb-0">
-                                                    لطفاً یک چک به نام فروشگاه ، خیابان فروشگاه ، شهرک فروشگاه ،
-                                                    ایالت /
-                                                    شهرستان فروشگاه ، کدپستی فروشگاه ارسال کنید.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#delivery" class="expand">پرداخت نقدی هنگام تحویل</a>
-                                            </div>
-                                            <div id="delivery" class="card-body collapsed">
-                                                <p class="mb-0">
-                                                    پرداخت به صورت نقدی هنگام تحویل.
-                                                </p>
-                                            </div>
-                                        </div>
+
                                         <div class="card p-relative">
                                             <div class="card-header">
-                                                <a href="#paypal" class="expand">پی پال </a>
+                                                <a href="#paypal" id="paypal-1" class="expand">پی پال </a>
                                             </div>
                                             <a href="https://www.paypal.com/us/webapps/mpp/paypal-popup"
                                                 class="text-primary paypal-que" onclick="javascript:window.open('https://www.paypal.com/us/webapps/mpp/paypal-popup','WIPaypal',
@@ -326,18 +315,19 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group place-order pt-6">
-                                    <button type="submit" form="checkout" class="btn btn-dark btn-block btn-rounded">ثبت
-                                        سفارش</button>
-                                </div>
                             </div>
 
+                            <div class="form-group place-order pt-6">
+                                <button type="submit" form="checkout" class="btn btn-dark btn-block btn-rounded">ثبت
+                                    سفارش</button>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- End of PageContent -->
 </main>
@@ -370,6 +360,34 @@ $('.province-select').change(function() {
     }
 });
 </script>
+<script>
+$('#address-checkout').click(function() {
+    $('#address-form').toggle();
+
+})
+</script>
+
+<script>
+$(document).ready(function(e) {
+
+    if ($('#zarinpal').hasClass('collapse')) {
+        $('#pay-methode').val('zarinpal');
+    }
+    if ($('#paypal-1').hasClass('collapse')) {
+        $('#pay-methode').val('pay');
+    }
+
+})
+
+$('#zarinpal').click(function() {
+    $('#pay-methode').val('zarinpal');
+})
+
+$('#paypal-1').click(function() {
+    $('#pay-methode').val('pay');
+})
+</script>
+
 @endpush
 
 @endsection

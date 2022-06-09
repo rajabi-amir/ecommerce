@@ -21,7 +21,9 @@ class OtpController extends Controller
             'user_id' => $user->id ?? null,
             'cellphone' => $data['phone'],
         ]);
+        
         if ($otp->sendCode($data['phone'])) {
+           
             return response()->json([
                 'id' => $otp->id
             ], 200);

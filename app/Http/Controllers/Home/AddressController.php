@@ -130,9 +130,14 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserAddress $address)
     {
-        //
+       
+        $address->delete();
+        
+        alert()->success('آدرس مورد نظر حذف شد', 'باتشکر');
+        return redirect()->back();
+        
     }
 
     public function getProvinceCitiesList(Request $request)

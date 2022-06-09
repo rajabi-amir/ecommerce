@@ -65,8 +65,10 @@
                     </table>
                 </address>
                 <a href="{{ route('home.addreses.edit', ['address' => $address->id]) }}"
-                    class="btn btn-link btn-underline btn-icon-right text-primary">ویرایش آدرس<i
-                        class="w-icon-long-arrow-left"></i></a>
+                    class="btn btn-link btn-underline btn-icon-right text-primary">ویرایش آدرس</a>
+
+                <a href="{{ route('home.addreses.destroy', ['address' => $address->id]) }}" style="margin-right: 5rem"
+                    class="btn btn-link btn-underline btn-icon-right text-primary ">حذف</a>
             </div>
 
             <div class="row mt-3" id="{{$address->id}}"
@@ -92,7 +94,7 @@
                 <div class="icon-box-content">
 
 
-                    <a onclick="edit_address('{{$address->id}}')" class="btn btn-link  btn-icon-right text-primary">
+                    <a class="btn btn-link  btn-icon-right text-primary">
                         <h4 class="title title-underline ls-25 font-weight-bold mt-3">ایجاد آدرس جدید</h4>
 
                     </a>

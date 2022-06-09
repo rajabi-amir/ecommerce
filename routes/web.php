@@ -95,6 +95,7 @@ Route::prefix('profile')->name('home.')->group(function () {
   Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
   Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
   Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
+  Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
 });
 
 
@@ -117,6 +118,8 @@ Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
+
+Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);

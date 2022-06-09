@@ -89,14 +89,20 @@
 
 
                                             <button class="quantity-plus w-icon-plus" wire:loading.attr="disabled"
-                                                wire:click="increment('{{$item->id}}')"></button>
+                                                wire:click="increment('{{$item->id}}')"
+                                                wire:touchstart="increment('{{$item->id}}')"
+                                                ></button>
 
 
                                             <button class="quantity-minus w-icon-minus" wire:loading.attr="disabled"
-                                                wire:click="decrement('{{$item->id}}')"></button>
+                                                wire:click="decrement('{{$item->id}}')"
+                                                wire:touchstart="decrement('{{$item->id}}')"
+                                                ></button>
                                         </div>
                                     </td>
-                                    <span wire:loading>loading ...</span>
+                                    <div class="loader" wire:loading.flex>
+                                        درحال بارگذاری ...
+                                    </div>
 
                                     <td class="product-subtotal">
                                         <span class="amount" id="product-subtotal">

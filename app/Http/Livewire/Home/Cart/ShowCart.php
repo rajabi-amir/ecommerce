@@ -23,6 +23,7 @@ class ShowCart extends Component
 
     public function increment($rowId)
     {
+    
         
         if(!\Cart::get($rowId) == null){
             $item = \Cart::get($rowId);
@@ -33,6 +34,7 @@ class ShowCart extends Component
                     'quantity' => 0
                 ]);
             }else{
+
                 \Cart::update($rowId, [
                     'quantity' => 1
                 ]);
