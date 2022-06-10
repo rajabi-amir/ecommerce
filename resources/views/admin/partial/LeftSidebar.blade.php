@@ -38,9 +38,9 @@
                     <li><a href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
                     <li @class(['active'])><a href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
                     <li @class(['active'])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
+                    <li><a href={{ route('admin.coupons.index') }}>کد تخفیف</a></li>
                 </ul>
             </li>
-
             <li> <a href="javascript:void(0);" class="menu-toggle"><i
                         class="zmdi zmdi-assignment-o"></i><span>سفارشات</span></a>
                 <ul class="ml-menu">
@@ -57,7 +57,7 @@
                 </ul>
             </li>
 
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>برند
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-star-circle"></i><span>برند
                         ها</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
@@ -65,20 +65,14 @@
                 </ul>
             </li>
 
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>کد
-                        تخفیف</span></a>
-                <ul class="ml-menu">
-                    <li><a href={{ route('admin.coupons.index') }}>لیست</a></li>
-                    <li><a href={{ route('admin.coupons.create') }}>ایجاد کد تخفیف</a></li>
-                </ul>
-            </li>
+
 
             <li> <a href={{ route('admin.tags.create') }}><i class="zmdi zmdi-label"></i><span>تگ
                         ها</span></a>
                 <ul class="ml-menu">
                 </ul>
             </li>
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>بنر
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-aspect-ratio-alt"></i><span>بنر
                         ها</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.banners.index') }}>لیست بنر ها</a></li>
@@ -86,7 +80,7 @@
                 </ul>
             </li>
 
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>سرویس
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-check-circle-u"></i><span>سرویس
                         ها</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.services.index') }}>لیست سرویس ها</a></li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
@@ -30,7 +31,7 @@ use App\Http\Livewire\Home\ProductsList;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
-    Route::view('/dashboard', 'admin.page.dashboard')->name('home');
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('products',       ProductController::class);
     Route::resource('brands',         BrandController::class);
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy']);

@@ -11,7 +11,7 @@ class UserProfileController extends Controller
 {
     public function index()
     {
-        $orders=Order::where('user_id', 2)->get();
+        $orders=Order::where('user_id', auth()->id())->get();
         $comments= Comment::where('user_id', auth()->id())->where('approved' , 1)->get();
         return view('home.page.users_profile.index' , compact('comments' , 'orders'));
     }
