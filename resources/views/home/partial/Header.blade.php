@@ -323,26 +323,8 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                     <li><a href="compare.html">مقایسه </a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="elements.html">عناصر </a>
-                                <ul>
-                                    <li><a href="element-accordions.html">آکاردئون </a></li>
-                                    <li><a href="element-alerts.html">هشدار و اطلاع رسانی</a></li>
-                                    <li><a href="element-blog-posts.html">نوشته های وبلاگ </a></li>
-                                    <li><a href="element-buttons.html">دکمه ها </a></li>
-                                    <li><a href="element-cta.html">فراخوانی برای اقدام </a></li>
-                                    <li><a href="element-icons.html">آیکن ها </a></li>
-                                    <li><a href="element-icon-boxes.html">باکس آیکنها </a></li>
-                                    <li><a href="element-instagrams.html">اینستاگرام </a></li>
-                                    <li><a href="element-categories.html">دسته بندی محصول </a></li>
-                                    <li><a href="element-products.html">محصولات </a></li>
-                                    <li><a href="element-tabs.html">برگه ها </a></li>
-                                    <li><a href="element-testimonials.html">مشتریان </a></li>
-                                    <li><a href="element-titles.html">عنوان ها </a></li>
-                                    <li><a href="element-typography.html">تایپوگرافی </a></li>
-
-                                    <li><a href="element-vendors.html">فروشندگان </a></li>
-                                </ul>
+                            <li @class(['active'=>request()->routeIs('contact-us')])>
+                                <a href="{{route('contact-us')}}">تماس با ما</a>
                             </li>
                         </ul>
                     </nav>
