@@ -31,22 +31,26 @@
                 </a>
             </li>
 
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-label"></i><span>محصولات</span></a>
+            <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.products.index') }}>لیست محصولات</a></li>
                     <li><a href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
+                    <li @class(['active'])><a href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
+                    <li @class(['active'])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
                 </ul>
             </li>
+
             <li> <a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-label"></i><span>سفارشات</span></a>
+                        class="zmdi zmdi-assignment-o"></i><span>سفارشات</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.orders.index') }}>لیست سفارشات</a></li>
                     <li><a href={{ route('admin.transactions.index') }}>لیست تراکنش ها</a></li>
                 </ul>
             </li>
 
-            <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>وبلاگ</span></a>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-border-color"></i><span>وبلاگ</span></a>
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.posts.index') }}>لیست مطالب</a></li>
                     <li><a href={{ route('admin.posts.create') }}>ایجاد مطلب</a></li>
@@ -66,14 +70,6 @@
                 <ul class="ml-menu">
                     <li><a href={{ route('admin.coupons.index') }}>لیست</a></li>
                     <li><a href={{ route('admin.coupons.create') }}>ایجاد کد تخفیف</a></li>
-                </ul>
-            </li>
-
-            <li @class(['active open'])> <a href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
-                <ul class="ml-menu">
-                    <li @class(['active'])><a href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
-                    <li @class(['active'])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
                 </ul>
             </li>
 

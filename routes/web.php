@@ -30,7 +30,7 @@ use App\Http\Livewire\Home\ProductsList;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
-
+    Route::view('/dashboard', 'admin.page.dashboard')->name('home');
     Route::resource('products',       ProductController::class);
     Route::resource('brands',         BrandController::class);
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy']);
@@ -47,25 +47,19 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create');
     Route::get('/category-attributes/{category}',     [CategoryController::class , 'getCategoryAttributes']);
     Route::get('/products/{product}/images-edit',     [ImageController::class, 'edit'])->name('products.images.edit');
-      // Edit Product Category
+
+    // Edit Product Category
     Route::get('/products/{product}/category-edit',   [ProductController::class, 'editCategory'])->name('products.category.edit');
     Route::put('/products/{product}/category-update', [ProductController::class, 'updateCategory'])->name('products.category.update');
-    
-    Route::view('/dashboard', 'admin.page.dashboard')->name('home');
-
+   
+    //image routes
+    Route::post('/upl',       [ProductController::class, 'uploadImage'])->name('uploade');
+    Route::post('/del',       [ProductController::class, 'deleteImage'])->name('del');
+    Route::post('/editupl',   [ImageController::class, 'edit_uploadImage'])->name('edit_uploade');
+    Route::post('/editdel',   [ImageController::class, 'edit_deleteImage'])->name('edit_del');
+    Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product.images.add');
 });
-
-Route::post('/upl', [ProductController::class, 'uploadImage'])->name('uploade');
-Route::post('/del', [ProductController::class, 'deleteImage'])->name('del');
-
-Route::post('/editupl', [ImageController::class, 'edit_uploadImage'])->name('edit_uploade');
-Route::post('/editdel', [ImageController::class, 'edit_deleteImage'])->name('edit_del');
-
-Route::post('/add_image', [ImageController::class, 'setPrimary'])->name('product.images.add');
-
 //end
-
-
 
 
 // home routes

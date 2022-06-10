@@ -284,8 +284,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <form action="/upl" id="myDropzone" class="dropzone" method="POST"
-                                        id="my-awesome-dropzone">
+                                    <form action="{{route('admin.uploade')}}" id="myDropzone" class="dropzone"
+                                        method="POST" id="my-awesome-dropzone">
                                         @csrf
                                     </form>
 
@@ -479,7 +479,7 @@
             alert(server_file);
             $.ajax({
                 type: "POST",
-                url: "{{route('del')}}",
+                url: "{{route('admin.del')}}",
                 data: {
                     _token: "{{ csrf_token() }}",
                     name: server_file,

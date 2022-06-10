@@ -1,11 +1,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>@yield('title')</title>
-
 <meta name="keywords" content="HTML5 Template" />
-<meta name="description" content="وولـمارت - قالب چند منظوره و مارکت پلیس html">
-<meta name="author" content="JafarAbbasi">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<!-- MINIFIED -->
+{!! SEO::generate(true) !!}
 
 <link rel="icon" type="image/png" href="/assets/images/icons/favicon.png">
 
@@ -35,7 +34,6 @@ WebFontConfig = {
     crossorigin="anonymous" />
 <link rel="preload" href="{{asset('fonts/wolmart87d5.ttf?png09e')}}" as="font" type="font/ttf"
     crossorigin="anonymous" />
-
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/owl-carousel/owl.carousel.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/animate/animate.min.css')}}" />

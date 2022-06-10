@@ -10,12 +10,23 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Service;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 use function PHPSTORM_META\type;
 
 class HomeController extends Controller
 {
     public function index(){
+
+        // SEO
+        SEOTools::setTitle('خانه');
+        SEOTools::setDescription(' فروشگاه اینترنتی لوازم آرایشی در تهران '); 
+        SEOTools::opengraph()->setUrl('http://current.url.com');
+        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@LuizVinicius73');
+        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+        //END SEO
        
         $brands=                        Brand::active()->get();
 

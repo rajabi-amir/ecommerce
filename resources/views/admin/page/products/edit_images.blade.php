@@ -31,8 +31,8 @@
                     <hr>
                     <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 ">
-                            <form action="{{route('product.images.add',['product' => $product->id])}}" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{route('admin.product.images.add',['product' => $product->id])}}"
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="header">
                                     <label for="primary_image">تصویر اصلی *</label>
@@ -63,7 +63,7 @@
                                 <label class="mb-1">سایر تصاویر</label>
                             </div>
                             <div class="form-group">
-                                <form action="{{route('edit_uploade' , ['product'=>$product])}}" id="myDropzone"
+                                <form action="{{route('admin.edit_uploade' , ['product'=>$product])}}" id="myDropzone"
                                     class="dropzone" method="POST" id="my-awesome-dropzone">
                                     @csrf
                                 </form>
@@ -122,7 +122,7 @@
             if (answer) {
                 $.ajax({
                     type: "POST",
-                    url: "{{route('edit_del')}}",
+                    url: "{{route('admin.edit_del')}}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         name: server_file,
