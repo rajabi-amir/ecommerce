@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
@@ -23,23 +25,24 @@ use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
-use App\Http\Livewire\Home\ProductSearch;
 use App\Http\Livewire\Home\ProductsList;
 
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
-    Route::resource('products',   ProductController::class);
-    Route::resource('brands',     BrandController::class);
-    Route::resource('attributes', AttributeController::class)->except(['show', 'destroy']);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('banners',    BannerController::class)->except(['show', 'destroy']);
-    Route::resource('/services',  ServiceController::class)->except(['show']);
-    Route::resource('/posts',     PostController::class)->except('show');
-    Route::resource('/comments',  CommentController::class);
-    Route::resource('/coupons',   CouponController::class);
-    Route::resource('products',   ProductController::class);
+    Route::resource('products',       ProductController::class);
+    Route::resource('brands',         BrandController::class);
+    Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy']);
+    Route::resource('categories',     CategoryController::class);
+    Route::resource('banners',        BannerController::class)->except(['show', 'destroy']);
+    Route::resource('/services',      ServiceController::class)->except(['show']);
+    Route::resource('/posts',         PostController::class)->except('show');
+    Route::resource('/comments',      CommentController::class);
+    Route::resource('/coupons',       CouponController::class);
+    Route::resource('products',       ProductController::class);
+    Route::resource('orders',         OrderController::class);
+    Route::resource('transactions',   TransactionController::class);
 
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create');
     Route::get('/category-attributes/{category}',     [CategoryController::class , 'getCategoryAttributes']);
@@ -90,12 +93,12 @@ Route::prefix('profile')->name('home.')->group(function () {
   Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
-
   Route::get('/addreses',  [AddressController::class, 'index'])->name('addreses.index');
   Route::post('/addreses', [AddressController::class, 'store'])->name('addreses.store');
   Route::get('/addreses/{address}', [AddressController::class, 'edit'])->name('addreses.edit');
   Route::put('/addreses/{address}', [AddressController::class, 'update'])->name('addreses.update');
   Route::get('/addreses/delete/{address}', [AddressController::class, 'destroy'])->name('addreses.destroy');
+  Route::get('/orders/{order}', [UserProfileController::class, 'order'])->name('user_profile.orders');
 });
 
 

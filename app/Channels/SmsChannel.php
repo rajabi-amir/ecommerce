@@ -7,15 +7,14 @@ use SoapClient;
 
 class SmsChannel
 {
-    
+
     public function send($notifiable, Notification $notification)
     {
-       
+        return 'done!';
         if ($notifiable->routes) {
-           $toNum=$notifiable->routes['cellphone'];
-        }
-        else{
-            $toNum=$notifiable->cellphone;
+            $toNum = $notifiable->routes['cellphone'];
+        } else {
+            $toNum = $notifiable->cellphone;
         }
         $client = new SoapClient("http://ippanel.com/class/sms/wsdlservice/server.php?wsdl");
         $user = "09133184182";

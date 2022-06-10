@@ -59,7 +59,7 @@
                                 @csrf
                                 <div class="form-group mb-5">
                                     <label>نام کوچک *</label>
-                                    <input type="text" class="form-control" name="name" value="{{old('name')}}"/>
+                                    <input type="text" class="form-control" name="name" value="{{old('name')}}" />
                                     <span class="text-red name-error"></span>
                                 </div>
                                 <div class="form-group">
@@ -81,11 +81,11 @@
                             </form>
                         </div>
                     </div>
-                    <p class="text-center">با حساب اجتماعی وارد شوید</p>
+                    <p class="text-center">دنبال روش دیگری هستید؟</p>
                     <div class="social-icons social-icon-border-color d-flex justify-content-center">
-                        <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                        <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                        <a href="#" class="social-icon social-google fab fa-google"></a>
+                        <a href="#" id="otp-login" class="btn btn-secondary btn-ellipse btn-outline btn-icon-left">
+                            <i class="w-icon-long-arrow-left"></i>ورود/ثبت نام با پیامک
+                        </a>
                     </div>
                 </div>
             </div>

@@ -15888,6 +15888,7 @@ body .product-popup {
 }
 
 .sticky-link p {
+    text-align: center;
     margin-top: 0.9rem;
     margin-bottom: 0;
     font-size: 1rem;

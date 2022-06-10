@@ -164,7 +164,7 @@
                         <table class="shop-table account-orders-table mb-6">
                             <thead>
                                 <tr>
-                                    <th class="order-id">سفارش </th>
+                                    <th class="order-id">کد سفارش </th>
                                     <th class="order-date">تاریخ </th>
                                     <th class="order-status">وضعیت </th>
                                     <th class="order-total">مجموع </th>
@@ -172,58 +172,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($orders->isEmpty())
                                 <tr>
-                                    <td class="order-id">#2321</td>
-                                    <td class="order-date">شهریور 1400</td>
-                                    <td class="order-status">در حال پردازش </td>
-                                    <td class="order-total">
-                                        <span class="order-price">2120000 تومان</span> برای
-                                        <span class="order-quantity"> 1</span> آیتم
-                                    </td>
-                                    <td class="order-action">
-                                        <a href="#"
-                                            class="btn btn-outline btn-default btn-block btn-sm btn-rounded">نمایش </a>
+                                    <td class="product-thumbnail">
+                                        <center>
+                                            <h4>لیست سفارشات خالی است</h4>
+                                        </center>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="order-id">#2321</td>
-                                    <td class="order-date">شهریور 1400</td>
-                                    <td class="order-status">در حال پردازش </td>
+                                @endif
+                                @foreach ($orders as $order)
+                                 <tr>
+                                    <td class="order-id">{{$order->id}}</td>
+                                    <td class="order-date">
+                                    {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
+                                    </td>
+                                    <td class="order-status" style={{$order->status== 'در انتظار پرداخت' ? "color:orange" : "color:green"}}>{{$order->status}}</td>
                                     <td class="order-total">
-                                        <span class="order-price">150000 تومان</span> برای
-                                        <span class="order-quantity"> 1</span> آیتم
+                                        <span class="order-price">{{number_format($order->paying_amount)}} تومان</span> 
+ 
                                     </td>
                                     <td class="order-action">
-                                        <a href="#"
+                                        <a href="{{route('home.user_profile.orders',['order' => $order->id])}}"
                                             class="btn btn-outline btn-default btn-block btn-sm btn-rounded">نمایش </a>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#2319</td>
-                                    <td class="order-date">شهریور 1400</td>
-                                    <td class="order-status">در حال پردازش </td>
-                                    <td class="order-total">
-                                        <span class="order-price">355000 تومان</span> برای
-                                        <span class="order-quantity"> 1</span> آیتم
-                                    </td>
-                                    <td class="order-action">
-                                        <a href="#"
-                                            class="btn btn-outline btn-default btn-block btn-sm btn-rounded">نمایش </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="order-id">#2318</td>
-                                    <td class="order-date">شهریور 1400</td>
-                                    <td class="order-status">در حال پردازش </td>
-                                    <td class="order-total">
-                                        <span class="order-price">3159999 تومان</span> برای
-                                        <span class="order-quantity"> 1</span> آیتم
-                                    </td>
-                                    <td class="order-action">
-                                        <a href="#"
-                                            class="btn btn-outline btn-default btn-block btn-sm btn-rounded">نمایش </a>
-                                    </td>
-                                </tr>
+                                </tr>   
+                                @endforeach
+                                
                             </tbody>
                         </table>
 

@@ -38,6 +38,13 @@
                     <li><a href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
                 </ul>
             </li>
+            <li> <a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-label"></i><span>سفارشات</span></a>
+                <ul class="ml-menu">
+                    <li><a href={{ route('admin.orders.index') }}>لیست سفارشات</a></li>
+                    <li><a href={{ route('admin.transactions.index') }}>لیست تراکنش ها</a></li>
+                </ul>
+            </li>
 
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-label"></i><span>وبلاگ</span></a>
                 <ul class="ml-menu">

@@ -14,8 +14,8 @@
                         <span class="text-red phone-error"></span>
                     </div>
                     <div class="form-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-checkbox" name="remember" id="remember" />
-                        <label for="remember">مرا به خاطر بسپار</label>
+                        <input type="checkbox" class="custom-checkbox" name="otpRemember" id="otpRemember" />
+                        <label for="otpRemember">مرا به خاطر بسپار</label>
                     </div>
                     <button type="submit" class="btn btn-primary">ورود </button>
                 </form>
@@ -33,7 +33,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="otp-sign-in">
-                <form>
+                <form autocomplete="off">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
