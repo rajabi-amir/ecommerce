@@ -362,7 +362,7 @@
                     <div class="product-wrapper row cols-lg-4 cols-md-3 cols-sm-2 cols-2">
                         @each('home.partial.product-item',$products,'Product','home.partial.product-item-empty')
                     </div>
-                    {{$products->links('home.partial.pagination')}}
+                    {{$products->onEachSide(1)->links('home.partial.pagination')}}
 
                     <div class="loader" wire:loading.flex wire:target="addFilter,resetFilters">
                         درحال بارگذاری ...

@@ -22274,3 +22274,11 @@ input.without-spin::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+
+.contact-us .icon-box .icon-workday {
+    margin: 0.4rem 0 1.3rem;
+}
+
+.contact-us .icon-box .icon-workday i {
+    font-size: 5.5rem;
+}

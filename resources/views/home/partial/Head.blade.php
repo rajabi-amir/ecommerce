@@ -22,7 +22,7 @@ WebFontConfig = {
     s.parentNode.insertBefore(wf, s);
 })(document);
 </script>
-@if (!request()->routeIs('home.user_profile'))
+@if (!request()->routeIs('home.user_profile') && !request()->routeIs('contact-us'))
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 @endif
 

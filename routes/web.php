@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
@@ -45,14 +46,16 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('orders',         OrderController::class);
     Route::resource('transactions',   TransactionController::class);
 
+    Route::get('/settings', [SettingController::class, 'show'])->name('settings.show');
+    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create');
-    Route::get('/category-attributes/{category}',     [CategoryController::class , 'getCategoryAttributes']);
+    Route::get('/category-attributes/{category}',     [CategoryController::class, 'getCategoryAttributes']);
     Route::get('/products/{product}/images-edit',     [ImageController::class, 'edit'])->name('products.images.edit');
 
     // Edit Product Category
     Route::get('/products/{product}/category-edit',   [ProductController::class, 'editCategory'])->name('products.category.edit');
     Route::put('/products/{product}/category-update', [ProductController::class, 'updateCategory'])->name('products.category.update');
-   
+
     //image routes
     Route::post('/upl',       [ProductController::class, 'uploadImage'])->name('uploade');
     Route::post('/del',       [ProductController::class, 'deleteImage'])->name('del');
@@ -64,21 +67,23 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
 
 
 // home routes
-Route::get('/',[HomeController::class , 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 
-Route::get('/products/{product:slug}' , [HomeProductController::class , 'show'] )->name('home.products.show');
+Route::get('/products/{product:slug}', [HomeProductController::class, 'show'])->name('home.products.show');
 
 Route::get('/search/{slug?}', ProductsList::class)->name('home.products.search');
 Route::get('/main/{slug}', ProductsList::class)->name('home.products.index');
-Route::post('/comments/{product}', [HomeCommentController::class , 'store'])->name('home.comments.store');
+Route::post('/comments/{product}', [HomeCommentController::class, 'store'])->name('home.comments.store');
 
 
-Route::post('/reply/store', [HomeCommentController::class , 'replyStore'])->name('reply.add');
+Route::post('/reply/store', [HomeCommentController::class, 'replyStore'])->name('reply.add');
 
 // otp auth
-Route::post('/otp/verify', [OtpController::class , 'checkVerificationCode'])->name('otp.verify');
-Route::post('/otp/resend', [OtpController::class , 'resendVerificationCode'])->name('otp.resend');
-Route::post('/otp', [OtpController::class , 'sendVerificationCode'])->name('otp.auth');
+Route::post('/otp/verify', [OtpController::class, 'checkVerificationCode'])->name('otp.verify');
+Route::post('/otp/resend', [OtpController::class, 'resendVerificationCode'])->name('otp.resend');
+Route::post('/otp', [OtpController::class, 'sendVerificationCode'])->name('otp.auth');
+// end otp auth
 
 Route::get('/assets/ajax', function () {
     return view('home.partial.login');
@@ -103,7 +108,7 @@ Route::prefix('profile')->name('home.')->group(function () {
 
 Route::get('/add-to-compare/{product:id}', [CompareController::class, 'add'])->name('home.compare.add');
 
-Route::get('/compare',[CompareController::class, 'index'])->name('home.compare.index');
+Route::get('/compare', [CompareController::class, 'index'])->name('home.compare.index');
 Route::get('/remove-from-compare/{product}', [CompareController::class, 'remove'])->name('home.compare.remove');
 
 //cart
@@ -124,6 +129,6 @@ Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceC
 
 
 Route::get('/test', function () {
-  \Cart::clear();
-  //  dd(\Cart::getContent()) ;
+    \Cart::clear();
+    //  dd(\Cart::getContent()) ;
 });
