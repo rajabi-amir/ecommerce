@@ -15,6 +15,8 @@ require("../assets/admin/plugins/multi-select/js/jquery.multi-select.js");
 require("../assets/admin/plugins/dropify/js/dropify.min");
 
 require("../assets/admin/bundles/sparkline.bundle");
+require("../assets/admin/bundles/c3.bundle.js");
+
 require("../assets/admin/plugins/sweetalert/sweetalert.min.js");
 require("../assets/admin/plugins/jquery-validation/jquery.validate.js");
 require("../assets/admin/plugins/jquery-steps/jquery.steps");
