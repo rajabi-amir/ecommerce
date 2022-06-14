@@ -4123,7 +4123,6 @@ blockquote {
 .bg-grey {
     background-color: #f5f5f5 !important;
 }
-
 .bg-image {
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -12348,6 +12347,10 @@ body .product-popup {
 .social-icons-colored .social-icon.social-instagram {
     border-color: #cc0001;
     background-color: #cc0001;
+}
+.social-icons-colored .social-icon.social-whatsapp {
+    border-color: #57cb51;
+    background-color: #57cb51;
 }
 
 .social-icons-colored .social-icon.social-youtube {
@@ -22267,6 +22270,7 @@ button {
     margin-right: auto !important;
 }
 
+/* input type number without marker */
 input.without-spin::-webkit-inner-spin-button,
 input.without-spin::-webkit-outer-spin-button {
     -webkit-appearance: none;

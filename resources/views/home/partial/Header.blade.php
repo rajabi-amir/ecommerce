@@ -36,9 +36,11 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
             <div class="header-left mr-md-4">
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger">
                 </a>
-                <a href="demo5.html" class="logo ml-lg-0">
-                    <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo" width="145" height="45" />
+                @isset($setting->logo)
+                <a href="{{route('home')}}" class="logo ml-lg-0">
+                    <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo" width="145" height="45" />
                 </a>
+                @endisset
                 @livewire('home.sections.search-box')
                 <div class="dropdown-box">
                     <a href="#ENG">
