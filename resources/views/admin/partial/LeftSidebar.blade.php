@@ -1,7 +1,9 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="#"><img src="{{$setting->icon ? asset('storage/'.$setting->icon):'/images/logo.png'}}" width="45" style="margin-right:20px" alt="meta-webs"><span class="m-l-10"></span></a>
+        <a href="{{route('admin.home')}}"><img
+                src="{{$setting->icon ? asset('storage/'.$setting->icon):'/images/logo.png'}}" width="45"
+                style="margin-right:20px" alt="meta-webs"><span class="m-l-10"></span></a>
 
     </div>
     <div class="menu">
@@ -26,59 +28,85 @@
             </td>
 
             <li @class(['active'=>request()->routeIs('admin.home')])>
-                <a href="#"><i class="zmdi zmdi-view-dashboard zmdi-hc-1x"></i><span> داشبورد</span>
+                <a href="{{route('admin.home')}}"><i class="zmdi zmdi-view-dashboard zmdi-hc-1x"></i><span>
+                        داشبورد</span>
                 </a>
             </li>
 
-            <li @class(['active open'=> request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
+            <li @class(['active open'=>
+                request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])> <a
+                    href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.products.index')])><a href={{ route('admin.products.index') }}>لیست محصولات</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.products.create')])><a href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.categories.index')])><a href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.attributes.index')])><a href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.coupons.index')])><a href={{ route('admin.coupons.index') }}>کد تخفیف</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.products.index')])><a
+                            href={{ route('admin.products.index') }}>لیست محصولات</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.products.create')])><a
+                            href={{ route('admin.products.create') }}>ایجاد محصول</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.categories.index')])><a
+                            href={{ route('admin.categories.index') }}>دسته بندی ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.attributes.index')])><a
+                            href={{ route('admin.attributes.index') }}>ویژگی ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.coupons.index')])><a
+                            href={{ route('admin.coupons.index') }}>کد تخفیف</a></li>
                 </ul>
             </li>
-            <li @class(['active open'=> request()->routeIs('admin.orders.*','admin.transactions.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment-o"></i><span>سفارشات</span></a>
+            <li @class(['active open'=> request()->routeIs('admin.orders.*','admin.transactions.*')])> <a
+                    href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-assignment-o"></i><span>سفارشات</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.orders.index')])><a href={{ route('admin.orders.index') }}>لیست سفارشات</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.transactions.index')])><a href={{ route('admin.transactions.index') }}>لیست تراکنش ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.orders.index')])><a
+                            href={{ route('admin.orders.index') }}>لیست سفارشات</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.transactions.index')])><a
+                            href={{ route('admin.transactions.index') }}>لیست تراکنش ها</a></li>
                 </ul>
             </li>
 
-            <li @class(['active open'=> request()->routeIs('admin.posts.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-border-color"></i><span>وبلاگ</span></a>
+            <li @class(['active open'=> request()->routeIs('admin.posts.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-border-color"></i><span>وبلاگ</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.posts.index')])><a href={{ route('admin.posts.index') }}>لیست مطالب</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.posts.create')])><a href={{ route('admin.posts.create') }}>ایجاد مطلب</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.posts.index')])><a
+                            href={{ route('admin.posts.index') }}>لیست مطالب</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.posts.create')])><a
+                            href={{ route('admin.posts.create') }}>ایجاد مطلب</a></li>
                 </ul>
             </li>
 
-            <li @class(['active open'=> request()->routeIs('admin.brands.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-star-circle"></i><span>برند
+            <li @class(['active open'=> request()->routeIs('admin.brands.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-star-circle"></i><span>برند
                         ها</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.brands.index')])><a href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.brands.create')])><a href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.brands.index')])><a
+                            href={{ route('admin.brands.index') }}>لیست برند ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.brands.create')])><a
+                            href={{ route('admin.brands.create') }}>ایجاد برند</a></li>
                 </ul>
             </li>
 
 
 
-            <li @class(['active'=>request()->routeIs('admin.tags.*')])> <a href={{ route('admin.tags.create') }}><i class="zmdi zmdi-label"></i><span>تگ
+            <li @class(['active'=>request()->routeIs('admin.tags.*')])> <a href={{ route('admin.tags.create') }}><i
+                        class="zmdi zmdi-label"></i><span>تگ
                         ها</span></a>
             </li>
-            <li @class(['active open'=>request()->routeIs('admin.banners.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-aspect-ratio-alt"></i><span>بنر
+            <li @class(['active open'=>request()->routeIs('admin.banners.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-aspect-ratio-alt"></i><span>بنر
                         ها</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.banners.index')])><a href={{ route('admin.banners.index') }}>لیست بنر ها</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.banners.create')])><a href={{ route('admin.banners.create') }}>ایجاد بنر</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.banners.index')])><a
+                            href={{ route('admin.banners.index') }}>لیست بنر ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.banners.create')])><a
+                            href={{ route('admin.banners.create') }}>ایجاد بنر</a></li>
                 </ul>
             </li>
 
-            <li @class(['active open'=>request()->routeIs('admin.services.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-check-circle-u"></i><span>سرویس
+            <li @class(['active open'=>request()->routeIs('admin.services.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-check-circle-u"></i><span>سرویس
                         ها</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.services.index')])><a href={{ route('admin.services.index') }}>لیست سرویس ها</a></li>
-                    <li @class(['active'=>request()->routeIs('admin.services.create')])><a href={{ route('admin.services.create') }}>ایجاد سرویس</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.services.index')])><a
+                            href={{ route('admin.services.index') }}>لیست سرویس ها</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.services.create')])><a
+                            href={{ route('admin.services.create') }}>ایجاد سرویس</a></li>
                 </ul>
             </li>
 
@@ -88,9 +116,11 @@
                     <i class="zmdi zmdi-hc-fw"></i><span>نظرات</span></a>
             </li>
             <!-- تنظیمات -->
-            <li @class(['active open'=>request()->routeIs('admin.settings.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
+            <li @class(['active open'=>request()->routeIs('admin.settings.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
-                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a href="{{route('admin.settings.show')}}">سایت</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a
+                            href="{{route('admin.settings.show')}}">سایت</a></li>
                     <li><a href="#">ویرایش پروفایل کاربری </a></li>
                     <li><a href="#">تغییر کلمه عبور </a></li>
                 </ul>
@@ -105,29 +135,29 @@
 </aside>
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $("#searchInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myList li").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+$(document).ready(function() {
+    $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myList li").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+});
 
-    $(document).ready(function() {
+$(document).ready(function() {
+    if ($("#cheack_collapsed").hasClass("ls-toggle-menu")) {
+        $('#search-item').hide();
+    } else {
+        $('#search-item').show();
+    }
+
+    $('.btn-menu').on('click', function() {
         if ($("#cheack_collapsed").hasClass("ls-toggle-menu")) {
             $('#search-item').hide();
         } else {
             $('#search-item').show();
         }
-
-        $('.btn-menu').on('click', function() {
-            if ($("#cheack_collapsed").hasClass("ls-toggle-menu")) {
-                $('#search-item').hide();
-            } else {
-                $('#search-item').show();
-            }
-        });
     });
+});
 </script>
 @endpush

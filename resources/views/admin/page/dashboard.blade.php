@@ -1,5 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
+@section('title','داشبورد')
 @section('Content')
 <section class="content">
     <div class="">
@@ -7,9 +7,10 @@
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>داشبورد</h2>
+                    </br>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> آئرو</a></li>
-                        <li class="breadcrumb-item active">داشبورد 1</li>
+                        <!-- <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> </a></li> -->
+                        <!-- <li class="{{route('admin.home')}}">داشبورد </li> -->
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                             class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -25,12 +26,13 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon traffic">
                         <div class="body">
-                            <h6>ترافیک</h6>
-                            <h2>20 <small class="info">از 1ترابایت</small></h2>
-                            <small>2٪ بالاتر از ماه گذشته</small>
+                            <h6>سفارشات ارسالی</h6>
+                            <h2>{{$successsend_order}}<small class="info">از {{$all_order}}</small></h2>
+                            <small>{{(int)(($successsend_order/$all_order)*100)}}% تراکنش موفق</small>
                             <div class="progress">
                                 <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
+                                    aria-valuemin="0" aria-valuemax="{{$all_order}}"
+                                    style="width: {{($successsend_order/$all_order)*100}}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -38,12 +40,13 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon sales">
                         <div class="body">
-                            <h6>فروش</h6>
-                            <h2>12% <small class="info">از 100</small></h2>
-                            <small>6٪ بالاتر از ماه گذشته</small>
+                            <h6>آماده به ارسال</h6>
+                            <h2>{{$successpay_order}} <small class="info">از {{$all_order}}</small></h2>
+                            <small>{{(int)(($successpay_order/$all_order)*100)}}% سفارشات آماده برای ارسال</small>
                             <div class="progress">
                                 <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 38%;"></div>
+                                    aria-valuemax="{{$all_order}}"
+                                    style="width: {{($successpay_order/$all_order)*100}}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -51,12 +54,13 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon email">
                         <div class="body">
-                            <h6>ایمیل</h6>
-                            <h2>39 <small class="info">از 100</small></h2>
-                            <small>مجموع ایمیل ثبت شده</small>
+                            <h6>سفارشات مرجوعی</h6>
+                            <h2>{{$returned_order}} <small class="info">از {{$all_order}}</small></h2>
+                            <small> {{(int)(($returned_order/$all_order)*100)}}% سفارشات مرجوعی</small>
                             <div class="progress">
                                 <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 39%;"></div>
+                                    aria-valuemin="{{$all_order}}" aria-valuemax="100"
+                                    style="width: {{($returned_order/$all_order)*100}}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -64,12 +68,83 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon domains">
                         <div class="body">
-                            <h6>دامنه ها</h6>
-                            <h2>8 <small class="info">از 10</small></h2>
-                            <small>مجموع دامنه ثبت شده</small>
+                            <h6> در انتظار پرداخت</h6>
+                            <h2>{{$notpay_order}} <small class="info">از {{$all_order}}</small></h2>
+                            <small>{{(int)(($notpay_order/$all_order)*100)}}% در انتظار پرداخت</small>
                             <div class="progress">
                                 <div class="progress-bar l-green" role="progressbar" aria-valuenow="89"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 89%;"></div>
+                                    aria-valuemin="0" aria-valuemax="{{$all_order}}"
+                                    style="width: {{($notpay_order/$all_order)*100}}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <cart>
+                        <div class="header">
+                            <h6><strong><i class="zmdi zmdi-chart"></i> گزارش</strong> هزینه ها</h6>
+                            <ul class="header-dropdown">
+                            </ul>
+                        </div>
+                    </cart>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon ">
+                        <div class="body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6>{{number_format( $amunt_success_orders)}} تومان</h6>
+                                    <h6><i class="zmdi zmdi-print"></i> مجموع <strong>خالص پرداختی
+                                            مشتری</strong></h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon">
+                        <div class="body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6>{{number_format($amunt_coupon_orders)}} تومان</h6>
+                                    <h6><i class="zmdi zmdi-turning-sign"></i> مجوع تخفیف ها</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon">
+                        <div class="body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6>{{number_format($amunt_delivery_orders)}} تومان</h6>
+                                    <h6><i class="zmdi zmdi-alert-circle-o"></i> هزینه های ارسال</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon">
+                        <div class="body">
+                            <div class="state_w1 mb-1 mt-1">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6>{{number_format($amunt_total_orders)}} تومان</h6>
+                                        <h6><i class="zmdi zmdi-balance"></i> مجموع هزینه ها</h6>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,241 +153,45 @@
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="header">
-                            <h2><strong><i class="zmdi zmdi-chart"></i> گزارش</strong> فروش</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="zmdi zmdi-more"></i> </a>
-                                    <ul class="dropdown-menu dropdown-menu-right slideUp">
-                                        <li><a href="javascript:void(0);">ویرایش</a></li>
-                                        <li><a href="javascript:void(0);">حذف</a></li>
-                                        <li><a href="javascript:void(0);">گزارش</a></li>
-                                    </ul>
-                                </li>
-                                <li class="remove">
-                                    <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body mb-2">
-                            <div class="row clearfix">
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="state_w1 mb-1 mt-1">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h5>2,365</h5>
-                                                <span><i class="zmdi zmdi-balance"></i> درآمد</span>
-                                            </div>
-                                            <div class="sparkline" data-type="bar" data-width="97%" data-height="55px"
-                                                data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#868e96">
-                                                5,2,3,7,6,4,8,1</div>
-                                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2><strong><i class="zmdi zmdi-chart"></i> گزارش</strong> بازدید</h2>
+                                    </div>
+                                    <div class="body">
+                                        <div id="chart-area-spline-sracke" class="c3_chart d_sales"></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="state_w1 mb-1 mt-1">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h5>365</h5>
-                                                <span><i class="zmdi zmdi-turning-sign"></i> بازگشت</span>
-                                            </div>
-                                            <div class="sparkline" data-type="bar" data-width="97%" data-height="55px"
-                                                data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#2bcbba">
-                                                8,2,6,5,1,4,4,3</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="state_w1 mb-1 mt-1">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h5>65</h5>
-                                                <span><i class="zmdi zmdi-alert-circle-o"></i> پرس و جوها</span>
-                                            </div>
-                                            <div class="sparkline" data-type="bar" data-width="97%" data-height="55px"
-                                                data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#82c885">
-                                                4,4,3,9,2,1,5,7</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="state_w1 mb-1 mt-1">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h5>2,055</h5>
-                                                <span><i class="zmdi zmdi-print"></i> صورتحساب ها</span>
-                                            </div>
-                                            <div class="sparkline" data-type="bar" data-width="97%" data-height="55px"
-                                                data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#45aaf2">
-                                                7,5,3,8,4,6,2,9</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="body">
-                            <div id="chart-area-spline-sracked" class="c3_chart d_sales"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card mcard_4">
-                        <div class="body">
-                            <ul class="header-dropdown list-unstyled">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
-                                        role="button" aria-haspopup="true" aria-expanded="false"> <i
-                                            class="zmdi zmdi-menu"></i> </a>
-                                    <ul class="dropdown-menu slideUp">
-                                        <li><a href="javascript:void(0);">ویرایش</a></li>
-                                        <li><a href="javascript:void(0);">حذف</a></li>
-                                        <li><a href="javascript:void(0);">گزارش</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="img">
-                                <img src="" class="rounded-circle" alt="profile-image">
-                            </div>
-                            <div class="user">
-                                <h5 class="mt-3 mb-1">آرش خادملو</h5>
-                                <small class="text-muted">طراح رابط گرافیکی</small>
-                            </div>
-                            <ul class="list-unstyled social-links">
-                                <li><a href="javascript:void(0);"><i class="zmdi zmdi-dribbble"></i></a></li>
-                                <li><a href="javascript:void(0);"><i class="zmdi zmdi-behance"></i></a></li>
-                                <li><a href="javascript:void(0);"><i class="zmdi zmdi-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card w_data_1">
-                        <div class="body">
-                            <div class="w_icon pink"><i class="zmdi zmdi-bug"></i></div>
-                            <h4 class="mt-3 mb-0">12.1k</h4>
-                            <span class="text-muted">اشکالات ثابت شده</span>
-                            <div class="w_description text-success">
-                                <i class="zmdi zmdi-trending-up"></i>
-                                <span>15.5%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card w_data_1">
-                        <div class="body">
-                            <div class="w_icon cyan"><i class="zmdi zmdi-ticket-star"></i></div>
-                            <h4 class="mt-3 mb-1">01.8k</h4>
-                            <span class="text-muted">تکرارهای ارسال شده</span>
-                            <div class="w_description text-success">
-                                <i class="zmdi zmdi-trending-up"></i>
-                                <span>95.5%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="body">
-                            <div class="chat-widget">
-                                <ul class="list-unstyled">
-                                    <li class="left">
-                                        <img src="" class="rounded-circle" alt="">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>آرش 11:00 صبح</small></li>
-                                            <li><span class="message bg-blue">سلام, آرش</span></li>
-                                            <li><span class="message bg-blue">حال شما چطور است!</span></li>
-                                        </ul>
-                                    </li>
-                                    <li class="right">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>11:10AM</small></li>
-                                            <li><span class="message">سلام, آرش</span></li>
-                                        </ul>
-                                    </li>
-                                    <li class="right">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>11:11 صبح</small></li>
-                                            <li><span class="message">من خوبم شما چطوری؟</span></li>
-                                        </ul>
-                                    </li>
-                                    <li class="left">
-                                        <img src="" class="rounded-circle" alt="">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>آرش 11:11 صبح</small></li>
-                                            <li><span class="message bg-indigo">سلام, آرش و آرش</span></li>
-                                        </ul>
-                                    </li>
-                                    <li class="left">
-                                        <img src="" class="rounded-circle" alt="">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>آرش 11:11 صبح</small></li>
-                                            <li><span class="message bg-amber">سلام, تیم</span></li>
-                                            <li><span class="message bg-amber">لطفا اجازه دهید من نیازهای شما را
-                                                    بشناسم.</span></li>
-                                            <li><span class="message bg-amber">چگونه می خواهیم با ما ارتباط برقرار
-                                                    کنیم؟</span></li>
-                                        </ul>
-                                    </li>
-                                    <li class="right">
-                                        <ul class="list-unstyled chat_info">
-                                            <li><small>11:11 صبح</small></li>
-                                            <li><span class="message">سلام, آرش</span></li>
-                                            <li><span class="message">جلسه در اتاق کنفرانس در 12:00 غروب</span></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">اضافه</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);">آرش خادملو</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">آرش خادملو</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">آرش خادملو</a>
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" placeholder="متن اینجا وارد کنید ..."
-                                    aria-label="Text input with dropdown button">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="zmdi zmdi-mail-send"></i></span>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="row clearfix">
-                <div class="col-md-12 col-lg-8">
+                <div class="col-md-12 col-lg-12">
+
                     <div class="card">
                         <div class="header">
-                            <h2><strong>آمار</strong> بازدید کنندگان</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="zmdi zmdi-more"></i> </a>
-                                    <ul class="dropdown-menu dropdown-menu-right slideUp">
-                                        <li><a href="javascript:void(0);">اقدام</a></li>
-                                        <li><a href="javascript:void(0);">اقدام دیگر</a></li>
-                                        <li><a href="javascript:void(0);">یک چیز دیگر</a></li>
-                                    </ul>
-                                </li>
-                                <li class="remove">
-                                    <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
-                                </li>
-                            </ul>
+                            <h2><strong><i class="zmdi zmdi-chart"></i> گزارش </strong> تراکنش های یکسال گذشته </h2>
                         </div>
                         <div class="body">
-                            <div id="world-map-markers" class="jvector-map"></div>
+                            <div id="chart-area-spline-transaction" class="c3_chart d_sales"></div>
                         </div>
                     </div>
+
                 </div>
-                <div class="col-lg-4 col-md-12">
+
+            </div>
+            </br>
+            <div class="row clearfix">
+
+                <div class="col-lg-12 col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>توزیع</strong></h2>
+                            <h2><strong>صفحات پر بازدید</strong></h2>
                             <ul class="header-dropdown">
                                 <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
                                         data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -335,56 +214,195 @@
                     </div>
                 </div>
             </div>
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2><strong>منبع</strong> ترافیک</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="zmdi zmdi-more"></i> </a>
-                                    <ul class="dropdown-menu dropdown-menu-right slideUp">
-                                        <li><a href="javascript:void(0);">ویرایش</a></li>
-                                        <li><a href="javascript:void(0);">حذف</a></li>
-                                        <li><a href="javascript:void(0);">گزارش</a></li>
-                                    </ul>
-                                </li>
-                                <li class="remove">
-                                    <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="row">
-                                <div class="col-lg-8 col-md-6 col-sm-12">
-                                    <div id="chart-area-step" class="c3_chart d_traffic"></div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <span> بیش از 30 درصد از کاربران از لینک مستقیم پیروی می کنند. برای اطلاعات بیشتر
-                                        صفحه جزئیات را بررسی کنید.</span>
-                                    <div class="progress mt-4">
-                                        <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45"
-                                            aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
-                                    </div>
-                                    <div class="d-flex bd-highlight mt-4">
-                                        <div class="flex-fill bd-highlight">
-                                            <h5 class="mb-0">21,521 <i class="zmdi zmdi-long-arrow-up"></i></h5>
-                                            <small>امروز</small>
-                                        </div>
-                                        <div class="flex-fill bd-highlight">
-                                            <h5 class="mb-0">%12.35 <i class="zmdi zmdi-long-arrow-down"></i></h5>
-                                            <small>ماه گذشته %</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
+@push('scripts')
+<!-- نمودار درصد ترافیک -->
+
+<script>
+initC3Chart();
+
+function initC3Chart() {
+    setTimeout(function() {
+        month_visits = "{{json_encode($month_visits)}}";
+        month_visits = JSON.parse(month_visits);
+        $(document).ready(function() {
+            var chart = c3.generate({
+                bindto: "#chart-area-spline-sracke", // id of chart wrapper
+                data: {
+                    columns: [
+                        // each columns data
+                        ["data1", month_visits[0], month_visits[1], month_visits[2],
+                            month_visits[3], month_visits[4], month_visits[5], month_visits[
+                                6], month_visits[7], month_visits[8], month_visits[9],
+                            month_visits[10], month_visits[11]
+                        ],
+                    ],
+                    type: "area-spline", // default type of chart
+                    groups: [
+                        ["data1", "data2", "data3"]
+                    ],
+                    colors: {
+                        data1: Aero.colors["teal"],
+                    },
+                    names: {
+                        // name of each serie
+                        data1: "میزان بازدید",
+                    },
+                },
+                axis: {
+
+                    x: {
+                        type: "category",
+                        // name of each category
+                        categories: [
+                            "فروردین",
+                            "اردیبهشت",
+                            "خرداد",
+                            "تیر",
+                            "مرداد",
+                            "شهریور",
+                            "مهر",
+                            "آبان",
+                            "آذر",
+                            "دی",
+                            "بهمن",
+                            "اسفند",
+                        ],
+                    },
+                },
+                legend: {
+                    show: true, //hide legend
+                },
+                padding: {
+                    bottom: 0,
+                    top: 0,
+                },
+            });
+        });
+    }, 500);
+
+
+    setTimeout(function() {
+        $success = @json($successTransactions);
+        console.log($success[0]);
+        $unsuccess = @json($unsuccessTransactions);
+        console.log($unsuccess[0]);
+        month_visits = "{{json_encode($month_visits)}}";
+        month_visits = JSON.parse(month_visits);
+        $(document).ready(function() {
+            var chart = c3.generate({
+                bindto: "#chart-area-spline-transaction", // id of chart wrapper
+                data: {
+                    columns: [
+                        // each columns data
+                        [$success[0], $success[1], $success[2],
+                            $success[3],
+                            $success[4],
+                            $success[5], $success[6], $success[7], $success[8], $success[9],
+                            $success[10], $success[11], $success[12]
+                        ],
+                        [$unsuccess[0], $unsuccess[1], $unsuccess[2], $unsuccess[3],
+                            $unsuccess[4], $unsuccess[5], $unsuccess[6], $unsuccess[7],
+                            $unsuccess[8], $unsuccess[9], $unsuccess[10], $unsuccess[11],
+                            $unsuccess[12]
+                        ],
+
+
+                    ],
+                    type: "area-spline", // default type of chart
+                    groups: [
+                        ["data1", "data2"]
+                    ],
+                    colors: {
+                        data1: Aero.colors["teal"],
+                        data2: Aero.colors["red"],
+                    },
+                    names: {
+                        // name of each serie
+                        data1: "تراکنش موفق",
+                        data2: "تراکنش ناموفق",
+                    },
+                },
+                axis: {
+                    x: {
+                        type: "category",
+                        // name of each category
+                        categories: @json($labels),
+                    },
+                    y: {
+                        show: false,
+                        tick: {
+                            format: function(d) {
+                                return number_format(d) + ' ' + 'تومان';
+                            },
+                        }
+                    }
+
+                },
+
+                legend: {
+                    show: true, //hide legend
+                },
+                padding: {
+                    bottom: 0,
+                    top: 0,
+                },
+            });
+        });
+    }, 500);
+
+
+}
+</script>
+<!-- پایان نمودار درصد ترافیک -->
+
+<script>
+$(document).ready(function() {
+    more_1 = @json($more[0]);
+    more_2 = @json($more[1]);
+    more_3 = @json($more[2]);
+    console.log(more_1);
+    var chart = c3.generate({
+        bindto: "#chart-pie", // id of chart wrapper
+        data: {
+            columns: [
+
+                ["data1", more_1.pageViews],
+                ["data2", more_2.pageViews],
+                ["data3", more_3.pageViews],
+
+                // each columns data
+
+
+            ],
+            type: "pie", // default type of chart
+            colors: {
+                data1: Aero.colors["lime"],
+                data2: Aero.colors["teal"],
+                data3: Aero.colors["gray"],
+            },
+            names: {
+                // name of each serie
+                data1: more_1.pageTitle,
+                data2: more_2.pageTitle,
+                data3: more_3.pageTitle,
+            },
+        },
+        axis: {},
+        legend: {
+            show: true, //hide legend
+        },
+        padding: {
+            bottom: 0,
+            top: 0,
+        },
+    });
+});
+</script>
+
+
+@endpush
 
 @endsection

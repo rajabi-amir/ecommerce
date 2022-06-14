@@ -39,6 +39,7 @@
                         </div>
 
 
+
                         <div class="body">
                             @if(count($orders)===0)
                             <p>هیچ رکوردی وجود ندارد</p>
@@ -114,6 +115,7 @@
 
                                     </tbody>
                                 </table>
+                                {{ $orders->links() }}
                             </div>
                             @endif
                         </div>

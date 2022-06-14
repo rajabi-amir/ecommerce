@@ -105,6 +105,8 @@
 
                                     </tbody>
                                 </table>
+                                {{ $transactions->links() }}
+
                             </div>
                             @endif
                         </div>

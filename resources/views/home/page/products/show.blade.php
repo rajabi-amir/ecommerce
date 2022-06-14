@@ -452,7 +452,7 @@
                                                             <div class="ratings-container comment-rating">
                                                                 <div class="ratings-full">
                                                                     <span class="ratings"
-                                                                        style="width: {{(ceil($product->rates->where('user_id', 1)->first()->rate)*100)/5}}%'"></span>
+                                                                        style="width: {{(ceil($comment->commentable->rates->first()->rate)*100)/5}}%'"></span>
                                                                     <span class="tooltiptext tooltip-top"></span>
                                                                 </div>
                                                             </div>
