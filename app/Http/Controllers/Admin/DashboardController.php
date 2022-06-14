@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Auth\Events\Failed;
 use Psy\CodeCleaner\IssetPass;
 use Spatie\Analytics\Period;
 use Verta;
@@ -25,14 +26,15 @@ class DashboardController extends Controller
       $m_1=$v->month(1)->day(1)->toCarbon();
       $m_13=$v->month(12)->day(30)->toCarbon();
       $now=Carbon::now();
-
-      if(Analytics::fetchVisitorsAndPageViews(Period::create($m_1,$m_13))->count()){
+try {
+  if(Analytics::fetchVisitorsAndPageViews(Period::create($m_1,$m_13))->count()){
         $lastyear = Analytics::fetchVisitorsAndPageViews(Period::create($m_1,$m_13));
       }
       else{
-        $lastyear = 0;
+        $lastyear = [0];
       }
-      
+   
+    
       $farvardin=$ordibehasht=$khordad=$tir=$mordad=$shahrivar=$mehr=$abaan=$azar=$dey=$bahman=$esfand=0;
       foreach ($lastyear as $key => $value) {
 
@@ -73,24 +75,13 @@ class DashboardController extends Controller
             $esfand=$esfand+1;
         }
       }
+    
+       
       $month_visits=[$farvardin, $ordibehasht, $khordad, $tir, $mordad, $shahrivar, $mehr, $abaan, $azar, $dey, $bahman, $esfand];
-     
-      
-        // $data=collect($analyticsData)->map(function($item){
-        //     return [
-        //         'date'=>$item['date'],
-        //         'visitors'=>$item['visitors'],
-        //         'pageViews'=>$item['pageViews'],
-        //     ];
-        // });
-        
-        // $data=$data->all();
-        // if($data == null){
-        //   dd('مشکل در اتصال');  
-        // }else{
-        //     $pageview=$data[0]['pageViews'];
-        //     $visitor=$data[0]['visitors'];
-        // }
+    } catch (\Throwable $th) {
+      $lastyear = [0];
+      $month_visits=[0];
+    }
 
         $from = Carbon::now()->subDays(30);
         $to = Carbon::now();
@@ -123,7 +114,13 @@ class DashboardController extends Controller
         $unsuccessTransactionsChart = $this->chart($unsuccessTransactions, $month);
         array_unshift($unsuccessTransactionsChart, "data2");
 //پربازدید ترین صفحات
-    $more=Analytics::fetchMostVisitedPages( Period::days(30) , $maxResults = 3);
+try {
+  $more=Analytics::fetchMostVisitedPages( Period::days(30) , $maxResults = 3);
+} catch (\Throwable $th) {
+  $more=[10,20,3];
+}
+
+    
    
 //  dd($successTransactionsChart , $unsuccessTransactionsChart);
         return view('admin.page.dashboard', compact(
