@@ -15,6 +15,8 @@
                                     <th>نوشته توسط</th>
                                     <th>تاریخ</th>
                                     <th>نام محصول</th>
+                                    <th>امتیاز</th>
+                                    <th>تعداد پاسخ ها</th>
                                     <th>وضعیت</th>
                                     <th>
                                         <center>
@@ -23,22 +25,34 @@
                                     </th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($comments as $comment)
+
+
                                 <tr wire:key="name_{{ $comment->id }}">
                                     <td scope=" row">{{$comment->id}}</td>
                                     <td>{{$comment->user->name == null ? "بدون نام" : $comment->user->name }}
                                     </td>
                                     <td>{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}
                                     </td>
-
-
                                     <td>
                                         <a
                                             href="{{route('admin.products.show',['product' => $comment->commentable_id])}}">
                                             {{$comment->commentable->name}}
                                         </a>
 
+                                    </td>
+                                    <td>
+                                        <div data-rating-stars="5" data-rating-readonly="true"
+                                            data-rating-value="{{ceil($comment->user->rate->first()->rate)}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success p-2">{{$comment->appro(1)->count()}}</span>
+                                        @if ($comment->appro(0)->count() > 0)
+                                        <span class="badge badge-danger p-2">{{$comment->appro(0)->count()}}</span>
+                                        @endif
                                     </td>
                                     <td>
                                         @if ($comment->approved==0)

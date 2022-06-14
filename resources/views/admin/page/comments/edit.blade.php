@@ -11,6 +11,7 @@
                             class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
+
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                             class="zmdi zmdi-arrow-right"></i></button>
                 </div>
@@ -19,8 +20,10 @@
 
         <div class="container-fluid">
 
+
             <!-- Hover Rows -->
             <div class="col-lg-12 col-md-12 col-sm-12">
+
                 @foreach($errors->all() as $error)
                 <div class="alert alert-danger" role="alert">
                     <div class="container">
@@ -82,6 +85,25 @@
                                 <button type="submit" class="btn btn-raised btn-primary waves-effect">ویرایش</button>
                             </div>
                         </form>
+
+                        <form
+                            action="{{route('admin.comments.store' , ['comment_id' => $comment->id , 'product_id' => $comment->commentable_id])}}"
+                            id="form_advanced_validation" class="needs-validation" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="text">دیدگاه</label>
+                                    <div class="form-group">
+                                        <textarea name="text" id="text" minlength="5" required
+                                            placeholder="پاسخ ادمین...." class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit onclick=" loadbtn(event)"
+                                    class="btn btn-raised btn-success waves-effect">
+                                    پاسخ به این سوال </button>
+                            </div>
+                        </form>
+
                         <h5>پاسخ ها</h5>
                         <hr>
                         @foreach ($comment->replies as $comment)

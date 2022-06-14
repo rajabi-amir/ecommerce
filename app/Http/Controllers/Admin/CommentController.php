@@ -36,10 +36,25 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ToastrFactory $flasher)
     {
-        //
-    }
+        
+        $request->validate([
+            'text' => 'required',
+        ]);
+    
+        Comment::create([
+            'parent_id' => $request->comment_id,
+            'user_id' => auth()->id(),
+            'text' => $request->text,
+            'commentable_type' => 'App\Models\Product',
+            'commentable_id' => $request->product_id,
+
+
+        ]);
+        
+        $flasher->addSuccess('تغییرات با موفقیت ذخیره شد');
+        return redirect()->route('admin.comments.index');    }
 
     /**
      * Display the specified resource.
