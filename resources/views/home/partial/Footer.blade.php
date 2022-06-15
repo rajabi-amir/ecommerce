@@ -7,7 +7,8 @@
                 @isset($setting->logo)
                 <div class="col-xl-3 col-lg-2">
                     <a href="{{route('home')}}" class="logo-footer">
-                        <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo-footer" width="145" height="45" />
+                        <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo-footer" width="145"
+                            height="45" />
                     </a>
                 </div>
                 @endisset
@@ -24,12 +25,16 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-9 mt-4 mt-lg-0 ">
                     <form action="#" method="get" class="input-wrapper input-wrapper-inline input-wrapper-rounded">
-                        <input type="email" class="form-control mr-2 bg-white text-default" name="email" id="email" placeholder="آدرس ایمیل شما" />
-                        <button class="btn btn-primary btn-rounded" type="submit">مشترک شدن<i class="w-icon-long-arrow-left"></i></button>
+                        <input type="email" class="form-control mr-2 bg-white text-default" name="email" id="email"
+                            placeholder="آدرس ایمیل شما" />
+                        <button class="btn btn-primary btn-rounded" type="submit">مشترک شدن<i
+                                class="w-icon-long-arrow-left"></i></button>
                     </form>
                 </div>
             </div>
         </div>
+
+
         <div class="footer-top">
             <div class="row">
                 <div class="col-lg-5 col-sm-6">
@@ -38,7 +43,8 @@
                             @isset($setting->work_days)
                             <p class="widget-about-title">ساعات کاری: <strong> {{$setting->work_days}}</strong></p>
                             @endisset
-                            @if(json_decode($setting->phones,true) !==[])
+                            @if(json_decode($setting->phones,true) !== null && json_decode($setting->phones,true) !==
+                            [])
                             <p class="widget-about-title">سوال داشتید؟ 24/7 با ما تماس بگیرید</p>
                             @foreach (json_decode($setting->phones,true) as $phone)
                             <a href="tel:{{$phone}}" class="widget-about-call">{{$phone}}</a>
@@ -49,23 +55,25 @@
                                 {{$setting->description}}
                             </p>
                             @endisset
-
                             <label class="label-social d-block text-dark">سوشیال مدیا </label>
                             <div class="social-icons social-icons-colored">
                                 @isset($setting->instagram)
-                                <a href="{{$setting->instagram}}" class="social-icon social-instagram w-icon-instagram"></a>
+                                <a href="{{$setting->instagram}}"
+                                    class="social-icon social-instagram w-icon-instagram"></a>
                                 @endisset
                                 @isset($setting->telegram)
-                                <a href="{{$setting->telegram}}" class="social-icon social-twitter"><i class="fa-brands fa-telegram"></i></a>
+                                <a href="{{$setting->telegram}}" class="social-icon social-twitter"><i
+                                        class="fa-brands fa-telegram"></i></a>
                                 @endisset
                                 @isset($setting->telegram)
-                                <a href="{{$setting->telegram}}" class="social-icon social-whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+                                <a href="{{$setting->telegram}}" class="social-icon social-whatsapp"><i
+                                        class="fa-brands fa-whatsapp"></i></a>
                                 @endisset
                             </div>
                         </div>
                     </div>
                 </div>
-                @if (json_decode($setting->links,true) !==[])
+                @if (json_decode($setting->links,true) !==[] && json_decode($setting->links,true) !== null)
                 @foreach (json_decode($setting->links,true) as $pLink )
                 <div class="col-lg-2 col-sm-6">
                     <div class="widget">

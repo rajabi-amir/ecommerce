@@ -61,12 +61,12 @@ class Setting extends Component
     ];
 
     public function mount()
-    {
+    {   $this->links=[];
         $settings = ModelsSetting::findOrNew(1);
         $this->site_name = $settings->site_name;
         $this->emails = json_decode($settings->emails, true);
         $this->phones = json_decode($settings->phones, true);
-        $this->links = json_decode($settings->links, true);
+        $this->links = $settings->links ? json_decode($settings->links, true) : [];
         $this->whatsapp = $settings->whatsapp;
         $this->instagram = $settings->instagram;
         $this->telegram = $settings->telegram;
@@ -106,9 +106,14 @@ class Setting extends Component
 
     public function addGroupName()
     {
+        if($this->links == null){
+           $this->links=[]; 
+        }
+        
         $this->validate([
             'group_name' => ['required', 'string', Rule::notIn(Arr::pluck($this->links, 'name'))],
         ]);
+
         $this->links[] = ['name' => $this->group_name, 'children' => []];
         $this->reset('group_name');
     }
