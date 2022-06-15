@@ -2,7 +2,37 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
+                <form wire:submit.prevent="$refresh">
+                    <div class="header">
+                        <h2>
+                            جست و جو
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" wire:model="name"
+                                            placeholder="نام کاربر">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" wire:model="product_name"
+                                            placeholder="نام محصول">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="body">
+                    <div class="loader" wire:loading.flex>
+                        درحال بارگذاری ...
+                    </div>
                     @if(count($comments)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
                     @else
