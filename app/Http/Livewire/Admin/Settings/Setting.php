@@ -56,26 +56,26 @@ class Setting extends Component
     protected $validationAttributes = [
         'group_name' => 'عنوان دسته ',
         'links.*.name' => 'عنوان دسته',
-        'links.*.children.title' => 'عنوان لینک',
-        'links.*.children.url' => 'آدرس لینک',
+        'links.*.children.*.title' => 'عنوان لینک',
+        'links.*.children.*.url' => 'آدرس لینک',
     ];
 
     public function mount()
     {
         $settings = ModelsSetting::findOrNew(1);
-        $this->site_name=$settings->site_name;
-        $this->emails=json_decode($settings->emails,true);
-        $this->phones=json_decode($settings->phones,true);
-        $this->links=json_decode($settings->links,true);
-        $this->whatsapp=$settings->whatsapp;
-        $this->instagram=$settings->instagram;
-        $this->telegram=$settings->telegram;
-        $this->address=$settings->address;
-        $this->description=$settings->description;
-        $this->work_days=$settings->work_days;
-        $this->latitude=$settings->latitude;
-        $this->longitude=$settings->longitude;
-        $this->logo_url=$settings->logo;
+        $this->site_name = $settings->site_name;
+        $this->emails = json_decode($settings->emails, true);
+        $this->phones = json_decode($settings->phones, true);
+        $this->links = json_decode($settings->links, true);
+        $this->whatsapp = $settings->whatsapp;
+        $this->instagram = $settings->instagram;
+        $this->telegram = $settings->telegram;
+        $this->address = $settings->address;
+        $this->description = $settings->description;
+        $this->work_days = $settings->work_days;
+        $this->latitude = $settings->latitude;
+        $this->longitude = $settings->longitude;
+        $this->logo_url = $settings->logo;
     }
 
     public function addEmail()
@@ -107,7 +107,7 @@ class Setting extends Component
     public function addGroupName()
     {
         $this->validate([
-            'group_name' => ['required','string',Rule::notIn(Arr::pluck($this->links, 'name'))],
+            'group_name' => ['required', 'string', Rule::notIn(Arr::pluck($this->links, 'name'))],
         ]);
         $this->links[] = ['name' => $this->group_name, 'children' => []];
         $this->reset('group_name');
@@ -125,12 +125,13 @@ class Setting extends Component
 
     public function removeLink($index, $child_index)
     {
-        unset($this->links[$index]['children'][$child_index]);
+        $cLinks = $this->links[$index]['children'];
+        array_splice($cLinks, $child_index, 1);
+        $this->links[$index]['children'] = $cLinks;
     }
 
     public function save()
     {
-        // dd($this->links);
         $data = $this->validate();
 
         $data['emails'] = json_encode($data['emails']);
@@ -142,7 +143,7 @@ class Setting extends Component
             $image_controller = new ImageController();
             $image_name = $image_controller->UploadeImage($this->logo, "logo", null, null);
             $data['logo'] = $image_name;
-        }else{
+        } else {
             unset($data['logo']);
         }
         ModelsSetting::updateOrCreate(['id' => 1], $data);
