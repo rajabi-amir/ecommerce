@@ -5,17 +5,50 @@ namespace App\Http\Livewire\Admin\Products;
 use App\Models\product;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
+use Livewire\WithPagination;
 
 class ProductComponent extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads,WithPagination;
 public $title;
 
 public $product;
+//////////////////////////////////////////////
+
+
+protected $paginationTheme = 'bootstrap'; 
+public $name;
+public $category;
+public $status;
+
+public function updatingName()
+{
+    $this->resetPage();
+}
+
+public function updatingCategory()
+{
+    $this->resetPage();
+}
+
+public function updatingRefId()
+{
+    $this->resetPage();
+}
+
+public function updatingStatus()
+{
+    $this->resetPage();
+}
+///////////////////////////////////////////////
+
+
+
+
 protected $listeners = [
     'sweetAlertConfirmed', // only when confirm button is clicked
 ];
@@ -37,7 +70,14 @@ public function mount(Product $product)
        
             public function render()
             {
-                return view('livewire.admin.products.product-component',['products' => Product::latest()->paginate(10)]);
+                $categories=Category::all();
+                $product=Product::
+                where('name','like','%'.$this->name.'%')
+                ->where('category_id','like','%'.$this->category.'%')
+                ->where('is_active','like','%'.$this->status.'%')
+                ->paginate(10);
+                
+                return view('livewire.admin.products.product-component',['products' => $product,'categories'=>$categories]);
            
             }
             

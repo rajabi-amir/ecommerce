@@ -30,13 +30,13 @@
                                     <figure class="product-image">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
                                             data-zoom-image="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                            alt="$product->slug" width="800" height="900">
+                                            alt="{{$product->slug}}" width="800" height="900">
                                     </figure>
                                     @foreach ($product->images as $image_value )
                                     <figure class="product-image">
                                         <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
                                             data-zoom-image="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value->image)}}"
-                                            alt="$product->slug" width="800" height="900">
+                                            alt="{{$product->slug}}" width="800" height="900">
                                     </figure>
                                     @endforeach
                                 </div>
@@ -44,12 +44,12 @@
                                     <div class="product-thumbs row cols-4 gutter-sm">
                                         <div class="product-thumb">
                                             <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product->primary_image)}}"
-                                                alt="$product->slug" width="800" height="900">
+                                                alt="{{$product->slug}}" width="800" height="900">
                                         </div>
                                         @foreach ( $product->images as $image_value_second )
                                         <div class="product-thumb">
                                             <img src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATCH').$image_value_second->image)}}"
-                                                alt="$product->slug" width="800" height="900">
+                                                alt="{{$product->slug}}" width="800" height="900">
                                         </div>
                                         @endforeach
                                     </div>
@@ -97,7 +97,7 @@
                                 <div class="product-bm-wrapper">
                                     <figure class="brand">
                                         <img src="{{url(env('BRAND_IMAGES_PATCH').$product->brand->image)}}"
-                                            alt="$product->brand->slug" width="105" height="48" />
+                                            alt="{{$product->brand->slug}}" width="105" height="48" />
                                     </figure>
                                     <div class="product-meta">
                                         <div class="product-categories">
@@ -580,7 +580,7 @@
                                 <figure class="product-media">
                                     <a href="{{route('home.products.show' , ['product' => $product->slug])}}">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$product_latest->primary_image)}}"
-                                            alt="$product->slug" width="300" height="338" />
+                                            alt="{{$product->slug}}" width="300" height="338" />
                                     </a>
                                 </figure>
                                 <div class="product-details">
@@ -652,7 +652,8 @@
                                 <div class="banner banner-fixed br-sm">
                                     <figure>
                                         <img src="{{url(env('BANNER_IMAGES_PATCH').$banner_product->image)}}"
-                                            alt="Banner" width="266" height="220" style="background-color: #1D2D44" />
+                                            alt="{{$banner_product->title}}" width="266" height="220"
+                                            style="background-color: #1D2D44" />
                                     </figure>
                                     <div class="banner-content">
                                         <div class="banner-price-info font-weight-bolder text-white lh-1 ls-25">

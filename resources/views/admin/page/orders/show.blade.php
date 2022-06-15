@@ -75,8 +75,13 @@
                 </div>
 
                 <div class="form-group col-md-12">
-                    <label>آدرس</label>
-                    <textarea class="form-control" disabled>{{ $order->address->address }}</textarea>
+                    <label>آدرس ({{ $order->address->title}})</label>
+                    <textarea class="form-control" rows="6" disabled>استان :{{ province_name($order->address->province_id) }} 
+شهر : {{ city_name($order->address->city_id) }}
+آدرس دقیق : {{ $order->address->address }}
+کد پستی : {{ $order->address->postal_code }}
+شماره تماس : {{ $order->address->cellphone }}
+                        </textarea>
                 </div>
 
                 <div class="col-md-12">

@@ -2,10 +2,60 @@
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
+                <form wire:submit.prevent="$refresh">
+                    <div class="header">
+                        <h2>
+                            جست و جو
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" wire:model="name"
+                                            placeholder="نام محصول">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select data-placeholder="دسته بندی" class="form-control ms"
+                                            wire:model.deferred="category" class="form-control ms select2">
+                                            <option value="">دسته بندی</option>
+                                            @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select data-placeholder="وضعیت" class="form-control ms"
+                                            wire:model.deferred="status" class="form-control ms select2">
+                                            <option value="">وضعیت</option>
+                                            <option value="1">انتشار</option>
+                                            <option value="0">عدم انتشار</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="header">
                     <h2><strong>لیست محصولات </strong>( {{$products->total()}} )</h2>
                 </div>
                 <div class="body">
+                    <div class="loader" wire:loading.flex>
+                        درحال بارگذاری ...
+                    </div>
                     @if(count($products)===0)
                     <p>هیچ رکوردی وجود ندارد</p>
                     @else
