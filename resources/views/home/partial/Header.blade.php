@@ -12,8 +12,11 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                 @auth
                 <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
-                <a role="link" aria-disabled="true" class="font-size-md"><i class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}} </a>
-                <a href="{{route('logout')}}" class="font-size-md" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
+                <a role="link" aria-disabled="true" class="font-size-md"><i
+                        class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}} </a>
+                <a href="{{route('logout')}}" class="font-size-md"
+                    onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i
+                        class="w-icon-power-off"></i> خروج</a>
                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -102,7 +105,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                 <figure class="product-media">
                                     <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
-                                            alt="product" height="84" width="94" />
+                                            alt="{{$product->slug}}" height="84" width="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close"

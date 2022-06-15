@@ -54,7 +54,8 @@
 
                                 <figure>
                                     <img src="{{url(env('BANNER_IMAGES_PATCH').$banner_left_top->image)}}"
-                                        alt="Category" width="330" height="239" style="background-color: #605959;" />
+                                        alt="{{$banner_left_top->title}}" width="330" height="239"
+                                        style="background-color: #605959;" />
                                 </figure>
 
                                 <div class="banner-content">
@@ -73,7 +74,8 @@
                                 @if ($banner_left_bottom)
                                 <figure>
                                     <img src="{{url(env('BANNER_IMAGES_PATCH').$banner_left_bottom->image)}}"
-                                        alt="Category" width="330" height="239" style="background-color: #eff5f5;" />
+                                        alt="{{$banner_left_bottom->title}}" width="330" height="239"
+                                        style="background-color: #eff5f5;" />
                                 </figure>
                                 <div class="banner-content">
                                     <h3 class="banner-title text-white text-capitalize ls-25 mb-3">
@@ -220,8 +222,9 @@
                 <div class="banner banner-fixed br-sm">
                     @if ($banner_left_category)
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_left_category->image}}" alt="دسته بنر"
-                            width="680px" height="180px" style="background-color: #EAEAEA;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_left_category->image}}"
+                            alt="{{$banner_left_category->title}}" width="680px" height="180px"
+                            style="background-color: #EAEAEA;" />
                     </figure>
                     <div class="banner-content y-50">
                         <h5 class="banner-subtitle text-capitalize font-weight-normal ls-25">
@@ -241,8 +244,9 @@
                 <div class="banner banner-fixed br-sm">
                     @if ($banner_right_category)
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_right_category->image}}" alt="دسته بنر"
-                            width="680px" height="180px" style="background-color: #565960;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_right_category->image}}"
+                            alt="{{$banner_right_category->title}}" width="680px" height="180px"
+                            style="background-color: #565960;" />
                     </figure>
                     <div class="banner-content y-50">
                         <h5 class="banner-subtitle text-white text-capitalize font-weight-normal ls-25">
@@ -347,8 +351,9 @@
             <div class="col-lg-6 grid-item height-x2 grid-item-lg">
                 <div class="banner banner-fixed br-sm">
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_right->image}}" alt="Banner" width="680"
-                            height="420" style="background-color: #242529;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_right->image}}"
+                            alt="{{$banner_end_right->title}}" width="680" height="420"
+                            style="background-color: #242529;" />
                     </figure>
                     <div class="banner-content text-center x-50 w-100 pl-4 pr-4">
                         <h5 class="banner-subtitle text-uppercase text-secondary font-weight-bold ls-25 mb-1">
@@ -363,8 +368,9 @@
             <div class="col-lg-6 grid-item height-x1 grid-item-md">
                 <div class="banner banner-fixed br-sm">
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_top->image}}" alt="Banner" width="680"
-                            height="200" style="background-color: #EEEEF0;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_top->image}}"
+                            alt="{{$banner_end_left_top->title}}" width="680" height="200"
+                            style="background-color: #EEEEF0;" />
                     </figure>
                     <div class="banner-content y-50">
                         <h5 class="banner-subtitle font-weight-normal text-uppercase mb-0">
@@ -382,8 +388,9 @@
             <div class="col-lg-3 col-sm-6 grid-item height-x1 grid-item-sm">
                 <div class="banner banner-fixed br-sm">
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_bottom_1->image}}" alt="Banner"
-                            width="330" height="200" style="background-color: #519DD9;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_bottom_1->image}}"
+                            alt="{{$banner_end_left_bottom_1->title}}" width="330" height="200"
+                            style="background-color: #519DD9;" />
                     </figure>
                     <div class="banner-content text-center x-50 y-50 w-100">
                         <h3 class="banner-title text-white text-uppercase mb-1 font-weight-bolder">سلام !</h3>
@@ -397,8 +404,9 @@
             <div class="col-lg-3 col-sm-6 grid-item height-x1 grid-item-sm">
                 <div class="banner banner-fixed br-sm">
                     <figure>
-                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_bottom_2->image}}" alt="Banner"
-                            width="330" height="200" style="background-color: #5F5657;" />
+                        <img src="{{env('BANNER_IMAGES_PATCH').$banner_end_left_bottom_2->image}}"
+                            alt="{{$banner_end_left_bottom_2->title}}" width="330" height="200"
+                            style="background-color: #5F5657;" />
                     </figure>
                     <div class="banner-content y-50">
                         <h3 class="banner-title text-white text-capitalize ls-25"> {{$banner_end_left_bottom_2->title}}
@@ -475,7 +483,8 @@
                 }">
             @foreach ($brands as $brand)
             <figure>
-                <img src="{{url(env('BRAND_IMAGES_PATCH').$brand->image)}}" alt="Brand" width="310" height="180" />
+                <img src="{{url(env('BRAND_IMAGES_PATCH').$brand->image)}}" alt="{{$brand->slug}}" width="310"
+                    height="180" />
             </figure>
             @endforeach
         </div>
@@ -514,7 +523,7 @@
             <div class="post text-center overlay-zoom">
                 <figure class="post-media br-sm">
                     <a href="post-single.html">
-                        <img src="{{url('storage/'.$post->image->url)}}" alt="Post" width="280" height="180"
+                        <img src="{{url('storage/'.$post->image->url)}}" alt="{{$post->title}}" width="280" height="180"
                             style="background-color: #546B73;" />
                     </a>
                 </figure>

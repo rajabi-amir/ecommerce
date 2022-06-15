@@ -4,7 +4,7 @@
             <a href="{{route('home.products.show' , ['product' => $wishlist->product->slug])}}">
                 <figure>
                     <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$wishlist->product->primary_image)}}"
-                        alt="product" width="300" height="338">
+                        alt="{{$product->slug}}" width="300" height="338">
                 </figure>
             </a>
             <button onclick="return send('{{$wishlist->product->id}}')" class="btn btn-close"><i
