@@ -209,7 +209,7 @@
                         </div>
                         <div class="body text-center">
                             <div id="chart-pie" class="c3_chart d_distribution"></div>
-                            <button class="btn btn-primary mt-4 mb-4">مشاهده بیشتر</button>
+                            <!-- <button hidden class="btn btn-primary mt-4 mb-4">مشاهده بیشتر</button> -->
                         </div>
                     </div>
                 </div>
