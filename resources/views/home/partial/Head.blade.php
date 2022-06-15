@@ -23,7 +23,7 @@ WebFontConfig = {
 })(document);
 </script>
 @if (!request()->routeIs('home.user_profile') && !request()->routeIs('contact-us'))
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 @endif
 
 <link rel="preload" href="{{asset('fonts/fontawesome-free/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2"

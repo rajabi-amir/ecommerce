@@ -13,7 +13,6 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
@@ -46,8 +45,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
     Route::resource('orders',         OrderController::class);
     Route::resource('transactions',   TransactionController::class);
 
-    Route::get('/settings', [SettingController::class, 'show'])->name('settings.show');
-    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::view('/settings', 'admin.page.settings.setting')->name('settings.show');
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create');
     Route::get('/category-attributes/{category}',     [CategoryController::class, 'getCategoryAttributes']);
     Route::get('/products/{product}/images-edit',     [ImageController::class, 'edit'])->name('products.images.edit');

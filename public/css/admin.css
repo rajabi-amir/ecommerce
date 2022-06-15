@@ -8038,7 +8038,7 @@ button.bg-dark:hover {
 
 .mr-2,
 .mx-2 {
-	margin-left: .5rem !important
+	margin-right: .5rem !important
 }
 
 .mb-2,
@@ -10174,7 +10174,7 @@ button.bg-dark:hover {
 }
 
 .text-right {
-	text-align: left !important
+	text-align: right !important
 }
 
 .text-center {
@@ -30218,7 +30218,7 @@ section.content {
 
 .panel-group .panel .panel-heading a {
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
 }
 
 .panel-group .panel .panel-heading a:hover,
@@ -35433,3 +35433,11 @@ section.content {
     max-width: fit-content !important;
 }
 
+/* input type number without marker */
+input.without-spin::-webkit-inner-spin-button,
+input.without-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}

@@ -138,7 +138,7 @@
 <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
 
 <script>
-    var map = L.map('map').setView([{{$setting->longitude}}, {{$setting->latitude}}], 12);
+    var map = L.map('map').setView([{{$setting->longitude}}, {{$setting->latitude}}], 13);
     L.tileLayer('https://developers.parsijoo.ir/web-service/v1/map/?type=tile&x={x}&y={y}&z={z}&apikey=627973149c2041b184e31259821d1306', {
         maxZoom: 21,
     }).addTo(map);

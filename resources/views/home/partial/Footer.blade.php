@@ -4,11 +4,13 @@
     <div class="container">
         <div class="footer-newsletter">
             <div class="row justify-content-center align-items-center">
+                @isset($setting->logo)
                 <div class="col-xl-3 col-lg-2">
-                    <a href="demo5.html" class="logo-footer">
-                        <img src="/assets/images/demos/demo5/Logo-1.png" alt="logo-footer" width="145" height="45" />
+                    <a href="{{route('home')}}" class="logo-footer">
+                        <img src="{{asset('storage/logo/'.$setting->logo)}}" alt="logo-footer" width="145" height="45" />
                     </a>
                 </div>
+                @endisset
                 <div class="col-xl-4 col-lg-5">
                     <div class="icon-box icon-box-side text-dark">
                         <div class="icon-box-icon d-inline-flex">
@@ -22,10 +24,8 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-9 mt-4 mt-lg-0 ">
                     <form action="#" method="get" class="input-wrapper input-wrapper-inline input-wrapper-rounded">
-                        <input type="email" class="form-control mr-2 bg-white text-default" name="email" id="email"
-                            placeholder="آدرس ایمیل شما" />
-                        <button class="btn btn-primary btn-rounded" type="submit">مشترک شدن<i
-                                class="w-icon-long-arrow-left"></i></button>
+                        <input type="email" class="form-control mr-2 bg-white text-default" name="email" id="email" placeholder="آدرس ایمیل شما" />
+                        <button class="btn btn-primary btn-rounded" type="submit">مشترک شدن<i class="w-icon-long-arrow-left"></i></button>
                     </form>
                 </div>
             </div>
@@ -35,63 +35,52 @@
                 <div class="col-lg-5 col-sm-6">
                     <div class="widget widget-about">
                         <div class="widget-body">
+                            @isset($setting->work_days)
+                            <p class="widget-about-title">ساعات کاری: <strong> {{$setting->work_days}}</strong></p>
+                            @endisset
+                            @if(json_decode($setting->phones,true) !==[])
                             <p class="widget-about-title">سوال داشتید؟ 24/7 با ما تماس بگیرید</p>
-                            <a href="tel:18005707777" class="widget-about-call">1-800-570-7777</a>
-                            <p class="widget-about-desc">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                کاربردی می باشد..
+                            @foreach (json_decode($setting->phones,true) as $phone)
+                            <a href="tel:{{$phone}}" class="widget-about-call">{{$phone}}</a>
+                            @endforeach
+                            @endif
+                            @isset($setting->description)
+                            <p class="widget-about-desc">
+                                {{$setting->description}}
                             </p>
+                            @endisset
+
                             <label class="label-social d-block text-dark">سوشیال مدیا </label>
                             <div class="social-icons social-icons-colored">
-                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                <a href="#" class="social-icon social-instagram w-icon-instagram"></a>
-                                <a href="#" class="social-icon social-youtube w-icon-youtube"></a>
-                                <a href="#" class="social-icon social-pinterest w-icon-pinterest"></a>
+                                @isset($setting->instagram)
+                                <a href="{{$setting->instagram}}" class="social-icon social-instagram w-icon-instagram"></a>
+                                @endisset
+                                @isset($setting->telegram)
+                                <a href="{{$setting->telegram}}" class="social-icon social-twitter"><i class="fa-brands fa-telegram"></i></a>
+                                @endisset
+                                @isset($setting->telegram)
+                                <a href="{{$setting->telegram}}" class="social-icon social-whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+                                @endisset
                             </div>
                         </div>
                     </div>
                 </div>
+                @if (json_decode($setting->links,true) !==[])
+                @foreach (json_decode($setting->links,true) as $pLink )
                 <div class="col-lg-2 col-sm-6">
                     <div class="widget">
-                        <h3 class="widget-title">شرکت </h3>
+                        <h3 class="widget-title">{{$pLink['name']}} </h3>
+                        @isset ($pLink['children'])
                         <ul class="widget-body">
-                            <li><a href="about-us.html">درباره ما </a></li>
-                            <li><a href="#">اعضای تیم </a></li>
-                            <li><a href="#">مشاغل </a></li>
-                            <li><a href="contact-us.html">تماس با ما </a></li>
-                            <li><a href="#">بازاریابی </a></li>
-                            <li><a href="#">تاریخ سفارش </a></li>
+                            @foreach ($pLink['children'] as $link)
+                            <li><a href="{{$link['url']}}">{{$link['title']}} </a></li>
+                            @endforeach
                         </ul>
+                        @endif
                     </div>
                 </div>
-                <div class="col-lg-2 col-sm-6">
-                    <div class="widget">
-                        <h4 class="widget-title">حساب کاربری </h4>
-                        <ul class="widget-body">
-                            <li><a href="#">پیگیری سفارش من </a></li>
-                            <li><a href="cart.html">نمایش سبد </a></li>
-                            <li><a href="login.html">ورود </a></li>
-                            <li><a href="#">کمک </a></li>
-                            <li><a href="wishlist.html">علاقه مندیهای من </a></li>
-                            <li><a href="#">حریم خصوصی </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-6">
-                    <div class="widget">
-                        <h4 class="widget-title">خدمات مشتری </h4>
-                        <ul class="widget-body">
-                            <li><a href="#">روش های پرداخت </a></li>
-                            <li><a href="#">ضمانت عودت وجه </a></li>
-                            <li><a href="#">روش بازگشتی </a></li>
-                            <li><a href="#">مرکز پشتیبانی </a></li>
-                            <li><a href="#">حمل و نقل </a></li>
-                            <li><a href="#">شرایط و ضوابط</a></li>
-                        </ul>
-                    </div>
-                </div>
+                @endforeach
+                @endif
             </div>
         </div>
     </div>
