@@ -34,12 +34,9 @@
                     <li class="nav-item">
                         <a href="#account-orders" class="nav-link">سفارشات </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#account-downloads" class="nav-link">دانلودها </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{#account-addresses}" class="nav-link">آدرسها </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="#account-details" class="nav-link">جزئیات حساب کاربری </a>
                     </li>
@@ -59,21 +56,7 @@
 
                 <div class="tab-content mb-6">
                     <div class="tab-pane active in" id="account-dashboard">
-                        <p class="greeting"> سلام
-                            <span class="text-dark font-weight-bold">جعفر عباسی </span>نیستی
-                            <span class="text-dark font-weight-bold">جعفر عباسی </span>?
-                            <a href="#" class="text-primary">خروج؟</a>)
-                        </p>
 
-                        <p class="mb-4">
-                            از داشبورد حساب خود می توانید حساب خود را مشاهده کنید <a href="#account-orders"
-                                class="text-primary link-to-tab">سفارشات اخیر </a>,
-                            مدیریت <a href="#account-addresses" class="text-primary link-to-tab">حمل و نقل و صدور صورت
-                                حساب
-                                آدرسها </a>، و
-                            <a href="#account-details" class="text-primary link-to-tab">رمز عبور و اطلاعات حساب خود را
-                                ویرایش کنید.</a>
-                        </p>
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
@@ -88,7 +71,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                            <!-- <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="#account-downloads" class="link-to-tab">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-download">
@@ -99,7 +82,7 @@
                                         </div>
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="#account-addresses" class="link-to-tab">
                                     <div class="icon-box text-center">
@@ -107,7 +90,8 @@
                                             <i class="w-icon-map-marker"></i>
                                         </span>
                                         <div class="icon-box-content">
-                                            <p class="text-uppercase mb-0">آدرسها </p>
+                                            <p class="text-uppercase mb-0"><a
+                                                    href="{{route('home.addreses.index')}}">آدرس ها </a> </p>
                                         </div>
                                     </div>
                                 </a>
@@ -182,23 +166,25 @@
                                 </tr>
                                 @endif
                                 @foreach ($orders as $order)
-                                 <tr>
+                                <tr>
                                     <td class="order-id">{{$order->id}}</td>
                                     <td class="order-date">
-                                    {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
+                                        {{Hekmatinasser\Verta\Verta::instance($order->created_at)->format('Y/n/j')}}
                                     </td>
-                                    <td class="order-status" style={{$order->status== 'در انتظار پرداخت' ? "color:orange" : "color:green"}}>{{$order->status}}</td>
+                                    <td class="order-status"
+                                        style={{$order->status== 'در انتظار پرداخت' ? "color:orange" : "color:green"}}>
+                                        {{$order->status}}</td>
                                     <td class="order-total">
-                                        <span class="order-price">{{number_format($order->paying_amount)}} تومان</span> 
- 
+                                        <span class="order-price">{{number_format($order->paying_amount)}} تومان</span>
+
                                     </td>
                                     <td class="order-action">
                                         <a href="{{route('home.user_profile.orders',['order' => $order->id])}}"
                                             class="btn btn-outline btn-default btn-block btn-sm btn-rounded">نمایش </a>
                                     </td>
-                                </tr>   
+                                </tr>
                                 @endforeach
-                                
+
                             </tbody>
                         </table>
 
@@ -345,8 +331,8 @@
                                                         class="
                                                                 comment-date">{{Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('Y/n/j')}}</span>
                                                     <span><a class="btn btn-secondary btn-link btn-underline"
-                                                            href="{{route('home.products.show', ['product' => $comment->product->slug])}}">محصول
-                                                            ( {{$comment->product->name}} )</a> </span>
+                                                            href="{{route('home.products.show', ['product' => $comment->commentable->slug])}}">محصول
+                                                            ( {{$comment->commentable->name}} )</a> </span>
                                                 </h4>
 
                                                 <!-- <div class="ratings-container comment-rating">

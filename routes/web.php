@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\Sitemap\SitemapGenerator;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -21,13 +22,18 @@ use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\SitemapController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
-
+use Carbon\Carbon;
+use Psr\Http\Message\UriInterface;
+use Spatie\Crawler\Crawler;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
@@ -124,6 +130,10 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
+
+
+
+
 
 
 Route::get('/test', function () {

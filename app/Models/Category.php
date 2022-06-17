@@ -15,6 +15,11 @@ class Category extends Model
         return $query->where('is_active', true);
     }
 
+    public function scopeParents($query)
+    {
+        return $query->where('parent_id', 0)->get();
+    }
+    
      public function parent()
      {
          return $this->belongsTo(Category::class,'parent_id');
