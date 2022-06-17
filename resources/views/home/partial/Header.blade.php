@@ -8,7 +8,6 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 <p class="welcome-msg">به فروشگاه {{env('APP_NAME')}} خوش آمدید</p>
             </div>
             <div class="header-right">
-                <a href="blog.html" class="d-lg-show">وبلاگ </a>
                 <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                 @auth
                 <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
@@ -185,159 +184,42 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                 <a href="{{route('home')}}">صفحه اصلی </a>
                             </li>
                             <li @class(['active'=>request()->is('categories/*')])>
-                                <a href="shop-banner-sidebar.html">فروشگاه </a>
+                                <a href="{{route('home.products.search')}}">فروشگاه </a>
 
                                 <!-- Start of Megamenu -->
                                 <ul class="megamenu">
+                                    @foreach ($categories as $category)
                                     <li>
-                                        <h4 class="menu-title">صفحات فروشگاه </h4>
+                                        <h4 class="menu-title">{{$category->name}}</h4>
+                                        @if(count($category->children))
                                         <ul>
-                                            <li><a href="shop-banner-sidebar.html">بنر با نوار کناری</a></li>
-                                            <li><a href="shop-boxed-banner.html">بنر جعبه ای </a></li>
-                                            <li><a href="shop-fullwidth-banner.html">بنر عرض کامل </a></li>
-                                            <li><a href="shop-horizontal-filter.html">فیلتر افقی<span
-                                                        class="tip tip-hot">داغ </span></a></li>
-                                            <li><a href="shop-off-canvas.html">نوار کناری <span class="tip tip-new">جدید
-                                                    </span></a></li>
-                                            <li><a href="shop-infinite-scroll.html">اسکرول بی نهایت آژاکس</a>
+                                            <li><a
+                                                    href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
+                                                </a>
                                             </li>
-                                            <li><a href="shop-right-sidebar.html">نوار کناری چپ</a></li>
-                                            <li><a href="shop-both-sidebar.html">دو نوار کناری </a></li>
                                         </ul>
+                                        @endif
                                     </li>
-                                    <li>
-                                        <h4 class="menu-title">چیدمان فروشگاه </h4>
-                                        <ul>
-                                            <li><a href="shop-grid-3cols.html">3 حالت ستون ها </a></li>
-                                            <li><a href="shop-grid-4cols.html">4 حالت ستون ها </a></li>
-                                            <li><a href="shop-grid-5cols.html">5 حالت ستون ها </a></li>
-                                            <li><a href="shop-grid-6cols.html">6 حالت ستون ها </a></li>
-                                            <li><a href="shop-grid-7cols.html">7 حالت ستون ها </a></li>
-                                            <li><a href="shop-grid-8cols.html">8 حالت ستون ها </a></li>
-                                            <li><a href="shop-list.html">حالت لیست </a></li>
-                                            <li><a href="shop-list-sidebar.html">حالت لیست با نوار کناری</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h4 class="menu-title">صفحات محصول </h4>
-                                        <ul>
-                                            <li><a href="product-variable.html">محصول متغیر </a></li>
-                                            <li><a href="product-featured.html">ویژه و حراج </a></li>
-                                            <li><a href="product-accordion.html">داده ها در آکاردئون</a></li>
-                                            <li><a href="product-section.html">داده ها در بخش ها</a></li>
-                                            <li><a href="product-swatch.html">سواچ تصویر</a></li>
-                                            <li><a href="product-extended.html">اطلاعات گسترده </a>
-                                            </li>
-                                            <li><a href="product-without-sidebar.html">بدون نوار کناری </a></li>
-                                            <li><a href="product-video.html">360<sup>درجه </sup> ویدئو <span
-                                                        class="tip tip-new">جدید </span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h4 class="menu-title">طرح بندی محصولات </h4>
-                                        <ul>
-                                            <li><a href="product-default.html">پیشفرض <span class="tip tip-hot">داغ
-                                                    </span></a></li>
-                                            <li><a href="product-vertical.html">تصاویر عمودی محصول </a></li>
-                                            <li><a href="product-grid.html">تصاویر شبکه ای </a></li>
-                                            <li><a href="product-masonry.html">ساختمانی </a></li>
-                                            <li><a href="product-gallery.html">گالری </a></li>
-                                            <li><a href="product-sticky-info.html">اطلاعات چسبناک </a></li>
-                                            <li><a href="product-sticky-thumb.html">تصاویر کوچک چسبناک</a></li>
-                                            <li><a href="product-sticky-both.html">چسبناک هر دو </a></li>
-                                        </ul>
-                                    </li>
+                                    @endforeach
                                 </ul>
                                 <!-- End of Megamenu -->
                             </li>
-                            <li>
-                                <a href="vendor-dokan-store.html">فروشنده </a>
-                                <ul>
-                                    <li>
-                                        <a href="vendor-dokan-store-list.html">لیست فروشگاه ها</a>
-                                        <ul>
-                                            <li><a href="vendor-dokan-store-list.html">لیست فروشگاه 1</a></li>
-                                            <li><a href="vendor-wcfm-store-list.html">لیست فروشگاه 2</a></li>
-                                            <li><a href="vendor-wcmp-store-list.html">لیست فروشگاه 3</a></li>
-                                            <li><a href="vendor-wc-store-list.html">لیست فروشگاه 4</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="vendor-dokan-store.html">فروشگاه فروشنده</a>
-                                        <ul>
-                                            <li><a href="vendor-dokan-store.html">فروشنده 1</a></li>
-                                            <li><a href="vendor-wcfm-store-product-grid.html">فروشنده 2</a>
-                                            </li>
-                                            <li><a href="vendor-wcmp-store-product-grid.html">فروشنده 3</a>
-                                            </li>
-                                            <li><a href="vendor-wc-store-product-grid.html">فروشنده 4</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li @class(['active'=>request()->is('blogs/*')])>
-                                <a href="blog.html">وبلاگ </a>
-                                <ul>
-                                    <li><a href="blog.html">کلاسیک </a></li>
-                                    <li><a href="blog-listing.html">فهرست </a></li>
-                                    <li>
-                                        <a href="blog-grid-3cols.html">گرید </a>
-                                        <ul>
-                                            <li><a href="blog-grid-2cols.html">ستون 2 گرید</a></li>
-                                            <li><a href="blog-grid-3cols.html">ستون 3 گرید</a></li>
-                                            <li><a href="blog-grid-4cols.html">ستون 4 گرید</a></li>
-                                            <li><a href="blog-grid-sidebar.html">نوار کناری گرید</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog-masonry-3cols.html">ساختمانی </a>
-                                        <ul>
-                                            <li><a href="blog-masonry-2cols.html">ستون 2 ساختمانی</a></li>
-                                            <li><a href="blog-masonry-3cols.html">ستون 3 ساختمانی</a></li>
-                                            <li><a href="blog-masonry-4cols.html">ستون 4 ساختمانی</a></li>
-                                            <li><a href="blog-masonry-sidebar.html">نوار کناری ساختمان </a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog-mask-grid.html">ماسک </a>
-                                        <ul>
-                                            <li><a href="blog-mask-grid.html">ماسک وبلاگ گرید </a></li>
-                                            <li><a href="blog-mask-masonry.html">بلاک ماسک ساختمانی </a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="post-single.html">تک نوشته </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="about-us.html">صفحات </a>
-                                <ul>
 
-                                    <li><a href="about-us.html">درباره ما </a></li>
-                                    <li><a href="become-a-vendor.html">تبدیل شدن به یک فروشنده </a></li>
-                                    <li><a href="contact-us.html">تماس با ما </a></li>
-                                    <li><a href="faq.html">گفت و گو </a></li>
-                                    <li><a href="error-404.html">ارور 404 </a></li>
-                                    <li><a href="coming-soon.html">به زودی </a></li>
-                                    <li><a href="wishlist.html">علاقه مندیها </a></li>
-                                    <li><a href="#">سبد خرید </a></li>
-                                    <li><a href="checkout.html">پرداخت </a></li>
-                                    <li><a href="my-account.html">حساب کاربری من </a></li>
-                                    <li><a href="compare.html">مقایسه </a></li>
-                                </ul>
+                            <li @class(['active'=>request()->is('blogs/*')])>
+                                <a href="{{route('home.posts.index')}}">وبلاگ </a>
+
                             </li>
+
                             <li @class(['active'=>request()->routeIs('contact-us')])>
                                 <a href="{{route('contact-us')}}">تماس با ما</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
-                <div class="header-right">
+                <!-- <div class="header-right">
                     <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>پیگیری سفارش</a>
                     <a href="#"><i class="w-icon-sale"></i>فروش ویژه </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

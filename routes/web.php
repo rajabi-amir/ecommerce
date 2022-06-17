@@ -21,6 +21,7 @@ use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
+use App\Http\Controllers\Home\PostController as HomePostController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\SitemapController;
 use App\Http\Controllers\Home\UserProfileController;
@@ -125,6 +126,9 @@ Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
+
+Route::get('/post/{post}', [HomePostController::class, 'show'])->name('home.posts.show');
+Route::get('/post', [HomePostController::class, 'index'])->name('home.posts.index');
 
 Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 
