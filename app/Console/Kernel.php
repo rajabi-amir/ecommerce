@@ -21,6 +21,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             Otp::where('updated_at', '<', Carbon::now()->subDay())->delete();
         })->weekly();
+
+        //SEO SITEMAP
+        $schedule->command('sitemap:generate')->weekly();
+
     }
 
     /**

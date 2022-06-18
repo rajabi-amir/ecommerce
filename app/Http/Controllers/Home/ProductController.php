@@ -9,12 +9,23 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\WishList;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function show(Product $product)
     {
+        // SEO
+        SEOTools::setTitle('صفحه محصول');
+        SEOTools::setDescription(' فروشگاه اینترنتی لوازم آرایشی در تهران ');
+        SEOTools::opengraph()->setUrl('http://current.url.com');
+        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@LuizVinicius73');
+        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+        //END SEO
+        
         $categories=Category::all();
         $brands=Brand::all();
         $services=Service::orderBy('service_order')->get();
