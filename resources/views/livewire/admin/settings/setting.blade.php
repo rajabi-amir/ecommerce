@@ -167,7 +167,7 @@
                                             </div>
                                         </h4>
                                     </div>
-                                    <div id="collapse_{{$index}}" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="heading_{{$index}}">
+                                    <div id="collapse_{{$index}}" class="panel-collapse collapse bg-ghostwhite in show" role="tabpanel" aria-labelledby="heading_{{$index}}">
                                         <div class="panel-body">
                                             @isset ( $parent['children'] )
                                             @foreach ($parent['children'] as $key => $value)

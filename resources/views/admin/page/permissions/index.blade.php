@@ -1,18 +1,5 @@
 @extends('admin.layout.MasterAdmin')
-
-@push('styles')
-<style>
-    .custom-file-label::after {
-        left: 0;
-        right: auto;
-        border-left-width: 0;
-        border-right: inherit;
-    }
-    .preview-img{
-        max-height: 18em;
-    }
-</style>
-@endpush
+@section('title','لیست مجوزها')
 
 @section('Content')
 <section class="content">
@@ -20,10 +7,13 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>تنظیمات</h2>
+                    <h2>لیست مجوزها</h2>
+                    </br>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i> خانه</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">تنظیمات</a></li>
+                        <li class="breadcrumb-item"><a href={{route('admin.home')}}><i class="zmdi zmdi-home"></i>
+                                خانه</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">مجوزها</a></li>
+                        <li class="breadcrumb-item active">لیست مجوزها</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -34,7 +24,7 @@
         </div>
 
         <div class="container-fluid">
-            @livewire('admin.settings.setting')
+            @livewire('admin.permissions.permission-list')
         </div>
     </div>
 </section>

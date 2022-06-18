@@ -9,9 +9,9 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
             </div>
             <div class="header-right">
                 <a href="blog.html" class="d-lg-show">وبلاگ </a>
-                <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
+                <a href="{{route('contact-us')}}" class="d-lg-show">تماس با ما </a>
                 @auth
-                <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
+                <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home') : route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
                 <a role="link" aria-disabled="true" class="font-size-md"><i
                         class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}} </a>
                 <a href="{{route('logout')}}" class="font-size-md"
@@ -107,7 +107,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                 <figure class="product-media">
                                     <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
                                         <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
-                                            alt="{{$product->slug}}" height="84" width="94" />
+                                            alt="{{$item->associatedModel->slug}}" height="84" width="94" />
                                     </a>
                                 </figure>
                                 <button class="btn btn-link btn-close"

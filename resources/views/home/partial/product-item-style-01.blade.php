@@ -3,7 +3,7 @@
         <figure class="product-media">
             <a href="{{route('home.products.show' , ['product' => $Product_our_suggestion->slug])}}">
                 <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$Product_our_suggestion->primary_image)}}"
-                    alt="{{$Product->slug}}">
+                    alt="{{$Product_our_suggestion->slug}}">
             </a>
         </figure>
         <div class="product-details">

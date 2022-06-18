@@ -1,5 +1,5 @@
 @extends('home.layout.MasterHome')
-@section('title','بازیابی رمز عبور')
+@section('title','ورود/ثبت نام')
 @section('content')
 <main class="main login-page">
     <!-- Start of Page Header -->

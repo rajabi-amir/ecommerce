@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // delete expired otp
         $schedule->call(function () {
             Otp::where('updated_at', '<', Carbon::now()->subDay())->delete();
         })->weekly();

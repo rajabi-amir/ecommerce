@@ -15,11 +15,11 @@ class Setting extends Component
     use WithFileUploads;
 
     public $email;
-    public $emails = [];
+    public $emails;
     public $phone;
-    public $phones = [];
+    public $phones;
     public $group_name;
-    public $links = [];
+    public $links;
     public $whatsapp;
     public $instagram;
     public $telegram;
@@ -66,7 +66,7 @@ class Setting extends Component
         $this->site_name = $settings->site_name;
         $this->emails = json_decode($settings->emails, true);
         $this->phones = json_decode($settings->phones, true);
-        $this->links = $settings->links ? json_decode($settings->links, true) : [];
+        $this->links = json_decode($settings->links, true) ?? [];
         $this->whatsapp = $settings->whatsapp;
         $this->instagram = $settings->instagram;
         $this->telegram = $settings->telegram;
@@ -106,10 +106,6 @@ class Setting extends Component
 
     public function addGroupName()
     {
-        if($this->links == null){
-           $this->links=[]; 
-        }
-        
         $this->validate([
             'group_name' => ['required', 'string', Rule::notIn(Arr::pluck($this->links, 'name'))],
         ]);

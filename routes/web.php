@@ -11,8 +11,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Home\AddressController;
 use App\Http\Controllers\Home\CartController;
@@ -30,23 +32,25 @@ use App\Http\Livewire\Home\ProductsList;
 
 
 //admin routes
-Route::prefix('Admin-panel/managment')->name('admin.')->group(function () {
+Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
-    Route::resource('products',       ProductController::class);
-    Route::resource('brands',         BrandController::class);
-    Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy']);
-    Route::resource('categories',     CategoryController::class);
-    Route::resource('banners',        BannerController::class)->except(['show', 'destroy']);
-    Route::resource('/services',      ServiceController::class)->except(['show']);
-    Route::resource('/posts',         PostController::class)->except('show');
-    Route::resource('/comments',      CommentController::class);
-    Route::resource('/coupons',       CouponController::class);
-    Route::resource('products',       ProductController::class);
-    Route::resource('orders',         OrderController::class);
-    Route::resource('transactions',   TransactionController::class);
+    Route::resource('brands',         BrandController::class)->middleware('permission:brands');
+    Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
+    Route::resource('categories',     CategoryController::class)->middleware('permission:categories');
+    Route::resource('banners',        BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
+    Route::resource('services',      ServiceController::class)->except(['show'])->middleware('permission:services');
+    Route::resource('posts',         PostController::class)->except('show')->middleware('permission:posts');
+    Route::resource('comments',      CommentController::class)->middleware('permission:comments');
+    Route::resource('coupons',       CouponController::class)->middleware('permission:coupons');
+    Route::resource('products',       ProductController::class)->middleware('permission:products');
+    Route::resource('orders',         OrderController::class)->middleware('permission:orders');
+    Route::resource('transactions',   TransactionController::class)->middleware('permission:transactions');
+    Route::resource('users',   UserController::class)->only('index', 'edit', 'update')->middleware('permission:users');
+    Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
+    Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
 
-    Route::view('/settings', 'admin.page.settings.setting')->name('settings.show');
-    Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create');
+    Route::view('/settings', 'admin.page.settings.setting')->name('settings.show')->middleware('permission:settings');
+    Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create')->middleware('permission:tags');
     Route::get('/category-attributes/{category}',     [CategoryController::class, 'getCategoryAttributes']);
     Route::get('/products/{product}/images-edit',     [ImageController::class, 'edit'])->name('products.images.edit');
 

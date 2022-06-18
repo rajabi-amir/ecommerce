@@ -65,14 +65,14 @@
                         <div class="icon-box-content">
                             <h4 class="icon-box-title">آدرس ایمیل</h4>
                             <p>
-                                @isset($setting->email)
+                                @if(json_decode($setting->emails) != null && json_decode($setting->emails) != [])
 
-                                @foreach(json_decode($setting->email) as $email)
+                                @foreach(json_decode($setting->emails) as $email)
 
-                                {{$loop->last ? '' : ' / '}}{{$email}}
+                                {{$email}}{{$loop->last ? '' : ' / '}}
 
                                 @endforeach
-                                @endisset
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -82,13 +82,13 @@
                         </span>
                         <div class="icon-box-content">
                             <h4 class="icon-box-title">شماره تلفن</h4>
-                            <p>@isset($setting->phone)
-                                @foreach(json_decode($setting->phone) as $phone)
+                            <p>@if(json_decode($setting->phones) != null && json_decode($setting->phones) != [])
+                                @foreach(json_decode($setting->phones) as $phone)
 
-                                {{$loop->last ? '' : ' / '}}{{$phone}}
+                                {{$phone}}{{$loop->last ? '' : ' / '}}
 
                                 @endforeach
-                                @endisset
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             <i class="w-icon-map-marker"></i>
                         </span>
                         <div class="icon-box-content">
-                            <h4 class="icon-box-title">آدرسها </h4>
+                            <h4 class="icon-box-title">آدرس </h4>
                             <p>{{$setting->address}}</p>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                         </span>
                         <div class="icon-box-content">
                             <h4 class="icon-box-title">ساعات کاری</h4>
-                            <p>{{$setting->work_day}}</p>
+                            <p>{{$setting->work_days}}</p>
                         </div>
                     </div>
                 </div>

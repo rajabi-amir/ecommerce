@@ -35320,37 +35320,38 @@ section.content {
 .select2-container .select2-search--inline .select2-search__field {
     font: inherit;
 }
+
 .select2-container--default .select2-selection--single {
     display: flex;
     align-items: center;
     height: calc(2.25rem + 2px);
 }
+
 .select2-container--default .select2-selection--multiple {
     min-height: calc(2.25rem + 2px);
 }
-.select2-container--default[dir="rtl"]
-    .select2-selection--single
-    .select2-selection__arrow {
+
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
     top: 5px;
 }
+
 .select2-results__option {
     text-align: right;
 }
+
 /* bootstrap select */
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
     white-space: nowrap;
 }
-.bootstrap-select.btn-group.show-tick
-    .dropdown-menu
-    li.selected
-    a
-    span.check-mark {
+
+.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
     position: absolute;
     display: inline-block;
     left: 15px;
     right: unset;
     margin-top: 5px;
 }
+
 /* toggle input css */
 .switchToggle input[type="checkbox"] {
     height: 0;
@@ -35358,6 +35359,7 @@ section.content {
     visibility: hidden;
     position: absolute;
 }
+
 .switchToggle label {
     cursor: pointer;
     text-indent: -9999px;
@@ -35370,6 +35372,7 @@ section.content {
     border-radius: 100px;
     position: relative;
 }
+
 .switchToggle label:after {
     content: "";
     position: absolute;
@@ -35381,12 +35384,14 @@ section.content {
     border-radius: 90px;
     transition: 0.3s;
 }
-.switchToggle input:checked + label,
-.switchToggle input:checked + input + label {
+
+.switchToggle input:checked+label,
+.switchToggle input:checked+input+label {
     background: #d1d1d1;
 }
-.switchToggle input + label:before,
-.switchToggle input + input + label:before {
+
+.switchToggle input+label:before,
+.switchToggle input+input+label:before {
     content: "فعال";
     position: absolute;
     top: 5px;
@@ -35400,8 +35405,9 @@ section.content {
     text-indent: 0;
     color: #fff;
 }
-.switchToggle input:checked + label:before,
-.switchToggle input:checked + input + label:before {
+
+.switchToggle input:checked+label:before,
+.switchToggle input:checked+input+label:before {
     content: "غیرفعال";
     position: absolute;
     top: 5px;
@@ -35415,14 +35421,17 @@ section.content {
     text-indent: 0;
     color: #7f7777;
 }
-.switchToggle input:checked + label:after,
-.switchToggle input:checked + input + label:after {
+
+.switchToggle input:checked+label:after,
+.switchToggle input:checked+input+label:after {
     left: calc(100% - 2px);
     transform: translateX(-100%);
 }
+
 .switchToggle label:active:after {
     width: 60px;
 }
+
 .toggle-switchArea {
     margin: 10px 0 10px 0;
 }
@@ -35441,3 +35450,54 @@ input.without-spin::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
+
+/* collapse spin */
+a[aria-expanded="true"] span {
+    transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    /*  for IE  */
+    /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+    -webkit-transform: rotate(270deg);
+    display: inline-block;
+
+}
+
+.bg-ghostwhite {
+    background-color: #f9f9fd;
+}
+
+
+/*
+*  input with addon
+* enable absolute positioning
+ */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .input-icon {
+    position: absolute;
+    /* padding: 10px; */
+    pointer-events: none;
+}
+
+/* align icon */
+.left-addon .input-icon {
+    left: 10px;
+    top: 10px;
+}
+
+.right-addon .input-icon {
+    right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
