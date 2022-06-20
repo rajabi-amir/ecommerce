@@ -13,7 +13,9 @@ use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseCont
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
 
@@ -30,7 +32,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return view('home.auth.login');
         });
-        
+
         Fortify::registerView(function () {
             return view('home.auth.login');
         });
@@ -38,6 +40,15 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 return redirect()->back();
+            }
+        });
+
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request)
+            {
+                return $request->wantsJson()
+                    ? response()->json(['two_factor' => false, 'redirect' => Redirect::intended('/')->getTargetUrl()])
+                    : redirect()->intended();
             }
         });
 

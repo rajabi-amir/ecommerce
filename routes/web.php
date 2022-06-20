@@ -32,11 +32,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
-use Carbon\Carbon;
-use Psr\Http\Message\UriInterface;
-use Spatie\Crawler\Crawler;
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role'])->group(function () {
@@ -98,7 +93,7 @@ Route::get('/assets/ajax', function () {
     return view('home.partial.login');
 });
 
-Route::prefix('profile')->name('home.')->group(function () {
+Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
