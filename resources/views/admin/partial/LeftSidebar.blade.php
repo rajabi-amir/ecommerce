@@ -8,7 +8,7 @@
         <ul class="list" id="myList">
             <td>
                 <div class="user-info">
-                    <a class="image" href="#"><img default="" src="{{$user->avatar ? asset('storage/profile/'.$user->avatar) : asset('img/profile.png') }}"></a>
+                    <a class="image" href="#"><img default="" src="{{auth()->user()->avatar ? asset('storage/profile/'.auth()->user()->avatar) : asset('img/profile.png') }}"></a>
                     <div class="detail">
                         <h6><strong>{{auth()->user()->name}}</strong></h6>
                         <small>{{auth()->user()->roles->first()->display_name}}</small>
