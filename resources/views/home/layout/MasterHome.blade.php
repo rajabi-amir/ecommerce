@@ -51,7 +51,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe.min.js')}}"></script>
     <script src="{{asset('assets/vendor/photoswipe/photoswipe-ui-default.min.js')}}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('assets/js/main.min.js')}}"></script>
     <script>
         function number_format(number, decimals, dec_point, thousands_sep) {

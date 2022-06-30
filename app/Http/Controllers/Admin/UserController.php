@@ -29,6 +29,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user, ToastrFactory $flasher)
     {
+
         $data = $request->validate([
             'name' => 'nullable|string',
             'email' => 'required_without:cellphone|nullable|email|unique:users,email,' . $user->id,
@@ -36,7 +37,6 @@ class UserController extends Controller
             'role' => 'nullable|string',
             'permissions' => 'nullable|array',
         ]);
-
         try {
             DB::beginTransaction();
             $user->update(Arr::except($data, ['role']));
@@ -49,6 +49,7 @@ class UserController extends Controller
             $flasher->addError($ex->getMessage());
             return redirect()->route('admin.users.index');
         }
+
         $flasher->addSuccess('کاربر با موفقیت ویرایش شد');
         return redirect()->back();
     }

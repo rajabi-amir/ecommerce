@@ -29,13 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Fortify::loginView(function () {
-            return view('home.auth.login');
-        });
 
-        Fortify::registerView(function () {
-            return view('home.auth.login');
-        });
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {
@@ -52,13 +46,6 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        Fortify::resetPasswordView(function ($request) {
-            return view('home.auth.reset-password', ['request' => $request]);
-        });
-
-        Fortify::verifyEmailView(function () {
-            return view('home.auth.verify-email');
-        });
     }
 
     /**
@@ -72,6 +59,22 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::loginView(function () {
+            return view('home.auth.login');
+        });
+        Fortify::registerView(function () {
+            return view('home.auth.login');
+        });
+        Fortify::resetPasswordView(function ($request) {
+            return view('home.auth.reset-password', ['request' => $request]);
+        });
+        Fortify::verifyEmailView(function () {
+            return view('home.auth.verify-email');
+        });
+        Fortify::confirmPasswordView(function () {
+            return view('home.auth.confirm-password');
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;

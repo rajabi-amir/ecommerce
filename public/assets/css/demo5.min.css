@@ -16743,6 +16743,7 @@ body .product-popup {
 
     .grid-item-widget {
         grid-column-end: span 2;
+        height: 0ch;
     }
 }
 

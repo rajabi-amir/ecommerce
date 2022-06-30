@@ -65,8 +65,8 @@
                                 <a href="{{$setting->telegram}}" class="social-icon social-twitter"><i
                                         class="fa-brands fa-telegram"></i></a>
                                 @endisset
-                                @isset($setting->telegram)
-                                <a href="{{$setting->telegram}}" class="social-icon social-whatsapp"><i
+                                @isset($setting->whatsapp)
+                                <a href="{{$setting->whatsapp}}" class="social-icon social-whatsapp"><i
                                         class="fa-brands fa-whatsapp"></i></a>
                                 @endisset
                             </div>
@@ -84,7 +84,7 @@
                             <li><a href="{{$link['url']}}">{{$link['title']}} </a></li>
                             @endforeach
                         </ul>
-                        @endif
+                        @endisset
                     </div>
                 </div>
                 @endforeach

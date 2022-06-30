@@ -8,7 +8,7 @@
         <ul class="list" id="myList">
             <td>
                 <div class="user-info">
-                    <a class="image" href="#"><img default="" src="{{asset('storage/profile/admin.png')}}"></a>
+                    <a class="image" href="#"><img default="" src="{{$user->avatar ? asset('storage/profile/'.$user->avatar) : asset('img/profile.png') }}"></a>
                     <div class="detail">
                         <h6><strong>{{auth()->user()->name}}</strong></h6>
                         <small>{{auth()->user()->roles->first()->display_name}}</small>
@@ -129,12 +129,14 @@
             @endcan
 
             <!-- تنظیمات -->
-            <li @class(['active open'=>request()->routeIs('admin.settings.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
+            <li @class(['active open'=>request()->routeIs('admin.settings.*','admin.profile.*')])> <a href="javascript:void(0);"
+                    class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
                     @can('settings')
-                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a href="{{route('admin.settings.show')}}">سایت</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a
+                            href="{{route('admin.settings.show')}}">سایت</a></li>
                     @endcan
-                    <li><a href="#">ویرایش پروفایل کاربری </a></li>
+                    <li @class(['active'=>request()->routeIs('admin.profile.edit')])><a href="{{route('admin.profile.edit')}}">ویرایش پروفایل کاربری </a></li>
                     <li><a href="#">تغییر کلمه عبور </a></li>
                 </ul>
             </li>
