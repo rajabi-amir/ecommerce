@@ -13,7 +13,9 @@ use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseCont
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
 
@@ -27,13 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Fortify::loginView(function () {
-            return view('home.auth.login');
-        });
-        
-        Fortify::registerView(function () {
-            return view('home.auth.login');
-        });
+
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)
             {
@@ -41,13 +37,15 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        Fortify::resetPasswordView(function ($request) {
-            return view('home.auth.reset-password', ['request' => $request]);
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request)
+            {
+                return $request->wantsJson()
+                    ? response()->json(['two_factor' => false, 'redirect' => Redirect::intended('/')->getTargetUrl()])
+                    : redirect()->intended();
+            }
         });
 
-        Fortify::verifyEmailView(function () {
-            return view('home.auth.verify-email');
-        });
     }
 
     /**
@@ -61,6 +59,22 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::loginView(function () {
+            return view('home.auth.login');
+        });
+        Fortify::registerView(function () {
+            return view('home.auth.login');
+        });
+        Fortify::resetPasswordView(function ($request) {
+            return view('home.auth.reset-password', ['request' => $request]);
+        });
+        Fortify::verifyEmailView(function () {
+            return view('home.auth.verify-email');
+        });
+        Fortify::confirmPasswordView(function () {
+            return view('home.auth.confirm-password');
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;

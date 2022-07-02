@@ -55,7 +55,7 @@
                                     @enderror
                                 </div>
                                 <input type="hidden" name="token" value="{{request()->route('token')}}">
-                                <button type="submit" class="btn btn-primary">ورود </button>
+                                <button type="submit" class="btn btn-primary">تغییر </button>
                             </form>
                         </div>
                     </div>

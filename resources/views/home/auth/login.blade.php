@@ -34,11 +34,10 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="sign-in">
-                            <form method="POST" action="{{route('login')}}">
-                                @csrf
+                            <form>
                                 <div class="form-group">
                                     <label>آدرس ایمیل یا نام کاربری *</label>
-                                    <input type="text" class="form-control" name="email" value="{{old('email')}}" />
+                                    <input type="text" class="form-control" name="email" />
                                     <span class="text-red email-error"></span>
                                 </div>
                                 <div class="form-group mb-0">
@@ -47,7 +46,7 @@
                                     <span class="text-red password-error"></span>
                                 </div>
                                 <div class="form-checkbox d-flex align-items-center justify-content-between">
-                                    <input type="checkbox" class="custom-checkbox" name="remember" />
+                                    <input type="checkbox" class="custom-checkbox" name="remember" id="remember" />
                                     <label for="remember">مرا به خاطر بسپار</label>
                                     <a id="reset-pass" href="#">فراموشی رمز عبور؟ </a>
                                 </div>
@@ -55,16 +54,15 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="sign-up">
-                            <form action="{{route('register')}}" method="POST">
-                                @csrf
+                            <form>
                                 <div class="form-group mb-5">
                                     <label>نام کوچک *</label>
-                                    <input type="text" class="form-control" name="name" value="{{old('name')}}" />
+                                    <input type="text" class="form-control" name="name" />
                                     <span class="text-red name-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label> آدرس ایمیل شما*</label>
-                                    <input type="text" class="form-control" name="email" value="{{old('email')}}" />
+                                    <input type="text" class="form-control" name="email" />
                                     <span class="text-red email-error"></span>
                                 </div>
                                 <div class="form-group mb-5">

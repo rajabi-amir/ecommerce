@@ -27,8 +27,8 @@
                     <p class="text-light">لطفا ابتدا لینک تاییدیه ارسالی به ایمیل خود را تایید نمایید.</p>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('frm-verify-email').submit();" class="btn btn-dark btn-rounded btn-icon-right">ارسال مجدد لینک تایید ایمیل<i class="w-icon-long-arrow-left"></i></a>
                     <form id="frm-verify-email" action="{{ route('verification.send') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
         </div>
@@ -47,4 +47,3 @@
 </script>
 @endpush
 @endif
-

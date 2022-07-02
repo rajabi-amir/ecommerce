@@ -1,6 +1,5 @@
 <?php
 
-use Spatie\Sitemap\SitemapGenerator;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -25,18 +25,12 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\PostController as HomePostController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
-use App\Http\Controllers\Home\SitemapController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Tags\TagControll;
 use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
-use Carbon\Carbon;
-use Psr\Http\Message\UriInterface;
-use Spatie\Crawler\Crawler;
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 
 //admin routes
 Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role'])->group(function () {
@@ -55,6 +49,9 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
     Route::resource('users',            UserController::class)->only('index', 'edit', 'update')->middleware('permission:users');
     Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
     Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
+
+    Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class,'update'])->name('profile.update');
 
     Route::view('/settings', 'admin.page.settings.setting')->name('settings.show')->middleware('permission:settings');
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create')->middleware('permission:tags');
@@ -98,7 +95,7 @@ Route::get('/assets/ajax', function () {
     return view('home.partial.login');
 });
 
-Route::prefix('profile')->name('home.')->group(function () {
+Route::prefix('profile')->name('home.')->middleware('auth')->group(function () {
   Route::get('/',[UserProfileController::class, 'index'])->name('user_profile');
   Route::get('/wishlist',[WishListController::class, 'usersProfileIndex'])->name('profile.wishlist.index');
   Route::get('/add-to-wishlist/{product:id}', [WishListController::class, 'add'])->name('home.wishlist.add');
