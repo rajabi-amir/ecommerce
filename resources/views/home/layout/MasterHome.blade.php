@@ -32,10 +32,6 @@
 
     <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/sticky/sticky.min.js')}}"></script>
-    <!-- <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
-        integrity="sha512-rRQtF4V2wtAvXsou4iUAs2kXHi3Lj9NE7xJR77DE7GHsxgY9RTWy93dzMXgDIG8ToiRTD45VsDNdTiUagOFeZA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <script src="{{asset('assets/vendor/jquery.plugin/jquery.plugin.min.js')}}"></script>
     <script src="{{asset('assets/vendor/parallax/parallax.min.js')}}"></script>
     <script src="{{asset('assets/vendor/owl-carousel/owl.carousel.min.js')}}"></script>

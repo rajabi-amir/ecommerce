@@ -34,7 +34,7 @@
                 <div class="grid-item fashion">
                     <article class="post post-mask overlay-zoom br-sm">
                         <figure class="post-media">
-                            <a href="post-single.html">
+                            <a href="{{route('home.posts.show' , ['post' => $post->id] )}}">
                                 <img src="{{url('storage/'.$post->image->url)}}" width="600" height="420" alt="blog">
                             </a>
                         </figure>
@@ -62,30 +62,15 @@
 
 
             </div>
-            <div class="row">
-                <ul dir="rtl" class="justify-content-center mb-10 pb-2 pt-2 mt-8">
+            <center>
+
+                <ul class="justify-content-center mb-10 pb-2 pt-2 mt-8">
                     {{$posts->links()}}
                 </ul>
-            </div>
 
-            <!-- <ul class="pagination justify-content-center mb-10 pb-2 pt-2 mt-8">
-                <li class="prev disabled">
-                    <a href="#" aria-label="قبلی " tabindex="-1" aria-disabled="true">
-                        <i class="w-icon-long-arrow-right"></i>قبلی
-                    </a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="next">
-                    <a href="#" aria-label="بعدی ">
-                        بعدی <i class="w-icon-long-arrow-left"></i>
-                    </a>
-                </li>
-                </ul> -->
+            </center>
+
+
         </div>
         <!-- End of Page Content -->
 </main>
