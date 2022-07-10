@@ -37,16 +37,16 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
-    Route::resource('categories',     CategoryController::class)->middleware('permission:categories');
-    Route::resource('banners',        BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
-    Route::resource('services',      ServiceController::class)->except(['show'])->middleware('permission:services');
-    Route::resource('posts',         PostController::class)->except('show')->middleware('permission:posts');
-    Route::resource('comments',      CommentController::class)->middleware('permission:comments');
-    Route::resource('coupons',       CouponController::class)->middleware('permission:coupons');
-    Route::resource('products',       ProductController::class)->middleware('permission:products');
-    Route::resource('orders',         OrderController::class)->middleware('permission:orders');
-    Route::resource('transactions',   TransactionController::class)->middleware('permission:transactions');
-    Route::resource('users',   UserController::class)->only('index', 'edit', 'update')->middleware('permission:users');
+    Route::resource('categories',       CategoryController::class)->middleware('permission:categories');
+    Route::resource('banners',          BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
+    Route::resource('services',         ServiceController::class)->except(['show'])->middleware('permission:services');
+    Route::resource('posts',            PostController::class)->except('show')->middleware('permission:posts');
+    Route::resource('comments',         CommentController::class)->middleware('permission:comments');
+    Route::resource('coupons',          CouponController::class)->middleware('permission:coupons');
+    Route::resource('products',         ProductController::class)->middleware('permission:products');
+    Route::resource('orders',           OrderController::class)->middleware('permission:orders');
+    Route::resource('transactions',     TransactionController::class)->middleware('permission:transactions');
+    Route::resource('users',            UserController::class)->only('index', 'edit', 'update')->middleware('permission:users');
     Route::resource('roles',   RoleController::class)->except('show')->middleware('permission:roles');
     Route::view('permissions', 'admin.page.permissions.index')->name('permissions')->middleware('permission:permissions');
 
