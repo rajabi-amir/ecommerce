@@ -3,12 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Post extends Model
 {
-    use HasFactory;
-    protected $fillable = ['user_id','title','slug','body','status'];
+    use HasFactory, Sluggable;
+
+    protected $fillable = ['user_id', 'title', 'slug', 'body', 'status'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function scopeActive($query)
     {
@@ -17,7 +29,7 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }  
+    }
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');

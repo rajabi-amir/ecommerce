@@ -12,9 +12,9 @@
             <div class="tab-pane active" id="sign-in">
                 <form>
                     <div class="form-group">
-                        <label>آدرس ایمیل یا نام کاربری *</label>
-                        <input type="text" class="form-control" name="email" />
-                        <span class="text-red email-error"></span>
+                        <label> نام کاربری *</label>
+                        <input type="text" class="form-control" name="username" placeholder="ایمیل یا شماره همراه" />
+                        <span class="text-red username-error"></span>
                     </div>
                     <div class="form-group mb-0">
                         <label>رمز عبور *</label>
@@ -63,7 +63,3 @@
         </div>
     </div>
 </div>
-
-
-
-

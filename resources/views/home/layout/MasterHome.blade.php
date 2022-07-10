@@ -163,7 +163,7 @@
                     '<span class="ml-1"><i class="w-icon-store-seo fa-spin"></i></span>');
                 $.post("{{route('login')}}", {
                         '_token': "{{csrf_token()}}",
-                        'email': $('#sign-in input[name="email"]').val(),
+                        'username': $('#sign-in input[name="username"]').val(),
                         'password': $('#sign-in input[name="password"]').val(),
                         'remember': $('#sign-in input[name="remember"]').is(":checked") ? 1 : 0,
                     },
@@ -178,9 +178,9 @@
                     console.log(response.responseJSON.errors);
 
                     if (response.responseJSON.errors.email) {
-                        $('#sign-in .email-error').html(response.responseJSON.errors.email[0]);
+                        $('#sign-in .username-error').html(response.responseJSON.errors.username[0]);
                     } else {
-                        $('#sign-in .email-error').html('');
+                        $('#sign-in .username-error').html('');
                     }
                     if (response.responseJSON.errors.password) {
                         $('#sign-in .password-error').html(response.responseJSON.errors.password[0]);

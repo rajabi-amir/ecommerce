@@ -1,11 +1,10 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="{{route('admin.home')}}"><img src="{{$setting->icon ? asset('storage/'.$setting->icon):'/images/logo.png'}}" width="45" style="margin-right:20px" alt="meta-webs"><span class="m-l-10"></span></a>
-
+        <a href="{{route(home')}}"><img src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}" style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
     </div>
     <div class="menu">
-        <ul class="list" id="myList">
+        <ul class="list mb-4" id="myList">
             <td>
                 <div class="user-info">
                     <a class="image" href="#"><img default="" src="{{auth()->user()->avatar ? asset('storage/profile/'.auth()->user()->avatar) : asset('img/profile.png') }}"></a>
@@ -129,12 +128,10 @@
             @endcan
 
             <!-- تنظیمات -->
-            <li @class(['active open'=>request()->routeIs('admin.settings.*','admin.profile.*')])> <a href="javascript:void(0);"
-                    class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
+            <li @class(['active open'=>request()->routeIs('admin.settings.*','admin.profile.*')])> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>تنظیمات</span></a>
                 <ul class="ml-menu">
                     @can('settings')
-                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a
-                            href="{{route('admin.settings.show')}}">سایت</a></li>
+                    <li @class(['active'=>request()->routeIs('admin.settings.show')])><a href="{{route('admin.settings.show')}}">سایت</a></li>
                     @endcan
                     <li @class(['active'=>request()->routeIs('admin.profile.edit')])><a href="{{route('admin.profile.edit')}}">ویرایش پروفایل کاربری </a></li>
                     <li><a href="#">تغییر کلمه عبور </a></li>

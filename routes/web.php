@@ -71,6 +71,8 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
 });
 //end
 
+//admin auth
+Route::view('admin-panel/login','admin.page.auth.login')->name('admin.login');
 
 // home routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

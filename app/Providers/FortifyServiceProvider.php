@@ -8,10 +8,12 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 
 use App\Http\Responses\PasswordResetResponse;
+use App\Models\User;
 use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseContract;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
@@ -42,7 +44,7 @@ class FortifyServiceProvider extends ServiceProvider
             {
                 return $request->wantsJson()
                     ? response()->json(['two_factor' => false, 'redirect' => Redirect::intended('/')->getTargetUrl()])
-                    : redirect()->intended();
+                    : (url()->previous() == url('admin-panel/login') ? redirect()->route('admin.home') : redirect()->intended());
             }
         });
 
@@ -74,6 +76,15 @@ class FortifyServiceProvider extends ServiceProvider
         });
         Fortify::confirmPasswordView(function () {
             return view('home.auth.confirm-password');
+        });
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->username)->orWhere('cellphone',$request->username)->first();
+
+            if ($user &&
+                Hash::check($request->password, $user->password)) {
+                return $user;
+            }
         });
 
         RateLimiter::for('login', function (Request $request) {
