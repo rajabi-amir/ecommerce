@@ -1,7 +1,7 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="{{route(home')}}"><img src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}" style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
+        <a href="{{route('home')}}"><img src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}" style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
     </div>
     <div class="menu">
         <ul class="list mb-4" id="myList">

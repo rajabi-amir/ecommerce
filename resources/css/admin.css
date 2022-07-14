@@ -191,3 +191,13 @@ a[aria-expanded="true"] span {
 .right-addon input {
     padding-right: 30px;
 }
+
+/* widget_2 bring text to front */
+.widget_2 {
+    background: #fff;
+}
+
+.widget_2 .body {
+    background: none;
+    position: relative;
+}

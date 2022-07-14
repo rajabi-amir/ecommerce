@@ -46,7 +46,7 @@ class RoleController extends Controller
             'display_name' => 'required|unique:roles',
             'permissions' => 'nullable|array',
         ]);
-        
+
         try {
             DB::beginTransaction();
             $role = Role::create(['name' => $data['name'], 'display_name' => $data['display_name']]);
@@ -65,7 +65,7 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Permission  $permission
+     * @param  \App\Models\Rol  $permission
      * @return \Illuminate\Http\Response
      */
     public function show(Permission $permission)

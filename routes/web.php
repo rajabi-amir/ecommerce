@@ -33,7 +33,7 @@ use App\Http\Livewire\Home\Cart\ShowCart;
 use App\Http\Livewire\Home\ProductsList;
 
 //admin routes
-Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role'])->group(function () {
+Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_role','has_free_plan'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
@@ -72,7 +72,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
 //end
 
 //admin auth
-Route::view('admin-panel/login','admin.page.auth.login')->name('admin.login');
+Route::view('admin-panel/login','admin.page.auth.login')->middleware('guest')->name('admin.login');
 
 // home routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

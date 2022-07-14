@@ -18,6 +18,7 @@ class EnsureUserHasRole
     public function handle(Request $request, Closure $next)
     {
         if (!$request->user()->hasRole(Role::all()->pluck('name')->toArray())) {
+            toast('شما اجازه دسترسی به این قسمت را ندارید!','warning')->timerProgressBar();
             return redirect()->route('home');
         }
         return $next($request);

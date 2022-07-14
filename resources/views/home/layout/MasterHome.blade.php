@@ -173,7 +173,7 @@
                     }, 'json').fail(function(response) {
                     console.log(response.responseJSON.errors);
 
-                    if (response.responseJSON.errors.email) {
+                    if (response.responseJSON.errors.username) {
                         $('#sign-in .username-error').html(response.responseJSON.errors.username[0]);
                     } else {
                         $('#sign-in .username-error').html('');

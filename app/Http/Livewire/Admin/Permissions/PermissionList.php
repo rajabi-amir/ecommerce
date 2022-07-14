@@ -48,7 +48,7 @@ class PermissionList extends Component
         $this->display = "disabled";
     }
 
-    public function del_attribute(Permission $permission)
+    public function del_permission(Permission $permission)
     {
         $this->permission = $permission;
         sweetAlert()
