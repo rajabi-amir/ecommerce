@@ -54,7 +54,7 @@
             <li @class(['active open'=>
                 request()->routeIs('admin.products.*','admin.categories.*','admin.attributes.*','admin.coupons.*')])> <a
                     href="javascript:void(0);" class="menu-toggle"><i
-                        class="zmdi zmdi-hc-fw"></i><span>محصولات</span></a>
+                        class="zmdi zmdi-hc-fw"></i><span>فروشگاه</span></a>
                 <ul class="ml-menu">
                     @can('products')
                     <li @class(['active'=>request()->routeIs('admin.products.index')])><a

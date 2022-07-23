@@ -35,56 +35,49 @@
                             @if(count($categories)===0)
                             <p>هیچ رکوردی وجود ندارد</p>
                             @else
-                            <div class="table-responsive">
-                                <table class="table table-hover c_table theme-color">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>عنوان</th>
-                                            <th>نام انگلیسی</th>
-                                            <th>والد</th>
-                                            <th>وضعیت</th>
-                                            <th class="text-center">عملیات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($categories as $key => $category)
-                                        <tr>
-                                            <td scope="row">{{$categories->firstItem() + $key}}</td>
-                                            <td>{{$category->name}}</td>
-                                            <td>{{$category->slug}}</td>
-                                            <td>@if ($category->parent_id ==0)
-                                                <span class="badge badge-info p-2">اصلی</span>
-                                                @else
-                                                {{$category->parent->name}}
-                                                @endif
-                                            </td>
-                                            <td>@if ($category->is_active)
-                                                <span class="badge badge-success p-2">فعال</span>
-                                                @else
-                                                <span class="badge badge-warning p-2">غیرفعال</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center js-sweetalert">
-                                                <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect" onclick="loadbtn(event)">
-                                                    <i class="zmdi zmdi-edit"></i>
-                                                </a>
-                                                <button class="btn btn-raised btn-danger waves-effect" data-type="confirm" data-form-id="del-category-{{$category->id}}">حذف</button>
-                                                <form action="{{route('admin.categories.destroy',$category->id)}}" id="del-category-{{$category->id}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
+                            <div class="dd nestable-with-handle m-3">
+                                <ol class="dd-list">
+                                    @foreach ($categories->where('parent_id',0)->sortBy('order') as $category )
+                                    <li class="dd-item dd3-item" data-id="{{$category->id}}">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <div class="dd3-content">
+                                            <strong>{{$category->name}}</strong>
+                                            @if ($category->is_active)
+                                            <span class="badge badge-success">فعال</span>
+                                            @else
+                                            <span class="badge badge-warning">غیرفعال</span>
+                                            @endif
+                                            <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </a>
+                                        </div>
+                                        @if($categories->where('parent_id',$category->id))
+                                        <ol class="dd-list">
+                                            @foreach ($categories->where('parent_id',$category->id)->sortBy('order') as $category )
+                                            <li class="dd-item dd3-item" data-id="{{$category->id}}">
+                                                <div class="dd-handle dd3-handle"></div>
+                                                <div class="dd3-content">
+                                                    {{$category->name}}
+                                                    @if ($category->is_active)
+                                                    <span class="badge badge-success">فعال</span>
+                                                    @else
+                                                    <span class="badge badge-warning">غیرفعال</span>
+                                                    @endif
+                                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-raised btn-info waves-effect m-0 btn-sm float-left" onclick="loadbtn(event)">
+                                                        <i class="zmdi zmdi-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ol>
+                                        @endif
+                                    </li>
+                                    @endforeach
+                                </ol>
                             </div>
                             @endif
                         </div>
                     </div>
-                    {{ $categories->links() }}
                 </div>
             </div>
             <!-- #END# Hover Rows -->
@@ -92,3 +85,35 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script>
+    $(".dd").on("change", function() {
+        var $this = $(this);
+        var serializedData = window.JSON.stringify(
+            $($this).nestable("serialize")
+        );
+        $this.parents("div.body").prepend(`<div class="mb-3 text-center" id="loading"><div class="spinner-border text-info" role="status">
+  <span class="sr-only">Loading...</span>
+</div><span class="text-muted"> درحال بارگذاری...</span></div>`);
+        $.post(
+                "{{route('admin.category.order')}}", {
+                    _token: "{{csrf_token()}}",
+                    data: serializedData,
+                },
+                function(response, status) {},
+                "json"
+            )
+            .fail(function() {
+                swal({
+                    title: 'خطا',
+                    text: "خطا در برقراری ارتباط!",
+                    icon: "warning",
+                    confirmButtonText: "تایید",
+                })
+            })
+            .always(function() {
+                $this.parents("div.body").find('#loading').remove();
+            });
+    });
+</script>
+@endpush

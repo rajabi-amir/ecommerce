@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\Category;
+use App\Models\Setting;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->paginate(10);
+        // $settings = Setting::findOrNew(1);
+        // $categories_order = json_decode($settings->data, 'true');
         return view('admin.page.categories.index', compact('categories'));
     }
 
@@ -192,5 +195,32 @@ class CategoryController extends Controller
         $variation = $category->attributes()->wherePivot('is_variation', 1)->first();
 
         return ['attrubtes' => $attrubtes, 'variation' => $variation];
+    }
+
+    public function saveOrder(Request $request)
+    {
+        if ($request->wantsJson()) {
+            $categories = Category::all();
+            $categories_order = json_decode($request->data, 'true');
+
+            foreach ($categories_order as $index => $item) {
+                $p_category = $categories->find($item['id']);
+                if ($p_category->parent_id != 0 || $p_category->order != $index) {
+                    $p_category->update(['parent_id' => 0, 'order' => $index]);
+                }
+                if (array_key_exists('children', $item)) {
+                    foreach ($item['children'] as $index2 => $item2) {
+                        $c_category = $categories->find($item2['id']);
+                        if ($c_category->parent_id != $item['id']  || $c_category->order != $index2) {
+                            $c_category->update(['parent_id' => $item['id'], 'order' => $index2]);
+                        }
+                    }
+                }
+            }
+            // dd($categories_order);
+            // Setting::updateOrCreate(['id' => 1], ['categories_order' => $request->data]);
+            return response()->json('success');
+        }
+        return abort(404);
     }
 }

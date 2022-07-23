@@ -10,12 +10,11 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
             <div class="header-right">
                 <a href="{{route('contact-us')}}" class="d-lg-show">تماس با ما </a>
                 @auth
-                <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home') : route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
-                <a role="link" aria-disabled="true" class="font-size-md"><i
-                        class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}} </a>
-                <a href="{{route('logout')}}" class="font-size-md"
-                    onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i
-                        class="w-icon-power-off"></i> خروج</a>
+                <a href="{{route('home.user_profile')}}" class="d-lg-show">حساب کاربری من </a>
+                <a href="{{auth()->user()->hasRole('super-admin') ? route('admin.home'):'#'}}" class="font-size-md">
+                    <i class="w-icon-account"></i>{{Auth::user()->name ?? auth()->user()->cellphone}}
+                </a>
+                <a href="{{route('logout')}}" class="font-size-md" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="w-icon-power-off"></i> خروج</a>
                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -46,12 +45,10 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                 @livewire('home.sections.search-box')
                 <div class="dropdown-box">
                     <a href="#ENG">
-                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
-                            class="dropdown-image" />
+                        <img src="/assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8" class="dropdown-image" />
                         فارسی </a>
                     <a href="#FRA">
-                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
-                            class="dropdown-image" />
+                        <img src="/assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8" class="dropdown-image" />
                         انگلیسی </a>
                 </div>
             </div>
@@ -105,12 +102,10 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                 </div>
                                 <figure class="product-media">
                                     <a href="{{route('home.products.show',['product'=>$item->associatedModel->slug])}}">
-                                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}"
-                                            alt="{{$item->associatedModel->slug}}" height="84" width="94" />
+                                        <img src="{{url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATCH').$item->associatedModel->primary_image)}}" alt="{{$item->associatedModel->slug}}" height="84" width="94" />
                                     </a>
                                 </figure>
-                                <button class="btn btn-link btn-close"
-                                    onclick="return delete_product_cart('{{$item->id}}')">
+                                <button class="btn btn-link btn-close" onclick="return delete_product_cart('{{$item->id}}')">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -143,10 +138,8 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
         <div class="container">
             <div class="inner-wrap">
                 <div class="header-left">
-                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}"
-                        data-visible="true">
-                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
+                    <div class="dropdown category-dropdown {{request()->routeIs('home')? 'show-dropdown':''}}" data-visible="true">
+                        <a href="#" class="text-white category-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="جستجوی دسته بندیها">
                             <i class="w-icon-category"></i>
                             <span>دسته بندیها </span>
                         </a>
@@ -164,8 +157,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                         <li>
                                             <ul>
                                                 @foreach ($category->children as $ChildrenCategory )
-                                                <li><a
-                                                        href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
+                                                <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
                                                     </a>
                                                 </li>
                                                 @endforeach
@@ -193,8 +185,7 @@ $categories = \App\Models\Category::where('parent_id', 0)->get();
                                         <h4 class="menu-title">{{$category->name}}</h4>
                                         @if(count($category->children))
                                         <ul>
-                                            <li><a
-                                                    href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
+                                            <li><a href="{{route('home.products.index',['slug'=>$ChildrenCategory->slug])}}">{{$ChildrenCategory->name}}
                                                 </a>
                                             </li>
                                         </ul>

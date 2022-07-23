@@ -37,6 +37,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('brands',         BrandController::class)->middleware('permission:brands');
     Route::resource('attributes',     AttributeController::class)->except(['show', 'destroy'])->middleware('permission:attributes');
+    Route::post('/categories/order',[CategoryController::class,'saveOrder'])->name('category.order');
     Route::resource('categories',       CategoryController::class)->middleware('permission:categories');
     Route::resource('banners',          BannerController::class)->except(['show', 'destroy'])->middleware('permission:banners');
     Route::resource('services',         ServiceController::class)->except(['show'])->middleware('permission:services');
