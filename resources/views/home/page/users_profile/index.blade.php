@@ -50,9 +50,6 @@
                     <li class="link-item">
                         <a href="{{route('home.addreses.index')}}">آدرس ها </a>
                     </li>
-                    <li class="link-item">
-                        <a href="login.html">خروج </a>
-                    </li>
                 </ul>
 
                 <div class="tab-content mb-6">

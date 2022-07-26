@@ -1,7 +1,6 @@
 @extends('home.layout.MasterHome')
 @section('title', "پرداخت ")
 @section('content')
-
 <main class="main checkout">
     <!-- Start of Breadcrumb -->
     <nav class="breadcrumb-nav">
@@ -141,9 +140,8 @@
 
 
                         <form class="form checkout-form" id="checkout" action="{{route('home.payment')}}" method="POST">
-
-                            @if ($addresses ->count() > 0)
                             @csrf
+                            @if ($addresses ->count() > 0)
                             <div class="row gutter-sm">
                                 <div class="col-xs-4">
                                     <div class="form-group">

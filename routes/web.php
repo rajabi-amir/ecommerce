@@ -129,7 +129,7 @@ Route::get('/remove-from-cart/{rowId}', [CartController::class, 'remove'])->name
 
 Route::get('/checkout', [CartController::class, 'checkout'])->name('home.orders.checkout');
 
-Route::post('/payment', [PaymentController::class, 'index'])->name('home.payment');
+Route::post('/payment', [PaymentController::class, 'payment'])->name('home.payment');
 
 Route::get('/post/{post}', [HomePostController::class, 'show'])->name('home.posts.show');
 Route::get('/post', [HomePostController::class, 'index'])->name('home.posts.index');
@@ -138,13 +138,3 @@ Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentV
 
 
 Route::get('/get-province-cities-list', [AddressController::class, 'getProvinceCitiesList']);
-
-
-
-
-
-
-Route::get('/test', function () {
-    \Cart::clear();
-    //  dd(\Cart::getContent()) ;
-});
