@@ -206,7 +206,7 @@
                                                 step="1" value="1" readonly>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-cart" style="margin-top: 8px; margin-right:20rem"
+                                    <button id="btn-cart" class="btn btn-primary btn-cart" style="margin-top: 8px; margin-right:20rem"
                                         type="submit">
                                         <i class="w-icon-cart"></i>
                                         <span>افزودن به سبد </span>
