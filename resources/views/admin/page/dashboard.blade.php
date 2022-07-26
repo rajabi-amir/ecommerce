@@ -28,7 +28,8 @@
                         <div class="body">
                             <h6>سفارشات ارسالی</h6>
                             <h2>{{$successsend_order}}<small class="info">از {{$all_order}}</small></h2>
-                            <small>{{(int)(($successsend_order/($all_order>0 ? $all_order : 1))*100)}}% تراکنش موفق</small>
+                            <small>{{(int)(($successsend_order/($all_order>0 ? $all_order : 1))*100)}}% تراکنش
+                                موفق</small>
                             <div class="progress">
                                 <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45"
                                     aria-valuemin="0" aria-valuemax="{{$all_order}}"
@@ -42,7 +43,8 @@
                         <div class="body">
                             <h6>آماده به ارسال</h6>
                             <h2>{{$successpay_order}} <small class="info">از {{$all_order}}</small></h2>
-                            <small>{{(int)(($successpay_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات آماده برای ارسال</small>
+                            <small>{{(int)(($successpay_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات آماده
+                                برای ارسال</small>
                             <div class="progress">
                                 <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0"
                                     aria-valuemax="{{$all_order}}"
@@ -56,7 +58,8 @@
                         <div class="body">
                             <h6>سفارشات مرجوعی</h6>
                             <h2>{{$returned_order}} <small class="info">از {{$all_order}}</small></h2>
-                            <small> {{(int)(($returned_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات مرجوعی</small>
+                            <small> {{(int)(($returned_order/($all_order>0 ? $all_order : 1))*100)}}% سفارشات
+                                مرجوعی</small>
                             <div class="progress">
                                 <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39"
                                     aria-valuemin="{{$all_order}}" aria-valuemax="100"
@@ -70,7 +73,8 @@
                         <div class="body">
                             <h6> در انتظار پرداخت</h6>
                             <h2>{{$notpay_order}} <small class="info">از {{$all_order}}</small></h2>
-                            <small>{{(int)(($notpay_order/($all_order>0 ? $all_order : 1))*100)}}% در انتظار پرداخت</small>
+                            <small>{{(int)(($notpay_order/($all_order>0 ? $all_order : 1))*100)}}% در انتظار
+                                پرداخت</small>
                             <div class="progress">
                                 <div class="progress-bar l-green" role="progressbar" aria-valuenow="89"
                                     aria-valuemin="0" aria-valuemax="{{$all_order}}"
@@ -286,9 +290,7 @@ function initC3Chart() {
 
     setTimeout(function() {
         $success = @json($successTransactions);
-        console.log($success[0]);
         $unsuccess = @json($unsuccessTransactions);
-        console.log($unsuccess[0]);
         month_visits = "{{json_encode($month_visits)}}";
         month_visits = JSON.parse(month_visits);
         $(document).ready(function() {
@@ -363,7 +365,7 @@ $(document).ready(function() {
     more_1 = @json($more[0]);
     more_2 = @json($more[1]);
     more_3 = @json($more[2]);
-    console.log(more_1);
+
     var chart = c3.generate({
         bindto: "#chart-pie", // id of chart wrapper
         data: {
