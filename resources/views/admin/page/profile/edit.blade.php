@@ -18,7 +18,6 @@
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
-                    <a href="profile.html" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
                 </div>
             </div>
         </div>
@@ -26,37 +25,36 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <div class="card">
-
-                        <form action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data" novalidate>
-                            @csrf
-                            @method('PUT')
-                            <div class="body">
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
+                        <div class="body">
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <form action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data" novalidate>
+                                @csrf
+                                @method('PUT')
                                 <div class="row clearfix">
                                     <div class="col-md-4">
                                         <label>نام و نام خانوادگی</label>
                                         <div class="form-group">
-                                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$user->name}}" placeholder="نام و نام خانوادگی">
+                                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{$user->name}}" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <label>شماره تماس</label>
                                         <div class="form-group">
-                                            <input name="cellphone" type="number" maxlength="11" class="form-control without-spin @error('cellphone') is-invalid @enderror" value="{{$user->cellphone}}" placeholder="شمار تماس">
+                                            <input name="cellphone" type="number" maxlength="11" class="form-control without-spin @error('cellphone') is-invalid @enderror" value="{{$user->cellphone}}" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <label>ایمیل</label>
                                         <div class="form-group">
-                                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" value="{{$user->email}}" placeholder="ایمیل">
+                                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" value="{{$user->email}}" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -71,8 +69,8 @@
                                         ذخیره
                                     </button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

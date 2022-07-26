@@ -53,6 +53,7 @@ Route::prefix('Admin-panel/managment')->name('admin.')->middleware(['auth','has_
 
     Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class,'update'])->name('profile.update');
+    Route::view('/user/password','admin.page.auth.change-password')->name('profile.change-pass');
 
     Route::view('/settings', 'admin.page.settings.setting')->name('settings.show')->middleware('permission:settings');
     Route::get('tags/create',                         [TagControll::class, "createTag"])->name('tags.create')->middleware('permission:tags');

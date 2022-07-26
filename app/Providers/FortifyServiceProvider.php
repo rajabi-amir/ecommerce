@@ -10,6 +10,9 @@ use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Http\Responses\PasswordResetResponse;
 use App\Models\User;
 use Laravel\Fortify\Contracts\PasswordResetResponse as PasswordResetResponseContract;
+use App\Http\Responses\PasswordUpdateResponse;
+use Laravel\Fortify\Contracts\PasswordUpdateResponse as PasswordUpdateResponseContract;
+
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -77,6 +80,8 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::confirmPasswordView(function () {
             return view('home.auth.confirm-password');
         });
+        $this->app->singleton(PasswordUpdateResponseContract::class, PasswordUpdateResponse::class);
+
 
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->username)->orWhere('cellphone',$request->username)->first();
