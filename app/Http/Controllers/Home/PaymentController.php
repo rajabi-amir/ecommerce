@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\PaymentGateway\Zarinpal;
 use App\PaymentGateway\Pay;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class PaymentController extends Controller
@@ -16,6 +18,10 @@ class PaymentController extends Controller
 
 public function payment(Request $request)
 {
+    if (!Auth::check()) {
+    alert()->error('ابتدا باید وارد شوید');
+    return redirect()->back(); 
+    }
     
     $validator = Validator::make($request->all(), [
         'address_id' => 'required',
@@ -24,7 +30,6 @@ public function payment(Request $request)
         'lastname' => 'required',
         'payment_method' => 'required',
     ]);
-
     User::where('id', auth()->user()->id)->update([
         'name' => $request->firstname . ' ' . $request->lastname,
     ]);
@@ -32,7 +37,7 @@ public function payment(Request $request)
     
 
     if ($validator->fails()) {
-        alert()->error('انتخاب آدرس تحویل سفارش الزامی می باشد', 'دقت کنید')->persistent('حله');
+        alert()->error('انتخاب آدرس تحویل سفارش الزامی می باشد', 'آدرد جسدید ایجاد کنید')->persistent('حله');
         return redirect()->back();
     }
 
@@ -84,8 +89,8 @@ public function paymentVerify(Request $request, $gatewayName)
             alert()->error($payGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();
         } else {
-            alert()->success($payGatewayResult['success'], 'با تشکر');
-            return redirect()->route('home');
+            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر');
+            return redirect()->route('home.user_profile');
         }
     }
 
@@ -103,8 +108,8 @@ public function paymentVerify(Request $request, $gatewayName)
             alert()->error($zarinpalGatewayResult['error'], 'دقت کنید')->persistent('حله');
             return redirect()->back();
         } else {
-            alert()->success($zarinpalGatewayResult['success'], 'با تشکر');
-            return redirect()->route('home');
+            alert()->success('خرید با موفقیت انجام گرفت', 'با تشکر', 'با تشکر');
+            return redirect()->route('home.user_profile');
         }
     }
 
@@ -115,6 +120,7 @@ public function paymentVerify(Request $request, $gatewayName)
 
 public function checkCart()
 {
+
     if (\Cart::isEmpty()) {
         return ['error' => 'سبد خرید شما خالی می باشد'];
     }
@@ -143,6 +149,7 @@ public function checkCart()
 
 public function getAmounts()
 {
+
     if (session()->has('coupon')) {
         $checkCoupon = checkCoupon(session()->get('coupon.code'));
         if (array_key_exists('error', $checkCoupon)) {

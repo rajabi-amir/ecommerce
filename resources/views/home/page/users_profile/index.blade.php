@@ -29,6 +29,7 @@
             <div class="tab tab-vertical row gutter-lg">
                 <ul class="nav nav-tabs mb-6" role="tablist">
                     <li class="nav-item">
+
                         <a href="#account-dashboard" class="nav-link active">داشبورد </a>
                     </li>
                     <li class="nav-item">
@@ -84,7 +85,7 @@
                                 </a>
                             </div> -->
                             <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
-                                <a href="#account-addresses" class="link-to-tab">
+                                <a href="{{route('home.addreses.index')}}" class="link-to-tab">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-address">
                                             <i class="w-icon-map-marker"></i>
@@ -188,115 +189,12 @@
                             </tbody>
                         </table>
 
-                        <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">برو فروشگاه<i
+                        <a href="{{route('home')}}" class="btn btn-dark btn-rounded btn-icon-right">برو فروشگاه<i
                                 class="w-icon-long-arrow-left"></i></a>
                     </div>
 
-                    <div class="tab-pane" id="account-downloads">
-                        <div class="icon-box icon-box-side icon-box-light">
-                            <span class="icon-box-icon icon-downloads mr-2">
-                                <i class="w-icon-download"></i>
-                            </span>
-                            <div class="icon-box-content">
-                                <h4 class="icon-box-title ls-normal">دانلودها </h4>
-                            </div>
-                        </div>
-                        <p class="mb-4">هنوز بارگیری در دسترس نیست.</p>
-                        <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">برو فروشگاه<i
-                                class="w-icon-long-arrow-left"></i></a>
-                    </div>
 
-                    <div class="tab-pane" id="account-addresses">
-                        <div class="icon-box icon-box-side icon-box-light">
-                            <span class="icon-box-icon icon-map-marker">
-                                <i class="w-icon-map-marker"></i>
-                            </span>
-                            <div class="icon-box-content">
-                                <h4 class="icon-box-title mb-0 ls-normal">آدرسها </h4>
-                            </div>
-                        </div>
-                        <p>آدرس های زیر به طور پیش فرض در صفحه پرداخت استفاده می شود.</p>
-                        <div class="row">
-                            <div class="col-sm-6 mb-6">
-                                <div class="ecommerce-address billing-address pr-lg-8">
-                                    <h4 class="title title-underline ls-25 font-weight-bold">آدرس قبض </h4>
-                                    <address class="mb-4">
-                                        <table class="address-table">
-                                            <tbody>
-                                                <tr>
-                                                    <th>نام :</th>
-                                                    <td>جعفر عباسی</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کشور:</th>
-                                                    <td> تم فایل</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>آدرس:</th>
-                                                    <td>خیابان دانش</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>شهر :</th>
-                                                    <td>شاهین دژ</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کشور:</th>
-                                                    <td>ایران </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کد پستی:</th>
-                                                    <td>92020</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>تلفن:</th>
-                                                    <td>1112223334</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </address>
-                                    <a href="#" class="btn btn-link btn-underline btn-icon-right text-primary">آدرس
-                                        صورتحساب خود را ویرایش کنید<i class="w-icon-long-arrow-left"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mb-6">
-                                <div class="ecommerce-address shipping-address pr-lg-8">
-                                    <h4 class="title title-underline ls-25 font-weight-bold">آدرس حمل و نقل</h4>
-                                    <address class="mb-4">
-                                        <table class="address-table">
-                                            <tbody>
-                                                <tr>
-                                                    <th>نام :</th>
-                                                    <td>جعفر عباسی</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کشور:</th>
-                                                    <td> تم فایل</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>آدرس:</th>
-                                                    <td>خیابان دانش</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>شهر :</th>
-                                                    <td>شاهین دژ</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کشور:</th>
-                                                    <td>ایران </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>کد پستی:</th>
-                                                    <td>92020</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </address>
-                                    <a href="#" class="btn btn-link btn-underline btn-icon-right text-primary">ویرایش
-                                        آدرس حمل و نقل<i class="w-icon-long-arrow-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="tab-pane" id="account-comments">
                         <div class="icon-box icon-box-side icon-box-light">

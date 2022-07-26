@@ -1,6 +1,7 @@
 @extends('home.layout.MasterHome')
 @section('title', "پرداخت ")
 @section('content')
+
 <main class="main checkout">
     <!-- Start of Breadcrumb -->
     <nav class="breadcrumb-nav">
