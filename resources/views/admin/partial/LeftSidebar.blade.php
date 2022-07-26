@@ -4,7 +4,7 @@
         <a href="{{route('home')}}"><img src="{{$setting->logo ? asset('storage/logo/'.$setting->logo):'/images/logo.png'}}" style="margin-right:20px;max-height: 3rem;" alt="meta-webs"><span class="m-l-10"></span></a>
     </div>
     <div class="menu">
-        <ul class="list mb-4" id="myList">
+        <ul class="list pb-4" id="myList">
             <td>
                 <div class="user-info">
                     <a class="image" href="#"><img default=""
@@ -165,7 +165,7 @@
                     @endcan
                     <li @class(['active'=>request()->routeIs('admin.profile.edit')])><a
                             href="{{route('admin.profile.edit')}}">ویرایش پروفایل کاربری </a></li>
-                    <li><a href="#">تغییر کلمه عبور </a></li>
+                    <li @class(['active'=>request()->routeIs('admin.profile.change-pass')])><a href="{{route('admin.profile.change-pass')}}">تغییر کلمه عبور </a></li>
                 </ul>
             </li>
         </ul>
