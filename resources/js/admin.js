@@ -27,7 +27,7 @@ require("../assets/admin/plugins/nestable/nestable-rtl");
 require("../assets/admin/bundles/mainscripts.bundle");
 require("../assets/admin/js/pages/ui/sweetalert.js");
 require("../assets/admin/js/pages/forms/form-validation.js");
-require("../assets/admin/js/pages/index.js");
+// require("../assets/admin/js/pages/index.js");
 require("../assets/admin/js/pages/forms/dropify");
 require("../assets/admin/js/pages/forms/form-wizard");
 require("../assets/admin/js/pages/medias/image-gallery.js");

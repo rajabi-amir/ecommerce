@@ -173,7 +173,7 @@
                 thisDropzone.emit("addedfile", mockFile);
                 thisDropzone.emit("success", mockFile);
                 thisDropzone.emit("thumbnail", mockFile,
-                    'http://localhost:8000/storage/other_product_image/' + variation.image)
+                    "{{env('APP_URL')}}" + '/storage/other_product_image/' + +variation.image)
             }, )
             dzClosure =
                 this; // Makes sure that 'this' is understood inside the functions below.
